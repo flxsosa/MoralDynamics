@@ -11,6 +11,29 @@ from pygame.locals import *
 import sys, random
 import pymunk.pygame_util
 
+def to_pygame(p):
+    return int(p.x), int(-p.y+600)
+
+def add_ball(space):
+    mass = 1
+    radius = 14
+    moment = pymunk.moment_for_circle(mass, 0, radius) # 1
+    body = pymunk.Body(mass, moment)
+    x = random.randint(120,380)
+    body.position = x, 550 # 3
+    shape = pymunk.Circle(body, radius)
+    space.add(body,shape) # 5
+    return shape
+
+def add_Static_L(space):
+    pymunk.Body(body_type = pymunk.Body.STATIC)
+    body.position = (300,300)
+    l1 = pymunk.Segment(body, (-150,0), (255,0), 5)
+    l2 = pymunk.Segment(body, (-150,0), (-150, 50), 5)
+
+    space.add(l1,l2)
+    return l1,l2
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((600,600))
@@ -20,12 +43,13 @@ def main():
     space = pymunk.Space() # 2
     space.gravity = (0.0, -900.0)
 
+    LINES = add_Static_L(space)
     balls = []
     draw_options = pymunk.pygame_util.DrawOptions(screen)
 
     ticks_to_next_ball = 10
     while True:
-        for event in pygame.event.get():
+     event in pygame.event.get():
             if event.type == QUIT:
                 sys.exit(0)
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
@@ -44,18 +68,6 @@ def main():
 
         pygame.display.flip()
         clock.tick(50)
-
-def add_ball(space):
-    mass = 1
-    radius = 14
-    moment = pymunk.moment_for_circle(mass, 0, radius) # 1
-    body = pymunk.Body(mass, moment)
-    x = random.randint(120,380)
-    body.position = x, 550 # 3
-    shape = pymunk.Circle(body, radius)
-    space.add(body,shape) # 5
-    return shape
-
 
 if __name__== '__main__':
     sys.exit(main())
