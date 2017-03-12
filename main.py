@@ -43,21 +43,23 @@ def addCone(space,x,y):
 	x -- x coordinate
 	y -- y coordinate
 	'''
-	body = pymunk.Body(1,1)
+	body = pymunk.Body(1,1,body_type=pymunk.Body.DYNAMIC)
 	body.position = x,y
 	shape = pymunk.Poly(body, [(0, 20),(20, -20),(-20, -20)])
 	space.add(shape)
 	return shape
 
-def addCylinder(space, x, y):
+def addCylinder(space, x, y, imp=(0,0)):
 	'''
 	Adds a cylinder [square] to teh simulation at a given position.
 	space -- pymunk simulation space
 	x -- x coordinate
 	y -- y coordinate
+	imp -- impulse for the cylinder
 	'''
-	body = pymunk.Body(1,1)
+	body = pymunk.Body(10,1)
 	body.position = x,y
+	body.apply_impulse_at_local_point(imp)
 	shape = pymunk.Poly.create_box(body, (30,30))
 	space.add(body,shape)
 	return shape
@@ -86,6 +88,11 @@ def longDistanceSim(space, screen, options):
 	options -- draw options for pymunk space
 	'''
 
+	# add shapes
+	ball = addFireball(space, 500, 300)
+	cone = addCone(space, 400, 300)
+	cylinder = addCylinder(space, 100, 300, (1000,0))
+	
 	while True:
 		#allow user to exit
 		for event in pygame.event.get():
@@ -96,12 +103,7 @@ def longDistanceSim(space, screen, options):
 
 		# set clock
 		clock = pygame.time.Clock()
-
-		# add shapes
-		ball = addFireball(space, 500, 300)
-		cone = addCone(space, 400, 300)
-		cylinder = addCylinder(space, 100, 300)
-
+		
 		# setup display and run sim
 		screen.fill((255,255,255))
 		space.step(1/50.0)
@@ -118,6 +120,10 @@ def shortDistanceSim(space, screen, options):
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
+	# add shapes
+	ball = addFireball(space, 400, 300)
+	cone = addCone(space, 300, 300)
+	cylinder = addCylinder(space, 150, 300, (1000,0))
 
 	while True:
 		#allow user to exit
@@ -129,11 +135,6 @@ def shortDistanceSim(space, screen, options):
 
 		# set clock
 		clock = pygame.time.Clock()
-
-		# add shapes
-		ball = addFireball(space, 400, 300)
-		cone = addCone(space, 300, 300)
-		cylinder = addCylinder(space, 150, 300)
 
 		# setup display and run sim
 		screen.fill((255,255,255))
