@@ -43,9 +43,10 @@ def addCone(space,x,y):
 	x -- x coordinate
 	y -- y coordinate
 	'''
-	body = pymunk.Body(1,1,body_type=pymunk.Body.DYNAMIC)
+	body = pymunk.Body(1,1)
 	body.position = x,y
 	shape = pymunk.Poly(body, [(0, 20),(20, -20),(-20, -20)])
+	shape.collision_type = 0
 	space.add(shape)
 	return shape
 
@@ -76,6 +77,7 @@ def addFireball(space, x, y, rad=15):
 	body.position = x,y # 3
 	shape = pymunk.Circle(body, rad)
 	shape.color = pygame.color.THECOLORS["red"]
+	shape.collision_type = 1
 	space.add(body,shape) # 5
 	return shape
 
