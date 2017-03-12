@@ -13,7 +13,7 @@ Simulations to implement:
 1. Distance -- Long Distance -- Complete/Edit
 2. Distance -- Short Distance -- Complete/Edit
 3. Distance -- Medium Distance -- Complete/Edit
-4. Force/Distance -- Static Cylinder
+4. Force/Distance -- Static Cylinder -- Complete/Edit
 5. Force -- Uphill Cylinder
 6. Force -- Downhill Cylinder
 7. Force -- Slow Collision Cone
@@ -60,11 +60,12 @@ def addCone(space,x,y, imp=(0,0)):
 	x -- x coordinate
 	y -- y coordinate
 	'''
-	body = pymunk.Body(100,1)
+	body = pymunk.Body(1,1)
 	body.position = x,y
 	body.apply_impulse_at_local_point(imp)
 	shape = pymunk.Poly(body, [(0, 20),(20, -20),(-20, -20)])
 	shape.collision_type = 0
+	shape.elasticity = 1
 	space.add(body, shape)
 	return shape
 
@@ -84,6 +85,7 @@ def addCylinder(space, x, y, imp=(0,0), flag=True):
 	body.apply_impulse_at_local_point(imp)
 	shape = pymunk.Poly.create_box(body, (30,30))
 	shape.collision_type = 1
+	shape.elasticity = 1
 	space.add(body,shape)
 	return shape
 
@@ -184,7 +186,7 @@ def shortDistanceSim(space, screen, options):
 
 def mediumDistanceSim(space, screen, options):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
+	Simulation of Cylinder pushing Cone into Fireball from a medium distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
 	space -- pymunk simulation space
 	screen -- pygame display Surface
@@ -222,6 +224,13 @@ def mediumDistanceSim(space, screen, options):
 		clock.tick(50)
 
 def staticCylinder(space, screen, options):
+	'''
+	Simulation of Cone bouncing off of a static Cylinder into a Fireball.
+	Originally to be compared with shortDistance in Moral Kinematics.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
 	pygame.display.set_caption("Simulation 4: Static Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
@@ -230,7 +239,7 @@ def staticCylinder(space, screen, options):
 
 	# add shapes
 	ball = addFireball(space, 500, 300)
-	cone = addCone(space, 200, 300, (10000,5500))
+	cone = addCone(space, 200, 300, (100,55))
 	cylinder = addCylinder(space, 350, 400, (0,0), False)
 
 	while True:
