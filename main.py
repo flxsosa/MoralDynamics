@@ -258,15 +258,19 @@ def staticCylinder(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
+def uphillCylinder(space, screen, options):
+	pass
+
 def main():
 	'''
 	Entry point
 	'''
-	
+	'''
 	# list experiment options to user
 	print("Please choose a Simulation [1-13] or [0] to exit:")
 	choice = raw_input()
-
+	'''
+	
 	# initialize pygame and create a space to contain the simulation
 	pygame.init()
 	space = pymunk.Space()
