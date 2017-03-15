@@ -18,9 +18,9 @@ Simulations to implement:
 4. Force/Distance -- Static Cylinder -- Complete/Edit
 5. Force -- Uphill Cylinder
 6. Force -- Downhill Cylinder
-7. Force -- Slow Collision Cone
-8. Force -- Fast Collision Cone
-9. Force/Distance -- Dodging Cylinder - Complete/Edit
+7. Force -- Slow Collision Cone - In Progress
+8. Force -- Fast Collision Cone - Complete/Edit
+9. Force/Distance -- Dodging Cylinder - Complete/Editgit m
 10. Frequency -- Double Contact Cylinder - Complete/Edit
 11. Duration -- Medium Push Cylinder - Complete/Edit
 12. Duration -- Long Push Cylinder - Complete/Edit
@@ -418,7 +418,7 @@ def doubleTouch(space, screen, options):
 	return
 
 def dodgingSim(space, screen, options):
-	pygame.display.set_caption("Simulation 10: Double Touch")
+	pygame.display.set_caption("Simulation 9: Dodging Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
@@ -460,6 +460,90 @@ def dodgingSim(space, screen, options):
 
 	return
 
+def fastCollisionSim(space, screen, options):
+	pygame.display.set_caption("Simulation 9: Fast Collision Cylinder")
+	# set up collision handlers
+	ch0=space.add_collision_handler(0,2)
+	ch0.data["surface"]=screen
+	ch0.post_solve=rem0
+
+	# add shapes
+	ball = agents.fireball(500, 300)
+	space.add(ball.body, ball.shape)
+	
+
+	cone = agents.patient(300, 300)
+	cone.body.apply_impulse_at_local_point((30,0))
+	space.add(cone.body, cone.shape)
+	
+	cylinder = agents.agent(100, 300)
+	cylinder.body.apply_impulse_at_local_point((200,0))
+	space.add(cylinder.body, cylinder.shape)
+
+	time = 80
+	running = True
+	while running:
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				sys.exit(0)
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		time-=1
+		if time==0:
+			cylinder.body.velocity=(0,0)
+		clock = pygame.time.Clock()
+		# setup display and run sim
+		screen.fill((255,255,255))
+		space.step(1/50.0)
+		space.debug_draw(options)
+		pygame.display.flip()
+		clock.tick(50)
+
+	return
+
+
+def slowCollisionSim(space, screen, options):
+	pygame.display.set_caption("Simulation 8: Slow Collision Cylinder")
+	# set up collision handlers
+	ch0=space.add_collision_handler(0,2)
+	ch0.data["surface"]=screen
+	ch0.post_solve=rem0
+
+	# add shapes
+	ball = agents.fireball(500, 300)
+	space.add(ball.body, ball.shape)
+	
+	
+	cone = agents.patient(300, 300)
+	cone.body.apply_impulse_at_local_point((30,0))
+	space.add(cone.body, cone.shape)
+	
+	cylinder = agents.agent(100, 300)
+	cylinder.body.apply_impulse_at_local_point((200,0))
+	space.add(cylinder.body, cylinder.shape)
+
+	time = 80
+	running = True
+	while running:
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				sys.exit(0)
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		time-=1
+		if time==0:
+			cylinder.body.velocity=(0,0)
+		clock = pygame.time.Clock()
+		# setup display and run sim
+		screen.fill((255,255,255))
+		space.step(1/50.0)
+		space.debug_draw(options)
+		pygame.display.flip()
+		clock.tick(50)
+
+	return
 def main():
 	'''
 	Entry point
@@ -477,7 +561,7 @@ def main():
 	screen = pygame.display.set_mode((600,600))	
 	drawOptions = pymunk.pygame_util.DrawOptions(screen)
 
-	dodgingSim(space, screen, drawOptions)
+	fastCollisionSim(space, screen, drawOptions)
 
 if __name__ == '__main__':
 	sys.exit(main())
