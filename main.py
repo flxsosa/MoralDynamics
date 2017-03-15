@@ -18,7 +18,7 @@ Simulations to implement:
 4. Force/Distance -- Static Cylinder -- Complete/Edit
 5. Force -- Uphill Cylinder
 6. Force -- Downhill Cylinder
-7. Force -- Slow Collision Cone - In Progress
+7. Force -- Slow Collision Cone - Complete/Edit
 8. Force -- Fast Collision Cone - Complete/Edit
 9. Force/Distance -- Dodging Cylinder - Complete/Editgit m
 10. Frequency -- Double Contact Cylinder - Complete/Edit
@@ -47,6 +47,15 @@ def rem0(arbiter, space, data):
 	'''
 	space.remove(space.shapes[1])
 
+def rem1(arbiter, space, data):
+	'''
+	Causes cone to travel slower after being hit by Cylinder.
+	'''
+	space.shapes[1].body.velocity = \
+	(space.shapes[1].body.velocity[0]/2.5, 
+		space.shapes[1].body.velocity[1]/2.5)
+	space.shapes[2].body.velocity=(0,0)
+	
 def longDistanceSim(space, screen, options):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
@@ -502,21 +511,23 @@ def fastCollisionSim(space, screen, options):
 
 	return
 
-
 def slowCollisionSim(space, screen, options):
 	pygame.display.set_caption("Simulation 8: Slow Collision Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
 	ch0.post_solve=rem0
+	ch1=space.add_collision_handler(0,1)
+	ch1.data["surface"]=screen
+	ch1.post_solve=rem1
 
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
 	
 	
-	cone = agents.patient(300, 300)
-	cone.body.apply_impulse_at_local_point((30,0))
+	cone = agents.patient(250, 300)
+	cone.body.apply_impulse_at_local_point((100,0))
 	space.add(cone.body, cone.shape)
 	
 	cylinder = agents.agent(100, 300)
@@ -544,6 +555,7 @@ def slowCollisionSim(space, screen, options):
 		clock.tick(50)
 
 	return
+
 def main():
 	'''
 	Entry point
@@ -561,7 +573,7 @@ def main():
 	screen = pygame.display.set_mode((600,600))	
 	drawOptions = pymunk.pygame_util.DrawOptions(screen)
 
-	fastCollisionSim(space, screen, drawOptions)
+	slowCollisionSim(space, screen, drawOptions)
 
 if __name__ == '__main__':
 	sys.exit(main())
