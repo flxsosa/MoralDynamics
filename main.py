@@ -21,10 +21,10 @@ Simulations to implement:
 7. Force -- Slow Collision Cone
 8. Force -- Fast Collision Cone
 9. Force/Distance -- Dodging Cylinder
-10. Frequency -- Double Contact Cylinder
-11. Duration -- Medium Push Cylinder
-12. Duration -- Long Push Cylinder
-13. Duration -- Touch Cylinder - In Progress
+10. Frequency -- Double Contact Cylinder - Complete/Edit
+11. Duration -- Medium Push Cylinder - Complete/Edit
+12. Duration -- Long Push Cylinder - Complete/Edit
+13. Duration -- Touch Cylinder - Complete/Edit
 
 Progress Key:
 In Progress: May not be functional but working on it
@@ -69,7 +69,7 @@ def longDistanceSim(space, screen, options):
 	space.add(cone.body, cone.shape)
 	
 	cylinder = agents.agent(100, 300)
-	cylinder.set("imp", (100,0))
+	cylinder.body.apply_impulse_at_local_point((100,0))#set("imp", (100,0))
 	space.add(cylinder.body, cylinder.shape)
 	
 	running = True
@@ -114,7 +114,7 @@ def shortDistanceSim(space, screen, options):
 	space.add(cone.body, cone.shape)
 	
 	cylinder = agents.agent(250, 300)
-	cylinder.set("imp", (100,0))
+	cylinder.body.apply_impulse_at_local_point((100,0))#set("imp", (100,0))
 	space.add(cylinder.body, cylinder.shape)
 
 	running = True
@@ -159,7 +159,7 @@ def mediumDistanceSim(space, screen, options):
 	space.add(cone.body, cone.shape)
 	
 	cylinder = agents.agent(175, 300)
-	cylinder.set("imp", (100,0))
+	cylinder.body.apply_impulse_at_local_point((100,0))#set("imp", (100,0))
 	space.add(cylinder.body, cylinder.shape)
 
 	running = True
@@ -175,14 +175,14 @@ def mediumDistanceSim(space, screen, options):
 		clock = pygame.time.Clock()
 		# setup display and run sim
 		screen.fill((255,255,255))
-		space.step(1/100.0)
+		space.step(1/50.0)
 		space.debug_draw(options)
 		pygame.display.flip()
 		clock.tick(50)
 
 	return
 
-def staticCylinder(space, screen, options):
+def staticCylinderSim(space, screen, options):
 	'''
 	Simulation of Cone bouncing off of a static Cylinder into a Fireball.
 	Originally to be compared with shortDistance in Moral Kinematics.
@@ -201,11 +201,11 @@ def staticCylinder(space, screen, options):
 	space.add(ball.body, ball.shape)
 	
 	cone = agents.patient(200, 300)
-	cone.set("imp", (100,53))
+	cone.body.apply_impulse_at_local_point((100,53))#set("imp", (100,53))
 	space.add(cone.body, cone.shape)
 	
 	cylinder = agents.agent(350, 400)
-	cylinder.set("type", "s")
+	cylinder.body = pymunk.Body(1,1, body_type=pymunk.Body.STATIC)
 	space.add(cylinder.body, cylinder.shape)
 
 	running = True
@@ -217,6 +217,195 @@ def staticCylinder(space, screen, options):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
+		# set clock
+		clock = pygame.time.Clock()
+		# setup display and run sim
+		screen.fill((255,255,255))
+		space.step(1/50.0)
+		space.debug_draw(options)
+		pygame.display.flip()
+		clock.tick(50)
+
+	return
+
+def mediumPushSim(space, screen, options):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball over a medium distance
+	before letting go.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	pygame.display.set_caption("Simulation 11: Medium Push Cylinder")
+	# set up collision handlers
+	ch0=space.add_collision_handler(0,2)
+	ch0.data["surface"]=screen
+	ch0.post_solve=rem0
+
+	# add shapes
+	ball = agents.fireball(500, 300)
+	space.add(ball.body, ball.shape)
+	
+	cone = agents.patient(200, 300)
+	space.add(cone.body, cone.shape)
+	
+	cylinder = agents.agent(150, 300)
+	cylinder.body.apply_force_at_local_point((10000,0), (0,0))
+	cylinder.shape.elasticity = 0
+	space.add(cylinder.body, cylinder.shape)
+
+	time = 70
+	running = True
+	while running:
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				sys.exit(0)
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+
+		time -= 1
+		if time == 0:
+			cylinder.body.velocity = (0,0)
+		# set clock
+		clock = pygame.time.Clock()
+		# setup display and run sim
+		screen.fill((255,255,255))
+		space.step(1/50.0)
+		space.debug_draw(options)
+		pygame.display.flip()
+		clock.tick(50)
+
+	return
+
+def longPushSim(space, screen, options):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball over complete
+	distance.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	pygame.display.set_caption("Simulation 12: Long Push Cylinder")
+	# set up collision handlers
+	ch0=space.add_collision_handler(0,2)
+	ch0.data["surface"]=screen
+	ch0.post_solve=rem0
+
+	# add shapes
+	ball = agents.fireball(500, 300)
+	space.add(ball.body, ball.shape)
+	
+	cone = agents.patient(200, 300)
+	space.add(cone.body, cone.shape)
+	
+	cylinder = agents.agent(150, 300)
+	cylinder.body.apply_force_at_local_point((10000,0), (0,0))
+	cylinder.shape.elasticity = 0
+	space.add(cylinder.body, cylinder.shape)
+
+	running = True
+	while running:
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				sys.exit(0)
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+
+		# set clock
+		clock = pygame.time.Clock()
+		# setup display and run sim
+		screen.fill((255,255,255))
+		space.step(1/50.0)
+		space.debug_draw(options)
+		pygame.display.flip()
+		clock.tick(50)
+
+	return
+
+def touchSim(space, screen, options):
+	'''
+	Simulation of Cylinder touching Cone or tapping Cone into Fireball.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	pygame.display.set_caption("Simulation 13: Touch Cylinder")
+	# set up collision handlers
+	ch0=space.add_collision_handler(0,2)
+	ch0.data["surface"]=screen
+	ch0.post_solve=rem0
+
+	# add shapes
+	ball = agents.fireball(500, 300)
+	space.add(ball.body, ball.shape)
+	
+	cone = agents.patient(200, 300)
+	space.add(cone.body, cone.shape)
+	
+	cylinder = agents.agent(170, 300)
+	cylinder.body.apply_impulse_at_local_point((200,0))
+	space.add(cylinder.body, cylinder.shape)
+
+	running = True
+	while running:
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				sys.exit(0)
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+
+		# set clock
+		clock = pygame.time.Clock()
+		# setup display and run sim
+		screen.fill((255,255,255))
+		space.step(1/50.0)
+		space.debug_draw(options)
+		pygame.display.flip()
+		clock.tick(50)
+
+	return
+
+def doubleTouch(space, screen, options):
+	'''
+	Simulation of Cylinder tapping Cone twice into Fireball.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	pygame.display.set_caption("Simulation 10: Double Touch")
+	# set up collision handlers
+	ch0=space.add_collision_handler(0,2)
+	ch0.data["surface"]=screen
+	ch0.post_solve=rem0
+
+	# add shapes
+	ball = agents.fireball(500, 300)
+	space.add(ball.body, ball.shape)
+	
+	cone = agents.patient(300, 300)
+	space.add(cone.body, cone.shape)
+	
+	cylinder = agents.agent(170, 300)
+	cylinder.body.apply_impulse_at_local_point((200,0))
+	space.add(cylinder.body, cylinder.shape)
+
+	time=80
+	running = True
+	while running:
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				sys.exit(0)
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		time-=1
+		if time == 30:
+			cylinder.body.apply_impulse_at_local_point((600,0))
+		elif time == 0:
+			cylinder.body.velocity = (0,0)
 		# set clock
 		clock = pygame.time.Clock()
 		# setup display and run sim
@@ -245,7 +434,7 @@ def main():
 	screen = pygame.display.set_mode((600,600))	
 	drawOptions = pymunk.pygame_util.DrawOptions(screen)
 
-	staticCylinder(space, screen, drawOptions)
+	doubleTouch(space, screen, drawOptions)
 
 if __name__ == '__main__':
 	sys.exit(main())
