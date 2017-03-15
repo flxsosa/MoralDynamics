@@ -228,39 +228,6 @@ def staticCylinder(space, screen, options):
 
 	return
 
-def longPushCylinder(space, screen, options):
-	pygame.display.set_caption("Simulation 3: Long Distance")
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
-	
-
-	# add shapes
-	ball = addFireball(space, 500, 300)
-	cone = addCone(space, 200, 300)
-	cylinder = addCylinder(space, 100, 300)
-	cylinder.body.apply_force_at_local_point((10000,0),(0,0))
-	running = True
-	while running:
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				sys.exit(0)
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# set clock
-		clock = pygame.time.Clock()
-		# setup display and run sim
-		screen.fill((255,255,255))
-		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
-
-	return
-
 def main():
 	'''
 	Entry point
