@@ -556,6 +556,51 @@ def slowCollisionSim(space, screen, options):
 
 	return
 
+def test(space, screen, options):
+	pygame.display.set_caption("Simulation 2: Medium Distance")
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"]=screen
+	ch0.post_solve=rem0
+	space.damping = 0.2
+
+	# add shapes
+	ball = agents.fireball(500, 300)
+	space.add(ball.body, ball.shape)
+	
+	cone = agents.patient(400, 300)
+	space.add(cone.body, cone.shape)
+	
+	cylinder = agents.agent(175, 300)
+	cylinder.body.apply_impulse_at_local_point((100,0))#set("imp", (100,0))
+	space.add(cylinder.body, cylinder.shape)
+
+	total = [100]
+	running = True
+	while running:
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				sys.exit(0)
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		print(cylinder.body.velocity)
+		if (cylinder.body.velocity[0] < 100):
+			imp = 100.0 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((2*imp,0))
+			total.append(imp)
+		# set clock
+		clock = pygame.time.Clock()
+		# setup display and run sim
+		screen.fill((255,255,255))
+		space.step(1/50.0)
+		space.debug_draw(options)
+		pygame.display.flip()
+		clock.tick(50)
+		print("Total impulse: ", sum(total))
+	return
+
+
 def main():
 	'''
 	Entry point
@@ -573,7 +618,7 @@ def main():
 	screen = pygame.display.set_mode((600,600))	
 	drawOptions = pymunk.pygame_util.DrawOptions(screen)
 
-	slowCollisionSim(space, screen, drawOptions)
+	test(space, screen, drawOptions)
 
 if __name__ == '__main__':
 	sys.exit(main())
