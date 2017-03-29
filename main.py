@@ -557,7 +557,13 @@ def slowCollisionSim(space, screen, options):
 	return
 
 def test(space, screen, options):
-	pygame.display.set_caption("Simulation 2: Medium Distance")
+	'''
+	Current sim for testing extraction of effort from agent.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	pygame.display.set_caption("Test Simulation for Effort Extraction")
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
@@ -575,6 +581,11 @@ def test(space, screen, options):
 	cylinder.body.apply_impulse_at_local_point((100,0))#set("imp", (100,0))
 	space.add(cylinder.body, cylinder.shape)
 
+	'''
+	Initialize list of effort variables with first supplied impulse of 100
+	(see line 581). We will add the supplied impulses to this list and 
+	sum over it for our final quantity of effort (so far).
+	'''
 	total = [100]
 	running = True
 	while running:
@@ -584,7 +595,17 @@ def test(space, screen, options):
 				sys.exit(0)
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+		# print out agent's velocity (comment out if you want)
 		print(cylinder.body.velocity)
+
+		'''
+		Check if the velocity is less than it's 'max' velocity. If so,
+		apply an impulse to the agent and add that impulse value to our 
+		total list (initialized in line 589).
+
+		The impulse should be 'just enough' to get our agent up to
+		their max velocity and no more. (calculation for that is in line 610)
+		'''
 		if (cylinder.body.velocity[0] < 100):
 			imp = 100.0 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
