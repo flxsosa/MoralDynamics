@@ -427,6 +427,12 @@ def doubleTouch(space, screen, options):
 	return
 
 def dodgingSim(space, screen, options):
+	'''
+	Simulation of Cylinder dodging Cone as it runs into Fireball.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
 	pygame.display.set_caption("Simulation 9: Dodging Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
@@ -470,6 +476,11 @@ def dodgingSim(space, screen, options):
 	return
 
 def fastCollisionSim(space, screen, options):
+	'''
+	Simulation of Cone travelling faster after being hit by Cylinder.
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
 	pygame.display.set_caption("Simulation 9: Fast Collision Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
@@ -512,6 +523,11 @@ def fastCollisionSim(space, screen, options):
 	return
 
 def slowCollisionSim(space, screen, options):
+	'''
+	Simulation of Cone travelling slower after being hit by Cylinder.
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
 	pygame.display.set_caption("Simulation 8: Slow Collision Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
