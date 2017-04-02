@@ -40,12 +40,10 @@ import pymunk.pygame_util
 from pygame.locals import *
 import sys
 
-'''
-Global collision list. Used to extract boolean from begin method of CollisionHandler
-class. Bad practice but will fix soon.
-'''
+
+# Global collision list. Used to extract boolean from begin method of CollisionHandler.
+# Bad practice but will fix soon.
 collision = []
-running = False
 
 def rem0(arbiter, space, data):
 	'''
@@ -105,7 +103,7 @@ def shortDistance(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
@@ -150,7 +148,7 @@ def mediumDistance(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
@@ -195,7 +193,7 @@ def longDistance(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
@@ -241,7 +239,7 @@ def static(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
@@ -298,7 +296,7 @@ def slowCollision(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 		time-=1
@@ -345,7 +343,7 @@ def fastCollision(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 		time-=1
@@ -391,7 +389,7 @@ def dodge(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 		time-=1
@@ -440,7 +438,7 @@ def doubleTouch(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 		time-=1
@@ -491,7 +489,7 @@ def mediumPush(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
@@ -540,7 +538,7 @@ def longPush(space, screen, options):
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
-				sys.exit(0)
+				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 		'''
