@@ -521,19 +521,19 @@ def longPush(space, screen, options):
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
 	ch0.post_solve=rem0
+	ch0.begin=rem2
+	space.damping = 0.2
 
 	# add shapes
 	ball = agents.fireball(500, 300)
-	space.add(ball.body, ball.shape)
-	
+	space.add(ball.body, ball.shape)	
 	cone = agents.patient(200, 300)
-	space.add(cone.body, cone.shape)
-	
+	space.add(cone.body, cone.shape)	
 	cylinder = agents.agent(150, 300)
-	cylinder.body.apply_force_at_local_point((10000,0), (0,0))
-	cylinder.shape.elasticity = 0
+	#cylinder.shape.elasticity = 0
 	space.add(cylinder.body, cylinder.shape)
 
+	total = []
 	running = True
 	while running:
 		#allow user to exit
@@ -542,6 +542,14 @@ def longPush(space, screen, options):
 				sys.exit(0)
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+		'''
+		Check if the velocity is less than it's 'max' velocity. If so,
+		apply an impulse to the agent and add that impulse value to total
+		'''
+		if (cylinder.body.velocity[0] < 100 and len(collision) == 0):
+			imp = 100.0 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((2*imp,0))
+			total.append(imp)
 
 		# set clock
 		clock = pygame.time.Clock()
@@ -552,6 +560,12 @@ def longPush(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
+	# remove value from collision list and print out resulting effort
+	try:
+		collision.remove(1)
+	except:
+		print("Exited before collision.")
+	print("Total impulse: ", sum(total))
 	return
 
 def touch(space, screen, options):
