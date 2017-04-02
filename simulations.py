@@ -36,11 +36,6 @@ import pymunk.pygame_util
 from pygame.locals import *
 import sys
 
-
-# Global collision list. Used to extract boolean from begin method of CollisionHandler.
-# Bad practice but will fix soon.
-collision = []
-
 def shortDistance(space, screen, options):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
@@ -388,19 +383,21 @@ def doubleTouch(space, screen, options):
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
 	ch0.post_solve=handlers.rem0
+	ch1 = space.add_collision_handler(0, 1)
+	ch1.data["surface"]=screen
+	ch1.begin = handlers.rem2
 
+	space.damping = 0.2
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
-	
 	cone = agents.patient(300, 300)
 	space.add(cone.body, cone.shape)
-	
 	cylinder = agents.agent(170, 300)
-	cylinder.body.apply_impulse_at_local_point((200,0))
 	space.add(cylinder.body, cylinder.shape)
 
-	time=80
+	time = 50
+	total = []
 	running = True
 	while running:
 		#allow user to exit
@@ -409,11 +406,23 @@ def doubleTouch(space, screen, options):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-		time-=1
-		if time == 30:
-			cylinder.body.apply_impulse_at_local_point((600,0))
-		elif time == 0:
-			cylinder.body.velocity = (0,0)
+		time -=1
+		'''
+		Check if the velocity is less than it's 'max' velocity. If so,
+		apply an impulse to the agent and add that impulse value to total
+		'''
+		if (cylinder.body.velocity[0] < 170 and len(handlers.collision) == 0):
+			imp = 170.0 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((2*imp,0))
+			total.append(imp)
+		elif (time == 10):
+			imp = 170.0 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((2*imp,0))
+			total.append(imp)
+		elif (len(handlers.collision) == 2 and cylinder.body.velocity[0] != 0):
+			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
+			total.append(math.fabs(imp))
+
 		# set clock
 		clock = pygame.time.Clock()
 		# setup display and run sim
@@ -423,6 +432,13 @@ def doubleTouch(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
+	# handlers.remove value from collision list and print out resulting effort
+	try:
+		handlers.collision.remove(1)
+		handlers.collision.remove(1)
+	except:
+		print("Exited before collision.")
+	print("Total impulse: ", sum(total))
 	return
 
 def mediumPush(space, screen, options):
@@ -522,7 +538,7 @@ def longPush(space, screen, options):
 		Check if the velocity is less than it's 'max' velocity. If so,
 		apply an impulse to the agent and add that impulse value to total
 		'''
-		if (cylinder.body.velocity[0] < 100 and len(collision) == 0):
+		if (cylinder.body.velocity[0] < 100 and len(handlers.collision) == 0):
 			imp = 100.0 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
@@ -538,7 +554,7 @@ def longPush(space, screen, options):
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
-		collision.handlers.remove(1)
+		handlers.collision.remove(1)
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
@@ -583,7 +599,7 @@ def touch(space, screen, options):
 		Check if the velocity is less than it's 'max' velocity. If so,
 		apply an impulse to the agent and add that impulse value to total
 		'''
-		if (cylinder.body.velocity[0] < 250 and len(collision) == 0):
+		if (cylinder.body.velocity[0] < 250 and len(handlers.collision) == 0):
 			imp = 250.0 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
@@ -599,7 +615,7 @@ def touch(space, screen, options):
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
-		collision.handlers.remove(1)
+		handlers.collision.remove(1)
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))

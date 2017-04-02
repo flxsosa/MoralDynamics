@@ -1,5 +1,5 @@
 '''
-Collision Handlers for MoralDynamics
+Collision Handlers for Moral Dynamics
 
 April 2, 2017
 Felix Sosa
@@ -7,6 +7,8 @@ Felix Sosa
 import pygame
 import pymunk
 from pygame.locals import *
+
+collision = []
 
 def rem0(arbiter, space, data):
 	'''
