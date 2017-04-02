@@ -54,6 +54,7 @@ def rem0(arbiter, space, data):
 	'''
 	space.remove(space.shapes[1])
 	running = False
+	pygame.time.set_timer(QUIT, 1000)
 	return True
 
 def rem1(arbiter, space, data):
