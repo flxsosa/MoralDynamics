@@ -9,6 +9,7 @@ import pymunk
 from pygame.locals import *
 
 collision = []
+totalImpulse = []
 
 def rem0(arbiter, space, data):
 	'''
@@ -36,4 +37,12 @@ def rem2(arbiter, space, data):
 	to signify a collision has begun.
 	'''
 	collision.append(1)
+	return True
+
+def rem3(arbiter, space, data):
+	'''
+	Used with post_solve method of CollisionHandler. Appends total impulse of
+	collision between objects to totalImpulse list.
+	'''
+	totalImpulse.append(arbiter.total_impulse)
 	return True
