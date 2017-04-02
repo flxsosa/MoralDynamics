@@ -1,13 +1,8 @@
 '''
-Classes of agents for Moral Dynamics.
+Agent Classes for Moral Dynamics.
 
 March 14, 2016
-
 Felix Sosa
-
-Agent: the agent that acts to inflict harm on the patient. Cylinder in Moral Kinematics.
-Patient: the agent that is harmed by the Agent. Cone in Moral Kinematics.
-Fireball: object that is harful to Patient. Same in Moral Kinematics
 '''
 
 import pymunk
@@ -29,21 +24,6 @@ class agent:
 		self.shape.collision_type = 1
 		self.shape.elasticity = 1
 
-	def set(self, var, val):
-		'''
-		Set method for Agent.
-		var -- attribute of Agent to set 
-		val -- value to set attribute to
-		'''
-		if var=="imp":
-			self.shape.body.apply_impulse_at_local_point(val)
-		elif var=="frc":
-			self.shape.body.apply_force_at_local_point(val, (0,0))
-		elif var=="type" and val=="s":
-			self.body = pymunk.Body(1,1, body_type=pymunk.Body.STATIC)
-		elif var=="type" and val=="d":
-			self.body = pymunk.Body(1,1, body_type=pymunk.Body.DYNAMIC)
-			
 class patient:
 	'''
 	A class for Patients in Moral Dynamics.
@@ -60,21 +40,6 @@ class patient:
 		self.shape.color = pygame.color.THECOLORS["green"]
 		self.shape.collision_type = 0
 		self.shape.elasticity = 1
-
-	def set(self, var, val):
-		'''
-		Set method for Patient.
-		var -- attribute of Patient to set 
-		val -- value to set attribute to
-		'''
-		if var=="imp":
-			self.shape.body.apply_impulse_at_local_point(val)
-		elif var=="frc":
-			self.shape.body.apply_force_at_local_point(val, (0,0))
-		elif var=="type" and val=="s":
-			self.body = pymunk.Body(1,1, body_type=pymunk.Body.STATIC)
-		elif var=="type" and val=="d":
-			self.body = pymunk.Body(1,1, body_type=pymunk.Body.DYNAMIC)
 
 class fireball:
 	'''
