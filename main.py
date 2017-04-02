@@ -1,14 +1,8 @@
 '''
-Moral Dynamics
+Main file for Moral Dynamics
 
 March 31, 2017
-
 Felix Sosa
-
-World of Cylinders, Cones, and Fireballs. 
-Fireballs are harmless for Cylinders (Squares) but harmful to Cones.
-
-Main file
 '''
 
 import pymunk

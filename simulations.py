@@ -1,17 +1,9 @@
 '''
-Moral Dynamics
-
-March 10, 2017
-
-Felix Sosa
-
-World of Cylinders, Cones, and Fireballs. 
-Fireballs are harmless for Cylinders (Squares) but harmful to Cones.
+Simulations for Moral Dynamics
 
 Simulations to implement:
 
 <Number>. <Factor> -- <Name> -- <Progress>
-
 1. Distance -- Long Distance -- Complete/Edit
 2. Distance -- Short Distance -- Complete/Edit
 3. Distance -- Medium Distance -- Complete/Edit
@@ -26,11 +18,13 @@ Simulations to implement:
 12. Duration -- Long Push Cylinder - Complete/Edit
 13. Duration -- Touch Cylinder - Complete/Edit
 
-Progress Key:
+Key:
 In Progress: May not be functional but working on it
 Complete/Edit: Functions as needed but may need edits or optimizations
 Complete: Functions and is optimal
 
+March 10, 2017
+Felix Sosa
 '''
 
 import pymunk
