@@ -49,18 +49,19 @@ def shortDistance(space, screen, options):
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
 	ch0.post_solve=handlers.rem0
-	
+	ch1 = space.add_collision_handler(0, 1)
+	ch1.data["surface"]=screen
+	ch1.begin=handlers.rem2
+	space.damping = 0.2
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
-	
 	cone = agents.patient(400, 300)
 	space.add(cone.body, cone.shape)
-	
 	cylinder = agents.agent(250, 300)
-	cylinder.body.apply_impulse_at_local_point((100,0))#set("imp", (100,0))
 	space.add(cylinder.body, cylinder.shape)
-
+	
+	total=[]
 	running = True
 	while running:
 		#allow user to exit
@@ -69,6 +70,15 @@ def shortDistance(space, screen, options):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+
+		'''
+		Check if the velocity is less than it's 'max' velocity. If so,
+		apply an impulse to the agent and add that impulse value to total
+		'''
+		if (cylinder.body.velocity[0] < 200 and len(handlers.collision) == 0):
+			imp = 200.0 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((2*imp,0))
+			total.append(imp)
 
 		# set clock
 		clock = pygame.time.Clock()
@@ -79,6 +89,12 @@ def shortDistance(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
+	# handlers.remove value from collision list and print out resulting effort
+	try:
+		handlers.collision = []
+	except:
+		print("Exited before collision.")
+	print("Total impulse: ", sum(total))
 	return
 
 def mediumDistance(space, screen, options):
@@ -94,18 +110,19 @@ def mediumDistance(space, screen, options):
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
 	ch0.post_solve=handlers.rem0
-
+	ch1 = space.add_collision_handler(0, 1)
+	ch1.data["surface"]=screen
+	ch1.begin=handlers.rem2
+	space.damping = 0.2
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
-	
 	cone = agents.patient(400, 300)
 	space.add(cone.body, cone.shape)
-	
 	cylinder = agents.agent(175, 300)
-	cylinder.body.apply_impulse_at_local_point((100,0))#set("imp", (100,0))
 	space.add(cylinder.body, cylinder.shape)
-
+	
+	total=[]
 	running = True
 	while running:
 		#allow user to exit
@@ -114,6 +131,15 @@ def mediumDistance(space, screen, options):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+
+		'''
+		Check if the velocity is less than it's 'max' velocity. If so,
+		apply an impulse to the agent and add that impulse value to total
+		'''
+		if (cylinder.body.velocity[0] < 200 and len(handlers.collision) == 0):
+			imp = 200.0 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((2*imp,0))
+			total.append(imp)
 
 		# set clock
 		clock = pygame.time.Clock()
@@ -124,6 +150,12 @@ def mediumDistance(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
+	# handlers.remove value from collision list and print out resulting effort
+	try:
+		handlers.collision = []
+	except:
+		print("Exited before collision.")
+	print("Total impulse: ", sum(total))
 	return
 
 def longDistance(space, screen, options):
@@ -139,18 +171,19 @@ def longDistance(space, screen, options):
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
 	ch0.post_solve=handlers.rem0
-
+	ch1 = space.add_collision_handler(0, 1)
+	ch1.data["surface"]=screen
+	ch1.begin=handlers.rem2
+	space.damping = 0.2
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
-	
 	cone = agents.patient(400, 300)
 	space.add(cone.body, cone.shape)
-	
 	cylinder = agents.agent(100, 300)
-	cylinder.body.apply_impulse_at_local_point((100,0))#set("imp", (100,0))
 	space.add(cylinder.body, cylinder.shape)
 	
+	total=[]
 	running = True
 	while running:
 		#allow user to exit
@@ -159,6 +192,15 @@ def longDistance(space, screen, options):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+
+		'''
+		Check if the velocity is less than it's 'max' velocity. If so,
+		apply an impulse to the agent and add that impulse value to total
+		'''
+		if (cylinder.body.velocity[0] < 200 and len(handlers.collision) == 0):
+			imp = 200.0 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((2*imp,0))
+			total.append(imp)
 
 		# set clock
 		clock = pygame.time.Clock()
@@ -169,6 +211,12 @@ def longDistance(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
+	# handlers.remove value from collision list and print out resulting effort
+	try:
+		handlers.collision = []
+	except:
+		print("Exited before collision.")
+	print("Total impulse: ", sum(total))
 	return
 
 def static(space, screen, options):
@@ -225,7 +273,7 @@ def static(space, screen, options):
 				total.append(math.fabs(handlers.totalImpulse[0][0])+math.fabs(handlers.totalImpulse[0][1]))
 			except:
 				pass
-				
+
 		# set clock
 		clock = pygame.time.Clock()
 		# setup display and run sim
@@ -334,13 +382,12 @@ def fastCollision(space, screen, options):
 				running = False
 
 		if (cone.body.velocity[0] < 30):
-			imp = 30 - cone.body.velocity[0]
+			imp = 30.0 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
 		if (cylinder.body.velocity[0] < 270 and len(handlers.collision) == 0):
-			print len(handlers.collision)
-			imp = 270 - cylinder.body.velocity[0]
+			imp = 270.0 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((imp,0))
-			total.append(270)
+			total.append(imp)
 
 		clock = pygame.time.Clock()
 		# setup display and run sim
