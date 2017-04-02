@@ -184,20 +184,23 @@ def static(space, screen, options):
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
 	ch0.post_solve=handlers.rem0
-	space.damping = 0.2
+	#space.damping = 0.2
+	ch1=space.add_collision_handler(0,1)
+	ch1.data["surface"]=screen
+	ch1.begin=handlers.rem2
+	ch1.post_solve=handlers.rem3
 
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
-	
 	cone = agents.patient(200, 300)
 	cone.body.apply_impulse_at_local_point((100,53))#set("imp", (100,53))
 	space.add(cone.body, cone.shape)
-	
 	cylinder = agents.agent(350, 400)
-	cylinder.body = pymunk.Body(1,1, body_type=pymunk.Body.STATIC)
 	space.add(cylinder.body, cylinder.shape)
 
+	total = []
+	count = 0
 	running = True
 	while running:
 		#allow user to exit
@@ -206,7 +209,14 @@ def static(space, screen, options):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-
+		if (len(handlers.collision) != 0 and count==0):
+			count+=1
+			try:
+				cylinder.body.apply_impulse_at_local_point((handlers.totalImpulse[0][0], 
+					handlers.totalImpulse[0][1]))
+				total.append(math.fabs(handlers.totalImpulse[0][0])+math.fabs(handlers.totalImpulse[0][1]))
+			except:
+				pass
 		# set clock
 		clock = pygame.time.Clock()
 		# setup display and run sim
@@ -216,6 +226,13 @@ def static(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
+	# handlers.remove value from collision list and print out resulting effort
+	try:
+		handlers.collision = []
+		handlers.totalImpulse = []
+	except:
+		print("Exited before collision.")
+	print("Total impulse: ", sum(total))
 	return
 
 def uphill(space, screen, options):
@@ -244,12 +261,9 @@ def slowCollision(space, screen, options):
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
-	
-	
 	cone = agents.patient(250, 300)
 	cone.body.apply_impulse_at_local_point((100,0))
 	space.add(cone.body, cone.shape)
-	
 	cylinder = agents.agent(100, 300)
 	cylinder.body.apply_impulse_at_local_point((200,0))
 	space.add(cylinder.body, cylinder.shape)
@@ -329,7 +343,7 @@ def fastCollision(space, screen, options):
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
-		handlers.collision.remove(1)
+		handlers.collision = []
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
@@ -449,8 +463,7 @@ def doubleTouch(space, screen, options):
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
-		handlers.collision.remove(1)
-		handlers.collision.remove(1)
+		handlers.collision = []
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
@@ -569,7 +582,7 @@ def longPush(space, screen, options):
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
-		handlers.collision.remove(1)
+		handlers.collision = []
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
@@ -630,7 +643,7 @@ def touch(space, screen, options):
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
-		handlers.collision.remove(1)
+		handlers.collision = []
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
@@ -699,7 +712,7 @@ def test(space, screen, options):
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
-		collision.handlers.remove(1)
+		collision.handlers = []
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
