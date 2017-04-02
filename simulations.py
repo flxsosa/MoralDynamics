@@ -36,6 +36,7 @@ Complete: Functions and is optimal
 import pymunk
 import pygame
 import agents
+import handlers
 import pymunk.pygame_util
 from pygame.locals import *
 import sys
@@ -44,34 +45,6 @@ import sys
 # Global collision list. Used to extract boolean from begin method of CollisionHandler.
 # Bad practice but will fix soon.
 collision = []
-
-def rem0(arbiter, space, data):
-	'''
-	Used with post_solve. Removes the Cone after colliding with the Fireball.
-	Expected that Cone is in space.shapes[1]
-	'''
-	space.remove(space.shapes[1])
-	running = False
-	pygame.time.set_timer(QUIT, 1000)
-	return True
-
-def rem1(arbiter, space, data):
-	'''
-	Used with post_solve. Causes cone to travel slower after being hit by Cylinder.
-	'''
-	space.shapes[1].body.velocity = \
-	(space.shapes[1].body.velocity[0]/2.5, 
-		space.shapes[1].body.velocity[1]/2.5)
-	space.shapes[2].body.velocity=(0,0)
-	return True
-
-def rem2(arbiter, space, data):
-	'''
-	Used with begin method of CollisionHandler. Adds element to collision list
-	to signify a collision has begun.
-	'''
-	collision.append(1)
-	return True
 
 def shortDistance(space, screen, options):
 	'''
@@ -85,7 +58,7 @@ def shortDistance(space, screen, options):
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 	
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -130,7 +103,7 @@ def mediumDistance(space, screen, options):
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -175,7 +148,7 @@ def longDistance(space, screen, options):
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -220,7 +193,7 @@ def static(space, screen, options):
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -272,10 +245,10 @@ def slowCollision(space, screen, options):
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 	ch1=space.add_collision_handler(0,1)
 	ch1.data["surface"]=screen
-	ch1.post_solve=rem1
+	ch1.post_solve=handlers.rem1
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -322,7 +295,7 @@ def fastCollision(space, screen, options):
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -370,7 +343,7 @@ def dodge(space, screen, options):
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -419,7 +392,7 @@ def doubleTouch(space, screen, options):
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -469,7 +442,7 @@ def mediumPush(space, screen, options):
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -519,8 +492,8 @@ def longPush(space, screen, options):
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
-	ch0.begin=rem2
+	ch0.post_solve=handlers.rem0
+	ch0.begin=handlers.rem2
 	space.damping = 0.2
 
 	# add shapes
@@ -559,9 +532,9 @@ def longPush(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
-	# remove value from collision list and print out resulting effort
+	# handlers.remove value from collision list and print out resulting effort
 	try:
-		collision.remove(1)
+		collision.handlers.remove(1)
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
@@ -578,10 +551,10 @@ def touch(space, screen, options):
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 	ch1 = space.add_collision_handler(0, 1)
 	ch1.data["surface"]=screen
-	ch1.begin = rem2
+	ch1.begin = handlers.rem2
 
 	space.damping = 0.2
 	# add shapes
@@ -620,9 +593,9 @@ def touch(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
-	# remove value from collision list and print out resulting effort
+	# handlers.remove value from collision list and print out resulting effort
 	try:
-		collision.remove(1)
+		collision.handlers.remove(1)
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
@@ -639,10 +612,10 @@ def test(space, screen, options):
 	# set up post_solve and begin collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
-	ch0.post_solve=rem0
+	ch0.post_solve=handlers.rem0
 	ch1 = space.add_collision_handler(0, 1)
 	ch1.data["surface"]=screen
-	ch1.begin = rem2
+	ch1.begin = handlers.rem2
 
 	# set space damping
 	space.damping = 0.2
@@ -689,9 +662,9 @@ def test(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
-	# remove value from collision list and print out resulting effort
+	# handlers.remove value from collision list and print out resulting effort
 	try:
-		collision.remove(1)
+		collision.handlers.remove(1)
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
