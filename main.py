@@ -67,6 +67,7 @@ def main():
 			simulations.test(space, screen, drawOptions)
 
 		pygame.quit()
+		pygame.display.quit()
 		print("Please choose a Simulation [1-13] or [0] to exit:")
 		choice = raw_input()
 		
