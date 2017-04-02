@@ -184,17 +184,16 @@ def static(space, screen, options):
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
 	ch0.post_solve=handlers.rem0
-	#space.damping = 0.2
 	ch1=space.add_collision_handler(0,1)
 	ch1.data["surface"]=screen
 	ch1.begin=handlers.rem2
 	ch1.post_solve=handlers.rem3
+	space.damping=0.2
 
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
 	cone = agents.patient(200, 300)
-	cone.body.apply_impulse_at_local_point((100,53))#set("imp", (100,53))
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(350, 400)
 	space.add(cylinder.body, cylinder.shape)
@@ -209,6 +208,15 @@ def static(space, screen, options):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+
+		# Check if the velocity is less than it's 'max' velocity.
+		if (cone.body.velocity[0] < 350 and cone.body.velocity[1] < 180 and \
+				len(handlers.collision) == 0):
+			impx = 350 - cone.body.velocity[0]
+			impy = 180 - cone.body.velocity[1]
+			cone.body.apply_impulse_at_local_point((impx,impy))
+
+		# if there is a collision between agent and patient, have agent push back once
 		if (len(handlers.collision) != 0 and count==0):
 			count+=1
 			try:
@@ -217,6 +225,7 @@ def static(space, screen, options):
 				total.append(math.fabs(handlers.totalImpulse[0][0])+math.fabs(handlers.totalImpulse[0][1]))
 			except:
 				pass
+				
 		# set clock
 		clock = pygame.time.Clock()
 		# setup display and run sim
