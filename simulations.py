@@ -751,7 +751,7 @@ def test(space, screen, options):
 		Check if the velocity is less than it's 'max' velocity. If so,
 		apply an impulse to the agent and add that impulse value to total
 		'''
-		if (cylinder.body.velocity[0] < 150 and len(collision) == 0):
+		if (cylinder.body.velocity[0] < 150 and len(handlers.collision) == 0):
 			imp = 150.0 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
@@ -768,7 +768,7 @@ def test(space, screen, options):
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
-		collision.handlers = []
+		handlers.collision = []
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
