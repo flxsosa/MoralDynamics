@@ -17,7 +17,23 @@ def main():
 	'''
 	Entry point
 	'''
-	
+	print("=================================================")
+	print("1. Short Distance")
+	print("2. Medium Distance")
+	print("3. Long Distance")
+	print("4. Static")
+	print("5. Uphill [N/A]")
+	print("6. Downhill [N/A]")
+	print("7. Slow Collision")
+	print("8. Fast Collision")
+	print("9. Dodge")
+	print("10. Double Touch")
+	print("11. Medium Push")
+	print("12. Long Push")
+	print("13. Touch")
+	print("14. Push Fireball")
+	print("0. EXIT")
+	print("=================================================")
 	# list experiment options to user
 	print("Please choose a Simulation [1-13] or [0] to exit:")
 	choice = raw_input()
