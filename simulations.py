@@ -270,7 +270,8 @@ def static(space, screen, options):
 			try:
 				cylinder.body.apply_impulse_at_local_point((handlers.totalImpulse[0][0], 
 					handlers.totalImpulse[0][1]))
-				total.append(math.fabs(handlers.totalImpulse[0][0])+math.fabs(handlers.totalImpulse[0][1]))
+				total.append(math.fabs(handlers.totalImpulse[0][0]) + \
+					math.fabs(handlers.totalImpulse[0][1]))
 			except:
 				pass
 
@@ -687,6 +688,69 @@ def touch(space, screen, options):
 			imp = 250.0 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
+
+		# set clock
+		clock = pygame.time.Clock()
+		# setup display and run sim
+		screen.fill((255,255,255))
+		space.step(1/50.0)
+		space.debug_draw(options)
+		pygame.display.flip()
+		clock.tick(50)
+
+	# handlers.remove value from collision list and print out resulting effort
+	try:
+		handlers.collision = []
+	except:
+		print("Exited before collision.")
+	print("Total impulse: ", sum(total))
+	return
+
+def pushFireball(space, screen, options):
+	'''
+	Simulation of Cylinder pushing Fireball into Cone.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	pygame.display.set_caption("Simulation 14: Push Fireball")
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"]=screen
+	ch0.post_solve=handlers.rem0
+	ch1 = space.add_collision_handler(1, 2)
+	ch1.data["surface"]=screen
+	ch1.begin=handlers.rem2
+	space.damping = 0.2
+	# add shapes
+	ball = agents.fireball(400, 300)
+	space.add(ball.body, ball.shape)
+	cone = agents.patient(500, 300)
+	space.add(cone.body, cone.shape)
+	cylinder = agents.agent(100, 300)
+	space.add(cylinder.body, cylinder.shape)
+	
+	total=[]
+	running = True
+	while running:
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				running = False
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+
+		'''
+		Check if the velocity is less than it's 'max' velocity. If so,
+		apply an impulse to the agent and add that impulse value to total
+		'''
+		if (cylinder.body.velocity[0] < 275 and len(handlers.collision) == 0):
+			imp = 275.0 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((2*imp,0))
+			total.append(imp)
+		elif (len(handlers.collision) != 0 and cylinder.body.velocity[0] != 0):
+			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
+			total.append(math.fabs(imp))
 
 		# set clock
 		clock = pygame.time.Clock()

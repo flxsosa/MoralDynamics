@@ -58,7 +58,7 @@ def main():
 		elif (choice == '13'):
 			simulations.touch(space, screen, drawOptions)
 		elif (choice == '14'):
-			simulations.test(space, screen, drawOptions)
+			simulations.pushFireball(space, screen, drawOptions)
 
 		pygame.quit()
 		pygame.display.quit()
