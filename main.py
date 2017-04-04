@@ -34,7 +34,6 @@ def main():
 	print("14. Push Fireball")
 	print("0. EXIT")
 	print("=================================================")
-	# list experiment options to user
 	print("Please choose a Simulation [1-13] or [0] to exit:")
 	choice = raw_input()
 	
@@ -75,10 +74,11 @@ def main():
 			simulations.touch(space, screen, drawOptions)
 		elif (choice == '14'):
 			simulations.pushFireball(space, screen, drawOptions)
-
+		else:
+			print("Must be an integer [0-14]")
 		pygame.quit()
 		pygame.display.quit()
-		print("Please choose a Simulation [1-13] or [0] to exit:")
+		print("Please choose a Simulation [1-14] or [0] to exit:")
 		choice = raw_input()
 		
 	print("Goodbye")

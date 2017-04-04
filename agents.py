@@ -51,8 +51,10 @@ class fireball:
 		y -- y coordinate in pymunk space
 		rad -- radius of shape
 		'''
-		self.body = pymunk.Body(body_type=pymunk.Body.STATIC)
+		self.body = pymunk.Body(1,1)
+		# self.body = pymunk.Body(body_type=pymunk.Body.STATIC)
 		self.body.position = x,y 
 		self.shape = pymunk.Circle(self.body, rad)
 		self.shape.color = pygame.color.THECOLORS["red"]
 		self.shape.collision_type = 2
+		self.shape.elasticity = 0
