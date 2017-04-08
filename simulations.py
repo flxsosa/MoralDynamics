@@ -314,19 +314,18 @@ def slowCollision(space, screen, options):
 	ch0.post_solve=handlers.rem0
 	ch1=space.add_collision_handler(0,1)
 	ch1.data["surface"]=screen
-	ch1.post_solve=handlers.rem1
+	#ch1.post_solve=handlers.rem1
 	ch1.begin=handlers.rem2
 	space.damping=0.2
 
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(250, 300)
-	cone.body.apply_impulse_at_local_point((100,0))
+	cone = agents.patient(200,300)
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(100, 300)
 	space.add(cylinder.body, cylinder.shape)
-
+	count = 0
 	total = []
 	time = 80
 	running = True
@@ -337,12 +336,20 @@ def slowCollision(space, screen, options):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+		if (cone.body.velocity[0] < 200 and len(handlers.collision) == 0):
+			imp = 150 - cone.body.velocity[0]
+			cone.body.apply_impulse_at_local_point((imp,0))
 
-		if (cylinder.body.velocity[0] < 200 and len(handlers.collision) == 0):
-			imp = 200 - cylinder.body.velocity[0]
+		if (cylinder.body.velocity[0] < 300 and len(handlers.collision) == 0):
+			imp = 250 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((imp,0))
 			total.append(imp)
-		
+		if (len(handlers.collision) == 1 and count == 0):
+			count+=1
+			cone.body.apply_impulse_at_local_point((-50,0))
+		if (len(handlers.collision) != 0 and cylinder.body.velocity[0] > 0):
+			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
+			total.append(math.fabs(cylinder.body.velocity[0]))
 		time-=1
 		#if time==0:
 		#	cylinder.body.velocity=(0,0)
