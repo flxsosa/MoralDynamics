@@ -46,3 +46,10 @@ def rem3(arbiter, space, data):
 	'''
 	totalImpulse.append(arbiter.total_impulse)
 	return True
+
+def rem$(arbiter, space, data):
+	'''
+	Used with slowCollision. Have cone push back against cylinder after collision.
+	'''
+	space.shapes[1].body.apply_impulse_at_local_point((-100,0))
+	return True

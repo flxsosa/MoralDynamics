@@ -315,6 +315,8 @@ def slowCollision(space, screen, options):
 	ch1=space.add_collision_handler(0,1)
 	ch1.data["surface"]=screen
 	ch1.post_solve=handlers.rem1
+	ch1.begin=handlers.rem2
+	space.damping=0.2
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -323,9 +325,9 @@ def slowCollision(space, screen, options):
 	cone.body.apply_impulse_at_local_point((100,0))
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(100, 300)
-	cylinder.body.apply_impulse_at_local_point((200,0))
 	space.add(cylinder.body, cylinder.shape)
 
+	total = []
 	time = 80
 	running = True
 	while running:
@@ -335,9 +337,15 @@ def slowCollision(space, screen, options):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+
+		if (cylinder.body.velocity[0] < 200 and len(handlers.collision) == 0):
+			imp = 200 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(imp)
+		
 		time-=1
-		if time==0:
-			cylinder.body.velocity=(0,0)
+		#if time==0:
+		#	cylinder.body.velocity=(0,0)
 		clock = pygame.time.Clock()
 		# setup display and run sim
 		screen.fill((255,255,255))
@@ -346,6 +354,7 @@ def slowCollision(space, screen, options):
 		pygame.display.flip()
 		clock.tick(50)
 
+	print("Total impulse: ", sum(total))
 	return
 
 def fastCollision(space, screen, options):
