@@ -27,7 +27,14 @@ class infer:
 		self.sim = sim
 
 	def simulate(self):
+		for s in self.sim:
+			pygame.init()
+			space = pymunk.Space()
+			screen = pygame.display.set_mode((600,600))
+			drawOptions = pymunk.pygame_util.DrawOptions(screen)
+
+			simulations.shortDistance(space, screen, drawOptions, self.guess)
 		
-		pass
 
 	def difference(self):
+		pass

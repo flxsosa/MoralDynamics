@@ -36,7 +36,7 @@ import pymunk.pygame_util
 from pygame.locals import *
 import sys
 
-def shortDistance(space, screen, options):
+def shortDistance(space, screen, options, impulse=200.0):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
 	away. Originally to be compared with longDistanceSim in Moral Kinematics.
@@ -75,8 +75,8 @@ def shortDistance(space, screen, options):
 		Check if the velocity is less than it's 'max' velocity. If so,
 		apply an impulse to the agent and add that impulse value to total
 		'''
-		if (cylinder.body.velocity[0] < 200 and len(handlers.collision) == 0):
-			imp = 200.0 - cylinder.body.velocity[0]
+		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
+			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
 
