@@ -61,6 +61,7 @@ def shortDistance(space, screen, options, impulse=200.0):
 	cylinder = agents.agent(250, 300)
 	space.add(cylinder.body, cylinder.shape)
 	
+	truth = []
 	total=[]
 	running = True
 	while running:
@@ -79,6 +80,7 @@ def shortDistance(space, screen, options, impulse=200.0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
+		truth.append(cylinder.body.position[0])
 
 		# set clock
 		clock = pygame.time.Clock()
@@ -88,14 +90,13 @@ def shortDistance(space, screen, options, impulse=200.0):
 		space.debug_draw(options)
 		pygame.display.flip()
 		clock.tick(50)
-
 	# handlers.remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
-	return
+	return truth
 
 def mediumDistance(space, screen, options):
 	'''
