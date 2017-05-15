@@ -60,11 +60,14 @@ def shortDistance(space, screen, options, impulse=200.0):
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(250, 300)
 	space.add(cylinder.body, cylinder.shape)
-	
-	truth = []
+	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
+	xImps = []
+	yImps = []
 	total=[]
 	running = True
-	while running:
+	tick=0
+	while running and tick<95:
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -80,7 +83,8 @@ def shortDistance(space, screen, options, impulse=200.0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
-		truth.append(cylinder.body.position[0])
+		xImps.append(cylinder.body.position[0])
+		yImps.append(cylinder.body.position[1])
 
 		# set clock
 		clock = pygame.time.Clock()
@@ -96,7 +100,7 @@ def shortDistance(space, screen, options, impulse=200.0):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
-	return truth
+	return (xImps, yImps)
 
 def mediumDistance(space, screen, options):
 	'''

@@ -15,8 +15,6 @@ import sys
 import simulations
 import math
 
-truth = [250.0, 258.0, 265.74659028580504, 273.2477979178212, 280.511395689569, 287.5449101818961, 294.3556295620624, 300.9506111357799, 307.33668866003285, 313.5204794242548, 319.50839110720136, 325.3066284166229, 330.9211995186176, 336.35792226332677, 341.62243021342425, 346.7201784816453, 351.65644938340535, 356.4363579103649, 361.06485703061264, 365.5467428209587, 369.88665943665643, 374.08910392370245, 373.78565919842254, 373.721208762133, 373.6587998716735, 373.59836785860085, 373.53985010292325, 373.4831859682134, 373.42831673877623, 373.3751855588078, 373.3237373734807, 373.27391887189606, 373.2256784318424, 373.17896606630467, 373.13373337166695, 373.08993347755677, 373.0475209982776, 373.00645198578, 372.96668388412235, 372.928175485374, 372.89088688691584, 372.8547794500924, 372.81981576017466, 372.7859595875906, 372.7531758503838, 372.7214305778615, 372.6906908753938, 372.6609248903282, 372.6321017789836, 372.60419167469007, 372.5771656568405, 372.55099572092337, 372.5256547495039, 372.50111648412496, 372.4773554980981, 372.45434717015604, 372.43206765893996, 372.4104938782951, 372.38960347334864, 372.36937479734553, 372.34978688921797, 372.33081945186547, 372.31245283112276, 372.2946679953942, 372.27744651593304, 372.2607705477454, 372.2446228110993, 372.22898657361924, 372.21384563294805, 372.1991842999579, 372.1849873824931, 372.17124016962794, 372.15792841642315, 372.14503832916523, 372.1325565510733, 372.12047014845876, 372.10876659732327, 372.0974337703813, 372.0864599244939, 372.0758336885002, 372.0655440514348, 372.0555803511179, 372.04593226310715, 372.0365897899996, 372.0275432510721, 372.01878327225006, 372.0103007763942, 372.0020869738947, 371.99413335356314, 371.98643167381346, 371.97897395412184, 371.97175246675715, 371.96475972877363, 371.9579884942568, 371.95143174681544]
-
 class infer:
 	'''
 	A class for inferring effort
@@ -30,14 +28,8 @@ class infer:
 		self.sim = sim
 		self.score = None
 
-	def simulate(self):
-		for s in self.sim:
-			pygame.init()
-			space = pymunk.Space()
-			screen = pygame.display.set_mode((600,600))
-			drawOptions = pymunk.pygame_util.DrawOptions(screen)
-
-	def difference(self):
+	def difference(self, verbose=False):
+		# run truth simulation
 		pygame.init()
 		space = pymunk.Space()
 		screen = pygame.display.set_mode((600,600))
@@ -45,7 +37,7 @@ class infer:
 		truth = simulations.shortDistance(space,screen,drawOptions)
 		pygame.quit()
 		pygame.display.quit()
-
+		# run guess simulation
 		pygame.init()
 		space = pymunk.Space()
 		screen = pygame.display.set_mode((600,600))
@@ -54,19 +46,21 @@ class infer:
 		pygame.quit()
 		pygame.display.quit()
 
-		diff =[]
-		j = 0
-		for step in truth:
-			try:
-				diff.append(math.fabs(step-guess[j]))
-			except:
-				diff.append(0)
-			j+=1
+		xDiff =[]
+		yDiff =[]
+		eucDiff=[]
+		for j in range(len(truth[0])):
+			xDiff.append(math.fabs(truth[0][j]-guess[0][j]))
+			yDiff.append(math.fabs(truth[1][j]-guess[1][j]))
+			e = euclidean(truth[0][j], truth[1][j], guess[0][j], guess[1][j])
+			eucDiff.append(e)
 
-		i = 0
-		print("Step \t Truth \t Guess \t Diff")
-		for step in truth:
-			print i,'\t',step, '\t', guess[i], '\t', diff[i]
-			i+=1
+		print("Step \t Truth \t Guess \t xDiff \t yDiff \t EucDiff")
+		if (verbose):
+			for i in range(len(truth)):
+				print i, '\t', truth[i], '\t', guess[i], '\t', xDiff[i], '\t', yDiff[i], '\t', eucDiff[i]
 
-		print "X \t X \t X \t", sum(diff)
+		print "X \t X \t X \t", sum(xDiff), " \t ", sum(yDiff), " \t ", sum(eucDiff)
+
+def euclidean(x1, y1, x2, y2):
+	return math.sqrt(pow((x1-x2),2)+pow((y1-y2),2))
