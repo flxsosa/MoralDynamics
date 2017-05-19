@@ -33,7 +33,7 @@ def difference(sim=False, guess=False, verbose=False):
 		truth = simulations.shortDistance(space,screen,drawOptions)
 		pygame.quit()
 		pygame.display.quit()
-		
+
 		# run guess simulation
 		pygame.init()
 		space = pymunk.Space()
@@ -43,23 +43,19 @@ def difference(sim=False, guess=False, verbose=False):
 		pygame.quit()
 		pygame.display.quit()
 
-		xDiff =[]
-		yDiff =[]
-		eucDiff=[]
+		# declare lists for euclidean distances for each body
+		eucDiffAgent = []
+		eucDiffPatient = []
+		eucDiffFireball = []
+		eucDiffTotal = []
+
 		for j in range(len(truth[0])):
-			xDiff.append(math.fabs(truth[0][j]-guess[0][j]))
-			yDiff.append(math.fabs(truth[1][j]-guess[1][j]))
-			e = euclidean(truth[0][j], truth[1][j], guess[0][j], guess[1][j])
-			eucDiff.append(e)
-
-		print("Step \t Truth \t Guess \t xDiff \t yDiff \t EucDiff")
-		if (verbose):
-			for i in range(len(truth[0])):
-				print i, '\t', truth[0][i], '\t', guess[i], '\t', xDiff[i], '\t', yDiff[i], '\t', eucDiff[i]
-
-		print "X \t X \t X \t", sum(xDiff), " \t ", sum(yDiff), " \t ", sum(eucDiff)
-	else:
-		print "Please choose a simulation from [1-14] and pass in a guess impulse value"
-
+			# gather euclidean distances between truth and guess for each body at each timestep
+			eucDiffAgent.append(euclidean(truth[0][j], truth[1][j], guess[0][j], guess[1][j]))
+			eucDiffPatient.append(euclidean(truth[2][j], truth[3][j], guess[2][j], guess[3][j]))
+			eucDiffFireball.append(euclidean(truth[4][j], truth[5][j], guess[4][j], guess[5][j]))
+			print(eucDiffAgent[j], eucDiffPatient[j], eucDiffFireball[j])
+		eucDiffTotal = sum(eucDiffAgent+eucDiffPatient+eucDiffFireball)
+		print(eucDiffTotal)
 def euclidean(x1, y1, x2, y2):
-	return math.sqrt(pow((x1-x2),2)+pow((y1-y2),2))
+	return math.sqrt(pow((x1-x2),2) + pow((y1-y2),2))
