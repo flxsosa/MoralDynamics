@@ -44,7 +44,8 @@ def shortDistance(space, screen, options, impulse=200.0):
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
-	pygame.display.set_caption("Simulation 1: Short Distance")
+	#pygame.display.set_caption("Simulation 1: Short Distance")
+	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
@@ -53,6 +54,7 @@ def shortDistance(space, screen, options, impulse=200.0):
 	ch1.data["surface"]=screen
 	ch1.begin=handlers.rem2
 	space.damping = 0.2
+	
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
@@ -60,14 +62,20 @@ def shortDistance(space, screen, options, impulse=200.0):
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(250, 300)
 	space.add(cylinder.body, cylinder.shape)
+	
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
-	xImps = []
-	yImps = []
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
 	total=[]
 	running = True
 	tick=0
 	while running and tick<95:
 		tick+=1
+		
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -83,24 +91,32 @@ def shortDistance(space, screen, options, impulse=200.0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
-		xImps.append(cylinder.body.position[0])
-		yImps.append(cylinder.body.position[1])
+
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
 
 		# set clock
 		clock = pygame.time.Clock()
+		
 		# setup display and run sim
-		screen.fill((255,255,255))
+		#screen.fill((255,255,255))
 		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
+		#space.debug_draw(options)
+		#pygame.display.flip()
+		clock.tick(500000)
+	
 	# handlers.remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
 		print("Exited before collision.")
-	print("Total impulse: ", sum(total))
-	return (xImps, yImps)
+	#print("Total impulse: ", sum(total))
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def mediumDistance(space, screen, options):
 	'''
