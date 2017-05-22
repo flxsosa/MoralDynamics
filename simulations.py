@@ -393,21 +393,26 @@ def static(space, screen, options, guess=False, impulse=350):
 	print("Total impulse: ", sum(total), "Tick ", tick)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def uphill(space, screen, options):
+def uphill(space, screen, options, guess=False, impulse=None):
 	print("Uphill simulation not implemented yet.")
 	return
 
-def downhill(space, screen, options):
+def downhill(space, screen, options, guess=False, impulse=None):
 	print("Downhill simulation not implemented yet.")
 	return
 
-def slowCollision(space, screen, options):
+def slowCollision(space, screen, options, guess=False, impulse=400):
 	'''
 	Simulation of Cone travelling slower after being hit by Cylinder.
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
+	TODO: 
+	1. Clean up this simulation. Make it more clear the patient is 
+	resiting the agent's push.
+	2. Find a way to incorporate patients impulses into guess.
 	'''
-	pygame.display.set_caption("Simulation 7: Slow Collision Cylinder")
+	if(not guess):
+		pygame.display.set_caption("Simulation 7: Slow Collision Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
@@ -425,23 +430,32 @@ def slowCollision(space, screen, options):
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(100, 300)
 	space.add(cylinder.body, cylinder.shape)
-	count = 0
-	total = []
-	time = 80
+	
+	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total=[]
 	running = True
-	while running:
+	tick = 0
+	count = 0
+	while running and tick<149:
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
+
 		if (cone.body.velocity[0] < 200 and len(handlers.collision) == 0):
 			imp = 150 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
-
-		if (cylinder.body.velocity[0] < 300 and len(handlers.collision) == 0):
-			imp = 250 - cylinder.body.velocity[0]
+		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
+			imp = 450 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((imp,0))
 			total.append(imp)
 		if (len(handlers.collision) == 1 and count == 0):
@@ -450,27 +464,49 @@ def slowCollision(space, screen, options):
 		if (len(handlers.collision) != 0 and cylinder.body.velocity[0] > 0):
 			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
 			total.append(math.fabs(cylinder.body.velocity[0]))
-		time-=1
-		#if time==0:
-		#	cylinder.body.velocity=(0,0)
+
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
+		# set clock
 		clock = pygame.time.Clock()
-		# setup display and run sim
-		screen.fill((255,255,255))
+		# setup display and run sim based on whether it's truth or guess
+		if(not guess):
+			screen.fill((255,255,255))
 		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
+		if(not guess):
+			space.debug_draw(options)
+			pygame.display.flip()
+		if(not guess):
+			clock.tick(50)
+		else:
+			clock.tick(500000)
+	# handlers.remove value from collision list and print out resulting effort
+	try:
+		handlers.collision = []
+		handlers.totalImpulse = []
+	except:
+		print("Exited before collision.")
+	print("Total impulse: ", sum(total), "Tick: ", tick)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-	print("Total impulse: ", sum(total))
-	return
-
-def fastCollision(space, screen, options):
+def fastCollision(space, screen, options, guess=False, impulse=270):
 	'''
 	Simulation of Cone travelling faster after being hit by Cylinder.
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
+	TODO:
+	1. Clean up this simulation. Make it more clear the patient is 
+	going faster after the agent's push.
+	2. Find a way to incorporate patient's impulses into guess.
 	'''
-	pygame.display.set_caption("Simulation 8: Fast Collision Cylinder")
+	if(not guess):
+		pygame.display.set_caption("Simulation 8: Fast Collision Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
@@ -488,9 +524,18 @@ def fastCollision(space, screen, options):
 	cylinder = agents.agent(100, 300)
 	space.add(cylinder.body, cylinder.shape)
 
+	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
 	total=[]
 	running = True
-	while running:
+	tick = 0
+	while running and tick<154:
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -501,26 +546,40 @@ def fastCollision(space, screen, options):
 		if (cone.body.velocity[0] < 30):
 			imp = 30.0 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
-		if (cylinder.body.velocity[0] < 270 and len(handlers.collision) == 0):
-			imp = 270.0 - cylinder.body.velocity[0]
+		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
+			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((imp,0))
 			total.append(imp)
 
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
+		# set clock
 		clock = pygame.time.Clock()
-		# setup display and run sim
-		screen.fill((255,255,255))
+		# setup display and run sim based on whether it's truth or guess
+		if(not guess):
+			screen.fill((255,255,255))
 		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
+		if(not guess):
+			space.debug_draw(options)
+			pygame.display.flip()
+		if(not guess):
+			clock.tick(50)
+		else:
+			clock.tick(500000)
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
 		print("Exited before collision.")
-	print("Total impulse: ", sum(total))
-	return
+	print("Total impulse: ", sum(total), "Tick: ", tick)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def dodge(space, screen, options):
 	'''

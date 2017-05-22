@@ -130,15 +130,15 @@ def main():
 			elif (choice == '3'):
 				infer.enum(simulations.longDistance, 100, 300)
 			elif (choice == '4'):
-				infer.enum(simulations.static, 290, 370)
+				infer.enum(simulations.static, 250, 450)
 			elif (choice == '5'):
 				simulations.uphill(space, screen, drawOptions)
 			elif (choice == '6'):
 				simulations.downhill(space, screen, drawOptions)
 			elif (choice == '7'):
-				simulations.slowCollision(space, screen, drawOptions)
+				infer.enum(simulations.slowCollision, 300, 500)
 			elif (choice == '8'):
-				simulations.fastCollision(space, screen, drawOptions)
+				infer.enum(simulations.fastCollision, 170, 370)
 			elif (choice == '9'):
 				simulations.dodge(space, screen, drawOptions)
 			elif (choice == '10'):
