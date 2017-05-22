@@ -44,6 +44,7 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
+	# if it's a truth sim, we use a display
 	if(not guess):
 		pygame.display.set_caption("Simulation 1: Short Distance")
 	
@@ -104,7 +105,7 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 		# set clock
 		clock = pygame.time.Clock()
 		
-		# setup display and run sim
+		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
 		space.step(1/50.0)

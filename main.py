@@ -26,6 +26,7 @@ def main():
 	print("Please choose an option or [0] to exit:")
 	choice = raw_input()
 
+	# display simulation options
 	if choice == '1':
 		print("=================================================")
 		print("1. Short Distance")
@@ -94,6 +95,7 @@ def main():
 		print("Goodbye")
 		sys.exit()
 		
+	# display guess options
 	if choice == '2':
 		print("=================================================")
 		print("1. Short Distance")
@@ -119,6 +121,8 @@ def main():
 			# create a space to contain the simulation
 			space = pymunk.Space()
 
+			# each choice executes an enumeration over a fixed interval of guess
+			# impulses for each sim
 			if (choice == '1'):
 				infer.enum(simulations.shortDistance, 100, 300)
 			elif (choice == '2'):
