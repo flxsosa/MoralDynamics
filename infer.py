@@ -10,23 +10,20 @@ x Enumerate guesses with infer.py
 - Modify all sims to work with infer.py
 
 May 12, 2017
-Felix Sosa 
+Felix Sosa
 '''
 
 
 import pymunk
 import pygame
 import agents
-import pymunk.pygame_util
-from pygame.locals import *
-import sys
-import simulations
 import math
+from pygame.locals import *
 import matplotlib.pyplot as plt
 
 def enum(sim, low, high):
 	'''
-	Enumerate over a fixed interval of impulses for a given sim
+	Enumerate over a fixed interval of impulses for a given sim.
 	sim -- simulation to be enumerated
 	low -- lower bound of impulse interval
 	high -- upper bound of impulse interval
@@ -56,7 +53,7 @@ def difference(sim=False, imp=False):
 		print "Impulse: ", imp
 		pygame.init()
 		space = pymunk.Space()
-		truth = simulations.shortDistance(space,None,None, True)
+		truth = sim(space,None,None, True)
 		pygame.quit()
 		# run guess simulation
 		pygame.init()
@@ -80,7 +77,7 @@ def difference(sim=False, imp=False):
 
 def euclidean(x1, y1, x2, y2):
 	'''
-	Calculate 2D euclidean distance
+	Calculate 2D euclidean distance.
 	'''
 	return math.sqrt(pow((x1-x2),2) + pow((y1-y2),2))
 
