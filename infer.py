@@ -70,7 +70,10 @@ def difference(sim=False, imp=False):
 			eucDiffAgent.append(euclidean(truth[0][j], truth[1][j], guess[0][j], guess[1][j]))
 			eucDiffPatient.append(euclidean(truth[2][j], truth[3][j], guess[2][j], guess[3][j]))
 			eucDiffFireball.append(euclidean(truth[4][j], truth[5][j], guess[4][j], guess[5][j]))
-
+		if(imp==200):
+			print sum(eucDiffAgent)
+			print sum(eucDiffPatient)
+			print sum(eucDiffFireball)
 		eucDiffTotal = sum(eucDiffAgent+eucDiffPatient+eucDiffFireball)
 		print "Total Distance: ", eucDiffTotal
 		return (eucDiffTotal, imp)
