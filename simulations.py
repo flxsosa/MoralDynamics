@@ -36,7 +36,7 @@ import pymunk.pygame_util
 from pygame.locals import *
 import sys
 
-def shortDistance(space, screen, options, impulse=200.0):
+def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
 	away. Originally to be compared with longDistanceSim in Moral Kinematics.
@@ -44,7 +44,8 @@ def shortDistance(space, screen, options, impulse=200.0):
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
-	#pygame.display.set_caption("Simulation 1: Short Distance")
+	if(not guess):
+		pygame.display.set_caption("Simulation 1: Short Distance")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -104,11 +105,16 @@ def shortDistance(space, screen, options, impulse=200.0):
 		clock = pygame.time.Clock()
 		
 		# setup display and run sim
-		#screen.fill((255,255,255))
+		if(not guess):
+			screen.fill((255,255,255))
 		space.step(1/50.0)
-		#space.debug_draw(options)
-		#pygame.display.flip()
-		clock.tick(500000)
+		if(not guess):
+			space.debug_draw(options)
+			pygame.display.flip()
+		if(not guess):
+			clock.tick(50)
+		else:
+			clock.tick(500000)
 	
 	# handlers.remove value from collision list and print out resulting effort
 	try:
