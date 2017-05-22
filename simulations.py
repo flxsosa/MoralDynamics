@@ -132,6 +132,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
+	# if it's a truth sim, we use a display
 	if(not guess):
 		pygame.display.set_caption("Simulation 2: Medium Distance")
 	# set up collision handlers
@@ -208,7 +209,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	print("Total impulse: ", sum(total), "Tick ", tick)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def longDistance(space, screen, options):
+def longDistance(space, screen, options, guess=False, impulse=200):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -216,7 +217,9 @@ def longDistance(space, screen, options):
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
-	pygame.display.set_caption("Simulation 3: Long Distance")
+	# if it's a truth sim, we use a display
+	if(not guess):
+		pygame.display.set_caption("Simulation 3: Long Distance")
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
@@ -233,9 +236,18 @@ def longDistance(space, screen, options):
 	cylinder = agents.agent(100, 300)
 	space.add(cylinder.body, cylinder.shape)
 	
+	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
 	total=[]
 	running = True
-	while running:
+	tick = 0
+	while running and tick < 133:
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -247,27 +259,40 @@ def longDistance(space, screen, options):
 		Check if the velocity is less than it's 'max' velocity. If so,
 		apply an impulse to the agent and add that impulse value to total
 		'''
-		if (cylinder.body.velocity[0] < 200 and len(handlers.collision) == 0):
-			imp = 200.0 - cylinder.body.velocity[0]
+		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
+			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
 
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
 		# set clock
 		clock = pygame.time.Clock()
-		# setup display and run sim
-		screen.fill((255,255,255))
+		# setup display and run sim based on whether it's truth or guess
+		if(not guess):
+			screen.fill((255,255,255))
 		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
+		if(not guess):
+			space.debug_draw(options)
+			pygame.display.flip()
+		if(not guess):
+			clock.tick(50)
+		else:
+			clock.tick(500000)
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
 		print("Exited before collision.")
-	print("Total impulse: ", sum(total))
-	return
+	print("Total impulse: ", sum(total), "Tick ", tick)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def static(space, screen, options):
 	'''
