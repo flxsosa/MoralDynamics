@@ -43,20 +43,14 @@ def difference(sim=False, imp=False, verbose=False):
 		print "Impulse: ", imp
 		pygame.init()
 		space = pymunk.Space()
-		screen = None # pygame.display.set_mode((600,600))
-		drawOptions = None #pymunk.pygame_util.DrawOptions(screen)
-		truth = simulations.shortDistance(space,screen,drawOptions)
+		truth = simulations.shortDistance(space,None,None, True)
 		pygame.quit()
-		#pygame.display.quit()
 
 		# run guess simulation
 		pygame.init()
 		space = pymunk.Space()
-		#screen = pygame.display.set_mode((600,600))
-		#drawOptions = pymunk.pygame_util.DrawOptions(screen)
-		guess = sim(space, screen, drawOptions, imp)
+		guess = sim(space, screen, drawOptions, True, imp)
 		pygame.quit()
-		#pygame.display.quit()
 
 		# declare lists for euclidean distances for each body
 		eucDiffAgent = []
