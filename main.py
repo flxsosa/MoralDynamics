@@ -130,7 +130,7 @@ def main():
 			elif (choice == '3'):
 				infer.enum(simulations.longDistance, 100, 300)
 			elif (choice == '4'):
-				simulations.static(space, screen, drawOptions)
+				infer.enum(simulations.static, 290, 370)
 			elif (choice == '5'):
 				simulations.uphill(space, screen, drawOptions)
 			elif (choice == '6'):

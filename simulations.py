@@ -294,15 +294,18 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 	print("Total impulse: ", sum(total), "Tick ", tick)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def static(space, screen, options):
+def static(space, screen, options, guess=False, impulse=350):
 	'''
 	Simulation of Cone bouncing off of a static Cylinder into a Fireball.
 	Originally to be compared with shortDistance in Moral Kinematics.
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
+
+	TODO: Consider ways to implement guessing of y-axis impulse on patient.
 	'''
-	pygame.display.set_caption("Simulation 4: Static Cylinder")
+	if (not guess):
+		pygame.display.set_caption("Simulation 4: Static Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
@@ -321,10 +324,19 @@ def static(space, screen, options):
 	cylinder = agents.agent(350, 400)
 	space.add(cylinder.body, cylinder.shape)
 
-	total = []
-	count = 0
+	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total=[]
 	running = True
-	while running:
+	tick = 0
+	count = 0
+	while running and tick < 140:
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -333,9 +345,9 @@ def static(space, screen, options):
 				running = False
 
 		# Check if the velocity is less than it's 'max' velocity.
-		if (cone.body.velocity[0] < 350 and cone.body.velocity[1] < 180 and \
+		if (cone.body.velocity[0] < impulse and cone.body.velocity[1] < 180 and \
 				len(handlers.collision) == 0):
-			impx = 350 - cone.body.velocity[0]
+			impx = impulse - cone.body.velocity[0]
 			impy = 180 - cone.body.velocity[1]
 			cone.body.apply_impulse_at_local_point((impx,impy))
 
@@ -349,15 +361,28 @@ def static(space, screen, options):
 					math.fabs(handlers.totalImpulse[0][1]))
 			except:
 				pass
+		
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
 
 		# set clock
 		clock = pygame.time.Clock()
-		# setup display and run sim
-		screen.fill((255,255,255))
+		# setup display and run sim based on whether it's truth or guess
+		if(not guess):
+			screen.fill((255,255,255))
 		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
+		if(not guess):
+			space.debug_draw(options)
+			pygame.display.flip()
+		if(not guess):
+			clock.tick(50)
+		else:
+			clock.tick(500000)
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -365,8 +390,8 @@ def static(space, screen, options):
 		handlers.totalImpulse = []
 	except:
 		print("Exited before collision.")
-	print("Total impulse: ", sum(total))
-	return
+	print("Total impulse: ", sum(total), "Tick ", tick)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def uphill(space, screen, options):
 	print("Uphill simulation not implemented yet.")
