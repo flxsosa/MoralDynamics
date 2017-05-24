@@ -140,9 +140,9 @@ def main():
 			elif (choice == '8'):
 				infer.enum(simulations.fastCollision, 170, 370)
 			elif (choice == '9'):
-				simulations.dodge(space, screen, drawOptions)
+				infer.enum(simulations.dodge, 50, 250)
 			elif (choice == '10'):
-				simulations.doubleTouch(space, screen, drawOptions)
+				infer.enum(simulations.doubleTouch, 70, 270)
 			elif (choice == '11'):
 				simulations.mediumPush(space, screen, drawOptions)
 			elif (choice == '12'):

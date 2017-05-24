@@ -581,14 +581,17 @@ def fastCollision(space, screen, options, guess=False, impulse=270):
 	print("Total impulse: ", sum(total), "Tick: ", tick)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def dodge(space, screen, options):
+def dodge(space, screen, options, guess=False, impulse=150):
 	'''
 	Simulation of Cylinder dodging Cone as it runs into Fireball.
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
+	TODO:
+	1. See if there's a better way to deal with the time variable
 	'''
-	pygame.display.set_caption("Simulation 9: Dodging Cylinder")
+	if(not guess):
+		pygame.display.set_caption("Simulation 9: Dodging Cylinder")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
@@ -603,10 +606,19 @@ def dodge(space, screen, options):
 	cylinder = agents.agent(400, 300)
 	space.add(cylinder.body, cylinder.shape)
 
-	time=80
+	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
 	total=[]
 	running = True
-	while running:
+	tick = 0
+	time=80
+	while running and tick<186:
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -618,28 +630,43 @@ def dodge(space, screen, options):
 			imp = 100 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
 		if (time == 20):
-			cylinder.body.apply_impulse_at_local_point((0,150))
-			total.append(150)
+			cylinder.body.apply_impulse_at_local_point((0,impulse))
+			total.append(impulse)
+		
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
 		# set clock
 		clock = pygame.time.Clock()
-		# setup display and run sim
-		screen.fill((255,255,255))
+		# setup display and run sim based on whether it's truth or guess
+		if(not guess):
+			screen.fill((255,255,255))
 		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
+		if(not guess):
+			space.debug_draw(options)
+			pygame.display.flip()
+		if(not guess):
+			clock.tick(50)
+		else:
+			clock.tick(500000)
 
-	print("Total impulse: ", sum(total))
-	return
+	print("Total impulse: ", sum(total), "Tick: ", tick)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def doubleTouch(space, screen, options):
+def doubleTouch(space, screen, options, guess=False, impulse=170):
 	'''
 	Simulation of Cylinder tapping Cone twice into Fireball.
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
-	pygame.display.set_caption("Simulation 10: Double Touch")
+	if(not guess):
+		pygame.display.set_caption("Simulation 10: Double Touch")
 	# set up collision handlers
 	ch0=space.add_collision_handler(0,2)
 	ch0.data["surface"]=screen
@@ -647,8 +674,8 @@ def doubleTouch(space, screen, options):
 	ch1 = space.add_collision_handler(0, 1)
 	ch1.data["surface"]=screen
 	ch1.begin = handlers.rem2
-
 	space.damping = 0.2
+
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
@@ -657,10 +684,19 @@ def doubleTouch(space, screen, options):
 	cylinder = agents.agent(170, 300)
 	space.add(cylinder.body, cylinder.shape)
 
-	time = 50
-	total = []
+	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total=[]
 	running = True
-	while running:
+	tick = 0
+	time=50
+	while running and tick<137:
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -672,34 +708,47 @@ def doubleTouch(space, screen, options):
 		Check if the velocity is less than it's 'max' velocity. If so,
 		apply an impulse to the agent and add that impulse value to total
 		'''
-		if (cylinder.body.velocity[0] < 170 and len(handlers.collision) == 0):
-			imp = 170.0 - cylinder.body.velocity[0]
+		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
+			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
 		elif (time == 10):
-			imp = 170.0 - cylinder.body.velocity[0]
+			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
 			total.append(imp)
 		elif (len(handlers.collision) == 2 and cylinder.body.velocity[0] != 0):
 			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
 			total.append(math.fabs(imp))
 
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
 		# set clock
 		clock = pygame.time.Clock()
-		# setup display and run sim
-		screen.fill((255,255,255))
+		# setup display and run sim based on whether it's truth or guess
+		if(not guess):
+			screen.fill((255,255,255))
 		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
+		if(not guess):
+			space.debug_draw(options)
+			pygame.display.flip()
+		if(not guess):
+			clock.tick(50)
+		else:
+			clock.tick(500000)
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
 		print("Exited before collision.")
-	print("Total impulse: ", sum(total))
-	return
+	print("Total impulse: ", sum(total), "Tick: ", tick)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def mediumPush(space, screen, options):
 	'''
