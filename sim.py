@@ -122,7 +122,7 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def mediumDistance(space, screen, options, guess=False, impulse=200):
 	'''
@@ -207,7 +207,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def longDistance(space, screen, options, guess=False, impulse=200):
 	'''
@@ -292,7 +292,7 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def static(space, screen, options, guess=False, impulse=350):
 	'''
@@ -391,16 +391,14 @@ def static(space, screen, options, guess=False, impulse=350):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def uphill(space, screen, options, guess=False, impulse=None):
 	print("Uphill simulation not implemented yet.")
 	return
-
 def downhill(space, screen, options, guess=False, impulse=None):
 	print("Downhill simulation not implemented yet.")
 	return
-
 def slowCollision(space, screen, options, guess=False, impulse=400):
 	'''
 	Simulation of Cone travelling slower after being hit by Cylinder.
@@ -493,7 +491,7 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def fastCollision(space, screen, options, guess=False, impulse=400):
 	'''
@@ -579,7 +577,7 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def dodge(space, screen, options, guess=False, impulse=150):
 	'''
@@ -656,7 +654,7 @@ def dodge(space, screen, options, guess=False, impulse=150):
 			clock.tick(500000)
 
 	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def doubleTouch(space, screen, options, guess=False, impulse=170):
 	'''
@@ -748,7 +746,7 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def mediumPush(space, screen, options, guess=False, impulse=150):
 	'''
@@ -835,7 +833,7 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 		print("Exited before collision.")
 	# print out resulting effort
 	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def longPush(space, screen, options, guess=False, impulse=100):
 	'''
@@ -918,7 +916,7 @@ def longPush(space, screen, options, guess=False, impulse=100):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def touch(space, screen, options, guess=False, impulse=250):
 	'''
@@ -1002,7 +1000,7 @@ def touch(space, screen, options, guess=False, impulse=250):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def pushFireball(space, screen, options, guess=False, impulse=275):
 	'''
@@ -1088,7 +1086,7 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def test(space, screen, options):
 	'''
@@ -1157,4 +1155,4 @@ def test(space, screen, options):
 	except:
 		print("Exited before collision.")
 	print("Total impulse: ", sum(total))
-	return
+	returnsum(total) 

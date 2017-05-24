@@ -13,6 +13,8 @@ from pygame.locals import *
 import sys
 import simulations
 import infer
+import sim
+import matplotlib.pyplot as plt
 
 def main():
 	'''
@@ -21,6 +23,7 @@ def main():
 	print("=================================================")
 	print("1. Show Simulations")
 	print("2. Run Guesses")
+	print("3. Plot Sims")
 	print("0. EXIT")
 	print("=================================================")
 	print("Please choose an option or [0] to exit:")
@@ -144,13 +147,13 @@ def main():
 			elif (choice == '10'):
 				infer.enum(simulations.doubleTouch, 70, 270)
 			elif (choice == '11'):
-				simulations.mediumPush(space, screen, drawOptions)
+				infer.enum(simulations.mediumPush, 50, 250)
 			elif (choice == '12'):
-				simulations.longPush(space, screen, drawOptions)
+				infer.enum(simulations.longPush, 10, 200)
 			elif (choice == '13'):
-				simulations.touch(space, screen, drawOptions)
+				infer.enum(simulations.touch, 150, 350)
 			elif (choice == '14'):
-				simulations.pushFireball(space, screen, drawOptions)
+				infer.enum(simulations.pushFireball, 175, 375)
 			else:
 				print("Must be an integer [0-14]")
 			pygame.quit()
@@ -160,6 +163,93 @@ def main():
 			
 		print("Goodbye")
 		sys.exit()
+
+	# display comparison options
+	if choice =='3':
+		print("=================================================")
+		print("1. Short Distance")
+		print("2. Medium Distance")
+		print("3. Long Distance")
+		print("4. Static")
+		print("5. Uphill [N/A]")
+		print("6. Downhill [N/A]")
+		print("7. Slow Collision")
+		print("8. Fast Collision")
+		print("9. Dodge")
+		print("10. Double Touch")
+		print("11. Medium Push")
+		print("12. Long Push")
+		print("13. Touch")
+		print("14. Push Fireball")
+		print("0. EXIT")
+		print("=================================================")
+
+		a = []
+		c = range(14)
+		b = ['shortDist',
+			'medDist',
+			'longDist',
+			'static',
+			'N/A',
+			'N/A',
+			'slowColl',
+			'fastColl',
+			'touch',
+			'doubleTouch',
+			'medPush',
+			'longPush',
+			'dodge',
+			'pushFire']
+		for i in range(14):
+			# initialize pygame and create a space to contain the simulation
+			pygame.init()
+			space = pymunk.Space()
+
+			# create a screen of 600x600 pixels
+			screen = None
+			drawOptions = None
+
+			if (i == 0):
+				a.append(sim.shortDistance(space, screen, drawOptions, True))
+			elif (i == 1):
+				a.append(sim.mediumDistance(space, screen, drawOptions, True))
+			elif (i == 2):
+				a.append(sim.longDistance(space, screen, drawOptions, True))
+			elif (i == 3):
+				a.append(sim.static(space, screen, drawOptions, True))
+			elif (i == 4):
+				a.append(0)
+			elif (i == 5):
+				a.append(0)
+			elif (i == 6):
+				a.append(sim.slowCollision(space, screen, drawOptions, True))
+			elif (i == 7):
+				a.append(sim.fastCollision(space, screen, drawOptions, True))
+			elif (i == 8):
+				a.append(sim.touch(space, screen, drawOptions, True))
+			elif (i == 9):
+				a.append(sim.doubleTouch(space, screen, drawOptions, True))
+			elif(i == 10):
+				a.append(sim.mediumPush(space, screen, drawOptions, True))
+			elif (i == 11):
+				a.append(sim.longPush(space, screen, drawOptions, True))
+			elif (i == 12):
+				a.append(sim.dodge(space, screen, drawOptions, True))
+			elif (i == 13):
+				a.append(sim.pushFireball(space, screen, drawOptions, True))
+			pygame.quit()
+
+		print(a,b)
+		plt.bar(c,a)
+
+		plt.xticks(c, b, rotation=50)
+		plt.ylabel('Total Impulses')
+		plt.title('Effort Comparison for Sims')
+		plt.tight_layout()
+		plt.savefig('comp.png')
+		plt.show()
+
+
 
 if __name__ == '__main__':
 	sys.exit(main())
