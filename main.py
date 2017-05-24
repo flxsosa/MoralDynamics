@@ -166,23 +166,6 @@ def main():
 
 	# display comparison options
 	if choice =='3':
-		print("=================================================")
-		print("1. Short Distance")
-		print("2. Medium Distance")
-		print("3. Long Distance")
-		print("4. Static")
-		print("5. Uphill [N/A]")
-		print("6. Downhill [N/A]")
-		print("7. Slow Collision")
-		print("8. Fast Collision")
-		print("9. Dodge")
-		print("10. Double Touch")
-		print("11. Medium Push")
-		print("12. Long Push")
-		print("13. Touch")
-		print("14. Push Fireball")
-		print("0. EXIT")
-		print("=================================================")
 
 		a = []
 		c = range(14)
@@ -248,8 +231,6 @@ def main():
 		plt.tight_layout()
 		plt.savefig('comp.png')
 		plt.show()
-
-
 
 if __name__ == '__main__':
 	sys.exit(main())

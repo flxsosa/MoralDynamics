@@ -7,7 +7,7 @@ x Compute Euclidean Distance for all bodies
 - Score all Euclidean Distances for each guess
 x Incorporate infer.py with main.py (or similar)
 x Enumerate guesses with infer.py
-- Modify all sims to work with infer.py
+x Modify all sims to work with infer.py
 
 May 12, 2017
 Felix Sosa
