@@ -115,7 +115,7 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 		
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -201,7 +201,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -287,7 +287,7 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -386,7 +386,7 @@ def static(space, screen, options, guess=False, impulse=350):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -490,7 +490,7 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 	# handlers.remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
@@ -577,7 +577,7 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -660,7 +660,7 @@ def dodge(space, screen, options, guess=False, impulse=150):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	print("Total impulse: ", sum(total), "Tick: ", tick)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
@@ -748,7 +748,7 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -836,7 +836,7 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 	# handlers.remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
@@ -920,7 +920,7 @@ def longPush(space, screen, options, guess=False, impulse=100):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -1005,7 +1005,7 @@ def touch(space, screen, options, guess=False, impulse=250):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -1092,7 +1092,7 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		raw_input()
+		
 
 	# handlers.remove value from collision list and print out resulting effort
 	try:
