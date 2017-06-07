@@ -8,6 +8,7 @@ import simulations
 import infer
 import sim
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 
 def compareTotalImps():
 	a = []
@@ -86,21 +87,24 @@ def compareKinematics():
 
 	# x axis values for plot
 	x = range(1, 16)
-	xLabels = ['LongDist v ShortDist', 'LongDist v MedDist', 'LongDist v Static', 'MedPush v Down', 
-			   'Up v Down', 'Up v MedPush', 'FastColl v SlowColl', 'Dodge v NoTouch',
-			   'Dodge v Static', 'Static v NoTouch', 'LongDist v Dodge', 
-			   'DoubleTouch v Touch', 'MedPush v Touch', 'LongPush v MedPush',
-			   'LongPush v Touch']
+	xLabels = ['1. LongDist v ShortDist', '2. LongDist v MedDist', '3. LongDist v Static', '4. MedPush v Down', 
+			   '5. Up v Down', '6. Up v MedPush', '7. FastColl v SlowColl', '8. Dodge v NoTouch',
+			   '9. Dodge v Static', '10. Static v NoTouch', '11. LongDist v Dodge', 
+			   '12. DoubleTouch v Touch', '13. MedPush v Touch', '14. LongPush v MedPush',
+			   '15. LongPush v Touch']
 
 	print kinematics, dynamics, xLabels
 
 	plt.subplot(111)
 	plt.ylabel("Agreement")
 	plt.title("Moral Kinematics vs Moral Dynamics")
-	plt.bar(x, kinematics, color='b')
-	plt.bar(x, dynamics, color='r')
+	plt.bar(x, kinematics, width=0.2, color='b', label='Kin')
+	plt.bar(map(lambda x:x+0.2, x), dynamics, width=0.2, color='r', label='Dyn')
 	plt.xticks(x, xLabels, rotation='70')
+	plt.legend(loc="1")
+	plt.plot([0.5]*17, "k--")
 	plt.tight_layout()
+	plt.savefig('kin.png')
 	plt.show()
 
 def calcProb():

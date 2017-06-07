@@ -36,6 +36,13 @@ import pymunk.pygame_util
 from pygame.locals import *
 import sys
 
+# MODEL PARAMETERS
+
+DYN_FRICTION = 0.2
+STAT_FRICTION = 0.2
+APMASS = 1
+FMASS = 1
+
 def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
@@ -50,12 +57,14 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
 	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"]=screen
-	ch1.begin=handlers.rem2
-	space.damping = 0.2
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+
+	# dynamic friction
+	space.damping = DYN_FRICTION
 	
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -65,19 +74,20 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	cylinder = agents.agent(250, 300)
 	space.add(cylinder.body, cylinder.shape)
 	
-	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
+	# lists for impulses per timestep, total impulses, running flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
 	xImpsPatient = []
 	yImpsPatient = []
 	xImpsFireball = []
 	yImpsFireball = []
-	total=[]
+	total = []
 	running = True
-	tick=0
+	tick = 0
+
+	# run simulation
 	while running and tick<95:
-		tick+=1
-		
+		tick += 1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -85,13 +95,19 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 		
-		# Check if the velocity is less than it's 'max' velocity. If so,
-		# apply an impulse to the agent and add that impulse value to total
+		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
+			total.append(2*imp)
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -115,14 +131,17 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-	
-	# handlers.remove value from collision list and print out resulting effort
+		
+		
+	# remove value from collision list
 	try:
 		handlers.collision = []
 	except:
 		print("Exited before collision.")
+
+	# output to user and return sum(total)#tuple
 	print("Total impulse: ", sum(total))
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def mediumDistance(space, screen, options, guess=False, impulse=200):
 	'''
@@ -135,6 +154,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	# if it's a truth sim, we use a display
 	if(not guess):
 		pygame.display.set_caption("Simulation 2: Medium Distance")
+
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"]=screen
@@ -142,7 +162,8 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	ch1 = space.add_collision_handler(0, 1)
 	ch1.data["surface"]=screen
 	ch1.begin=handlers.rem2
-	space.damping = 0.2
+	space.damping = DYN_FRICTION
+
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
@@ -161,6 +182,8 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	total=[]
 	running = True
 	tick = 0
+
+	# run simulation
 	while running and tick<115:
 		tick += 1
 		#allow user to exit
@@ -170,14 +193,19 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
-		'''
-		Check if the velocity is less than it's 'max' velocity. If so,
-		apply an impulse to the agent and add that impulse value to total
-		'''
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
+			total.append(2*imp)
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -189,6 +217,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -200,14 +229,17 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
 
-	# handlers.remove value from collision list and print out resulting effort
+	# remove value from collision list
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
-	print("Total impulse: ", sum(total), "Tick ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		print "Exited before collision."
+
+	# output to user and return sum(total)#tuple
+	print "Total impulse: ", sum(total), "Tick ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def longDistance(space, screen, options, guess=False, impulse=200):
 	'''
@@ -220,14 +252,16 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 	# if it's a truth sim, we use a display
 	if(not guess):
 		pygame.display.set_caption("Simulation 3: Long Distance")
+
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
 	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"]=screen
-	ch1.begin=handlers.rem2
-	space.damping = 0.2
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+	space.damping = DYN_FRICTION
+
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
@@ -243,11 +277,14 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 	yImpsPatient = []
 	xImpsFireball = []
 	yImpsFireball = []
-	total=[]
+	total = []
 	running = True
 	tick = 0
+
+	# run simulation
 	while running and tick < 133:
 		tick+=1
+
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -255,14 +292,19 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
-		'''
-		Check if the velocity is less than it's 'max' velocity. If so,
-		apply an impulse to the agent and add that impulse value to total
-		'''
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
+			total.append(2*imp)
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -274,6 +316,7 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -285,14 +328,17 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
 
-	# handlers.remove value from collision list and print out resulting effort
+	# remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
 		print("Exited before collision.")
+
+	# output to user and return sum(total)#tuple
 	print("Total impulse: ", sum(total), "Tick ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def static(space, screen, options, guess=False, impulse=350):
 	'''
@@ -306,15 +352,16 @@ def static(space, screen, options, guess=False, impulse=350):
 	'''
 	if (not guess):
 		pygame.display.set_caption("Simulation 4: Static Cylinder")
+
 	# set up collision handlers
-	ch0=space.add_collision_handler(0,2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
-	ch1=space.add_collision_handler(0,1)
-	ch1.data["surface"]=screen
-	ch1.begin=handlers.rem2
-	ch1.post_solve=handlers.rem3
-	space.damping=0.2
+	ch0 = space.add_collision_handler(0,2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(0,1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+	ch1.post_solve = handlers.rem3
+	space.damping = DYN_FRICTION
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -331,10 +378,12 @@ def static(space, screen, options, guess=False, impulse=350):
 	yImpsPatient = []
 	xImpsFireball = []
 	yImpsFireball = []
-	total=[]
+	total = []
 	running = True
 	tick = 0
 	count = 0
+
+	# run simulation
 	while running and tick < 140:
 		tick+=1
 		#allow user to exit
@@ -344,14 +393,22 @@ def static(space, screen, options, guess=False, impulse=350):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
-		# Check if the velocity is less than it's 'max' velocity.
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep the Patient at it's intended velocity for some duration
 		if (cone.body.velocity[0] < impulse and cone.body.velocity[1] < 180 and \
 				len(handlers.collision) == 0):
 			impx = impulse - cone.body.velocity[0]
 			impy = 180 - cone.body.velocity[1]
 			cone.body.apply_impulse_at_local_point((impx,impy))
 
-		# if there is a collision between agent and patient, have agent push back once
+		# if collision between agent and patient, have agent push back once
 		if (len(handlers.collision) != 0 and count==0):
 			count+=1
 			try:
@@ -372,6 +429,7 @@ def static(space, screen, options, guess=False, impulse=350):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -383,22 +441,27 @@ def static(space, screen, options, guess=False, impulse=350):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
 
-	# handlers.remove value from collision list and print out resulting effort
+	# remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 		handlers.totalImpulse = []
 	except:
 		print("Exited before collision.")
+
+	# output to user and return sum(total)#tuple
 	print("Total impulse: ", sum(total), "Tick ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def uphill(space, screen, options, guess=False, impulse=None):
 	print("Uphill simulation not implemented yet.")
 	return
+
 def downhill(space, screen, options, guess=False, impulse=None):
 	print("Downhill simulation not implemented yet.")
 	return
+
 def slowCollision(space, screen, options, guess=False, impulse=400):
 	'''
 	Simulation of Cone travelling slower after being hit by Cylinder.
@@ -411,15 +474,15 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 	'''
 	if(not guess):
 		pygame.display.set_caption("Simulation 7: Slow Collision Cylinder")
+
 	# set up collision handlers
-	ch0=space.add_collision_handler(0,2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
-	ch1=space.add_collision_handler(0,1)
-	ch1.data["surface"]=screen
-	#ch1.post_solve=handlers.rem1
-	ch1.begin=handlers.rem2
-	space.damping=0.2
+	ch0 = space.add_collision_handler(0,2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(0,1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+	space.damping = 0.2
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -440,8 +503,11 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 	running = True
 	tick = 0
 	count = 0
+
+	# run simulation
 	while running and tick<149:
 		tick+=1
+
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -449,6 +515,15 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep the Patient and Agent at their intended velocity for some duration
 		if (cone.body.velocity[0] < 200 and len(handlers.collision) == 0):
 			imp = 150 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
@@ -456,10 +531,11 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 			imp = 450 - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((imp,0))
 			total.append(imp)
+
+		# when Agent and Patient collide, have Patient push back and Agent stop
 		if (len(handlers.collision) == 1 and count == 0):
 			count+=1
 			cone.body.apply_impulse_at_local_point((-50,0))
-		if (len(handlers.collision) != 0 and cylinder.body.velocity[0] > 0):
 			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
 			total.append(math.fabs(cylinder.body.velocity[0]))
 
@@ -473,6 +549,7 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -484,14 +561,17 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-	# handlers.remove value from collision list and print out resulting effort
+		
+	# remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 		handlers.totalImpulse = []
 	except:
-		print("Exited before collision.")
-	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		print "Exited before collision."
+
+	# output to user and return sum(total)#tuple
+	print "Total impulse: ", sum(total), "Tick: ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def fastCollision(space, screen, options, guess=False, impulse=400):
 	'''
@@ -505,14 +585,15 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 	'''
 	if(not guess):
 		pygame.display.set_caption("Simulation 8: Fast Collision Cylinder")
+
 	# set up collision handlers
-	ch0=space.add_collision_handler(0,2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
-	ch1=space.add_collision_handler(0,1)
-	ch1.data["surface"]=screen
-	ch1.begin=handlers.rem2
-	space.damping=0.2
+	ch0 = space.add_collision_handler(0,2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(0,1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+	space.damping = 0.2
 	
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -532,6 +613,8 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 	total=[]
 	running = True
 	tick = 0
+
+	# run simulation
 	while running and tick<154:
 		tick+=1
 		#allow user to exit
@@ -541,6 +624,15 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep Agent and Patient at their intended velocities
 		if (cone.body.velocity[0] < 30):
 			imp = 30.0 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
@@ -559,6 +651,7 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -570,14 +663,16 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-
-	# handlers.remove value from collision list and print out resulting effort
+		
+	# remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
-	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		print "Exited before collision."
+
+	# output to user and return sum(total)#tuple
+	print "Total impulse: ", sum(total), "Tick: ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def dodge(space, screen, options, guess=False, impulse=150):
 	'''
@@ -591,9 +686,9 @@ def dodge(space, screen, options, guess=False, impulse=150):
 	if(not guess):
 		pygame.display.set_caption("Simulation 9: Dodging Cylinder")
 	# set up collision handlers
-	ch0=space.add_collision_handler(0,2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
+	ch0 = space.add_collision_handler(0,2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
 	space.damping = 0.2
 
 	# add shapes
@@ -611,10 +706,12 @@ def dodge(space, screen, options, guess=False, impulse=150):
 	yImpsPatient = []
 	xImpsFireball = []
 	yImpsFireball = []
-	total=[]
+	total = []
 	running = True
 	tick = 0
-	time=80
+	time = 80
+
+	# run simulation
 	while running and tick<186:
 		tick+=1
 		#allow user to exit
@@ -623,10 +720,22 @@ def dodge(space, screen, options, guess=False, impulse=150):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-		time-=1
+
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep Patient at it's intended velocity
 		if (cone.body.velocity[0] < 100):
 			imp = 100 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
+
+		# at t == 20, Agent dogdes Patient
+		time-=1
 		if (time == 20):
 			cylinder.body.apply_impulse_at_local_point((0,impulse))
 			total.append(impulse)
@@ -641,6 +750,7 @@ def dodge(space, screen, options, guess=False, impulse=150):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -652,9 +762,10 @@ def dodge(space, screen, options, guess=False, impulse=150):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-
-	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		
+	# output to user and return sum(total)#tuple
+	print "Total impulse: ", sum(total), "Tick: ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def doubleTouch(space, screen, options, guess=False, impulse=170):
 	'''
@@ -665,14 +776,15 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 	'''
 	if(not guess):
 		pygame.display.set_caption("Simulation 10: Double Touch")
+
 	# set up collision handlers
-	ch0=space.add_collision_handler(0,2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
+	ch0 = space.add_collision_handler(0,2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
 	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"]=screen
+	ch1.data["surface"] = screen
 	ch1.begin = handlers.rem2
-	space.damping = 0.2
+	space.damping = DYN_FRICTION
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -689,31 +801,40 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 	yImpsPatient = []
 	xImpsFireball = []
 	yImpsFireball = []
-	total=[]
+	total = []
 	running = True
 	tick = 0
-	time=50
+	time = 50
+
+	# run simulation
 	while running and tick<137:
 		tick+=1
+		time -= 1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-		time -=1
-		'''
-		Check if the velocity is less than it's 'max' velocity. If so,
-		apply an impulse to the agent and add that impulse value to total
-		'''
+
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep Agent at intended velocity
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
+			total.append(2*imp)
+		# when t == 10, the Agent collides with the Patient again
 		elif (time == 10):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
+			total.append(2*imp)
 		elif (len(handlers.collision) == 2 and cylinder.body.velocity[0] != 0):
 			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
 			total.append(math.fabs(imp))
@@ -728,6 +849,7 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -739,14 +861,17 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
 
-	# handlers.remove value from collision list and print out resulting effort
+	# remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
-	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		print "Exited before collision."
+
+	# output to user and return sum(total)#tuple
+	print "Total impulse: ", sum(total), "Tick: ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def mediumPush(space, screen, options, guess=False, impulse=150):
 	'''
@@ -761,10 +886,10 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 	if(not guess):
 		pygame.display.set_caption("Simulation 11: Medium Push Cylinder")
 	# set up collision handlers
-	ch0=space.add_collision_handler(0,2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
-	space.damping = 0.2
+	ch0 = space.add_collision_handler(0,2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	space.damping = DYN_FRICTION
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -781,13 +906,16 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 	yImpsPatient = []
 	xImpsFireball = []
 	yImpsFireball = []
-	total=[]
+	total = []
 	running = True
 	tick = 0
-	time=70
+	time = 70
+
+	# run simulation
 	while running and tick<144:
 		time -= 1
-		tick+=1
+		tick += 1
+		
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -795,13 +923,21 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
-		
-		# Check if the velocity is less than it's 'max' velocity. If so,
-		# apply an impulse to the agent and add that impulse value to total
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep Agent at intended velocity
 		if (cylinder.body.velocity[0] < impulse and time > 0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(math.fabs(imp))
+			total.append(math.fabs(2*imp))
+
+		# when t == 0, have Agent stop 
 		if (time == 0):
 			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
 		
@@ -815,6 +951,7 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -826,14 +963,16 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
 	# handlers.remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
-	# print out resulting effort
-	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		print "Exited before collision."
+
+	# output to user and return sum(total)#tuple
+	print "Total impulse: ", sum(total), "Tick: ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def longPush(space, screen, options, guess=False, impulse=100):
 	'''
@@ -846,11 +985,11 @@ def longPush(space, screen, options, guess=False, impulse=100):
 	if(not guess):
 		pygame.display.set_caption("Simulation 12: Long Push Cylinder")
 	# set up collision handlers
-	ch0=space.add_collision_handler(0,2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
-	ch0.begin=handlers.rem2
-	space.damping = 0.2
+	ch0 = space.add_collision_handler(0,2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch0.begin = handlers.rem2
+	space.damping = DYN_FRICTION
 
 	# add shapes
 	ball = agents.fireball(500, 300)
@@ -858,7 +997,6 @@ def longPush(space, screen, options, guess=False, impulse=100):
 	cone = agents.patient(200, 300)
 	space.add(cone.body, cone.shape)	
 	cylinder = agents.agent(150, 300)
-	#cylinder.shape.elasticity = 0
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -871,22 +1009,31 @@ def longPush(space, screen, options, guess=False, impulse=100):
 	total=[]
 	running = True
 	tick = 0
+
+	# run simulation
 	while running and tick<183:
 		tick+=1
+
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-		'''
-		Check if the velocity is less than it's 'max' velocity. If so,
-		apply an impulse to the agent and add that impulse value to total
-		'''
+
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep Agent at intended velocity
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
+			total.append(2*imp)
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -898,6 +1045,7 @@ def longPush(space, screen, options, guess=False, impulse=100):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -909,14 +1057,14 @@ def longPush(space, screen, options, guess=False, impulse=100):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-
-	# handlers.remove value from collision list and print out resulting effort
+		
+	# remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
-	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		print "Exited before collision."
+	print "Total impulse: ", sum(total), "Tick: ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def touch(space, screen, options, guess=False, impulse=250):
 	'''
@@ -928,14 +1076,14 @@ def touch(space, screen, options, guess=False, impulse=250):
 	if(not guess):
 		pygame.display.set_caption("Simulation 13: Touch Cylinder")
 	# set up collision handlers
-	ch0=space.add_collision_handler(0,2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
+	ch0 = space.add_collision_handler(0,2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
 	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"]=screen
+	ch1.data["surface"] = screen
 	ch1.begin = handlers.rem2
+	space.damping = DYN_FRICTION
 
-	space.damping = 0.2
 	# add shapes
 	ball = agents.fireball(500, 300)
 	space.add(ball.body, ball.shape)
@@ -951,11 +1099,14 @@ def touch(space, screen, options, guess=False, impulse=250):
 	yImpsPatient = []
 	xImpsFireball = []
 	yImpsFireball = []
-	total=[]
+	total = []
 	running = True
 	tick = 0
+
+	# run simulation
 	while running and tick<114:
 		tick+=1
+
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -963,14 +1114,19 @@ def touch(space, screen, options, guess=False, impulse=250):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
-		'''
-		Check if the velocity is less than it's 'max' velocity. If so,
-		apply an impulse to the agent and add that impulse value to total
-		'''
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+		
+		# keep Agent at intended velocity
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
+			total.append(2*imp)
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -982,25 +1138,29 @@ def touch(space, screen, options, guess=False, impulse=250):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(logo_img, p)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
 
-	# handlers.remove value from collision list and print out resulting effort
+	# remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
-	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		print "Exited before collision."
+
+	print "Total impulse: ", sum(total), "Tick: ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def pushFireball(space, screen, options, guess=False, impulse=275):
 	'''
@@ -1013,12 +1173,13 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 		pygame.display.set_caption("Simulation 14: Push Fireball")
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
 	ch1 = space.add_collision_handler(1, 2)
-	ch1.data["surface"]=screen
-	ch1.begin=handlers.rem2
-	space.damping = 0.2
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+	space.damping = DYN_FRICTION
+
 	# add shapes
 	ball = agents.fireball(400, 300)
 	space.add(ball.body, ball.shape)
@@ -1034,9 +1195,11 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 	yImpsPatient = []
 	xImpsFireball = []
 	yImpsFireball = []
-	total=[]
+	total = []
 	running = True
 	tick = 0
+
+	# run simulation
 	while running and tick<143:
 		tick+=1
 		#allow user to exit
@@ -1046,14 +1209,19 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
-		'''
-		Check if the velocity is less than it's 'max' velocity. If so,
-		apply an impulse to the agent and add that impulse value to total
-		'''
+		# static friction for all bodies
+		if (cylinder.body.velocity == (0,0)):
+			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (cone.body.velocity == (0,0)):
+			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+		if (ball.body.velocity == (0,0)):
+			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+
+		# keep Agent at intended velocity until Fireball hits Patient
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
+			total.append(2*imp)
 		elif (len(handlers.collision) != 0 and cylinder.body.velocity[0] != 0):
 			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
 			total.append(math.fabs(imp))
@@ -1068,6 +1236,7 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 
 		# set clock
 		clock = pygame.time.Clock()
+
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
 			screen.fill((255,255,255))
@@ -1079,80 +1248,14 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
 
-	# handlers.remove value from collision list and print out resulting effort
+	# remove value from collision list and print out resulting effort
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
-	print("Total impulse: ", sum(total), "Tick: ", tick)
-	return sum(total) #(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+		print "Exited before collision."
 
-def test(space, screen, options):
-	'''
-	Current sim for testing extraction of effort from agent.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	pygame.display.set_caption("Simulation 14: Test Simulation for Effort Extraction")
-	# set up post_solve and begin collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
-	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"]=screen
-	ch1.begin = handlers.rem2
-
-	# set space damping
-	space.damping = 0.2
-
-	# add shapes with necesarry impulses
-	ball = agents.fireball(500, 300) # fireball
-	space.add(ball.body, ball.shape)	
-	cone = agents.patient(400, 300) # patient
-	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(175, 300) # agent
-	space.add(cylinder.body, cylinder.shape)
-
-	'''
-	Initialize list of effort variables with first supplied impulse of 150.
-	We will add the supplied impulses to this list and sum over it for our 
-	final quantity of effort (so far).
-	'''
-	total = []
-	running = True
-	while running:
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		'''
-		Check if the velocity is less than it's 'max' velocity. If so,
-		apply an impulse to the agent and add that impulse value to total
-		'''
-		if (cylinder.body.velocity[0] < 150 and len(handlers.collision) == 0):
-			imp = 150.0 - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(imp)
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim
-		screen.fill((255,255,255))
-		space.step(1/50.0)
-		space.debug_draw(options)
-		pygame.display.flip()
-		clock.tick(50)
-
-	# handlers.remove value from collision list and print out resulting effort
-	try:
-		handlers.collision = []
-	except:
-		print("Exited before collision.")
-	print("Total impulse: ", sum(total))
-	returnsum(total) 
+	# output to user and return sum(total)#tuple
+	print "Total impulse: ", sum(total), "Tick: ", tick
+	return sum(total)#(xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
