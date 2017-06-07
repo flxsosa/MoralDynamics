@@ -40,8 +40,8 @@ import sys
 
 DYN_FRICTION = 0.2
 STAT_FRICTION = 0.1
-APMASS = 1
-FMASS = 1
+AP_MASS = 1
+F_MASS = 1
 
 def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	'''
@@ -67,11 +67,11 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	space.damping = DYN_FRICTION
 	
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(400, 300)
+	cone = agents.patient(400, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(250, 300)
+	cylinder = agents.agent(250, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
 	# lists for impulses per timestep, total impulses, running flag, and ticks
@@ -165,11 +165,11 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	space.damping = DYN_FRICTION
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(400, 300)
+	cone = agents.patient(400, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(175, 300)
+	cylinder = agents.agent(175, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -263,11 +263,11 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 	space.damping = DYN_FRICTION
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(400, 300)
+	cone = agents.patient(400, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(100, 300)
+	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -364,11 +364,11 @@ def static(space, screen, options, guess=False, impulse=350):
 	space.damping = DYN_FRICTION
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(200, 300)
+	cone = agents.patient(200, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(350, 400)
+	cylinder = agents.agent(350, 400, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -485,11 +485,11 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 	space.damping = 0.2
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(200,300)
+	cone = agents.patient(200,300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(100, 300)
+	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -596,11 +596,11 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 	space.damping = 0.2
 	
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(300, 300)
+	cone = agents.patient(300, 300, AP_MASS)
 	space.add(cone.body, cone.shape)	
-	cylinder = agents.agent(100, 300)
+	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -692,11 +692,11 @@ def dodge(space, screen, options, guess=False, impulse=150):
 	space.damping = 0.2
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(200, 300)
+	cone = agents.patient(200, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(400, 300)
+	cylinder = agents.agent(400, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -787,11 +787,11 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 	space.damping = DYN_FRICTION
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(300, 300)
+	cone = agents.patient(300, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(170, 300)
+	cylinder = agents.agent(170, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -892,11 +892,11 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 	space.damping = DYN_FRICTION
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(200, 300)
+	cone = agents.patient(200, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(150, 300)
+	cylinder = agents.agent(150, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -992,11 +992,11 @@ def longPush(space, screen, options, guess=False, impulse=100):
 	space.damping = DYN_FRICTION
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)	
-	cone = agents.patient(200, 300)
+	cone = agents.patient(200, 300, AP_MASS)
 	space.add(cone.body, cone.shape)	
-	cylinder = agents.agent(150, 300)
+	cylinder = agents.agent(150, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -1085,11 +1085,11 @@ def touch(space, screen, options, guess=False, impulse=250):
 	space.damping = DYN_FRICTION
 
 	# add shapes
-	ball = agents.fireball(500, 300)
+	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(200, 300)
+	cone = agents.patient(200, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(170, 300)
+	cylinder = agents.agent(170, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	logo_img = pygame.image.load("fireball.png")
@@ -1185,11 +1185,11 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 	space.damping = DYN_FRICTION
 
 	# add shapes
-	ball = agents.fireball(400, 300)
+	ball = agents.fireball(400, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(500, 300)
+	cone = agents.patient(500, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(100, 300)
+	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
