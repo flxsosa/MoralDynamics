@@ -38,7 +38,7 @@ import sys
 
 # MODEL PARAMETERS
 
-DYN_FRICTION = 0.2
+DYN_FRICTION = 1.0
 STAT_FRICTION = 0.1
 AP_MASS = 1
 F_MASS = 1
@@ -137,10 +137,10 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
+		print "Exited before collision."
 
 	# output to user and return tuple
-	print("Total impulse: ", sum(total))
+	print "Total impulse: ", sum(total)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def mediumDistance(space, screen, options, guess=False, impulse=200):
@@ -334,10 +334,10 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 	try:
 		handlers.collision = []
 	except:
-		print("Exited before collision.")
+		print "Exited before collision."
 
 	# output to user and return tuple
-	print("Total impulse: ", sum(total), "Tick ", tick)
+	print "Total impulse: ", sum(total), "Tick ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
 def static(space, screen, options, guess=False, impulse=350):
