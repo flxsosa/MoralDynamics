@@ -31,24 +31,7 @@ def main():
 
 	# display simulation options
 	if choice == '1':
-		print("=================================================")
-		print("1. Short Distance")
-		print("2. Medium Distance")
-		print("3. Long Distance")
-		print("4. Static")
-		print("5. Uphill [N/A]")
-		print("6. Downhill [N/A]")
-		print("7. Slow Collision")
-		print("8. Fast Collision")
-		print("9. Dodge")
-		print("10. Double Touch")
-		print("11. Medium Push")
-		print("12. Long Push")
-		print("13. Touch")
-		print("14. Push Fireball")
-		print("0. EXIT")
-		print("=================================================")
-		print("Please choose a Simulation [1-14] or [0] to exit:")
+		printOptions()
 		choice = raw_input()
 		
 		while (choice != '0'):
@@ -102,24 +85,7 @@ def main():
 		
 	# display guess options
 	if choice == '2':
-		print("=================================================")
-		print("1. Short Distance")
-		print("2. Medium Distance")
-		print("3. Long Distance")
-		print("4. Static")
-		print("5. Uphill [N/A]")
-		print("6. Downhill [N/A]")
-		print("7. Slow Collision")
-		print("8. Fast Collision")
-		print("9. Dodge")
-		print("10. Double Touch")
-		print("11. Medium Push")
-		print("12. Long Push")
-		print("13. Touch")
-		print("14. Push Fireball")
-		print("0. EXIT")
-		print("=================================================")
-		print("Please choose a Simulation [1-13] or [0] to exit:")
+		printOptions()
 		choice = raw_input()
 		
 		while (choice != '0'):
@@ -135,7 +101,7 @@ def main():
 			elif (choice == '3'):
 				infer.enum(simulations.longDistance, 100, 300)
 			elif (choice == '4'):
-				infer.enum(simulations.static, 250, 450)
+				infer.enum(simluations.static, 250, 450)
 			elif (choice == '5'):
 				simulations.uphill(space, screen, drawOptions)
 			elif (choice == '6'):
@@ -168,71 +134,28 @@ def main():
 
 	# display comparison options
 	if choice =='3':
+		print "Use graph.py in interactive mode"
+		
 
-		a = []
-		c = range(14)
-		b = ['shortDist',
-			'medDist',
-			'longDist',
-			'static',
-			'N/A',
-			'N/A',
-			'slowColl',
-			'fastColl',
-			'touch',
-			'doubleTouch',
-			'medPush',
-			'longPush',
-			'dodge',
-			'pushFire']
-		for i in range(14):
-			# initialize pygame and create a space to contain the simulation
-			pygame.init()
-			space = pymunk.Space()
-
-			# create a screen of 600x600 pixels
-			screen = None
-			drawOptions = None
-
-			if (i == 0):
-				a.append(sim.shortDistance(space, screen, drawOptions, True))
-			elif (i == 1):
-				a.append(sim.mediumDistance(space, screen, drawOptions, True))
-			elif (i == 2):
-				a.append(sim.longDistance(space, screen, drawOptions, True))
-			elif (i == 3):
-				a.append(sim.static(space, screen, drawOptions, True))
-			elif (i == 4):
-				a.append(0)
-			elif (i == 5):
-				a.append(0)
-			elif (i == 6):
-				a.append(sim.slowCollision(space, screen, drawOptions, True))
-			elif (i == 7):
-				a.append(sim.fastCollision(space, screen, drawOptions, True))
-			elif (i == 8):
-				a.append(sim.touch(space, screen, drawOptions, True))
-			elif (i == 9):
-				a.append(sim.doubleTouch(space, screen, drawOptions, True))
-			elif(i == 10):
-				a.append(sim.mediumPush(space, screen, drawOptions, True))
-			elif (i == 11):
-				a.append(sim.longPush(space, screen, drawOptions, True))
-			elif (i == 12):
-				a.append(sim.dodge(space, screen, drawOptions, True))
-			elif (i == 13):
-				a.append(sim.pushFireball(space, screen, drawOptions, True))
-			pygame.quit()
-
-		print(a,b)
-		plt.bar(c,a)
-
-		plt.xticks(c, b, rotation=50)
-		plt.ylabel('Total Impulses')
-		plt.title('Effort Comparison for Sims')
-		plt.tight_layout()
-		plt.savefig('comp.png')
-		plt.show()
+def printOptions():
+	print("=================================================")
+	print("1. Short Distance")
+	print("2. Medium Distance")
+	print("3. Long Distance")
+	print("4. Static")
+	print("5. Uphill [N/A]")
+	print("6. Downhill [N/A]")
+	print("7. Slow Collision")
+	print("8. Fast Collision")
+	print("9. Dodge")
+	print("10. Double Touch")
+	print("11. Medium Push")
+	print("12. Long Push")
+	print("13. Touch")
+	print("14. Push Fireball")
+	print("0. EXIT")
+	print("=================================================")
+	print("Please choose a Simulation [1-14] or [0] to exit:")
 
 if __name__ == '__main__':
 	sys.exit(main())
