@@ -1,27 +1,6 @@
 '''
-Simulations for Moral Dynamics
-
-Simulations to implement:
-
-<Number>. <Factor> -- <Name> -- <Progress>
-1. Distance -- Long Distance -- Complete/Edit
-2. Distance -- Short Distance -- Complete/Edit
-3. Distance -- Medium Distance -- Complete/Edit
-4. Force/Distance -- Static Cylinder -- Complete/Edit
-5. Force -- Uphill Cylinder
-6. Force -- Downhill Cylinder
-7. Force -- Slow Collision Cone - Complete/Edit
-8. Force -- Fast Collision Cone - Complete/Edit
-9. Force/Distance -- Dodging Cylinder - Complete/Editgit m
-10. Frequency -- Double Contact Cylinder - Complete/Edit
-11. Duration -- Medium Push Cylinder - Complete/Edit
-12. Duration -- Long Push Cylinder - Complete/Edit
-13. Duration -- Touch Cylinder - Complete/Edit
-
-Key:
-In Progress: May not be functional but working on it
-Complete/Edit: Functions as needed but may need edits or optimizations
-Complete: Functions and is optimal
+Simulations to be used for graphing
+for Moral Dynamics
 
 March 10, 2017
 Felix Sosa
