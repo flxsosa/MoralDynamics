@@ -1,3 +1,10 @@
+'''
+Graphing functions for Moral Dynamics.
+
+Felix Sosa
+March 25, 2017
+'''
+
 import pymunk
 import pygame
 import agents
@@ -9,67 +16,40 @@ import infer
 import sim
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import math
+
+# list of simulation calls from sim.py to be passed as parameters
+simulations = [sim.shortDistance, sim.mediumDistance, sim.longDistance, sim.static,sim.uphill, 
+		sim.downhill, sim.slowCollision, sim.fastCollision, sim.touch, sim.doubleTouch, 
+		sim.mediumPush, sim.longPush, sim.dodge, sim.pushFireball]
 
 def compareTotalImps():
-	a = []
-	c = range(14)
-	b = ['shortDist',
-		'medDist',
-		'longDist',
-		'static',
-		'N/A',
-		'N/A',
-		'slowColl',
-		'fastColl',
-		'touch',
-		'doubleTouch',
-		'medPush',
-		'longPush',
-		'dodge',
-		'pushFire']
-	for i in range(14):
+	'''
+	Plot total impulses applied to Agent for each of the 14 simulations.
+	'''
+	impulses = []
+	idx = range(14)
+	sims = ['shortDistance', 'medDistance', 'longDistance', 'static','N/A', 
+		'N/A', 'slowCollision', 'fastCollision', 'touch', 'doubleTouch', 
+		'medPush', 'longPush', 'dodge', 'pushFireball']
+	
+	# traverse simulations and 
+	for sim in simulations:
 		# initialize pygame and create a space to contain the simulation
 		pygame.init()
 		space = pymunk.Space()
 
-		# create a screen of 600x600 pixels
+		# we are not viewing the sims
 		screen = None
 		drawOptions = None
 
-		if (i == 0):
-			a.append(sim.shortDistance(space, screen, drawOptions, True))
-		elif (i == 1):
-			a.append(sim.mediumDistance(space, screen, drawOptions, True))
-		elif (i == 2):
-			a.append(sim.longDistance(space, screen, drawOptions, True))
-		elif (i == 3):
-			a.append(sim.static(space, screen, drawOptions, True))
-		elif (i == 4):
-			a.append(0)
-		elif (i == 5):
-			a.append(0)
-		elif (i == 6):
-			a.append(sim.slowCollision(space, screen, drawOptions, True))
-		elif (i == 7):
-			a.append(sim.fastCollision(space, screen, drawOptions, True))
-		elif (i == 8):
-			a.append(sim.touch(space, screen, drawOptions, True))
-		elif (i == 9):
-			a.append(sim.doubleTouch(space, screen, drawOptions, True))
-		elif(i == 10):
-			a.append(sim.mediumPush(space, screen, drawOptions, True))
-		elif (i == 11):
-			a.append(sim.longPush(space, screen, drawOptions, True))
-		elif (i == 12):
-			a.append(sim.dodge(space, screen, drawOptions, True))
-		elif (i == 13):
-			a.append(sim.pushFireball(space, screen, drawOptions, True))
+		# append total impulse applied to Agent for given simulation
+		impulses.append(sim(space, screen, drawOptions, True))
 		pygame.quit()
 
-	print(a,b)
-	plt.bar(c,a)
-
-	plt.xticks(c, b, rotation=50)
+	# create bar graph of total impulses per simulation
+	plt.bar(idx,impulses)
+	plt.xticks(idx, sims, rotation=50)
 	plt.ylabel('Total Impulses')
 	plt.title('Effort Comparison for Sims')
 	plt.tight_layout()
@@ -77,79 +57,64 @@ def compareTotalImps():
 	plt.show()
 
 def compareKinematics():
+	'''
+	Plots two bar plots. One for Moral Kinematics data and one for
+	Moral Dynamics data.
+	'''
 
-	# empirical probabilities for each comparison in Moral Kinematics
-	kinematics = [0.82, 0.88, 0.75, 0.5, 0.67, 0.84, 0.75,
-				  1.0, 0.82, 0.75, 0.69, 0.75, 1.0, 0.82,
-				  0.94]
+	# agreements for each comparison in Moral Kinematics
+	kinematics = [0.82, 0.88, 0.75, 0.5, 0.67, 0.84, 0.75, 1.0, 
+				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
+
 	# calculated probabilities for each comparison in Moral Dynamics
-	dynamics = calcProb()
+	print "Gathering data..."
+	dynamics = calcProb(1.0,0.1)
 
 	# x axis values for plot
-	x = range(1, 16)
+	idx = range(1, 16)
 	xLabels = ['1. LongDist v ShortDist', '2. LongDist v MedDist', '3. LongDist v Static', '4. MedPush v Down', 
 			   '5. Up v Down', '6. Up v MedPush', '7. FastColl v SlowColl', '8. Dodge v NoTouch',
 			   '9. Dodge v Static', '10. Static v NoTouch', '11. LongDist v Dodge', 
 			   '12. DoubleTouch v Touch', '13. MedPush v Touch', '14. LongPush v MedPush',
 			   '15. LongPush v Touch']
 
-	print kinematics, dynamics, xLabels
-
+	# double bar plot
 	plt.subplot(111)
 	plt.ylabel("Agreement")
 	plt.title("Moral Kinematics vs Moral Dynamics")
-	plt.bar(x, kinematics, width=0.2, color='b', label='Kin')
-	plt.bar(map(lambda x:x+0.2, x), dynamics, width=0.2, color='r', label='Dyn')
-	plt.xticks(x, xLabels, rotation='70')
-	plt.legend(loc="1")
+	# Moral Kinematics data
+	plt.bar(idx, kinematics, width=0.2, color='b', label='Kin')
+	# Moral Dynamics data - need to plot bars next to Kinematics bars
+	plt.bar(map(lambda x:x+0.2, idx), dynamics, width=0.2, color='r', label='Dyn')
+	plt.xticks(idx, xLabels, rotation='70')
+	plt.legend(loc="best")
 	plt.plot([0.5]*17, "k--")
 	plt.tight_layout()
 	plt.savefig('kin.png')
 	plt.show()
 
-def calcProb():
+def calcProb(x,y):
+	'''
+	Calculate probability one simulation would be deemed worse than another
+	using Luce's Choice Theorem. Currently calculates probabilities of the
+	same situations presented in Moral Kinematics by Iliev et. al, 2012.
+	'''
 	a = []
 	prob = []
 
-	# gather effort from each sim
-	for i in range(14):
+	# traverse simulations and append impulses to list
+	for sim in simulations:
 		# initialize pygame and create a space to contain the simulation
 		pygame.init()
 		space = pymunk.Space()
 
-		# create a screen of 600x600 pixels
+		# we are not viewing the sims
 		screen = None
 		drawOptions = None
 
-		if (i == 0):
-			a.append(sim.shortDistance(space, screen, drawOptions, True))
-		elif (i == 1):
-			a.append(sim.mediumDistance(space, screen, drawOptions, True))
-		elif (i == 2):
-			a.append(sim.longDistance(space, screen, drawOptions, True))
-		elif (i == 3):
-			a.append(sim.static(space, screen, drawOptions, True))
-		elif (i == 4):
-			a.append(0)
-		elif (i == 5):
-			a.append(0)
-		elif (i == 6):
-			a.append(sim.slowCollision(space, screen, drawOptions, True))
-		elif (i == 7):
-			a.append(sim.fastCollision(space, screen, drawOptions, True))
-		elif (i == 8):
-			a.append(sim.touch(space, screen, drawOptions, True))
-		elif (i == 9):
-			a.append(sim.doubleTouch(space, screen, drawOptions, True))
-		elif(i == 10):
-			a.append(sim.mediumPush(space, screen, drawOptions, True))
-		elif (i == 11):
-			a.append(sim.longPush(space, screen, drawOptions, True))
-		elif (i == 12):
-			a.append(sim.dodge(space, screen, drawOptions, True))
-		elif (i == 13):
-			a.append(sim.pushFireball(space, screen, drawOptions, True))
-			pygame.quit()
+		# append total impulse applied to Agent for given simulation
+		a.append(sim(space, screen, drawOptions, True, x, y))
+		pygame.quit()
 
 	# long distance vs short distance
 	prob.append(a[2]/(a[0]+a[2]))
@@ -183,3 +148,24 @@ def calcProb():
 	prob.append(a[11]/(a[11]+a[8]))
 
 	return prob
+
+def modelFit():
+	'''
+	Model fit using model parameters.
+	'''	
+	# agreements for each comparison in Moral Kinematics
+	kinematics = [0.82, 0.88, 0.75, 0.0, 0.0, 0.0, 0.75, 1.0, 
+				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
+
+	for dyn in range(8,11):
+		for stat in range(1, 11):
+			dynamics = calcProb(dyn*0.1, stat*0.1)
+			print "Dynamic Friction: ", dyn*0.1, "Static Friction: ", stat*0.1
+			print math.sqrt((sum(kinematics)-sum(dynamics))**2)
+
+def rmse(x, y):
+	a = []
+	for i in range(len(x)):
+		a.append((x[i]- y[i])**2)
+
+	return math.sqrt(sum(a)/(len(x)*2+0.0))
