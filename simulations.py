@@ -44,6 +44,12 @@ STAT_FRICTION = 0.7
 AP_MASS = 1
 F_MASS = 1
 
+ani = glob.glob("Sprites/fireball*.png")
+ani.sort()
+
+def update(scr, p, img):
+	scr.blit(glob[i], p)
+
 def shortDistance(space, screen, options, guess=False, impulse=400):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
@@ -53,6 +59,8 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
+	cnt = 0
+	print ani
 	if(not guess):
 		pygame.display.set_caption("Simulation 1: Short Distance")
 	
@@ -139,8 +147,16 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
-			
 			screen.blit(fireSprite, pBall)
+			if (len(handlers.collision) == 1 and cnt < 4 and cnt):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt+=0.5
+
+			elif (len(handlers.collision) == 1 and cnt > 3 and cnt < 8):
+				img = pygame.image.load(ani[cnt-4])
+				screen.blit(img, pCone)
+				cnt+=0.5
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -186,6 +202,9 @@ def mediumDistance(space, screen, options, guess=False, impulse=400):
 	cylinder = agents.agent(125, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -199,6 +218,9 @@ def mediumDistance(space, screen, options, guess=False, impulse=400):
 
 	# run simulation
 	while running and tick<115:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick += 1
 		#allow user to exit
 		for event in pygame.event.get():
@@ -242,6 +264,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=400):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -288,6 +311,9 @@ def longDistance(space, screen, options, guess=False, impulse=400):
 	cylinder = agents.agent(50, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -301,6 +327,9 @@ def longDistance(space, screen, options, guess=False, impulse=400):
 
 	# run simulation
 	while running and tick < 133:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 
 		#allow user to exit
@@ -345,6 +374,7 @@ def longDistance(space, screen, options, guess=False, impulse=400):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -393,6 +423,9 @@ def static(space, screen, options, guess=False, impulse=350):
 	cylinder = agents.agent(400, 375, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -407,6 +440,9 @@ def static(space, screen, options, guess=False, impulse=350):
 
 	# run simulation
 	while running and tick < 140:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
@@ -458,6 +494,7 @@ def static(space, screen, options, guess=False, impulse=350):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -514,6 +551,9 @@ def slowCollision(space, screen, options, guess=False, impulse=380):
 	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -528,6 +568,9 @@ def slowCollision(space, screen, options, guess=False, impulse=380):
 
 	# run simulation
 	while running and tick<149:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 
 		#allow user to exit
@@ -578,6 +621,7 @@ def slowCollision(space, screen, options, guess=False, impulse=380):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -625,6 +669,9 @@ def fastCollision(space, screen, options, guess=False, impulse=600):
 	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -638,6 +685,9 @@ def fastCollision(space, screen, options, guess=False, impulse=600):
 
 	# run simulation
 	while running and tick<154:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
@@ -680,6 +730,7 @@ def fastCollision(space, screen, options, guess=False, impulse=600):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -721,6 +772,9 @@ def dodge(space, screen, options, guess=False, impulse=250):
 	cylinder = agents.agent(400, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -735,6 +789,9 @@ def dodge(space, screen, options, guess=False, impulse=250):
 
 	# run simulation
 	while running and tick<186:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
@@ -782,6 +839,7 @@ def dodge(space, screen, options, guess=False, impulse=250):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -819,6 +877,9 @@ def doubleTouch(space, screen, options, guess=False, impulse=450):
 	cylinder = agents.agent(170, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -833,6 +894,9 @@ def doubleTouch(space, screen, options, guess=False, impulse=450):
 
 	# run simulation
 	while running and tick<137:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 		time -= 1
 		#allow user to exit
@@ -881,6 +945,7 @@ def doubleTouch(space, screen, options, guess=False, impulse=450):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -924,6 +989,9 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 	cylinder = agents.agent(150, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -938,6 +1006,9 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 
 	# run simulation
 	while running and tick<144:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		time -= 1
 		tick += 1
 		
@@ -983,6 +1054,7 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -1024,6 +1096,9 @@ def longPush(space, screen, options, guess=False, impulse=150):
 	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -1037,6 +1112,9 @@ def longPush(space, screen, options, guess=False, impulse=150):
 
 	# run simulation
 	while running and tick<183:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 
 		#allow user to exit
@@ -1081,6 +1159,7 @@ def longPush(space, screen, options, guess=False, impulse=150):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
@@ -1220,6 +1299,9 @@ def pushFireball(space, screen, options, guess=False, impulse=350):
 	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -1233,6 +1315,9 @@ def pushFireball(space, screen, options, guess=False, impulse=350):
 
 	# run simulation
 	while running and tick < 137:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
@@ -1275,6 +1360,7 @@ def pushFireball(space, screen, options, guess=False, impulse=350):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
