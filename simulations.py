@@ -59,8 +59,6 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
-	cnt = 0
-	print ani
 	if(not guess):
 		pygame.display.set_caption("Simulation 1: Short Distance")
 	
@@ -97,7 +95,9 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 	total = []
 	running = True
 	tick = 0
+	# animation flags
 	x = 0
+	cnt = 0
 
 	# run simulation
 	while running and tick<95:
@@ -150,18 +150,19 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
 
-			if (len(handlers.collision) == 1 and cnt < 8 and x == 0):
+			# animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
 				img = pygame.image.load(ani[cnt])
 				screen.blit(img, pCone)
-				cnt+=1
-				if cnt == 4:
+				cnt += 1
+				if cnt == 12:
 					x = 1
-					cnt = 7
+					cnt = 11
 			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
 				img = pygame.image.load(ani[cnt])
 				screen.blit(img, pCone)
-				cnt-=1
-				
+				cnt -= 1
+
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
