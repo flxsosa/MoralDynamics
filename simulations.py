@@ -97,6 +97,7 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 	total = []
 	running = True
 	tick = 0
+	x = 0
 
 	# run simulation
 	while running and tick<95:
@@ -148,15 +149,19 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
-			if (len(handlers.collision) == 1 and cnt < 4 and cnt):
+
+			if (len(handlers.collision) == 1 and cnt < 8 and x == 0):
 				img = pygame.image.load(ani[cnt])
 				screen.blit(img, pCone)
-				cnt+=0.5
-
-			elif (len(handlers.collision) == 1 and cnt > 3 and cnt < 8):
-				img = pygame.image.load(ani[cnt-4])
+				cnt+=1
+				if cnt == 4:
+					x = 1
+					cnt = 7
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
 				screen.blit(img, pCone)
-				cnt+=0.5
+				cnt-=1
+				
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
