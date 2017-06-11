@@ -7,6 +7,7 @@ Felix Sosa
 
 import pymunk
 import pygame
+import glob
 
 class agent:
 	'''
@@ -40,6 +41,7 @@ class patient:
 		self.shape.color = pygame.color.THECOLORS["green"]
 		self.shape.collision_type = 0
 		self.shape.elasticity = 1
+
 
 class fireball:
 	'''

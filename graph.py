@@ -7,11 +7,9 @@ March 25, 2017
 
 import pymunk
 import pygame
-import agents
 import pymunk.pygame_util
 from pygame.locals import *
 import sys
-import simulations
 import infer
 import sim
 import matplotlib.pyplot as plt
@@ -20,18 +18,20 @@ import math
 
 # list of simulation calls from sim.py to be passed as parameters
 simulations = [sim.shortDistance, sim.mediumDistance, sim.longDistance, sim.static,sim.uphill, 
-		sim.downhill, sim.slowCollision, sim.fastCollision, sim.touch, sim.doubleTouch, 
-		sim.mediumPush, sim.longPush, sim.dodge, sim.pushFireball]
+			   sim.downhill, sim.slowCollision, sim.fastCollision, sim.touch, sim.doubleTouch, 
+			   sim.mediumPush, sim.longPush, sim.dodge, sim.pushFireball]
 
 def compareTotalImps():
 	'''
 	Plot total impulses applied to Agent for each of the 14 simulations.
 	'''
+	DYN = 0.1
+	STAT = 0.7
 	impulses = []
 	idx = range(14)
 	sims = ['shortDistance', 'medDistance', 'longDistance', 'static','N/A', 
-		'N/A', 'slowCollision', 'fastCollision', 'touch', 'doubleTouch', 
-		'medPush', 'longPush', 'dodge', 'pushFireball']
+		    'N/A', 'slowCollision', 'fastCollision', 'touch', 'doubleTouch', 
+		    'medPush', 'longPush', 'dodge', 'pushFireball']
 	
 	# traverse simulations and 
 	for sim in simulations:
@@ -44,7 +44,7 @@ def compareTotalImps():
 		drawOptions = None
 
 		# append total impulse applied to Agent for given simulation
-		impulses.append(sim(space, screen, drawOptions, True))
+		impulses.append(sim(space, screen, drawOptions, True, DYN, STAT))
 		pygame.quit()
 
 	# create bar graph of total impulses per simulation
@@ -53,22 +53,40 @@ def compareTotalImps():
 	plt.ylabel('Total Impulses')
 	plt.title('Effort Comparison for Sims')
 	plt.tight_layout()
-	plt.savefig('comp.png')
+	plt.savefig('Dyn: '+ str(DYN) + 'Stat: ' + str(STAT) + '.png')
 	plt.show()
 
-def compareKinematics():
+def compareKinematics(DYN, STAT):
 	'''
 	Plots two bar plots. One for Moral Kinematics data and one for
 	Moral Dynamics data.
 	'''
+	#DYN = 0.1
+	#STAT = 0.7
 
+	impulses = []
 	# agreements for each comparison in Moral Kinematics
 	kinematics = [0.82, 0.88, 0.75, 0.5, 0.67, 0.84, 0.75, 1.0, 
 				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
 
 	# calculated probabilities for each comparison in Moral Dynamics
 	print "Gathering data..."
-	dynamics = calcProb(1.0,0.1)
+	# traverse simulations and append impulses to list
+	for sim in simulations:
+		# initialize pygame and create a space to contain the simulation
+		pygame.init()
+		space = pymunk.Space()
+
+		# we are not viewing the sims
+		screen = None
+		drawOptions = None
+
+		# append total impulse applied to Agent for given simulation
+		impulses.append(sim(space, screen, drawOptions, True, DYN, STAT))
+		pygame.quit()
+
+	# probabilities using Luce's Choice Axiom
+	dynamics = calcProb(impulses)
 
 	# x axis values for plot
 	idx = range(1, 16)
@@ -90,31 +108,16 @@ def compareKinematics():
 	plt.legend(loc="best")
 	plt.plot([0.5]*17, "k--")
 	plt.tight_layout()
-	plt.savefig('kin.png')
+	plt.savefig('Dyn: '+ str(DYN) + 'Stat: ' + str(STAT) + 'kin.png')
 	plt.show()
 
-def calcProb(x,y):
+def calcProb(a):
 	'''
 	Calculate probability one simulation would be deemed worse than another
 	using Luce's Choice Theorem. Currently calculates probabilities of the
 	same situations presented in Moral Kinematics by Iliev et. al, 2012.
 	'''
-	a = []
 	prob = []
-
-	# traverse simulations and append impulses to list
-	for sim in simulations:
-		# initialize pygame and create a space to contain the simulation
-		pygame.init()
-		space = pymunk.Space()
-
-		# we are not viewing the sims
-		screen = None
-		drawOptions = None
-
-		# append total impulse applied to Agent for given simulation
-		a.append(sim(space, screen, drawOptions, True, x, y))
-		pygame.quit()
 
 	# long distance vs short distance
 	prob.append(a[2]/(a[0]+a[2]))
@@ -157,11 +160,15 @@ def modelFit():
 	kinematics = [0.82, 0.88, 0.75, 0.0, 0.0, 0.0, 0.75, 1.0, 
 				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
 
-	for dyn in range(8,11):
+	values = {"Value" : "(DYN, STAT)"}
+	for dyn in range(1,11):
 		for stat in range(1, 11):
 			dynamics = calcProb(dyn*0.1, stat*0.1)
 			print "Dynamic Friction: ", dyn*0.1, "Static Friction: ", stat*0.1
+			values[(dyn*0.1, stat*0.1)] = math.sqrt((sum(kinematics)-sum(dynamics))**2)
 			print math.sqrt((sum(kinematics)-sum(dynamics))**2)
+
+	print min(values, key=values.get)
 
 def rmse(x, y):
 	a = []

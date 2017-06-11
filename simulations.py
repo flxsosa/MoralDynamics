@@ -35,15 +35,16 @@ import math
 import pymunk.pygame_util
 from pygame.locals import *
 import sys
+import glob
 
 # MODEL PARAMETERS
 
-DYN_FRICTION = 1.0
-STAT_FRICTION = 0.1
+DYN_FRICTION = 0.1
+STAT_FRICTION = 0.7
 AP_MASS = 1
 F_MASS = 1
 
-def shortDistance(space, screen, options, guess=False, impulse=200.0):
+def shortDistance(space, screen, options, guess=False, impulse=400):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
 	away. Originally to be compared with longDistanceSim in Moral Kinematics.
@@ -69,11 +70,15 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	# add shapes
 	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(400, 300, AP_MASS)
+	cone = agents.patient(450, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(250, 300, AP_MASS)
+	cylinder = agents.agent(300, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+	
+
 	# lists for impulses per timestep, total impulses, running flag, and ticks
 	xImpsAgent = []
 	yImpsAgent = []
@@ -87,7 +92,11 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 
 	# run simulation
 	while running and tick<95:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick += 1
+
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -106,8 +115,12 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(2*imp)
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(imp)
+		if (len(handlers.collision) == 1):
+			imp = cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
+			total.append(math.fabs(imp))
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -126,12 +139,13 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 		space.step(1/50.0)
 		if(not guess):
 			space.debug_draw(options)
+			
+			screen.blit(fireSprite, pBall)
 			pygame.display.flip()
 		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
-		
 		
 	# remove value from collision list
 	try:
@@ -143,7 +157,7 @@ def shortDistance(space, screen, options, guess=False, impulse=200.0):
 	print "Total impulse: ", sum(total)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def mediumDistance(space, screen, options, guess=False, impulse=200):
+def mediumDistance(space, screen, options, guess=False, impulse=400):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a medium distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -167,9 +181,9 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	# add shapes
 	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(400, 300, AP_MASS)
+	cone = agents.patient(450, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(175, 300, AP_MASS)
+	cylinder = agents.agent(125, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -204,8 +218,12 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(2*imp)
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(imp)
+		if (len(handlers.collision) == 1):
+			imp = cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
+			total.append(math.fabs(imp))
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -241,7 +259,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=200):
 	print "Total impulse: ", sum(total), "Tick ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def longDistance(space, screen, options, guess=False, impulse=200):
+def longDistance(space, screen, options, guess=False, impulse=400):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -265,9 +283,9 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 	# add shapes
 	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(400, 300, AP_MASS)
+	cone = agents.patient(450, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(100, 300, AP_MASS)
+	cylinder = agents.agent(50, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -303,8 +321,12 @@ def longDistance(space, screen, options, guess=False, impulse=200):
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(2*imp)
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(imp)
+		if (len(handlers.collision) == 1):
+			imp = cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
+			total.append(math.fabs(imp))
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -366,9 +388,9 @@ def static(space, screen, options, guess=False, impulse=350):
 	# add shapes
 	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(200, 300, AP_MASS)
+	cone = agents.patient(300, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(350, 400, AP_MASS)
+	cylinder = agents.agent(400, 375, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -462,7 +484,7 @@ def downhill(space, screen, options, guess=False, impulse=None):
 	print("Downhill simulation not implemented yet.")
 	return
 
-def slowCollision(space, screen, options, guess=False, impulse=400):
+def slowCollision(space, screen, options, guess=False, impulse=380):
 	'''
 	Simulation of Cone travelling slower after being hit by Cylinder.
 	screen -- pygame display Surface
@@ -487,7 +509,7 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 	# add shapes
 	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(200,300, AP_MASS)
+	cone = agents.patient(300,300, AP_MASS)
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
@@ -524,18 +546,18 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 
 		# keep the Patient and Agent at their intended velocity for some duration
-		if (cone.body.velocity[0] < 200 and len(handlers.collision) == 0):
-			imp = 150 - cone.body.velocity[0]
+		if (cone.body.velocity[0] < 120 and len(handlers.collision) == 0):
+			imp = 120 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
-			imp = 450 - cylinder.body.velocity[0]
+			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((imp,0))
 			total.append(imp)
 
 		# when Agent and Patient collide, have Patient push back and Agent stop
 		if (len(handlers.collision) == 1 and count == 0):
 			count+=1
-			cone.body.apply_impulse_at_local_point((-50,0))
+			cone.body.apply_impulse_at_local_point((-180,0))
 			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
 			total.append(math.fabs(cylinder.body.velocity[0]))
 
@@ -573,7 +595,7 @@ def slowCollision(space, screen, options, guess=False, impulse=400):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def fastCollision(space, screen, options, guess=False, impulse=400):
+def fastCollision(space, screen, options, guess=False, impulse=600):
 	'''
 	Simulation of Cone travelling faster after being hit by Cylinder.
 	screen -- pygame display Surface
@@ -674,7 +696,7 @@ def fastCollision(space, screen, options, guess=False, impulse=400):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def dodge(space, screen, options, guess=False, impulse=150):
+def dodge(space, screen, options, guess=False, impulse=250):
 	'''
 	Simulation of Cylinder dodging Cone as it runs into Fireball.
 	space -- pymunk simulation space
@@ -730,16 +752,19 @@ def dodge(space, screen, options, guess=False, impulse=150):
 			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 
 		# keep Patient at it's intended velocity
-		if (cone.body.velocity[0] < 100):
-			imp = 100 - cone.body.velocity[0]
+		if (cone.body.velocity[0] < 200):
+			imp = 200 - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
 
 		# at t == 20, Agent dogdes Patient
 		time-=1
-		if (time == 20):
+		if (time == 40):
 			cylinder.body.apply_impulse_at_local_point((0,impulse))
 			total.append(impulse)
-		
+		if (time == 25):
+			imp = cylinder.body.velocity[1]
+			cylinder.body.apply_impulse_at_local_point((0,-1*imp))
+			total.append(math.fabs(imp))
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
 		yImpsAgent.append(cylinder.body.position[1])
@@ -767,7 +792,7 @@ def dodge(space, screen, options, guess=False, impulse=150):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def doubleTouch(space, screen, options, guess=False, impulse=170):
+def doubleTouch(space, screen, options, guess=False, impulse=450):
 	'''
 	Simulation of Cylinder tapping Cone twice into Fireball.
 	space -- pymunk simulation space
@@ -789,7 +814,7 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 	# add shapes
 	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(300, 300, AP_MASS)
+	cone = agents.patient(200, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(170, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
@@ -828,13 +853,13 @@ def doubleTouch(space, screen, options, guess=False, impulse=170):
 		# keep Agent at intended velocity
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(2*imp)
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(imp)
 		# when t == 10, the Agent collides with the Patient again
-		elif (time == 10):
-			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(2*imp)
+		elif (time == 25):
+			imp = impulse+200 - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(imp)
 		elif (len(handlers.collision) == 2 and cylinder.body.velocity[0] != 0):
 			cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
 			total.append(math.fabs(imp))
@@ -932,10 +957,10 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 
 		# keep Agent at intended velocity
-		if (cylinder.body.velocity[0] < impulse and time > 0):
-			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(math.fabs(2*imp))
+		if (time > 0):
+			imp = (impulse+impulse*(1/time)) - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(math.fabs(imp))
 
 		# when t == 0, have Agent stop 
 		if (time == 0):
@@ -974,7 +999,7 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def longPush(space, screen, options, guess=False, impulse=100):
+def longPush(space, screen, options, guess=False, impulse=150):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball over complete
 	distance.
@@ -994,9 +1019,9 @@ def longPush(space, screen, options, guess=False, impulse=100):
 	# add shapes
 	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)	
-	cone = agents.patient(200, 300, AP_MASS)
+	cone = agents.patient(150, 300, AP_MASS)
 	space.add(cone.body, cone.shape)	
-	cylinder = agents.agent(150, 300, AP_MASS)
+	cylinder = agents.agent(100, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -1030,10 +1055,14 @@ def longPush(space, screen, options, guess=False, impulse=100):
 			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 
 		# keep Agent at intended velocity
-		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
-			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(2*imp)
+		if ( len(handlers.collision) == 0):
+			imp = (impulse+impulse*(2*tick/183)) - cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(imp)
+		if (len(handlers.collision) == 1):
+			imp = cylinder.body.velocity[0]
+			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
+			total.append(math.fabs(imp))
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -1066,7 +1095,7 @@ def longPush(space, screen, options, guess=False, impulse=100):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def touch(space, screen, options, guess=False, impulse=250):
+def touch(space, screen, options, guess=False, impulse=400):
 	'''
 	Simulation of Cylinder touching Cone or tapping Cone into Fireball.
 	space -- pymunk simulation space
@@ -1087,14 +1116,13 @@ def touch(space, screen, options, guess=False, impulse=250):
 	# add shapes
 	ball = agents.fireball(500, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(200, 300, AP_MASS)
+	cone = agents.patient(300, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(170, 300, AP_MASS)
+	cylinder = agents.agent(270, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
-	logo_img = pygame.image.load("fireball.png")
-	p = ball.body.position
-	screen.blit(logo_img, p)
+	logo_img = pygame.image.load("Plots/fireball.png")
+	p = (ball.body.position[0]-30,ball.body.position[1]-35)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
 	xImpsAgent = []
@@ -1108,7 +1136,7 @@ def touch(space, screen, options, guess=False, impulse=250):
 	tick = 0
 
 	# run simulation
-	while running and tick<114:
+	while running and tick<118:
 		tick+=1
 
 		#allow user to exit
@@ -1129,8 +1157,8 @@ def touch(space, screen, options, guess=False, impulse=250):
 		# keep Agent at intended velocity
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((2*imp,0))
-			total.append(2*imp)
+			cylinder.body.apply_impulse_at_local_point((imp,0))
+			total.append(imp)
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -1166,7 +1194,7 @@ def touch(space, screen, options, guess=False, impulse=250):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
 
-def pushFireball(space, screen, options, guess=False, impulse=275):
+def pushFireball(space, screen, options, guess=False, impulse=350):
 	'''
 	Simulation of Cylinder pushing Fireball into Cone.
 	space -- pymunk simulation space
@@ -1204,7 +1232,7 @@ def pushFireball(space, screen, options, guess=False, impulse=275):
 	tick = 0
 
 	# run simulation
-	while running and tick<143:
+	while running and tick < 137:
 		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
