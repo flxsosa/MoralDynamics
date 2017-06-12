@@ -44,11 +44,9 @@ STAT_FRICTION = 0.7
 AP_MASS = 1
 F_MASS = 1
 
+# animations for patient-fireball collision
 ani = glob.glob("Sprites/fireball*.png")
 ani.sort()
-
-def update(scr, p, img):
-	scr.blit(glob[i], p)
 
 def shortDistance(space, screen, options, guess=False, impulse=400):
 	'''
@@ -95,7 +93,7 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 	total = []
 	running = True
 	tick = 0
-	# animation flags
+	# animation flag
 	x = 0
 	cnt = 0
 
@@ -177,7 +175,8 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def mediumDistance(space, screen, options, guess=False, impulse=400):
 	'''
@@ -286,7 +285,8 @@ def mediumDistance(space, screen, options, guess=False, impulse=400):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def longDistance(space, screen, options, guess=False, impulse=400):
 	'''
@@ -396,7 +396,8 @@ def longDistance(space, screen, options, guess=False, impulse=400):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def static(space, screen, options, guess=False, impulse=350):
 	'''
@@ -517,7 +518,8 @@ def static(space, screen, options, guess=False, impulse=350):
 
 	# output to user and return tuple
 	print("Total impulse: ", sum(total), "Tick ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def uphill(space, screen, options, guess=False, impulse=None):
 	print("Uphill simulation not implemented yet.")
@@ -643,7 +645,8 @@ def slowCollision(space, screen, options, guess=False, impulse=380):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def fastCollision(space, screen, options, guess=False, impulse=600):
 	'''
@@ -751,7 +754,8 @@ def fastCollision(space, screen, options, guess=False, impulse=600):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def dodge(space, screen, options, guess=False, impulse=250):
 	'''
@@ -854,7 +858,8 @@ def dodge(space, screen, options, guess=False, impulse=250):
 		
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def doubleTouch(space, screen, options, guess=False, impulse=450):
 	'''
@@ -967,7 +972,8 @@ def doubleTouch(space, screen, options, guess=False, impulse=450):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def mediumPush(space, screen, options, guess=False, impulse=150):
 	'''
@@ -1075,7 +1081,8 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def longPush(space, screen, options, guess=False, impulse=150):
 	'''
@@ -1178,7 +1185,8 @@ def longPush(space, screen, options, guess=False, impulse=150):
 	except:
 		print "Exited before collision."
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def touch(space, screen, options, guess=False, impulse=400):
 	'''
@@ -1277,7 +1285,8 @@ def touch(space, screen, options, guess=False, impulse=400):
 		print "Exited before collision."
 
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
 
 def pushFireball(space, screen, options, guess=False, impulse=350):
 	'''
@@ -1382,4 +1391,5 @@ def pushFireball(space, screen, options, guess=False, impulse=350):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, xImpsFireball, yImpsFireball)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
