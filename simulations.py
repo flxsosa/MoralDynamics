@@ -979,6 +979,12 @@ def dodge(space, screen, options, guess=False, impulse=250):
 		
 		# update pymunk space
 		space.step(1/50.0)
+	
+	# remove value from collision list and print out resulting effort
+	try:
+		handlers.collision = []
+	except:
+		print "Exited before collision."
 		
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
