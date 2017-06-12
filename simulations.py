@@ -93,7 +93,8 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 	total = []
 	running = True
 	tick = 0
-	# animation flag
+
+	# animation flag and counter
 	x = 0
 	cnt = 0
 
@@ -124,7 +125,7 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 			imp = impulse - cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((imp,0))
 			total.append(imp)
-		if (len(handlers.collision) == 1):
+		elif (len(handlers.collision) == 1):
 			imp = cylinder.body.velocity[0]
 			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
 			total.append(math.fabs(imp))
@@ -140,15 +141,14 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 		# set clock
 		clock = pygame.time.Clock()
 		
-		# setup display and run sim based on whether it's truth or guess
+		# setup display and run sim based on whether it's truth or guess	
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
 
-			# animation sequence
+			# conditional animation sequence
 			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
 				img = pygame.image.load(ani[cnt])
 				screen.blit(img, pCone)
@@ -161,11 +161,14 @@ def shortDistance(space, screen, options, guess=False, impulse=400):
 				screen.blit(img, pCone)
 				cnt -= 1
 
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
 		
 	# remove value from collision list
 	try:
@@ -221,6 +224,10 @@ def mediumDistance(space, screen, options, guess=False, impulse=400):
 	running = True
 	tick = 0
 
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
 	# run simulation
 	while running and tick<115:
 		# update fireball sprite according to ball's position
@@ -265,16 +272,32 @@ def mediumDistance(space, screen, options, guess=False, impulse=400):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
 		
 
 	# remove value from collision list
@@ -331,6 +354,10 @@ def longDistance(space, screen, options, guess=False, impulse=400):
 	running = True
 	tick = 0
 
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
 	# run simulation
 	while running and tick < 133:
 		# update fireball sprite according to ball's position
@@ -376,16 +403,32 @@ def longDistance(space, screen, options, guess=False, impulse=400):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
 		
 
 	# remove value from collision list and print out resulting effort
@@ -445,6 +488,10 @@ def static(space, screen, options, guess=False, impulse=350):
 	tick = 0
 	count = 0
 
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
 	# run simulation
 	while running and tick < 140:
 		# update fireball sprite according to ball's position
@@ -497,16 +544,32 @@ def static(space, screen, options, guess=False, impulse=350):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
 		
 
 	# remove value from collision list and print out resulting effort
@@ -574,6 +637,10 @@ def slowCollision(space, screen, options, guess=False, impulse=380):
 	tick = 0
 	count = 0
 
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
 	# run simulation
 	while running and tick<149:
 		# update fireball sprite according to ball's position
@@ -625,16 +692,32 @@ def slowCollision(space, screen, options, guess=False, impulse=380):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
 		
 	# remove value from collision list and print out resulting effort
 	try:
@@ -692,6 +775,10 @@ def fastCollision(space, screen, options, guess=False, impulse=600):
 	running = True
 	tick = 0
 
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
 	# run simulation
 	while running and tick<154:
 		# update fireball sprite according to ball's position
@@ -735,16 +822,32 @@ def fastCollision(space, screen, options, guess=False, impulse=600):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
 		
 	# remove value from collision list and print out resulting effort
 	try:
@@ -771,6 +874,7 @@ def dodge(space, screen, options, guess=False, impulse=250):
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
 	ch0.data["surface"] = screen
+	ch0.begin = handlers.rem2
 	ch0.post_solve = handlers.rem0
 	space.damping = 0.2
 
@@ -796,6 +900,10 @@ def dodge(space, screen, options, guess=False, impulse=250):
 	running = True
 	tick = 0
 	time = 80
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
 
 	# run simulation
 	while running and tick<186:
@@ -845,16 +953,32 @@ def dodge(space, screen, options, guess=False, impulse=250):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
+		# update pymunk space
+		space.step(1/50.0)
 		
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
@@ -902,6 +1026,10 @@ def doubleTouch(space, screen, options, guess=False, impulse=450):
 	running = True
 	tick = 0
 	time = 50
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
 
 	# run simulation
 	while running and tick<137:
@@ -952,17 +1080,32 @@ def doubleTouch(space, screen, options, guess=False, impulse=450):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
 		
+		# update pymunk space
+		space.step(1/50.0)
 
 	# remove value from collision list and print out resulting effort
 	try:
@@ -990,6 +1133,7 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
 	ch0.data["surface"] = screen
+	ch0.begin = handlers.rem2
 	ch0.post_solve = handlers.rem0
 	space.damping = DYN_FRICTION
 
@@ -1015,6 +1159,10 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 	running = True
 	tick = 0
 	time = 70
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
 
 	# run simulation
 	while running and tick<144:
@@ -1062,16 +1210,32 @@ def mediumPush(space, screen, options, guess=False, impulse=150):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
+		# update pymunk space
+		space.step(1/50.0)
 		
 	# handlers.remove value from collision list and print out resulting effort
 	try:
@@ -1123,6 +1287,10 @@ def longPush(space, screen, options, guess=False, impulse=150):
 	running = True
 	tick = 0
 
+	# animation flag and counter 
+	x = 0
+	cnt = 0
+
 	# run simulation
 	while running and tick<183:
 		# update fireball sprite according to ball's position
@@ -1168,16 +1336,32 @@ def longPush(space, screen, options, guess=False, impulse=150):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
+		# update pymunk space
+		space.step(1/50.0)
 		
 	# remove value from collision list and print out resulting effort
 	try:
@@ -1214,7 +1398,7 @@ def touch(space, screen, options, guess=False, impulse=400):
 	cylinder = agents.agent(270, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 
-	logo_img = pygame.image.load("Plots/fireball.png")
+	fireSprite = pygame.image.load("Plots/fireball.png")
 	p = (ball.body.position[0]-30,ball.body.position[1]-35)
 
 	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
@@ -1228,8 +1412,15 @@ def touch(space, screen, options, guess=False, impulse=400):
 	running = True
 	tick = 0
 
+	# animation flag and counter
+	cnt = 0
+	x = 0
+
 	# run simulation
 	while running and tick<118:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
 		tick+=1
 
 		#allow user to exit
@@ -1266,16 +1457,32 @@ def touch(space, screen, options, guess=False, impulse=400):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
-			screen.blit(logo_img, p)
+			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+		
+		# update pymunk space
+		space.step(1/50.0)
 		
 
 	# remove value from collision list and print out resulting effort
@@ -1328,6 +1535,10 @@ def pushFireball(space, screen, options, guess=False, impulse=350):
 	running = True
 	tick = 0
 
+	# animation flag and counter
+	cnt = 0
+	x = 0
+
 	# run simulation
 	while running and tick < 137:
 		# update fireball sprite according to ball's position
@@ -1371,16 +1582,32 @@ def pushFireball(space, screen, options, guess=False, impulse=350):
 
 		# setup display and run sim based on whether it's truth or guess
 		if(not guess):
+			# draw screen
 			screen.fill((255,255,255))
-		space.step(1/50.0)
-		if(not guess):
 			space.debug_draw(options)
 			screen.blit(fireSprite, pBall)
+
+			# conditional animation sequence
+			if (len(handlers.collision) == 1 and cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (len(handlers.collision) == 1 and cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+
+			# adjust pygame screen and move clock forward
 			pygame.display.flip()
-		if(not guess):
 			clock.tick(50)
 		else:
 			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
 		
 
 	# remove value from collision list and print out resulting effort
@@ -1393,3 +1620,120 @@ def pushFireball(space, screen, options, guess=False, impulse=350):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
+
+def test(space, screen, options, guess=False, impulse=100):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball from a short distance
+	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	# if it's a truth sim, we use a display
+	if(not guess):
+		pygame.display.set_caption("Simulation 1: Short Distance")
+	
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(0, 1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+
+	DYN_FRICTION = 0.5
+	STAT_FRICTION = None
+	# dynamic friction
+	space.damping = DYN_FRICTION
+	
+	# add shapes
+	ball = agents.fireball(500, 300, F_MASS)
+	#space.add(ball.body, ball.shape)
+	cone = agents.patient(450, 300, AP_MASS)
+	#space.add(cone.body, cone.shape)
+	cylinder = agents.agent(300, 300, AP_MASS)
+	space.add(cylinder.body, cylinder.shape)
+	
+	# load fireball sprite into simulation
+	fireSprite = pygame.image.load("Plots/fireball.png")
+	
+	# lists for impulses per timestep, total impulses, running flag, and ticks
+	total = []
+	running = True
+	tick = 0
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
+	dist = []
+	cylinder.body.apply_impulse_at_local_point((impulse,0))
+	total.append(impulse)
+	# run simulation
+	while running and tick < 200:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
+		tick += 1
+
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				running = False
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+
+		if STAT_FRICTION != None:
+		# static friction for all bodies
+			if (cylinder.body.velocity == (0,0)):
+				cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
+			if (cone.body.velocity == (0,0)):
+				cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
+			if (ball.body.velocity == (0,0)):
+				ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
+		
+		print "Velocity: ", cylinder.body.velocity[0]#, "Time: ", tick
+		print "Distance: ", cylinder.body.position[0] - 300
+		print "Force: ", cylinder.body.force
+
+		dist.append(cylinder.body.velocity[0]/50.0)
+
+		# set clock
+		clock = pygame.time.Clock()
+		
+		# setup display and run sim based on whether it's truth or guess	
+		if(not guess):
+			# draw screen
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			screen.blit(fireSprite, pBall)
+
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+		else:
+			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
+	
+	# remove value from collision list
+	try:
+		handlers.collision = []
+	except:
+		print "Exited before collision."
+
+	# output to user and return tuple
+	print "Total impulse: ", sum(total)
+	print sum(dist)
+
+def expected_distance(damping, velocity):
+	dist = []
+	time = 5
+	while (velocity > 6):
+		dist.append(velocity/50.0)
+		print "Velocity: ", velocity
+		velocity -= velocity*(1-damping)/50.0
+		print "Distance: ", sum(dist)
+		time -= 1/50.0
+
+	print "Expected Distance: ", sum(dist)
