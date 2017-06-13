@@ -40,7 +40,7 @@ def main():
 			space = pymunk.Space()
 
 			# create a screen of 600x600 pixels
-			screen = pygame.display.set_mode((600,600))	
+			screen = pygame.display.set_mode((1000,600))	
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
 
 			if (choice == '1'):
