@@ -39,7 +39,7 @@ import glob
 
 # MODEL PARAMETERS
 
-DYN_FRICTION = 0.9
+DYN_FRICTION = 0.6
 STAT_FRICTION = 0.1
 AP_MASS = 1
 F_MASS = 1
@@ -126,7 +126,7 @@ def shortDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	clock = pygame.time.Clock()
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -185,35 +185,37 @@ def shortDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)
-
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
-
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
+	if not guess:
+		# patient collision
+		for i in range(25):
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
 			screen.blit(fireSprite, pBall)
 			screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+			# conditional animation sequence
+			if (cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+			else:
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -223,8 +225,9 @@ def shortDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	
+	return sum(total)
+		
 
 def mediumDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -271,7 +274,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -331,35 +334,37 @@ def mediumDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
-
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
+	if not guess:
+		# patient collision
+		for i in range(25):
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
 			screen.blit(fireSprite, pBall)
 			screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+			# conditional animation sequence
+			if (cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+			else:
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -369,8 +374,8 @@ def mediumDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def longDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -417,7 +422,7 @@ def longDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -478,35 +483,37 @@ def longDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
-
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
+	if not guess:
+		# patient collision
+		for i in range(25):
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
 			screen.blit(fireSprite, pBall)
 			screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+			# conditional animation sequence
+			if (cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+			else:
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -516,8 +523,8 @@ def longDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -565,7 +572,7 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and tick < 140:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -634,35 +641,37 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
-
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
+	if not guess:
+		# patient collision
+		for i in range(25):
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
 			screen.blit(fireSprite, pBall)
 			screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+			# conditional animation sequence
+			if (cnt < 12 and x == 0):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt += 1
+				if cnt == 12:
+					x = 1
+					cnt = 11
+			elif (cnt >= 0 and x == 1):
+				img = pygame.image.load(ani[cnt])
+				screen.blit(img, pCone)
+				cnt -= 1
+			else:
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -673,16 +682,13 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print("Total impulse: ", sum(total), "Tick ", tick)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
-
+	return sum(total)
+		
 def uphill(space, screen, options, guess=False, impulse=None):
-	print("Uphill simulation not implemented yet.")
-	return
+	return 0
 
 def downhill(space, screen, options, guess=False, impulse=None):
-	print("Downhill simulation not implemented yet.")
-	return
+	return 0
 
 def slowCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -700,12 +706,12 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	ch1 = space.add_collision_handler(0,1)
 	ch1.data["surface"] = screen
 	ch1.begin = handlers.rem2
-	space.damping = 0.2
+	space.damping = DYN_FRICTION
 
 	# add shapes
 	ball = agents.fireball(900, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(605,300, AP_MASS)
+	cone = agents.patient(600,300, AP_MASS)
 	space.add(cone.body, cone.shape)
 	cylinder = agents.agent(400, 300, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
@@ -727,7 +733,7 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -786,35 +792,37 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-		
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
+		if not guess:	
+			# patient collision
+			for i in range(25):
+				screen.fill((255,255,255))
+				space.debug_draw(options)
+				setBackground(screen)
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, pBall)
-			screen.blit(agentSprite, pAgent)
+				# conditional animation sequence
+				if (cnt < 12 and x == 0):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt += 1
+					if cnt == 12:
+						x = 1
+						cnt = 11
+				elif (cnt >= 0 and x == 1):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt -= 1
+				else:
+					screen.blit(fireSprite, pBall)
+					screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+				# adjust pygame screen and move clock forward
+				pygame.display.flip()
+				clock.tick(50)
 
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -824,8 +832,8 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -869,7 +877,7 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -925,35 +933,37 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-		
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
+		if not guess:	
+		# patient collision
+			for i in range(25):
+				screen.fill((255,255,255))
+				space.debug_draw(options)
+				setBackground(screen)
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, pBall)
-			screen.blit(agentSprite, pAgent)
+				# conditional animation sequence
+				if (cnt < 12 and x == 0):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt += 1
+					if cnt == 12:
+						x = 1
+						cnt = 11
+				elif (cnt >= 0 and x == 1):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt -= 1
+				else:
+					screen.blit(fireSprite, pBall)
+					screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+				# adjust pygame screen and move clock forward
+				pygame.display.flip()
+				clock.tick(50)
 
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -963,8 +973,8 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -1009,7 +1019,7 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -1067,35 +1077,37 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-		
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
+		if not guess:	
+			# patient collision
+			for i in range(25):
+				screen.fill((255,255,255))
+				space.debug_draw(options)
+				setBackground(screen)
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, pBall)
-			screen.blit(agentSprite, pAgent)
+				# conditional animation sequence
+				if (cnt < 12 and x == 0):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt += 1
+					if cnt == 12:
+						x = 1
+						cnt = 11
+				elif (cnt >= 0 and x == 1):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt -= 1
+				else:
+					screen.blit(fireSprite, pBall)
+					screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+				# adjust pygame screen and move clock forward
+				pygame.display.flip()
+				clock.tick(50)
 
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1105,8 +1117,8 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def doubleTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -1152,7 +1164,7 @@ def doubleTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -1217,35 +1229,37 @@ def doubleTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-		
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
+		if not guess:	
+			# patient collision
+			for i in range(25):
+				screen.fill((255,255,255))
+				space.debug_draw(options)
+				setBackground(screen)
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, pBall)
-			screen.blit(agentSprite, pAgent)
+				# conditional animation sequence
+				if (cnt < 12 and x == 0):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt += 1
+					if cnt == 12:
+						x = 1
+						cnt = 11
+				elif (cnt >= 0 and x == 1):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt -= 1
+				else:
+					screen.blit(fireSprite, pBall)
+					screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+				# adjust pygame screen and move clock forward
+				pygame.display.flip()
+				clock.tick(50)
 
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1255,8 +1269,8 @@ def doubleTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -1307,7 +1321,7 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -1361,35 +1375,37 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-		
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
+		if not guess:	
+			# patient collision
+			for i in range(25):
+				screen.fill((255,255,255))
+				space.debug_draw(options)
+				setBackground(screen)
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, pBall)
-			screen.blit(agentSprite, pAgent)
+				# conditional animation sequence
+				if (cnt < 12 and x == 0):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt += 1
+					if cnt == 12:
+						x = 1
+						cnt = 11
+				elif (cnt >= 0 and x == 1):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt -= 1
+				else:
+					screen.blit(fireSprite, pBall)
+					screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+				# adjust pygame screen and move clock forward
+				pygame.display.flip()
+				clock.tick(50)
 
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1399,8 +1415,8 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -1444,7 +1460,7 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -1498,35 +1514,37 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-		
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
+		if not guess:	
+			# patient collision
+			for i in range(25):
+				screen.fill((255,255,255))
+				space.debug_draw(options)
+				setBackground(screen)
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, pBall)
-			screen.blit(agentSprite, pAgent)
+				# conditional animation sequence
+				if (cnt < 12 and x == 0):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt += 1
+					if cnt == 12:
+						x = 1
+						cnt = 11
+				elif (cnt >= 0 and x == 1):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt -= 1
+				else:
+					screen.blit(fireSprite, pBall)
+					screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+				# adjust pygame screen and move clock forward
+				pygame.display.flip()
+				clock.tick(50)
 
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1534,8 +1552,8 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	except:
 		print "Exited before collision."
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -1579,7 +1597,7 @@ def touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -1628,35 +1646,37 @@ def touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-		
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
+		if not guess:	
+			# patient collision
+			for i in range(25):
+				screen.fill((255,255,255))
+				space.debug_draw(options)
+				setBackground(screen)
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, pBall)
-			screen.blit(agentSprite, pAgent)
+				# conditional animation sequence
+				if (cnt < 12 and x == 0):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt += 1
+					if cnt == 12:
+						x = 1
+						cnt = 11
+				elif (cnt >= 0 and x == 1):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt -= 1
+				else:
+					screen.blit(fireSprite, pBall)
+					screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+				# adjust pygame screen and move clock forward
+				pygame.display.flip()
+				clock.tick(50)
 
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1665,8 +1685,8 @@ def touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		print "Exited before collision."
 
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
 
 def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -1711,7 +1731,7 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 
 	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
+	while running and len(handlers.PF_COLLISION) == 0 and tick < 500:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-40)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
@@ -1765,35 +1785,37 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# update pymunk space
 		space.step(1/50.0)	
-		
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		setBackground(screen)
-		screen.blit(fireSprite, pBall)
-		screen.blit(agentSprite, pAgent)
+		if not guess:	
+			# patient collision
+			for i in range(25):
+				screen.fill((255,255,255))
+				space.debug_draw(options)
+				setBackground(screen)
+				screen.blit(fireSprite, pBall)
+				screen.blit(agentSprite, pAgent)
 
-		# conditional animation sequence
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, pCone)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, pBall)
-			screen.blit(agentSprite, pAgent)
+				# conditional animation sequence
+				if (cnt < 12 and x == 0):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt += 1
+					if cnt == 12:
+						x = 1
+						cnt = 11
+				elif (cnt >= 0 and x == 1):
+					img = pygame.image.load(ani[cnt])
+					screen.blit(img, pCone)
+					cnt -= 1
+				else:
+					screen.blit(fireSprite, pBall)
+					screen.blit(agentSprite, pAgent)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
+				# adjust pygame screen and move clock forward
+				pygame.display.flip()
+				clock.tick(50)
 
+	if len(handlers.PF_COLLISION) == 0:
+		return None
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1803,5 +1825,5 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# output to user and return tuple
 	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
+	return sum(total)
+		
