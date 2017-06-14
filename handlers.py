@@ -9,6 +9,7 @@ import pymunk
 from pygame.locals import *
 
 collision = []
+PF_COLLISION = []
 totalImpulse = []
 
 def rem0(arbiter, space, data):
@@ -18,6 +19,7 @@ def rem0(arbiter, space, data):
 	'''
 	space.remove(space.shapes[1])
 	running = False
+	PF_COLLISION.append(1)
 	pygame.time.set_timer(QUIT, 1000)
 	return True
 
@@ -37,6 +39,14 @@ def rem2(arbiter, space, data):
 	to signify a collision has begun.
 	'''
 	collision.append(1)
+	return True
+
+def rem4(arbiter, space, data):
+	'''
+	Used with begin method of CollisionHandler. Adds element to collision list
+	to signify a collision has begun.
+	'''
+	PF_COLLISION.append(1)
 	return True
 
 def rem3(arbiter, space, data):
