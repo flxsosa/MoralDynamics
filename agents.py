@@ -47,7 +47,7 @@ class fireball:
 	'''
 	A class for Fireballs in Moral Dynamics.
 	'''
-	def __init__(self, x, y, mass=1, rad=15):
+	def __init__(self, x, y, mass=1, rad=25):
 		'''
 		x -- x coordinate in pymunk space
 		y -- y coordinate in pymunk space
