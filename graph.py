@@ -37,11 +37,9 @@ def compareTotalImps():
 		# initialize pygame and create a space to contain the simulation
 		pygame.init()
 		space = pymunk.Space()
-
 		# we are not viewing the sims
 		screen = None
 		drawOptions = None
-
 		# append total impulse applied to Agent for given simulation
 		impulses.append(sim(space, screen, drawOptions, True))
 		pygame.quit()
@@ -55,13 +53,11 @@ def compareTotalImps():
 	plt.savefig('Dyn: '+ str(DYN) + '.png')
 	plt.show()
 
-def compareKinematics(DYN):
+def compareKinematics(DYN, flag=True):
 	'''
 	Plots two bar plots. One for Moral Kinematics data and one for
 	Moral Dynamics data.
 	'''
-	#DYN = 0.1
-	#STAT = 0.7
 
 	impulses = []
 	# agreements for each comparison in Moral Kinematics
@@ -80,7 +76,7 @@ def compareKinematics(DYN):
 		screen = None
 		drawOptions = None
 		# append total impulse applied to Agent for given simulation
-		impulses.append(sim(space, screen, drawOptions, True))
+		impulses.append(sim(space, screen, drawOptions, True, DYN))
 		pygame.quit()
 
 	if None in impulses:
@@ -163,21 +159,42 @@ def modelFit():
 				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
 
 	values = {"Value" : "DYN"}
-	for dyn in range(1,11):
 
-		dynamics = calcProb(dyn*0.1)
-		if not None in dynamics:
-			print "Dynamic Friction: ", dyn*0.1
-			values[dyn*0.1] = math.sqrt((sum(kinematics)-sum(dynamics))**2)
-			print math.sqrt((sum(kinematics)-sum(dynamics))**2)
+	for dyn in range(30,101):
+
+		impulses = []
+		for sim in simulations:
+			# initialize pygame and create a space to contain the simulation
+			pygame.init()
+			space = pymunk.Space()
+			# we are not viewing the sims
+			screen = None
+			drawOptions = None
+			# append total impulse applied to Agent for given simulation
+			impulses.append(sim(space, screen, drawOptions, True, dyn*0.01))
+			pygame.quit()
+
+		if not None in impulses:
+			dynamics = calcProb(impulses)
+			print "=============================="
+			print "Success at Dynamic Friction: ", dyn*0.1
+			values[dyn*0.1] = rmse(kinematics, dynamics)
+			print "=============================="
 		else:
-			print "Fail"
+			print "=============================="
+			print "Fail at Dynamic Friction: ", dyn*0.1
+			print "=============================="
 
-	#print min(values, key=values.get)
+	print min(values, key=values.get)
 
 def rmse(x, y):
-	a = []
-	for i in range(len(x)):
-		a.append((x[i]- y[i])**2)
+	'''
+	Root mean squared error between two lists of numbers.
+	'''
+	z = []
 
-	return math.sqrt(sum(a)/(len(x)*2+0.0))
+	for i in range(len(x)):
+		z.append((x[i] - y[i])**2)
+
+	square = sum(z)/(len(x)+0.0)
+	return square**0.5

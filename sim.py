@@ -39,7 +39,7 @@ import glob
 
 # MODEL PARAMETERS
 
-DYN_FRICTION = 0.6
+DYN = 0.6
 STAT_FRICTION = 0.1
 AP_MASS = 1
 F_MASS = 1
@@ -76,7 +76,7 @@ def setBackground(screen):
 	screen.blit(BACKGROUND_S, (600,200))
 	screen.blit(BACKGROUND_S, (800,200))
 
-def shortDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def shortDistance(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
 	away. Originally to be compared with longDistanceSim in Moral Kinematics.
@@ -228,8 +228,7 @@ def shortDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	
 	return sum(total)
 		
-
-def mediumDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def mediumDistance(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a medium distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -376,8 +375,7 @@ def mediumDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick ", tick
 	return sum(total)
 		
-
-def longDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def longDistance(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -525,8 +523,7 @@ def longDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick ", tick
 	return sum(total)
 		
-
-def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def static(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cone bouncing off of a static Cylinder into a Fireball.
 	Originally to be compared with shortDistance in Moral Kinematics.
@@ -678,10 +675,10 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		handlers.PF_COLLISION = []
 		handlers.totalImpulse = []
 	except:
-		print("Exited before collision.")
+		print "Exited before collision."
 
 	# output to user and return tuple
-	print("Total impulse: ", sum(total), "Tick ", tick)
+	print "Total impulse: ", sum(total), "Tick ", tick
 	return sum(total)
 		
 def uphill(space, screen, options, guess=False, impulse=None):
@@ -690,7 +687,7 @@ def uphill(space, screen, options, guess=False, impulse=None):
 def downhill(space, screen, options, guess=False, impulse=None):
 	return 0
 
-def slowCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def slowCollision(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cone travelling slower after being hit by Cylinder.
 	screen -- pygame display Surface
@@ -834,8 +831,7 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return sum(total)
 		
-
-def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def fastCollision(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cone travelling faster after being hit by Cylinder.
 	screen -- pygame display Surface
@@ -975,8 +971,7 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return sum(total)
 		
-
-def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def dodge(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder dodging Cone as it runs into Fireball.
 	space -- pymunk simulation space
@@ -1119,8 +1114,7 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return sum(total)
 		
-
-def doubleTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def doubleTouch(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder tapping Cone twice into Fireball.
 	space -- pymunk simulation space
@@ -1271,8 +1265,7 @@ def doubleTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return sum(total)
 		
-
-def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def mediumPush(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball over a medium distance
 	before letting go.
@@ -1417,8 +1410,7 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return sum(total)
 		
-
-def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def longPush(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball over complete
 	distance.
@@ -1554,8 +1546,7 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return sum(total)
 		
-
-def touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def touch(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder touching Cone or tapping Cone into Fireball.
 	space -- pymunk simulation space
@@ -1687,8 +1678,7 @@ def touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print "Total impulse: ", sum(total), "Tick: ", tick
 	return sum(total)
 		
-
-def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def pushFireball(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Fireball into Cone.
 	space -- pymunk simulation space
