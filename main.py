@@ -73,6 +73,16 @@ def main():
 				simulations.pushFireball(space, screen, drawOptions)
 			elif (choice == 'test'):
 				simulations.test(space, screen, drawOptions)
+			elif (choice == '15'):
+				simulations.sim1(space, screen, drawOptions)
+			elif (choice == '16'):
+				simulations.sim2(space, screen, drawOptions)
+			elif (choice == '17'):
+				simulations.agentPush(space, screen, drawOptions)
+			elif (choice == '18'):
+				simulations.agentTap(space, screen, drawOptions)
+			elif (choice == '19'):
+				simulations.noTouch(space, screen, drawOptions)
 			else:
 				print("Must be an integer [0-14]")
 			pygame.quit()
