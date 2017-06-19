@@ -144,14 +144,6 @@ def shortDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-
-		# static friction for all bodies
-		if (cylinder.body.velocity[0] == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 		
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
@@ -288,14 +280,6 @@ def mediumDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-
-		# static friction for all bodies
-		if (cylinder.body.velocity == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
@@ -2430,14 +2414,6 @@ def agentTap(space, screen, options, guess=False, impulse=AGENT_WALKING):
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-
-		# static friction for all bodies
-		if (cylinder.body.velocity[0] == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 		
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
@@ -2583,14 +2559,6 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
-		# static friction for all bodies
-		if (cylinder.body.velocity[0] == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
-		
 		# keep the Agent at it's intended velocity for some duration
 		if (cone.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cone.body.velocity[0]
