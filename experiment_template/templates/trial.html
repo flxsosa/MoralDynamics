@@ -3,17 +3,49 @@
 		<h1>Instructions</h1>
 		<div class="blue">
 				<p>In this experiment, you will be shown clips of creatures from the planet Color-Gaya interacting and asked to judge their behavior.</p>
-				<p>The image below shows you the three different species of creatures you will see. The next page will explain to you how they behave and the planet of Color-Gaya. After that, you will be shown the clips and asked to make judgements.
+				<p>The image below shows you part of what a clip may look like. The next page will explain to you how these creatures behave and the planet of Color-Gaya. After that, you will be shown the clips and asked to make judgements.
 				</p>
-				<img src="static/images/example_stimulus.jpg" alt="Example" style="width:400px;height:300px">
-				<p> All of the clips feature the three types of creatures interacting. Though, the creatures may look the same in every clip, they are different creatures each clip. The reason they look the same is they are members of the same species.
+				<img src="static/images/example_stim.png" alt="Example" style="width:865px">
+				<p> All of the clips feature the two types of creatures interacting and one Red Orb. Though, they all may look the same in every clip, they are different creatures each clip. The reason they look the same is they are members of the same species.
 				</p>
-				<p>You will watch each clip <b>twice</b> before making your judgement on the behavior of the creatures. </p>
+				<p>You will watch each clip <b>twice</b> before making your judgement on the behavior of the creatures.</p>
 				<p> Please click <b>Start</b> to begin the experiment.
 				</p>
 		</div>
 		<div class="continue">
 				<button type="button" class="next">Start</button>
+		</div>
+</div>
+<!--Intro-->
+<div class="slide" id="intro">
+		<div id="progress">
+				<div id="progress-text">Progress</div>
+				<div id="indicator-container">
+						<div id="indicator-outer">
+								<div id="indicator-stage"></div>
+						</div>
+				</div>
+				<div class="spacer"></div>
+		</div>
+		<br />
+		<hr />
+		<div id="stim">
+				<div id="prompt-text"> To what extent do you think the different statements on the right are good descriptions of what happened in the video clip?</div>
+				</br>
+				<div class="container">
+						<div class="slide_container">
+								<div class="continue">
+										<button type="button" class="next" id="continue">Next Slide</button>
+								</div>
+						</div>
+				</div>
+				<div class="spacer"></div>
+				<p class="stim_text"> <b>Note</b>: The video is played in a loop. If it stops playing, just click the 'reload video' button. </p>
+		</div>
+		<div class="spacer"></div>
+		<hr />
+		<div class="continue">
+				<button type="button" id="trial_next" class="next">Continue</button>
 		</div>
 </div>
 <!-- Trial -->

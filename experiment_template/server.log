@@ -950,3 +950,735 @@ TemplateNotFound: demographics.html
 [2017-06-21 22:24:15 +0000] [6663] [INFO] Worker exiting (pid: 6663)
 [2017-06-21 22:24:15 +0000] [7898] [INFO] Parent changed, shutting down: <Worker 7898>
 [2017-06-21 22:24:15 +0000] [7898] [INFO] Worker exiting (pid: 7898)
+[2017-06-22 16:07:10 +0000] [3530] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f0d89235de8>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f0d89235b18>
+  pre_fork: <function pre_fork at 0x7f0d89235c80>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 17
+  proc_name: psiturk_experiment_server
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7f0d892359b0>
+  pre_exec: <function pre_exec at 0x7f0d8923d410>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7f0d89235f50>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7f0d8928d410>
+  config: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f0d8923d578>
+  post_request: <function post_request at 0x7f0d8923d668>
+  user: 1000
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f0d8923d140>
+  threads: 1
+  max_requests: 0
+  limit_request_line: 0
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7f0d8923d7d0>
+  chdir: /home/felix/GitHub/MoralDynamics/experiment_template
+  paste: None
+  default_proc_name: gunicorn
+  errorlog: server.log
+  loglevel: debug
+  logconfig: None
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7f0d89235848>
+  worker_abort: <function worker_abort at 0x7f0d8923d2a8>
+  bind: ['0.0.0.0:22362']
+  raw_env: []
+  reload: False
+  check_config: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f0d8923d938>
+  timeout: 30
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+  statsd_prefix: 
+[2017-06-22 16:07:10 +0000] [3530] [INFO] Starting gunicorn 19.4.5
+[2017-06-22 16:07:10 +0000] [3530] [DEBUG] Arbiter booted
+[2017-06-22 16:07:10 +0000] [3530] [INFO] Listening at: http://0.0.0.0:22362 (3530)
+[2017-06-22 16:07:10 +0000] [3530] [INFO] Using worker: sync
+[2017-06-22 16:07:10 +0000] [3536] [INFO] Booting worker with pid: 3536
+[2017-06-22 16:07:10 +0000] [3537] [INFO] Booting worker with pid: 3537
+[2017-06-22 16:07:10 +0000] [3540] [INFO] Booting worker with pid: 3540
+[2017-06-22 16:07:10 +0000] [3543] [INFO] Booting worker with pid: 3543
+2017-06-22 16:07:10,630 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:10,630 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:10,631 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:10 +0000] [3546] [INFO] Booting worker with pid: 3546
+2017-06-22 16:07:10,675 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:10,676 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:10,677 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:07:10,702 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:10,702 Hmm... it seems no custom code (custom.py) associated                         with this project.
+[2017-06-22 16:07:10 +0000] [3549] [INFO] Booting worker with pid: 3549
+2017-06-22 16:07:10,703 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:10 +0000] [3550] [INFO] Booting worker with pid: 3550
+2017-06-22 16:07:10,752 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:10,752 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:10,753 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:10 +0000] [3553] [INFO] Booting worker with pid: 3553
+2017-06-22 16:07:10,811 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:10,812 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:10,813 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:10 +0000] [3560] [INFO] Booting worker with pid: 3560
+2017-06-22 16:07:10,869 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:10,869 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:10,870 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:07:10,875 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:10,875 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:10,877 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:10 +0000] [3561] [INFO] Booting worker with pid: 3561
+2017-06-22 16:07:10,919 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:10,920 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:10,921 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:10 +0000] [3566] [INFO] Booting worker with pid: 3566
+2017-06-22 16:07:11,012 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,013 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,014 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:07:11,070 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,071 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,072 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:11 +0000] [3569] [INFO] Booting worker with pid: 3569
+2017-06-22 16:07:11,146 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,147 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,148 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:11 +0000] [3572] [INFO] Booting worker with pid: 3572
+[2017-06-22 16:07:11 +0000] [3573] [INFO] Booting worker with pid: 3573
+[2017-06-22 16:07:11 +0000] [3574] [INFO] Booting worker with pid: 3574
+2017-06-22 16:07:11,239 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,239 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,240 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:11 +0000] [3579] [INFO] Booting worker with pid: 3579
+[2017-06-22 16:07:11 +0000] [3580] [INFO] Booting worker with pid: 3580
+[2017-06-22 16:07:11 +0000] [3530] [DEBUG] 17 workers
+2017-06-22 16:07:11,346 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,347 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,348 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:07:11,350 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,350 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,351 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:07:11,413 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,414 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,415 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:07:11,449 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,449 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,450 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:07:11,490 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:07:11,490 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:07:11,491 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:07:12 +0000] [3553] [DEBUG] Closing connection. 
+[2017-06-22 16:07:13 +0000] [3546] [DEBUG] Closing connection. 
+[2017-06-22 16:07:13 +0000] [3553] [DEBUG] Closing connection. 
+[2017-06-22 16:07:13 +0000] [3553] [DEBUG] Closing connection. 
+[2017-06-22 16:07:13 +0000] [3572] [DEBUG] GET /ad
+[2017-06-22 16:07:15 +0000] [3553] [DEBUG] GET /consent
+[2017-06-22 16:07:15 +0000] [3580] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:07:15 +0000] [3546] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:07:17 +0000] [3579] [DEBUG] GET /exp
+2017-06-22 16:07:17,134 Accessing /exp: debugA5WH3T debug6XGIG0 debugOAT8AC 
+2017-06-22 16:07:17,148 given Counter({(0, 0): 0}) chose (0, 0)
+[2017-06-22 16:07:17 +0000] [3536] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:07:17 +0000] [3553] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:07:17 +0000] [3560] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:07:17 +0000] [3536] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:07:17 +0000] [3553] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:07:17 +0000] [3537] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:07:17 +0000] [3537] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:07:17 +0000] [3566] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:07:17 +0000] [3574] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:07:17 +0000] [3546] [DEBUG] GET /ad
+[2017-06-22 16:07:17 +0000] [3560] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:07:17 +0000] [3561] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:07:17 +0000] [3573] [DEBUG] GET /sync/debugOAT8AC%3Adebug6XGIG0
+2017-06-22 16:07:17,446 GET /sync route with id: debugOAT8AC:debug6XGIG0
+[2017-06-22 16:07:17 +0000] [3540] [DEBUG] GET /trial.html
+[2017-06-22 16:07:17 +0000] [3550] [DEBUG] GET /submit.html
+[2017-06-22 16:07:17 +0000] [3574] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-22 16:10:29 +0000] [3543] [DEBUG] Closing connection. 
+[2017-06-22 16:10:31 +0000] [3543] [DEBUG] Closing connection. 
+[2017-06-22 16:10:31 +0000] [3560] [DEBUG] Closing connection. 
+[2017-06-22 16:10:31 +0000] [3580] [DEBUG] Closing connection. 
+[2017-06-22 16:10:31 +0000] [3572] [DEBUG] GET /ad
+[2017-06-22 16:10:33 +0000] [3580] [DEBUG] GET /consent
+[2017-06-22 16:10:33 +0000] [3543] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:10:33 +0000] [3549] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:10:34 +0000] [3573] [DEBUG] GET /exp
+2017-06-22 16:10:34,617 Accessing /exp: debug7XHVLH debug0YUF3Q debug5HLATO 
+2017-06-22 16:10:34,626 given Counter({(0, 0): 1}) chose (0, 0)
+[2017-06-22 16:10:34 +0000] [3574] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:10:34 +0000] [3550] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:10:34 +0000] [3536] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:10:34 +0000] [3540] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:10:34 +0000] [3573] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:10:34 +0000] [3560] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:10:34 +0000] [3560] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:10:34 +0000] [3579] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:10:34 +0000] [3537] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:10:34 +0000] [3553] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:10:34 +0000] [3573] [DEBUG] GET /ad
+[2017-06-22 16:10:34 +0000] [3573] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:10:34 +0000] [3566] [DEBUG] GET /sync/debug5HLATO%3Adebug0YUF3Q
+2017-06-22 16:10:34,975 GET /sync route with id: debug5HLATO:debug0YUF3Q
+[2017-06-22 16:10:34 +0000] [3546] [DEBUG] GET /trial.html
+[2017-06-22 16:10:34 +0000] [3569] [DEBUG] GET /submit.html
+[2017-06-22 16:10:35 +0000] [3553] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-22 16:10:49 +0000] [3561] [DEBUG] Closing connection. 
+[2017-06-22 16:10:50 +0000] [3550] [DEBUG] Closing connection. 
+[2017-06-22 16:10:51 +0000] [3553] [DEBUG] Closing connection. 
+[2017-06-22 16:10:51 +0000] [3569] [DEBUG] Closing connection. 
+[2017-06-22 16:10:51 +0000] [3569] [DEBUG] GET /ppid
+[2017-06-22 16:10:51 +0000] [3569] [INFO] Parent changed, shutting down: <Worker 3569>
+[2017-06-22 16:10:51 +0000] [3560] [INFO] Parent changed, shutting down: <Worker 3560>
+[2017-06-22 16:10:51 +0000] [3573] [DEBUG] Closing connection. 
+[2017-06-22 16:10:51 +0000] [3569] [INFO] Worker exiting (pid: 3569)
+[2017-06-22 16:10:51 +0000] [3560] [INFO] Worker exiting (pid: 3560)
+[2017-06-22 16:10:51 +0000] [3573] [INFO] Parent changed, shutting down: <Worker 3573>
+[2017-06-22 16:10:51 +0000] [3573] [INFO] Worker exiting (pid: 3573)
+[2017-06-22 16:10:52 +0000] [3543] [INFO] Parent changed, shutting down: <Worker 3543>
+[2017-06-22 16:10:52 +0000] [3553] [INFO] Parent changed, shutting down: <Worker 3553>
+[2017-06-22 16:10:52 +0000] [3546] [INFO] Parent changed, shutting down: <Worker 3546>
+[2017-06-22 16:10:52 +0000] [3579] [INFO] Parent changed, shutting down: <Worker 3579>
+[2017-06-22 16:10:52 +0000] [3574] [DEBUG] Closing connection. 
+[2017-06-22 16:10:52 +0000] [3572] [INFO] Parent changed, shutting down: <Worker 3572>
+[2017-06-22 16:10:52 +0000] [3543] [INFO] Worker exiting (pid: 3543)
+[2017-06-22 16:10:52 +0000] [3572] [INFO] Worker exiting (pid: 3572)
+[2017-06-22 16:10:52 +0000] [3579] [INFO] Worker exiting (pid: 3579)
+[2017-06-22 16:10:52 +0000] [3546] [INFO] Worker exiting (pid: 3546)
+[2017-06-22 16:10:52 +0000] [3574] [INFO] Parent changed, shutting down: <Worker 3574>
+[2017-06-22 16:10:52 +0000] [3553] [INFO] Worker exiting (pid: 3553)
+[2017-06-22 16:10:52 +0000] [3574] [INFO] Worker exiting (pid: 3574)
+[2017-06-22 16:10:52 +0000] [3550] [DEBUG] Closing connection. 
+[2017-06-22 16:10:52 +0000] [3540] [INFO] Parent changed, shutting down: <Worker 3540>
+[2017-06-22 16:10:52 +0000] [3537] [INFO] Parent changed, shutting down: <Worker 3537>
+[2017-06-22 16:10:52 +0000] [3566] [INFO] Parent changed, shutting down: <Worker 3566>
+[2017-06-22 16:10:52 +0000] [3566] [INFO] Worker exiting (pid: 3566)
+[2017-06-22 16:10:52 +0000] [3540] [INFO] Worker exiting (pid: 3540)
+[2017-06-22 16:10:52 +0000] [3537] [INFO] Worker exiting (pid: 3537)
+[2017-06-22 16:10:52 +0000] [3550] [INFO] Parent changed, shutting down: <Worker 3550>
+[2017-06-22 16:10:52 +0000] [3550] [INFO] Worker exiting (pid: 3550)
+[2017-06-22 16:10:53 +0000] [3549] [INFO] Parent changed, shutting down: <Worker 3549>
+[2017-06-22 16:10:53 +0000] [3561] [INFO] Parent changed, shutting down: <Worker 3561>
+[2017-06-22 16:10:53 +0000] [3580] [INFO] Parent changed, shutting down: <Worker 3580>
+[2017-06-22 16:10:53 +0000] [3536] [DEBUG] Closing connection. 
+[2017-06-22 16:10:53 +0000] [3549] [INFO] Worker exiting (pid: 3549)
+[2017-06-22 16:10:53 +0000] [3561] [INFO] Worker exiting (pid: 3561)
+[2017-06-22 16:10:53 +0000] [3580] [INFO] Worker exiting (pid: 3580)
+[2017-06-22 16:10:53 +0000] [3536] [INFO] Parent changed, shutting down: <Worker 3536>
+[2017-06-22 16:10:53 +0000] [3536] [INFO] Worker exiting (pid: 3536)
+[2017-06-22 16:13:54 +0000] [4313] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f1350634de8>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f1350634b18>
+  pre_fork: <function pre_fork at 0x7f1350634c80>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 17
+  proc_name: psiturk_experiment_server
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7f13506349b0>
+  pre_exec: <function pre_exec at 0x7f135063c410>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7f1350634f50>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7f135068c410>
+  config: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f135063c578>
+  post_request: <function post_request at 0x7f135063c668>
+  user: 1000
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f135063c140>
+  threads: 1
+  max_requests: 0
+  limit_request_line: 0
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7f135063c7d0>
+  chdir: /home/felix/GitHub/MoralDynamics/experiment_template
+  paste: None
+  default_proc_name: gunicorn
+  errorlog: server.log
+  loglevel: debug
+  logconfig: None
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7f1350634848>
+  worker_abort: <function worker_abort at 0x7f135063c2a8>
+  bind: ['0.0.0.0:22362']
+  raw_env: []
+  reload: False
+  check_config: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f135063c938>
+  timeout: 30
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+  statsd_prefix: 
+[2017-06-22 16:13:54 +0000] [4313] [INFO] Starting gunicorn 19.4.5
+[2017-06-22 16:13:54 +0000] [4313] [DEBUG] Arbiter booted
+[2017-06-22 16:13:54 +0000] [4313] [INFO] Listening at: http://0.0.0.0:22362 (4313)
+[2017-06-22 16:13:54 +0000] [4313] [INFO] Using worker: sync
+[2017-06-22 16:13:54 +0000] [4318] [INFO] Booting worker with pid: 4318
+[2017-06-22 16:13:54 +0000] [4319] [INFO] Booting worker with pid: 4319
+[2017-06-22 16:13:54 +0000] [4322] [INFO] Booting worker with pid: 4322
+[2017-06-22 16:13:54 +0000] [4327] [INFO] Booting worker with pid: 4327
+2017-06-22 16:13:54,908 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:54,908 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:54,909 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:13:54,917 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:54,917 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:54,918 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:54 +0000] [4328] [INFO] Booting worker with pid: 4328
+2017-06-22 16:13:54,984 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:54,984 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:54,985 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4333] [INFO] Booting worker with pid: 4333
+2017-06-22 16:13:55,064 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,064 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,065 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:13:55,111 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,112 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,113 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4336] [INFO] Booting worker with pid: 4336
+[2017-06-22 16:13:55 +0000] [4337] [INFO] Booting worker with pid: 4337
+2017-06-22 16:13:55,196 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,196 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,197 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4342] [INFO] Booting worker with pid: 4342
+2017-06-22 16:13:55,298 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,298 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,299 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4343] [INFO] Booting worker with pid: 4343
+2017-06-22 16:13:55,337 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,337 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,339 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4346] [INFO] Booting worker with pid: 4346
+[2017-06-22 16:13:55 +0000] [4349] [INFO] Booting worker with pid: 4349
+2017-06-22 16:13:55,419 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,420 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,421 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:13:55,473 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,473 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,475 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4352] [INFO] Booting worker with pid: 4352
+2017-06-22 16:13:55,504 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,504 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,505 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4355] [INFO] Booting worker with pid: 4355
+2017-06-22 16:13:55,569 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,569 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,571 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4360] [INFO] Booting worker with pid: 4360
+[2017-06-22 16:13:55 +0000] [4361] [INFO] Booting worker with pid: 4361
+2017-06-22 16:13:55,638 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,638 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,639 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:13:55,671 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,672 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,673 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:55 +0000] [4366] [INFO] Booting worker with pid: 4366
+[2017-06-22 16:13:55 +0000] [4313] [DEBUG] 17 workers
+2017-06-22 16:13:55,744 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,745 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,746 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:13:55,777 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,778 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,779 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-22 16:13:55,853 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-22 16:13:55,854 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-22 16:13:55,855 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-22 16:13:56 +0000] [4361] [DEBUG] Closing connection. 
+[2017-06-22 16:13:57 +0000] [4355] [DEBUG] Closing connection. 
+[2017-06-22 16:13:57 +0000] [4361] [DEBUG] Closing connection. 
+[2017-06-22 16:13:57 +0000] [4327] [DEBUG] Closing connection. 
+[2017-06-22 16:13:58 +0000] [4355] [DEBUG] GET /ad
+[2017-06-22 16:13:59 +0000] [4349] [DEBUG] GET /consent
+[2017-06-22 16:13:59 +0000] [4346] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:13:59 +0000] [4352] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:14:01 +0000] [4319] [DEBUG] GET /exp
+2017-06-22 16:14:01,292 Accessing /exp: debug4RGPZ9 debug7CHNZE debug83LM01 
+2017-06-22 16:14:01,309 given Counter({(0, 0): 2}) chose (0, 0)
+[2017-06-22 16:14:01 +0000] [4343] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:14:01 +0000] [4342] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:14:01 +0000] [4355] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:14:01 +0000] [4337] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:14:01 +0000] [4366] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:14:01 +0000] [4349] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:14:01 +0000] [4327] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:14:01 +0000] [4361] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:14:01 +0000] [4336] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:14:01 +0000] [4366] [DEBUG] GET /ad
+[2017-06-22 16:14:01 +0000] [4352] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:14:01 +0000] [4342] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:14:01 +0000] [4349] [DEBUG] GET /sync/debug83LM01%3Adebug7CHNZE
+2017-06-22 16:14:01,670 GET /sync route with id: debug83LM01:debug7CHNZE
+[2017-06-22 16:14:01 +0000] [4352] [DEBUG] GET /trial.html
+[2017-06-22 16:14:01 +0000] [4342] [DEBUG] GET /submit.html
+[2017-06-22 16:14:01 +0000] [4349] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:14:44 +0000] [4352] [DEBUG] Closing connection. 
+[2017-06-22 16:14:46 +0000] [4352] [DEBUG] Closing connection. 
+[2017-06-22 16:14:46 +0000] [4355] [DEBUG] Closing connection. 
+[2017-06-22 16:14:46 +0000] [4333] [DEBUG] Closing connection. 
+[2017-06-22 16:14:46 +0000] [4333] [DEBUG] GET /ad
+[2017-06-22 16:14:48 +0000] [4360] [DEBUG] GET /consent
+[2017-06-22 16:14:48 +0000] [4352] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:14:48 +0000] [4366] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:14:48 +0000] [4328] [DEBUG] GET /exp
+2017-06-22 16:14:48,779 Accessing /exp: debug81KZFA debugF3FTZS debugZ8GZWW 
+2017-06-22 16:14:48,793 given Counter({(0, 0): 3}) chose (0, 0)
+[2017-06-22 16:14:48 +0000] [4337] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:14:48 +0000] [4349] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:14:48 +0000] [4336] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:14:48 +0000] [4346] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:14:48 +0000] [4343] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:14:48 +0000] [4328] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:14:48 +0000] [4319] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:14:48 +0000] [4349] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:14:48 +0000] [4342] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:14:48 +0000] [4349] [DEBUG] GET /ad
+[2017-06-22 16:14:48 +0000] [4327] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:14:49 +0000] [4361] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:14:49 +0000] [4352] [DEBUG] GET /sync/debugZ8GZWW%3AdebugF3FTZS
+2017-06-22 16:14:49,011 GET /sync route with id: debugZ8GZWW:debugF3FTZS
+[2017-06-22 16:14:49 +0000] [4355] [DEBUG] GET /trial.html
+[2017-06-22 16:14:49 +0000] [4336] [DEBUG] GET /submit.html
+[2017-06-22 16:14:49 +0000] [4355] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:15:01 +0000] [4366] [DEBUG] Closing connection. 
+[2017-06-22 16:15:03 +0000] [4318] [DEBUG] Closing connection. 
+[2017-06-22 16:15:03 +0000] [4366] [DEBUG] Closing connection. 
+[2017-06-22 16:15:03 +0000] [4318] [DEBUG] Closing connection. 
+[2017-06-22 16:15:03 +0000] [4318] [DEBUG] GET /ad
+[2017-06-22 16:15:04 +0000] [4337] [DEBUG] GET /consent
+[2017-06-22 16:15:04 +0000] [4319] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:15:04 +0000] [4352] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:15:05 +0000] [4355] [DEBUG] GET /exp
+2017-06-22 16:15:05,552 Accessing /exp: debug97EXVG debugCQ26PE debugZN27C7 
+2017-06-22 16:15:05,561 given Counter({(0, 0): 4}) chose (0, 0)
+[2017-06-22 16:15:05 +0000] [4336] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:15:05 +0000] [4319] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:15:05 +0000] [4355] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:15:05 +0000] [4327] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:15:05 +0000] [4352] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:15:05 +0000] [4333] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:15:05 +0000] [4337] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:15:05 +0000] [4355] [DEBUG] GET /ad
+[2017-06-22 16:15:05 +0000] [4318] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:15:05 +0000] [4360] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:15:05 +0000] [4337] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:15:05 +0000] [4361] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:15:05 +0000] [4352] [DEBUG] GET /sync/debugZN27C7%3AdebugCQ26PE
+2017-06-22 16:15:05,829 GET /sync route with id: debugZN27C7:debugCQ26PE
+[2017-06-22 16:15:05 +0000] [4336] [DEBUG] GET /trial.html
+[2017-06-22 16:15:05 +0000] [4343] [DEBUG] GET /submit.html
+[2017-06-22 16:15:05 +0000] [4322] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:15:38 +0000] [4337] [DEBUG] Closing connection. 
+[2017-06-22 16:15:40 +0000] [4342] [DEBUG] Closing connection. 
+[2017-06-22 16:15:40 +0000] [4360] [DEBUG] Closing connection. 
+[2017-06-22 16:15:40 +0000] [4360] [DEBUG] Closing connection. 
+[2017-06-22 16:15:40 +0000] [4352] [DEBUG] GET /ad
+[2017-06-22 16:15:41 +0000] [4319] [DEBUG] GET /consent
+[2017-06-22 16:15:41 +0000] [4366] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:15:41 +0000] [4322] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:15:42 +0000] [4349] [DEBUG] GET /exp
+2017-06-22 16:15:42,466 Accessing /exp: debugSKEKYH debug2FO5UA debugU12T3H 
+2017-06-22 16:15:42,470 given Counter({(0, 0): 5}) chose (0, 0)
+[2017-06-22 16:15:42 +0000] [4342] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:15:42 +0000] [4346] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:15:42 +0000] [4349] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:15:42 +0000] [4337] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:15:42 +0000] [4355] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:15:42 +0000] [4352] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:15:42 +0000] [4327] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:15:42 +0000] [4328] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:15:42 +0000] [4342] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:15:42 +0000] [4352] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:15:42 +0000] [4337] [DEBUG] GET /ad
+[2017-06-22 16:15:42 +0000] [4352] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:15:42 +0000] [4342] [DEBUG] GET /sync/debugU12T3H%3Adebug2FO5UA
+2017-06-22 16:15:42,745 GET /sync route with id: debugU12T3H:debug2FO5UA
+[2017-06-22 16:15:42 +0000] [4349] [DEBUG] GET /trial.html
+[2017-06-22 16:15:42 +0000] [4328] [DEBUG] GET /submit.html
+[2017-06-22 16:15:42 +0000] [4337] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:16:09 +0000] [4333] [DEBUG] Closing connection. 
+[2017-06-22 16:16:10 +0000] [4322] [DEBUG] Closing connection. 
+[2017-06-22 16:16:10 +0000] [4336] [DEBUG] Closing connection. 
+[2017-06-22 16:16:10 +0000] [4328] [DEBUG] Closing connection. 
+[2017-06-22 16:16:10 +0000] [4366] [DEBUG] GET /ad
+[2017-06-22 16:16:12 +0000] [4322] [DEBUG] GET /consent
+[2017-06-22 16:16:12 +0000] [4333] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:16:12 +0000] [4360] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:16:13 +0000] [4328] [DEBUG] GET /exp
+2017-06-22 16:16:13,068 Accessing /exp: debug23YYAH debugF15G4N debugJ4F8WW 
+2017-06-22 16:16:13,078 given Counter({(0, 0): 6}) chose (0, 0)
+[2017-06-22 16:16:13 +0000] [4327] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:16:13 +0000] [4342] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:16:13 +0000] [4319] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:16:13 +0000] [4337] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:16:13 +0000] [4361] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:16:13 +0000] [4352] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:16:13 +0000] [4319] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:16:13 +0000] [4361] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:16:13 +0000] [4352] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:16:13 +0000] [4327] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:16:13 +0000] [4361] [DEBUG] GET /ad
+[2017-06-22 16:16:13 +0000] [4337] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:16:13 +0000] [4352] [DEBUG] GET /sync/debugJ4F8WW%3AdebugF15G4N
+2017-06-22 16:16:13,300 GET /sync route with id: debugJ4F8WW:debugF15G4N
+[2017-06-22 16:16:13 +0000] [4346] [DEBUG] GET /trial.html
+[2017-06-22 16:16:13 +0000] [4360] [DEBUG] GET /submit.html
+[2017-06-22 16:16:13 +0000] [4322] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:16:31 +0000] [4343] [DEBUG] Closing connection. 
+[2017-06-22 16:16:32 +0000] [4319] [DEBUG] Closing connection. 
+[2017-06-22 16:16:32 +0000] [4366] [DEBUG] Closing connection. 
+[2017-06-22 16:16:32 +0000] [4322] [DEBUG] Closing connection. 
+[2017-06-22 16:16:33 +0000] [4322] [DEBUG] GET /ad
+[2017-06-22 16:16:34 +0000] [4319] [DEBUG] GET /consent
+[2017-06-22 16:16:34 +0000] [4343] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:16:34 +0000] [4328] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:16:35 +0000] [4366] [DEBUG] GET /exp
+2017-06-22 16:16:35,565 Accessing /exp: debug15YTQ5 debugZD5MXQ debugGGUFT6 
+2017-06-22 16:16:35,570 given Counter({(0, 0): 7}) chose (0, 0)
+[2017-06-22 16:16:35 +0000] [4361] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:16:35 +0000] [4333] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:16:35 +0000] [4346] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:16:35 +0000] [4355] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:16:35 +0000] [4319] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:16:35 +0000] [4343] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:16:35 +0000] [4346] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:16:35 +0000] [4328] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:16:35 +0000] [4343] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:16:35 +0000] [4319] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:16:35 +0000] [4333] [DEBUG] GET /ad
+[2017-06-22 16:16:35 +0000] [4346] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:16:35 +0000] [4336] [DEBUG] GET /sync/debugGGUFT6%3AdebugZD5MXQ
+2017-06-22 16:16:35,899 GET /sync route with id: debugGGUFT6:debugZD5MXQ
+[2017-06-22 16:16:35 +0000] [4349] [DEBUG] GET /trial.html
+[2017-06-22 16:16:35 +0000] [4355] [DEBUG] GET /submit.html
+[2017-06-22 16:16:35 +0000] [4318] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:16:53 +0000] [4322] [DEBUG] Closing connection. 
+[2017-06-22 16:16:54 +0000] [4336] [DEBUG] Closing connection. 
+[2017-06-22 16:16:54 +0000] [4333] [DEBUG] Closing connection. 
+[2017-06-22 16:16:54 +0000] [4342] [DEBUG] Closing connection. 
+[2017-06-22 16:16:54 +0000] [4342] [DEBUG] GET /ad
+[2017-06-22 16:16:55 +0000] [4360] [DEBUG] GET /consent
+[2017-06-22 16:16:55 +0000] [4352] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:16:55 +0000] [4349] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:16:56 +0000] [4336] [DEBUG] GET /exp
+2017-06-22 16:16:56,479 Accessing /exp: debugJ7XZLG debugSJ8W2O debugMPR4Q2 
+2017-06-22 16:16:56,489 given Counter({(0, 0): 8}) chose (0, 0)
+[2017-06-22 16:16:56 +0000] [4361] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:16:56 +0000] [4352] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:16:56 +0000] [4346] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:16:56 +0000] [4318] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:16:56 +0000] [4337] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:16:56 +0000] [4352] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:16:56 +0000] [4328] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:16:56 +0000] [4336] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:16:56 +0000] [4361] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:16:56 +0000] [4352] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:16:56 +0000] [4337] [DEBUG] GET /ad
+[2017-06-22 16:16:56 +0000] [4322] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:16:56 +0000] [4343] [DEBUG] GET /sync/debugMPR4Q2%3AdebugSJ8W2O
+2017-06-22 16:16:56,692 GET /sync route with id: debugMPR4Q2:debugSJ8W2O
+[2017-06-22 16:16:56 +0000] [4327] [DEBUG] GET /trial.html
+[2017-06-22 16:16:56 +0000] [4333] [DEBUG] GET /submit.html
+[2017-06-22 16:16:56 +0000] [4366] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:17:06 +0000] [4343] [DEBUG] Closing connection. 
+[2017-06-22 16:17:07 +0000] [4322] [DEBUG] Closing connection. 
+[2017-06-22 16:17:07 +0000] [4333] [DEBUG] Closing connection. 
+[2017-06-22 16:17:07 +0000] [4366] [DEBUG] Closing connection. 
+[2017-06-22 16:17:07 +0000] [4355] [DEBUG] GET /ad
+[2017-06-22 16:17:09 +0000] [4343] [DEBUG] GET /consent
+[2017-06-22 16:17:09 +0000] [4366] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:17:09 +0000] [4318] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:17:10 +0000] [4319] [DEBUG] GET /exp
+2017-06-22 16:17:10,424 Accessing /exp: debugPS5DFX debugK4PFKZ debug45AS0V 
+2017-06-22 16:17:10,428 given Counter({(0, 0): 9}) chose (0, 0)
+[2017-06-22 16:17:10 +0000] [4322] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:17:10 +0000] [4349] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:17:10 +0000] [4343] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:17:10 +0000] [4319] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:17:10 +0000] [4346] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:17:10 +0000] [4360] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:17:10 +0000] [4322] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:17:10 +0000] [4343] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:17:10 +0000] [4349] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:17:10 +0000] [4319] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:17:10 +0000] [4322] [DEBUG] GET /ad
+[2017-06-22 16:17:10 +0000] [4319] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:17:10 +0000] [4346] [DEBUG] GET /sync/debug45AS0V%3AdebugK4PFKZ
+2017-06-22 16:17:10,639 GET /sync route with id: debug45AS0V:debugK4PFKZ
+[2017-06-22 16:17:10 +0000] [4337] [DEBUG] GET /trial.html
+[2017-06-22 16:17:10 +0000] [4349] [DEBUG] GET /submit.html
+[2017-06-22 16:17:10 +0000] [4352] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:17:32 +0000] [4349] [DEBUG] Closing connection. 
+[2017-06-22 16:17:33 +0000] [4337] [DEBUG] Closing connection. 
+[2017-06-22 16:17:33 +0000] [4327] [DEBUG] Closing connection. 
+[2017-06-22 16:17:33 +0000] [4349] [DEBUG] Closing connection. 
+[2017-06-22 16:17:33 +0000] [4336] [DEBUG] GET /ad
+[2017-06-22 16:17:35 +0000] [4349] [DEBUG] GET /consent
+[2017-06-22 16:17:35 +0000] [4352] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:17:35 +0000] [4327] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:17:36 +0000] [4360] [DEBUG] GET /exp
+2017-06-22 16:17:36,231 Accessing /exp: debugWV597T debug9272WM debugRYA4KO 
+2017-06-22 16:17:36,238 given Counter({(0, 0): 10}) chose (0, 0)
+[2017-06-22 16:17:36 +0000] [4328] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:17:36 +0000] [4322] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:17:36 +0000] [4327] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:17:36 +0000] [4349] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:17:36 +0000] [4336] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:17:36 +0000] [4360] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:17:36 +0000] [4349] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:17:36 +0000] [4336] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:17:36 +0000] [4366] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:17:36 +0000] [4322] [DEBUG] GET /ad
+[2017-06-22 16:17:36 +0000] [4361] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:17:36 +0000] [4336] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:17:36 +0000] [4318] [DEBUG] GET /sync/debugRYA4KO%3Adebug9272WM
+2017-06-22 16:17:36,469 GET /sync route with id: debugRYA4KO:debug9272WM
+[2017-06-22 16:17:36 +0000] [4333] [DEBUG] GET /trial.html
+[2017-06-22 16:17:36 +0000] [4343] [DEBUG] GET /submit.html
+[2017-06-22 16:17:36 +0000] [4346] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:17:47 +0000] [4319] [DEBUG] Closing connection. 
+[2017-06-22 16:17:48 +0000] [4319] [DEBUG] Closing connection. 
+[2017-06-22 16:17:48 +0000] [4319] [DEBUG] Closing connection. 
+[2017-06-22 16:17:48 +0000] [4318] [DEBUG] Closing connection. 
+[2017-06-22 16:17:48 +0000] [4366] [DEBUG] GET /ad
+[2017-06-22 16:17:49 +0000] [4333] [DEBUG] GET /consent
+[2017-06-22 16:17:49 +0000] [4319] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:17:49 +0000] [4355] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:17:50 +0000] [4318] [DEBUG] GET /exp
+2017-06-22 16:17:50,313 Accessing /exp: debug3CD12D debugGV1OKV debugI3PVM3 
+2017-06-22 16:17:50,321 given Counter({(0, 0): 11}) chose (0, 0)
+[2017-06-22 16:17:50 +0000] [4360] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:17:50 +0000] [4342] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:17:50 +0000] [4361] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:17:50 +0000] [4333] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:17:50 +0000] [4318] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:17:50 +0000] [4336] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:17:50 +0000] [4318] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:17:50 +0000] [4360] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:17:50 +0000] [4355] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:17:50 +0000] [4327] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:17:50 +0000] [4360] [DEBUG] GET /ad
+[2017-06-22 16:17:50 +0000] [4349] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:17:50 +0000] [4322] [DEBUG] GET /sync/debugI3PVM3%3AdebugGV1OKV
+2017-06-22 16:17:50,535 GET /sync route with id: debugI3PVM3:debugGV1OKV
+[2017-06-22 16:17:50 +0000] [4352] [DEBUG] GET /trial.html
+[2017-06-22 16:17:50 +0000] [4337] [DEBUG] GET /submit.html
+[2017-06-22 16:17:50 +0000] [4355] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:17:55 +0000] [4349] [DEBUG] Closing connection. 
+[2017-06-22 16:18:02 +0000] [4346] [DEBUG] Closing connection. 
+[2017-06-22 16:18:02 +0000] [4355] [DEBUG] Closing connection. 
+[2017-06-22 16:18:02 +0000] [4343] [DEBUG] Closing connection. 
+[2017-06-22 16:18:02 +0000] [4337] [DEBUG] GET /ad
+[2017-06-22 16:18:03 +0000] [4355] [DEBUG] GET /consent
+[2017-06-22 16:18:03 +0000] [4352] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:18:03 +0000] [4342] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:18:04 +0000] [4318] [DEBUG] GET /exp
+2017-06-22 16:18:04,936 Accessing /exp: debugVBZ0HJ debug972WM9 debugBWE5DD 
+2017-06-22 16:18:04,947 given Counter({(0, 0): 12}) chose (0, 0)
+[2017-06-22 16:18:04 +0000] [4322] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:18:04 +0000] [4318] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:18:04 +0000] [4355] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:18:04 +0000] [4360] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:18:04 +0000] [4337] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:18:04 +0000] [4327] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:18:04 +0000] [4355] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:18:04 +0000] [4360] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:18:04 +0000] [4337] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:18:04 +0000] [4318] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:18:05 +0000] [4366] [DEBUG] GET /ad
+[2017-06-22 16:18:05 +0000] [4328] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:18:05 +0000] [4349] [DEBUG] GET /sync/debugBWE5DD%3Adebug972WM9
+2017-06-22 16:18:05,144 GET /sync route with id: debugBWE5DD:debug972WM9
+[2017-06-22 16:18:05 +0000] [4343] [DEBUG] GET /trial.html
+[2017-06-22 16:18:05 +0000] [4336] [DEBUG] GET /submit.html
+[2017-06-22 16:18:05 +0000] [4361] [DEBUG] GET /static/images/example_stim.png
+[2017-06-22 16:18:38 +0000] [4333] [DEBUG] GET /static/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+[2017-06-22 16:18:38 +0000] [4346] [DEBUG] GET /static/css/images/ui-bg_glass_100_f6f6f6_1x400.png
+[2017-06-22 16:18:38 +0000] [4352] [DEBUG] GET /static/videos/mp4/clip2.mp4
+[2017-06-22 16:29:35 +0000] [4346] [DEBUG] Closing connection. 
+[2017-06-22 16:29:36 +0000] [4352] [DEBUG] Closing connection. 
+[2017-06-22 16:29:36 +0000] [4327] [DEBUG] Closing connection. 
+[2017-06-22 16:29:36 +0000] [4355] [DEBUG] Closing connection. 
+[2017-06-22 16:29:37 +0000] [4352] [DEBUG] GET /ad
+[2017-06-22 16:29:38 +0000] [4360] [DEBUG] GET /consent
+[2017-06-22 16:29:38 +0000] [4355] [DEBUG] GET /static/js/utils.js
+[2017-06-22 16:29:38 +0000] [4349] [DEBUG] GET /static/css/general.css
+[2017-06-22 16:29:39 +0000] [4333] [DEBUG] GET /exp
+2017-06-22 16:29:39,811 Accessing /exp: debugNCEZIX debug0IQEND debugOZGJ5M 
+2017-06-22 16:29:39,815 given Counter({(0, 0): 13}) chose (0, 0)
+[2017-06-22 16:29:39 +0000] [4327] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-22 16:29:39 +0000] [4361] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-22 16:29:39 +0000] [4352] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-22 16:29:39 +0000] [4366] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-22 16:29:39 +0000] [4343] [DEBUG] GET /static/lib/mustache.js
+[2017-06-22 16:29:39 +0000] [4328] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-22 16:29:39 +0000] [4322] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-22 16:29:39 +0000] [4328] [DEBUG] GET /static/js/config.js
+[2017-06-22 16:29:39 +0000] [4366] [DEBUG] GET /static/js/task.js
+[2017-06-22 16:29:39 +0000] [4318] [DEBUG] GET /static/js/psiturk.js
+[2017-06-22 16:29:39 +0000] [4328] [DEBUG] GET /ad
+[2017-06-22 16:29:40 +0000] [4328] [DEBUG] GET /static/json/stim.json
+[2017-06-22 16:29:40 +0000] [4342] [DEBUG] GET /sync/debugOZGJ5M%3Adebug0IQEND
+2017-06-22 16:29:40,094 GET /sync route with id: debugOZGJ5M:debug0IQEND
+[2017-06-22 16:29:40 +0000] [4337] [DEBUG] GET /trial.html
+[2017-06-22 16:29:40 +0000] [4336] [DEBUG] GET /submit.html
+[2017-06-22 16:29:40 +0000] [4319] [DEBUG] GET /static/images/example_stim.png
