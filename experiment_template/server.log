@@ -1,0 +1,952 @@
+[2017-06-19 11:52:16 -0400] [16845] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x10e96f848>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x10e96f578>
+  pre_fork: <function pre_fork at 0x10e96f6e0>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 20
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 9
+  proc_name: psiturk_experiment_server
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x10e96f410>
+  pre_exec: <function pre_exec at 0x10e96fde8>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x10e96f9b0>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x10e9b0398>
+  config: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x10e96ff50>
+  post_request: <function post_request at 0x10e9730c8>
+  user: 501
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x10e96fb18>
+  threads: 1
+  max_requests: 0
+  limit_request_line: 0
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x10e973230>
+  chdir: /Users/tobi/Dropbox (MIT)/work/projects/moral_dynamics/code/javascript/experiment_template
+  paste: None
+  default_proc_name: gunicorn
+  errorlog: server.log
+  loglevel: debug
+  logconfig: None
+  syslog_addr: unix:///var/run/syslog
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x10e96f2a8>
+  worker_abort: <function worker_abort at 0x10e96fc80>
+  bind: ['0.0.0.0:22362']
+  raw_env: []
+  reload: False
+  check_config: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x10e973398>
+  timeout: 30
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+  statsd_prefix: 
+[2017-06-19 11:52:16 -0400] [16845] [INFO] Starting gunicorn 19.4.5
+[2017-06-19 11:52:16 -0400] [16845] [DEBUG] Arbiter booted
+[2017-06-19 11:52:16 -0400] [16845] [INFO] Listening at: http://0.0.0.0:22362 (16845)
+[2017-06-19 11:52:16 -0400] [16845] [INFO] Using worker: sync
+[2017-06-19 11:52:16 -0400] [16849] [INFO] Booting worker with pid: 16849
+[2017-06-19 11:52:16 -0400] [16850] [INFO] Booting worker with pid: 16850
+[2017-06-19 11:52:16 -0400] [16851] [INFO] Booting worker with pid: 16851
+[2017-06-19 11:52:16 -0400] [16852] [INFO] Booting worker with pid: 16852
+[2017-06-19 11:52:16 -0400] [16853] [INFO] Booting worker with pid: 16853
+[2017-06-19 11:52:16 -0400] [16854] [INFO] Booting worker with pid: 16854
+[2017-06-19 11:52:16 -0400] [16855] [INFO] Booting worker with pid: 16855
+[2017-06-19 11:52:16 -0400] [16856] [INFO] Booting worker with pid: 16856
+[2017-06-19 11:52:16 -0400] [16857] [INFO] Booting worker with pid: 16857
+[2017-06-19 11:52:16 -0400] [16845] [DEBUG] 9 workers
+2017-06-19 11:52:17,516 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,516 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,517 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,517 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,523 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 11:52:17,557 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 11:52:17,705 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,706 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,709 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 11:52:17,715 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,715 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,718 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-19 11:52:17 -0400] [16849] [DEBUG] Closing connection. 
+2017-06-19 11:52:17,763 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,764 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,775 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 11:52:17,834 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,835 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,841 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 11:52:17,887 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,887 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,895 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 11:52:17,896 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,896 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,899 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 11:52:17,910 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 11:52:17,910 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 11:52:17,913 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-19 11:52:19 -0400] [16855] [DEBUG] Closing connection. 
+[2017-06-19 11:52:19 -0400] [16855] [DEBUG] Closing connection. 
+[2017-06-19 11:52:19 -0400] [16854] [DEBUG] Closing connection. 
+[2017-06-19 11:52:19 -0400] [16855] [DEBUG] GET /ad
+[2017-06-19 11:52:20 -0400] [16850] [DEBUG] GET /consent
+[2017-06-19 11:52:20 -0400] [16854] [DEBUG] GET /static/js/utils.js
+[2017-06-19 11:52:20 -0400] [16857] [DEBUG] GET /static/css/general.css
+[2017-06-19 11:52:22 -0400] [16851] [DEBUG] GET /exp
+2017-06-19 11:52:22,178 Accessing /exp: debug8K6BKW debugL8O5WN debugSXQS1O 
+2017-06-19 11:52:22,185 given Counter({(0, 0): 0}) chose (0, 0)
+[2017-06-19 11:52:22 -0400] [16853] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-19 11:52:22 -0400] [16853] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-19 11:52:22 -0400] [16851] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-19 11:52:22 -0400] [16854] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-19 11:52:22 -0400] [16853] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-19 11:52:22 -0400] [16851] [DEBUG] GET /static/lib/mustache.js
+[2017-06-19 11:52:22 -0400] [16852] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-19 11:52:22 -0400] [16849] [DEBUG] GET /ad
+[2017-06-19 11:52:22 -0400] [16850] [DEBUG] GET /static/js/config.js
+[2017-06-19 11:52:22 -0400] [16857] [DEBUG] GET /static/js/psiturk.js
+[2017-06-19 11:52:22 -0400] [16855] [DEBUG] GET /static/js/task.js
+[2017-06-19 11:52:22 -0400] [16855] [DEBUG] GET /static/json/stim.json
+[2017-06-19 11:52:22 -0400] [16853] [DEBUG] GET /sync/debugSXQS1O%3AdebugL8O5WN
+2017-06-19 11:52:22,737 GET /sync route with id: debugSXQS1O:debugL8O5WN
+[2017-06-19 11:52:22 -0400] [16851] [DEBUG] GET /trial.html
+[2017-06-19 11:52:22 -0400] [16851] [DEBUG] GET /submit.html
+[2017-06-19 11:52:22 -0400] [16855] [DEBUG] GET /demographics.html
+2017-06-19 11:52:22,786 Exception on /demographics.html [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 683, in regularpage
+    return render_template(pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: demographics.html
+[2017-06-19 11:52:22 -0400] [16852] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-19 11:52:24 -0400] [16853] [DEBUG] GET /static/lib/underscore-min.map
+[2017-06-19 11:52:33 -0400] [16851] [DEBUG] GET /static/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+[2017-06-19 11:52:33 -0400] [16852] [DEBUG] GET /static/css/images/ui-bg_glass_100_f6f6f6_1x400.png
+[2017-06-19 11:52:33 -0400] [16855] [DEBUG] GET /static/videos/mp4/clip6.mp4
+[2017-06-19 11:52:37 -0400] [16852] [DEBUG] GET /exp
+2017-06-19 11:52:37,221 Accessing /exp: debug8K6BKW debugL8O5WN debugSXQS1O 
+[2017-06-19 11:52:37 -0400] [16852] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-19 11:52:37 -0400] [16850] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-19 11:52:37 -0400] [16855] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-19 11:52:37 -0400] [16856] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-19 11:52:37 -0400] [16850] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-19 11:52:37 -0400] [16857] [DEBUG] GET /static/css/general.css
+[2017-06-19 11:52:37 -0400] [16853] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-19 11:52:37 -0400] [16854] [DEBUG] GET /static/lib/mustache.js
+[2017-06-19 11:52:37 -0400] [16857] [DEBUG] GET /static/js/config.js
+[2017-06-19 11:52:37 -0400] [16853] [DEBUG] GET /static/js/utils.js
+[2017-06-19 11:52:37 -0400] [16853] [DEBUG] GET /static/js/psiturk.js
+[2017-06-19 11:52:37 -0400] [16849] [DEBUG] GET /static/js/task.js
+[2017-06-19 11:52:37 -0400] [16853] [DEBUG] GET /static/lib/underscore-min.map
+[2017-06-19 11:52:37 -0400] [16855] [DEBUG] GET /static/json/stim.json
+[2017-06-19 11:52:37 -0400] [16856] [DEBUG] GET /sync/debugSXQS1O%3AdebugL8O5WN
+2017-06-19 11:52:37,831 GET /sync route with id: debugSXQS1O:debugL8O5WN
+[2017-06-19 11:52:37 -0400] [16853] [DEBUG] GET /trial.html
+[2017-06-19 11:52:37 -0400] [16855] [DEBUG] GET /submit.html
+[2017-06-19 11:52:37 -0400] [16854] [DEBUG] GET /demographics.html
+2017-06-19 11:52:37,885 Exception on /demographics.html [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 683, in regularpage
+    return render_template(pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: demographics.html
+[2017-06-19 11:52:37 -0400] [16856] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-19 11:52:55 -0400] [16856] [DEBUG] GET /exp
+2017-06-19 11:52:55,941 Accessing /exp: debug8K6BKW debugL8O5WN debugSXQS1O 
+[2017-06-19 11:52:55 -0400] [16857] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-19 11:52:56 -0400] [16856] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-19 11:52:56 -0400] [16857] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-19 11:52:56 -0400] [16853] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-19 11:52:56 -0400] [16851] [DEBUG] GET /static/css/general.css
+[2017-06-19 11:52:56 -0400] [16854] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-19 11:52:56 -0400] [16851] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-19 11:52:56 -0400] [16850] [DEBUG] GET /static/lib/mustache.js
+[2017-06-19 11:52:56 -0400] [16854] [DEBUG] GET /static/js/config.js
+[2017-06-19 11:52:56 -0400] [16855] [DEBUG] GET /static/js/utils.js
+[2017-06-19 11:52:56 -0400] [16851] [DEBUG] GET /static/js/psiturk.js
+[2017-06-19 11:52:56 -0400] [16852] [DEBUG] GET /static/js/task.js
+[2017-06-19 11:52:56 -0400] [16851] [DEBUG] GET /static/json/stim.json
+[2017-06-19 11:52:56 -0400] [16849] [DEBUG] GET /static/lib/underscore-min.map
+[2017-06-19 11:52:56 -0400] [16849] [DEBUG] GET /sync/debugSXQS1O%3AdebugL8O5WN
+2017-06-19 11:52:56,728 GET /sync route with id: debugSXQS1O:debugL8O5WN
+[2017-06-19 11:52:56 -0400] [16849] [DEBUG] GET /trial.html
+[2017-06-19 11:52:56 -0400] [16856] [DEBUG] GET /submit.html
+[2017-06-19 11:52:56 -0400] [16855] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16849)
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16850)
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16851)
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16852)
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16853)
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16854)
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16855)
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16856)
+[2017-06-19 12:51:05 -0400] [16845] [CRITICAL] WORKER TIMEOUT (pid:16857)
+[2017-06-19 12:51:05 -0400] [16851] [INFO] Worker exiting (pid: 16851)
+[2017-06-19 12:51:05 -0400] [16852] [INFO] Worker exiting (pid: 16852)
+[2017-06-19 12:51:05 -0400] [16850] [INFO] Worker exiting (pid: 16850)
+[2017-06-19 12:51:05 -0400] [16854] [INFO] Worker exiting (pid: 16854)
+[2017-06-19 12:51:05 -0400] [16853] [INFO] Worker exiting (pid: 16853)
+[2017-06-19 12:51:05 -0400] [16856] [INFO] Worker exiting (pid: 16856)
+[2017-06-19 12:51:05 -0400] [16857] [INFO] Worker exiting (pid: 16857)
+[2017-06-19 12:51:05 -0400] [16849] [INFO] Worker exiting (pid: 16849)
+[2017-06-19 12:51:05 -0400] [16855] [INFO] Worker exiting (pid: 16855)
+[2017-06-19 12:51:05 -0400] [16938] [INFO] Booting worker with pid: 16938
+[2017-06-19 12:51:05 -0400] [16845] [DEBUG] 1 workers
+[2017-06-19 12:51:05 -0400] [16939] [INFO] Booting worker with pid: 16939
+[2017-06-19 12:51:05 -0400] [16940] [INFO] Booting worker with pid: 16940
+[2017-06-19 12:51:05 -0400] [16941] [INFO] Booting worker with pid: 16941
+[2017-06-19 12:51:05 -0400] [16942] [INFO] Booting worker with pid: 16942
+[2017-06-19 12:51:05 -0400] [16943] [INFO] Booting worker with pid: 16943
+[2017-06-19 12:51:06 -0400] [16944] [INFO] Booting worker with pid: 16944
+[2017-06-19 12:51:06 -0400] [16945] [INFO] Booting worker with pid: 16945
+[2017-06-19 12:51:06 -0400] [16946] [INFO] Booting worker with pid: 16946
+[2017-06-19 12:51:06 -0400] [16845] [DEBUG] 9 workers
+2017-06-19 12:51:07,109 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,110 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,113 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 12:51:07,117 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,117 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,120 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 12:51:07,180 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,182 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,194 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 12:51:07,268 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,269 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,272 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 12:51:07,277 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,278 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,281 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 12:51:07,324 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,325 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,328 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 12:51:07,331 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,332 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,336 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 12:51:07,414 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,415 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,418 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-19 12:51:07,439 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-19 12:51:07,439 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-19 12:51:07,443 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-19 12:52:22 -0400] [16944] [DEBUG] Closing connection. 
+[2017-06-19 12:52:23 -0400] [16942] [DEBUG] Closing connection. 
+[2017-06-19 12:52:23 -0400] [16946] [DEBUG] Closing connection. 
+[2017-06-19 12:52:23 -0400] [16940] [DEBUG] GET /ppid
+[2017-06-19 12:52:23 -0400] [16940] [INFO] Parent changed, shutting down: <Worker 16940>
+[2017-06-19 12:52:23 -0400] [16946] [INFO] Parent changed, shutting down: <Worker 16946>
+[2017-06-19 12:52:23 -0400] [16942] [INFO] Parent changed, shutting down: <Worker 16942>
+[2017-06-19 12:52:23 -0400] [16945] [DEBUG] Closing connection. 
+[2017-06-19 12:52:23 -0400] [16940] [INFO] Worker exiting (pid: 16940)
+[2017-06-19 12:52:23 -0400] [16946] [INFO] Worker exiting (pid: 16946)
+[2017-06-19 12:52:23 -0400] [16942] [INFO] Worker exiting (pid: 16942)
+[2017-06-19 12:52:23 -0400] [16945] [INFO] Parent changed, shutting down: <Worker 16945>
+[2017-06-19 12:52:23 -0400] [16945] [INFO] Worker exiting (pid: 16945)
+[2017-06-19 12:52:24 -0400] [16944] [DEBUG] Closing connection. 
+[2017-06-19 12:52:24 -0400] [16938] [INFO] Parent changed, shutting down: <Worker 16938>
+[2017-06-19 12:52:24 -0400] [16944] [INFO] Parent changed, shutting down: <Worker 16944>
+[2017-06-19 12:52:24 -0400] [16938] [INFO] Worker exiting (pid: 16938)
+[2017-06-19 12:52:24 -0400] [16944] [INFO] Worker exiting (pid: 16944)
+[2017-06-19 12:52:24 -0400] [16941] [INFO] Parent changed, shutting down: <Worker 16941>
+[2017-06-19 12:52:24 -0400] [16943] [INFO] Parent changed, shutting down: <Worker 16943>
+[2017-06-19 12:52:24 -0400] [16939] [DEBUG] Closing connection. 
+[2017-06-19 12:52:24 -0400] [16941] [INFO] Worker exiting (pid: 16941)
+[2017-06-19 12:52:24 -0400] [16943] [INFO] Worker exiting (pid: 16943)
+[2017-06-19 12:52:24 -0400] [16939] [INFO] Parent changed, shutting down: <Worker 16939>
+[2017-06-19 12:52:24 -0400] [16939] [INFO] Worker exiting (pid: 16939)
+[2017-06-21 11:05:39 -0400] [1576] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x110866848>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x110866578>
+  pre_fork: <function pre_fork at 0x1108666e0>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 20
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 9
+  proc_name: psiturk_experiment_server
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x110866410>
+  pre_exec: <function pre_exec at 0x110866de8>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x1108669b0>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x1108a7398>
+  config: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x110866f50>
+  post_request: <function post_request at 0x11086a0c8>
+  user: 501
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x110866b18>
+  threads: 1
+  max_requests: 0
+  limit_request_line: 0
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x11086a230>
+  chdir: /Users/tobi/Dropbox (MIT)/work/projects/moral_dynamics/code/javascript/experiment_template
+  paste: None
+  default_proc_name: gunicorn
+  errorlog: server.log
+  loglevel: debug
+  logconfig: None
+  syslog_addr: unix:///var/run/syslog
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x1108662a8>
+  worker_abort: <function worker_abort at 0x110866c80>
+  bind: ['0.0.0.0:22362']
+  raw_env: []
+  reload: False
+  check_config: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x11086a398>
+  timeout: 30
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+  statsd_prefix: 
+[2017-06-21 11:05:39 -0400] [1576] [INFO] Starting gunicorn 19.4.5
+[2017-06-21 11:05:39 -0400] [1576] [DEBUG] Arbiter booted
+[2017-06-21 11:05:39 -0400] [1576] [INFO] Listening at: http://0.0.0.0:22362 (1576)
+[2017-06-21 11:05:39 -0400] [1576] [INFO] Using worker: sync
+[2017-06-21 11:05:39 -0400] [1581] [INFO] Booting worker with pid: 1581
+[2017-06-21 11:05:39 -0400] [1582] [INFO] Booting worker with pid: 1582
+[2017-06-21 11:05:39 -0400] [1584] [INFO] Booting worker with pid: 1584
+[2017-06-21 11:05:39 -0400] [1585] [INFO] Booting worker with pid: 1585
+[2017-06-21 11:05:39 -0400] [1586] [INFO] Booting worker with pid: 1586
+[2017-06-21 11:05:40 -0400] [1587] [INFO] Booting worker with pid: 1587
+[2017-06-21 11:05:40 -0400] [1588] [INFO] Booting worker with pid: 1588
+[2017-06-21 11:05:40 -0400] [1589] [INFO] Booting worker with pid: 1589
+[2017-06-21 11:05:40 -0400] [1590] [INFO] Booting worker with pid: 1590
+[2017-06-21 11:05:40 -0400] [1576] [DEBUG] 9 workers
+2017-06-21 11:05:41,000 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,001 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 11:05:41,023 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,023 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 11:05:41,024 Hmm... it seems no custom code (custom.py) associated                         with this project.
+[2017-06-21 11:05:41 -0400] [1582] [DEBUG] Closing connection. 
+2017-06-21 11:05:41,048 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 11:05:41,249 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,250 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 11:05:41,265 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 11:05:41,266 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,266 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 11:05:41,269 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 11:05:41,281 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,282 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 11:05:41,287 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 11:05:41,302 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,302 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 11:05:41,305 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 11:05:41,312 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,313 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 11:05:41,316 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 11:05:41,325 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,326 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 11:05:41,327 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 11:05:41,501 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 11:05:41,502 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 11:05:41,505 /usr/local/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 11:05:42 -0400] [1581] [DEBUG] Closing connection. 
+[2017-06-21 11:05:42 -0400] [1581] [DEBUG] Closing connection. 
+[2017-06-21 11:05:42 -0400] [1587] [DEBUG] Closing connection. 
+[2017-06-21 11:05:42 -0400] [1590] [DEBUG] GET /ad
+[2017-06-21 11:05:44 -0400] [1584] [DEBUG] GET /consent
+[2017-06-21 11:05:44 -0400] [1581] [DEBUG] GET /static/js/utils.js
+[2017-06-21 11:05:44 -0400] [1588] [DEBUG] GET /static/css/general.css
+[2017-06-21 11:05:45 -0400] [1587] [DEBUG] GET /exp
+2017-06-21 11:05:45,706 Accessing /exp: debugR62GYU debugX8XTNJ debugFA6MHI 
+2017-06-21 11:05:45,712 given Counter({(0, 0): 0}) chose (0, 0)
+[2017-06-21 11:05:45 -0400] [1589] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-21 11:05:45 -0400] [1587] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-21 11:05:45 -0400] [1585] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-21 11:05:45 -0400] [1588] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-21 11:05:45 -0400] [1582] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-21 11:05:45 -0400] [1581] [DEBUG] GET /static/lib/mustache.js
+[2017-06-21 11:05:45 -0400] [1587] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-21 11:05:45 -0400] [1587] [DEBUG] GET /ad
+[2017-06-21 11:05:45 -0400] [1581] [DEBUG] GET /static/js/config.js
+[2017-06-21 11:05:45 -0400] [1588] [DEBUG] GET /static/js/psiturk.js
+[2017-06-21 11:05:45 -0400] [1584] [DEBUG] GET /static/js/task.js
+[2017-06-21 11:05:46 -0400] [1590] [DEBUG] GET /static/json/stim.json
+[2017-06-21 11:05:46 -0400] [1581] [DEBUG] GET /sync/debugFA6MHI%3AdebugX8XTNJ
+2017-06-21 11:05:46,226 GET /sync route with id: debugFA6MHI:debugX8XTNJ
+[2017-06-21 11:05:46 -0400] [1588] [DEBUG] GET /trial.html
+[2017-06-21 11:05:46 -0400] [1581] [DEBUG] GET /submit.html
+[2017-06-21 11:05:46 -0400] [1581] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-21 11:05:49 -0400] [1581] [DEBUG] GET /static/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+[2017-06-21 11:05:49 -0400] [1582] [DEBUG] GET /static/css/images/ui-bg_glass_100_f6f6f6_1x400.png
+[2017-06-21 11:05:49 -0400] [1584] [DEBUG] GET /static/videos/mp4/clip1.mp4
+[2017-06-21 11:07:46 -0400] [1588] [DEBUG] GET /static/css/images/ui-bg_glass_65_ffffff_1x400.png
+[2017-06-21 11:07:47 -0400] [1590] [DEBUG] GET /static/css/images/ui-bg_glass_100_fdf5ce_1x400.png
+[2017-06-21 11:11:24 -0400] [1590] [DEBUG] GET /static/videos/mp4/clip6.mp4
+[2017-06-21 11:11:32 -0400] [1585] [DEBUG] GET /static/videos/mp4/clip4.mp4
+[2017-06-21 11:16:59 -0400] [1584] [DEBUG] Closing connection. 
+[2017-06-21 11:17:01 -0400] [1584] [DEBUG] Closing connection. 
+[2017-06-21 11:17:01 -0400] [1586] [DEBUG] Closing connection. 
+[2017-06-21 11:17:01 -0400] [1586] [DEBUG] GET /ppid
+[2017-06-21 11:17:01 -0400] [1586] [INFO] Parent changed, shutting down: <Worker 1586>
+[2017-06-21 11:17:01 -0400] [1589] [INFO] Parent changed, shutting down: <Worker 1589>
+[2017-06-21 11:17:01 -0400] [1590] [DEBUG] Closing connection. 
+[2017-06-21 11:17:01 -0400] [1586] [INFO] Worker exiting (pid: 1586)
+[2017-06-21 11:17:01 -0400] [1589] [INFO] Worker exiting (pid: 1589)
+[2017-06-21 11:17:01 -0400] [1590] [INFO] Parent changed, shutting down: <Worker 1590>
+[2017-06-21 11:17:01 -0400] [1590] [INFO] Worker exiting (pid: 1590)
+[2017-06-21 11:17:01 -0400] [1581] [INFO] Parent changed, shutting down: <Worker 1581>
+[2017-06-21 11:17:01 -0400] [1582] [DEBUG] Closing connection. 
+[2017-06-21 11:17:01 -0400] [1584] [INFO] Parent changed, shutting down: <Worker 1584>
+[2017-06-21 11:17:01 -0400] [1587] [INFO] Parent changed, shutting down: <Worker 1587>
+[2017-06-21 11:17:01 -0400] [1584] [INFO] Worker exiting (pid: 1584)
+[2017-06-21 11:17:01 -0400] [1581] [INFO] Worker exiting (pid: 1581)
+[2017-06-21 11:17:01 -0400] [1587] [INFO] Worker exiting (pid: 1587)
+[2017-06-21 11:17:01 -0400] [1582] [INFO] Parent changed, shutting down: <Worker 1582>
+[2017-06-21 11:17:01 -0400] [1582] [INFO] Worker exiting (pid: 1582)
+[2017-06-21 11:17:02 -0400] [1585] [INFO] Parent changed, shutting down: <Worker 1585>
+[2017-06-21 11:17:02 -0400] [1588] [DEBUG] Closing connection. 
+[2017-06-21 11:17:02 -0400] [1585] [INFO] Worker exiting (pid: 1585)
+[2017-06-21 11:17:02 -0400] [1588] [INFO] Parent changed, shutting down: <Worker 1588>
+[2017-06-21 11:17:02 -0400] [1588] [INFO] Worker exiting (pid: 1588)
+[2017-06-21 18:05:04 +0000] [1888] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7f877f4a1de8>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7f877f4a1b18>
+  pre_fork: <function pre_fork at 0x7f877f4a1c80>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 17
+  proc_name: psiturk_experiment_server
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7f877f4a19b0>
+  pre_exec: <function pre_exec at 0x7f877f4a9410>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7f877f4a1f50>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7f877f4f9410>
+  config: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7f877f4a9578>
+  post_request: <function post_request at 0x7f877f4a9668>
+  user: 1000
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7f877f4a9140>
+  threads: 1
+  max_requests: 0
+  limit_request_line: 0
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7f877f4a97d0>
+  chdir: /home/felix/GitHub/MoralDynamics/experiment_template
+  paste: None
+  default_proc_name: gunicorn
+  errorlog: server.log
+  loglevel: debug
+  logconfig: None
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7f877f4a1848>
+  worker_abort: <function worker_abort at 0x7f877f4a92a8>
+  bind: ['0.0.0.0:22362']
+  raw_env: []
+  reload: False
+  check_config: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7f877f4a9938>
+  timeout: 30
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+  statsd_prefix: 
+[2017-06-21 18:05:04 +0000] [1888] [INFO] Starting gunicorn 19.4.5
+[2017-06-21 18:05:04 +0000] [1888] [DEBUG] Arbiter booted
+[2017-06-21 18:05:04 +0000] [1888] [INFO] Listening at: http://0.0.0.0:22362 (1888)
+[2017-06-21 18:05:04 +0000] [1888] [INFO] Using worker: sync
+[2017-06-21 18:05:04 +0000] [1895] [INFO] Booting worker with pid: 1895
+[2017-06-21 18:05:04 +0000] [1898] [INFO] Booting worker with pid: 1898
+[2017-06-21 18:05:04 +0000] [1899] [INFO] Booting worker with pid: 1899
+2017-06-21 18:05:04,530 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,530 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,531 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 18:05:04 +0000] [1903] [INFO] Booting worker with pid: 1903
+[2017-06-21 18:05:04 +0000] [1906] [INFO] Booting worker with pid: 1906
+[2017-06-21 18:05:04 +0000] [1907] [INFO] Booting worker with pid: 1907
+[2017-06-21 18:05:04 +0000] [1908] [INFO] Booting worker with pid: 1908
+[2017-06-21 18:05:04 +0000] [1909] [INFO] Booting worker with pid: 1909
+2017-06-21 18:05:04,610 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,610 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,612 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:04,668 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,668 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,670 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 18:05:04 +0000] [1918] [INFO] Booting worker with pid: 1918
+[2017-06-21 18:05:04 +0000] [1919] [INFO] Booting worker with pid: 1919
+[2017-06-21 18:05:04 +0000] [1921] [INFO] Booting worker with pid: 1921
+2017-06-21 18:05:04,769 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,770 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,771 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 18:05:04 +0000] [1923] [INFO] Booting worker with pid: 1923
+2017-06-21 18:05:04,831 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,831 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,833 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:04,854 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,854 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,856 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:04,862 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,862 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,864 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 18:05:04 +0000] [1929] [INFO] Booting worker with pid: 1929
+[2017-06-21 18:05:04 +0000] [1931] [INFO] Booting worker with pid: 1931
+2017-06-21 18:05:04,896 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,897 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,899 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 18:05:04 +0000] [1934] [INFO] Booting worker with pid: 1934
+[2017-06-21 18:05:04 +0000] [1933] [INFO] Booting worker with pid: 1933
+[2017-06-21 18:05:04 +0000] [1936] [INFO] Booting worker with pid: 1936
+[2017-06-21 18:05:04 +0000] [1888] [DEBUG] 17 workers
+2017-06-21 18:05:04,972 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,972 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,974 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:04,988 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:04,988 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:04,990 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:05,036 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:05,036 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:05,038 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:05,072 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:05,072 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:05,074 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:05,141 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:05,141 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:05,143 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:05,151 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:05,151 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:05,153 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:05,154 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:05,154 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:05,156 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:05,173 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:05,173 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:05,174 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 18:05:05,211 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 18:05:05,211 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 18:05:05,213 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 18:05:05 +0000] [1903] [DEBUG] Closing connection. 
+[2017-06-21 18:05:08 +0000] [1923] [DEBUG] Closing connection. 
+[2017-06-21 18:05:08 +0000] [1929] [DEBUG] Closing connection. 
+[2017-06-21 18:05:08 +0000] [1909] [DEBUG] Closing connection. 
+[2017-06-21 18:05:08 +0000] [1921] [DEBUG] GET /ad
+[2017-06-21 18:05:14 +0000] [1909] [DEBUG] GET /consent
+[2017-06-21 18:05:14 +0000] [1918] [DEBUG] GET /static/js/utils.js
+[2017-06-21 18:05:14 +0000] [1931] [DEBUG] GET /static/css/general.css
+[2017-06-21 18:05:25 +0000] [1921] [DEBUG] GET /exp
+2017-06-21 18:05:25,831 Accessing /exp: debug1BOAFT debugCF7UW8 debugXJC00T 
+2017-06-21 18:05:25,840 given Counter({(0, 0): 0}) chose (0, 0)
+[2017-06-21 18:05:25 +0000] [1931] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-21 18:05:25 +0000] [1933] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-21 18:05:25 +0000] [1899] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-21 18:05:25 +0000] [1906] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-21 18:05:25 +0000] [1906] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-21 18:05:25 +0000] [1923] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-21 18:05:25 +0000] [1919] [DEBUG] GET /static/lib/mustache.js
+[2017-06-21 18:05:25 +0000] [1899] [DEBUG] GET /static/js/config.js
+[2017-06-21 18:05:25 +0000] [1933] [DEBUG] GET /static/css/general.css
+[2017-06-21 18:05:25 +0000] [1899] [DEBUG] GET /ad
+[2017-06-21 18:05:25 +0000] [1921] [DEBUG] GET /static/js/psiturk.js
+[2017-06-21 18:05:25 +0000] [1933] [DEBUG] GET /static/js/task.js
+[2017-06-21 18:05:25 +0000] [1934] [DEBUG] GET /static/js/utils.js
+[2017-06-21 18:05:26 +0000] [1923] [DEBUG] GET /static/json/stim.json
+[2017-06-21 18:05:26 +0000] [1903] [DEBUG] GET /sync/debugXJC00T%3AdebugCF7UW8
+2017-06-21 18:05:26,178 GET /sync route with id: debugXJC00T:debugCF7UW8
+[2017-06-21 18:05:26 +0000] [1895] [DEBUG] GET /trial.html
+[2017-06-21 18:05:26 +0000] [1934] [DEBUG] GET /submit.html
+[2017-06-21 18:05:26 +0000] [1898] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-21 18:05:30 +0000] [1895] [DEBUG] GET /static/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+[2017-06-21 18:05:30 +0000] [1934] [DEBUG] GET /static/css/images/ui-bg_glass_100_f6f6f6_1x400.png
+[2017-06-21 18:05:30 +0000] [1936] [DEBUG] GET /static/videos/mp4/clip2.mp4
+[2017-06-21 18:05:45 +0000] [1899] [DEBUG] GET /static/css/images/ui-bg_glass_65_ffffff_1x400.png
+[2017-06-21 18:05:45 +0000] [1899] [DEBUG] GET /static/css/images/ui-bg_glass_100_fdf5ce_1x400.png
+[2017-06-21 18:05:48 +0000] [1919] [DEBUG] GET /static/videos/mp4/clip1.mp4
+[2017-06-21 18:05:52 +0000] [1903] [DEBUG] GET /static/videos/mp4/clip7.mp4
+[2017-06-21 18:05:59 +0000] [1895] [DEBUG] GET /static/videos/mp4/clip3.mp4
+[2017-06-21 18:06:02 +0000] [1929] [DEBUG] GET /static/videos/mp4/clip8.mp4
+[2017-06-21 18:06:06 +0000] [1907] [DEBUG] GET /static/videos/mp4/clip6.mp4
+[2017-06-21 18:06:14 +0000] [1906] [DEBUG] GET /static/videos/mp4/clip5.mp4
+[2017-06-21 18:06:22 +0000] [1923] [DEBUG] GET /static/videos/mp4/clip4.mp4
+[2017-06-21 18:06:40 +0000] [1908] [DEBUG] GET /consent
+[2017-06-21 18:06:40 +0000] [1923] [DEBUG] GET /static/js/utils.js
+[2017-06-21 18:06:40 +0000] [1908] [DEBUG] GET /static/css/general.css
+[2017-06-21 18:06:44 +0000] [1931] [DEBUG] GET /exp
+2017-06-21 18:06:44,990 Accessing /exp: debug1BOAFT debugCF7UW8 debugXJC00T 
+[2017-06-21 18:06:45 +0000] [1936] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-21 18:06:45 +0000] [1907] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-21 18:06:45 +0000] [1931] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-21 18:06:45 +0000] [1921] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-21 18:06:45 +0000] [1895] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-21 18:06:45 +0000] [1933] [DEBUG] GET /static/lib/mustache.js
+[2017-06-21 18:06:45 +0000] [1909] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-21 18:06:45 +0000] [1933] [DEBUG] GET /static/js/config.js
+[2017-06-21 18:06:45 +0000] [1936] [DEBUG] GET /static/js/psiturk.js
+[2017-06-21 18:06:45 +0000] [1898] [DEBUG] GET /static/js/task.js
+[2017-06-21 18:06:45 +0000] [1895] [DEBUG] GET /ad
+[2017-06-21 18:06:45 +0000] [1936] [DEBUG] GET /static/json/stim.json
+[2017-06-21 18:06:45 +0000] [1918] [DEBUG] GET /sync/debugXJC00T%3AdebugCF7UW8
+2017-06-21 18:06:45,306 GET /sync route with id: debugXJC00T:debugCF7UW8
+[2017-06-21 18:06:45 +0000] [1933] [DEBUG] GET /trial.html
+[2017-06-21 18:06:45 +0000] [1898] [DEBUG] GET /submit.html
+[2017-06-21 18:06:45 +0000] [1936] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-21 18:27:22 +0000] [1931] [DEBUG] Closing connection. 
+[2017-06-21 18:27:25 +0000] [1898] [DEBUG] Closing connection. 
+[2017-06-21 18:27:27 +0000] [1919] [DEBUG] Closing connection. 
+[2017-06-21 18:27:34 +0000] [1934] [DEBUG] Closing connection. 
+[2017-06-21 18:27:37 +0000] [1898] [DEBUG] Closing connection. 
+[2017-06-21 18:27:37 +0000] [1899] [DEBUG] Closing connection. 
+[2017-06-21 18:27:37 +0000] [1909] [DEBUG] Closing connection. 
+[2017-06-21 18:27:37 +0000] [1921] [DEBUG] GET /ad
+[2017-06-21 18:27:39 +0000] [1909] [DEBUG] GET /consent
+[2017-06-21 18:27:39 +0000] [1923] [DEBUG] GET /static/js/utils.js
+[2017-06-21 18:27:39 +0000] [1918] [DEBUG] GET /static/css/general.css
+[2017-06-21 18:27:40 +0000] [1931] [DEBUG] GET /exp
+2017-06-21 18:27:40,727 Accessing /exp: debugQ4H538 debugG3WJ0K debug5QD5M3 
+2017-06-21 18:27:40,735 given Counter({(0, 0): 1}) chose (0, 0)
+[2017-06-21 18:27:40 +0000] [1934] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-21 18:27:40 +0000] [1933] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-21 18:27:40 +0000] [1931] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-21 18:27:40 +0000] [1899] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-21 18:27:40 +0000] [1936] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-21 18:27:40 +0000] [1934] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-21 18:27:40 +0000] [1908] [DEBUG] GET /static/lib/mustache.js
+[2017-06-21 18:27:40 +0000] [1931] [DEBUG] GET /static/js/config.js
+[2017-06-21 18:27:40 +0000] [1929] [DEBUG] GET /static/js/psiturk.js
+[2017-06-21 18:27:40 +0000] [1899] [DEBUG] GET /static/js/task.js
+[2017-06-21 18:27:40 +0000] [1934] [DEBUG] GET /ad
+[2017-06-21 18:27:40 +0000] [1929] [DEBUG] GET /static/json/stim.json
+[2017-06-21 18:27:41 +0000] [1898] [DEBUG] GET /sync/debug5QD5M3%3AdebugG3WJ0K
+2017-06-21 18:27:41,009 GET /sync route with id: debug5QD5M3:debugG3WJ0K
+[2017-06-21 18:27:41 +0000] [1908] [DEBUG] GET /trial.html
+[2017-06-21 18:27:41 +0000] [1906] [DEBUG] GET /submit.html
+[2017-06-21 18:27:41 +0000] [1898] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-21 18:28:47 +0000] [1903] [DEBUG] Closing connection. 
+[2017-06-21 18:28:48 +0000] [1907] [DEBUG] Closing connection. 
+[2017-06-21 18:28:48 +0000] [1934] [DEBUG] Closing connection. 
+[2017-06-21 18:28:48 +0000] [1899] [DEBUG] Closing connection. 
+[2017-06-21 18:28:49 +0000] [1923] [DEBUG] GET /ad
+[2017-06-21 18:28:53 +0000] [1899] [DEBUG] GET /consent
+[2017-06-21 18:28:53 +0000] [1934] [DEBUG] GET /static/js/utils.js
+[2017-06-21 18:28:53 +0000] [1895] [DEBUG] GET /static/css/general.css
+[2017-06-21 18:28:57 +0000] [1907] [DEBUG] GET /exp
+2017-06-21 18:28:57,794 Accessing /exp: debugHOUHVS debugGALU10 debugUF73XD 
+2017-06-21 18:28:57,807 given Counter({(0, 0): 2}) chose (0, 0)
+[2017-06-21 18:28:57 +0000] [1936] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-21 18:28:57 +0000] [1909] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-21 18:28:57 +0000] [1921] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-21 18:28:57 +0000] [1907] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-21 18:28:57 +0000] [1931] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-21 18:28:57 +0000] [1906] [DEBUG] GET /static/lib/mustache.js
+[2017-06-21 18:28:57 +0000] [1909] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-21 18:28:57 +0000] [1936] [DEBUG] GET /static/js/config.js
+[2017-06-21 18:28:57 +0000] [1921] [DEBUG] GET /static/js/psiturk.js
+[2017-06-21 18:28:57 +0000] [1931] [DEBUG] GET /static/js/task.js
+[2017-06-21 18:28:57 +0000] [1907] [DEBUG] GET /ad
+[2017-06-21 18:28:58 +0000] [1933] [DEBUG] GET /static/json/stim.json
+[2017-06-21 18:28:58 +0000] [1903] [DEBUG] GET /sync/debugUF73XD%3AdebugGALU10
+2017-06-21 18:28:58,084 GET /sync route with id: debugUF73XD:debugGALU10
+[2017-06-21 18:28:58 +0000] [1919] [DEBUG] GET /trial.html
+[2017-06-21 18:28:58 +0000] [1918] [DEBUG] GET /submit.html
+[2017-06-21 18:28:58 +0000] [1929] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-21 18:29:42 +0000] [1908] [DEBUG] GET /consent
+[2017-06-21 18:29:42 +0000] [1906] [DEBUG] GET /static/js/utils.js
+[2017-06-21 18:29:42 +0000] [1898] [DEBUG] GET /static/css/general.css
+[2017-06-21 18:29:42 +0000] [1933] [DEBUG] GET /ad
+[2017-06-21 18:29:44 +0000] [1909] [DEBUG] GET /exp
+2017-06-21 18:29:44,047 Accessing /exp: debugHOUHVS debugGALU10 debugUF73XD 
+[2017-06-21 18:29:44 +0000] [1936] [DEBUG] GET /static/lib/seedrandom.js
+[2017-06-21 18:29:44 +0000] [1918] [DEBUG] GET /static/lib/jquery.min.js
+[2017-06-21 18:29:44 +0000] [1895] [DEBUG] GET /static/lib/backbone-min.js
+[2017-06-21 18:29:44 +0000] [1899] [DEBUG] GET /static/lib/mustache.js
+[2017-06-21 18:29:44 +0000] [1909] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-06-21 18:29:44 +0000] [1931] [DEBUG] GET /static/lib/underscore-min.js
+[2017-06-21 18:29:44 +0000] [1898] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-06-21 18:29:44 +0000] [1895] [DEBUG] GET /static/js/config.js
+[2017-06-21 18:29:44 +0000] [1936] [DEBUG] GET /static/js/psiturk.js
+[2017-06-21 18:29:44 +0000] [1899] [DEBUG] GET /static/js/task.js
+[2017-06-21 18:29:44 +0000] [1918] [DEBUG] GET /static/json/stim.json
+[2017-06-21 18:29:44 +0000] [1934] [DEBUG] GET /sync/debugUF73XD%3AdebugGALU10
+2017-06-21 18:29:44,344 GET /sync route with id: debugUF73XD:debugGALU10
+[2017-06-21 18:29:44 +0000] [1929] [DEBUG] GET /trial.html
+[2017-06-21 18:29:44 +0000] [1903] [DEBUG] GET /submit.html
+[2017-06-21 18:29:44 +0000] [1906] [DEBUG] GET /static/images/example_stimulus.jpg
+[2017-06-21 19:05:20 +0000] [1909] [DEBUG] Closing connection. 
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1921)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1923)
+[2017-06-21 22:00:14 +0000] [1923] [INFO] Worker exiting (pid: 1923)
+[2017-06-21 22:00:14 +0000] [1921] [INFO] Worker exiting (pid: 1921)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1895)
+[2017-06-21 22:00:14 +0000] [1895] [INFO] Worker exiting (pid: 1895)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1929)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1898)
+[2017-06-21 22:00:14 +0000] [1929] [INFO] Worker exiting (pid: 1929)
+[2017-06-21 22:00:14 +0000] [1898] [INFO] Worker exiting (pid: 1898)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1899)
+[2017-06-21 22:00:14 +0000] [1899] [INFO] Worker exiting (pid: 1899)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1931)
+[2017-06-21 22:00:14 +0000] [1931] [INFO] Worker exiting (pid: 1931)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1933)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1934)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1903)
+[2017-06-21 22:00:14 +0000] [1933] [INFO] Worker exiting (pid: 1933)
+[2017-06-21 22:00:14 +0000] [1934] [INFO] Worker exiting (pid: 1934)
+[2017-06-21 22:00:14 +0000] [1903] [INFO] Worker exiting (pid: 1903)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1936)
+[2017-06-21 22:00:14 +0000] [1936] [INFO] Worker exiting (pid: 1936)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1906)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1907)
+[2017-06-21 22:00:14 +0000] [1906] [INFO] Worker exiting (pid: 1906)
+[2017-06-21 22:00:14 +0000] [1907] [INFO] Worker exiting (pid: 1907)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1908)
+[2017-06-21 22:00:14 +0000] [1908] [INFO] Worker exiting (pid: 1908)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1909)
+[2017-06-21 22:00:14 +0000] [1909] [INFO] Worker exiting (pid: 1909)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1918)
+[2017-06-21 22:00:14 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:1919)
+[2017-06-21 22:00:14 +0000] [6660] [INFO] Booting worker with pid: 6660
+[2017-06-21 22:00:14 +0000] [1919] [INFO] Worker exiting (pid: 1919)
+[2017-06-21 22:00:14 +0000] [1918] [INFO] Worker exiting (pid: 1918)
+[2017-06-21 22:00:14 +0000] [6664] [INFO] Booting worker with pid: 6664
+[2017-06-21 22:00:14 +0000] [6663] [INFO] Booting worker with pid: 6663
+[2017-06-21 22:00:14 +0000] [6665] [INFO] Booting worker with pid: 6665
+[2017-06-21 22:00:14 +0000] [6666] [INFO] Booting worker with pid: 6666
+[2017-06-21 22:00:14 +0000] [6667] [INFO] Booting worker with pid: 6667
+[2017-06-21 22:00:14 +0000] [6669] [INFO] Booting worker with pid: 6669
+[2017-06-21 22:00:14 +0000] [6670] [INFO] Booting worker with pid: 6670
+[2017-06-21 22:00:14 +0000] [1888] [DEBUG] 8 workers
+[2017-06-21 22:00:14 +0000] [6673] [INFO] Booting worker with pid: 6673
+[2017-06-21 22:00:14 +0000] [6685] [INFO] Booting worker with pid: 6685
+[2017-06-21 22:00:14 +0000] [6686] [INFO] Booting worker with pid: 6686
+[2017-06-21 22:00:14 +0000] [6692] [INFO] Booting worker with pid: 6692
+[2017-06-21 22:00:14 +0000] [6694] [INFO] Booting worker with pid: 6694
+2017-06-21 22:00:14,603 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,603 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,605 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 22:00:14 +0000] [6695] [INFO] Booting worker with pid: 6695
+2017-06-21 22:00:14,620 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,620 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,622 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,644 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,644 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,648 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 22:00:14 +0000] [6698] [INFO] Booting worker with pid: 6698
+[2017-06-21 22:00:14 +0000] [6701] [INFO] Booting worker with pid: 6701
+2017-06-21 22:00:14,674 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,675 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,677 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,684 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,684 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,686 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,698 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,707 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,709 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,710 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,710 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,712 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,749 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,750 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,752 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 22:00:14 +0000] [6706] [INFO] Booting worker with pid: 6706
+2017-06-21 22:00:14,807 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,809 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,816 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 22:00:14 +0000] [1888] [DEBUG] 17 workers
+2017-06-21 22:00:14,875 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,876 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,879 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,949 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,950 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,952 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,957 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,957 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,959 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,961 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,962 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,963 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:14,989 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:14,989 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:14,990 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:15,005 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:15,005 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:15,007 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:15,032 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:15,032 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:15,033 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:00:15,046 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:00:15,046 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:00:15,048 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 22:18:42 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:6664)
+[2017-06-21 22:18:42 +0000] [1888] [CRITICAL] WORKER TIMEOUT (pid:6665)
+[2017-06-21 22:18:42 +0000] [6664] [INFO] Worker exiting (pid: 6664)
+[2017-06-21 22:18:42 +0000] [6665] [INFO] Worker exiting (pid: 6665)
+[2017-06-21 22:18:42 +0000] [7898] [INFO] Booting worker with pid: 7898
+[2017-06-21 22:18:42 +0000] [7899] [INFO] Booting worker with pid: 7899
+2017-06-21 22:18:43,066 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:18:43,066 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:18:43,068 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-06-21 22:18:43,126 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-06-21 22:18:43,126 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-06-21 22:18:43,127 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-06-21 22:24:12 +0000] [6692] [DEBUG] Closing connection. 
+[2017-06-21 22:24:14 +0000] [6667] [DEBUG] Closing connection. 
+[2017-06-21 22:24:14 +0000] [6686] [DEBUG] Closing connection. 
+[2017-06-21 22:24:14 +0000] [6701] [DEBUG] GET /ppid
+[2017-06-21 22:24:14 +0000] [6694] [INFO] Parent changed, shutting down: <Worker 6694>
+[2017-06-21 22:24:14 +0000] [6667] [INFO] Parent changed, shutting down: <Worker 6667>
+[2017-06-21 22:24:14 +0000] [6701] [INFO] Parent changed, shutting down: <Worker 6701>
+[2017-06-21 22:24:14 +0000] [6698] [INFO] Parent changed, shutting down: <Worker 6698>
+[2017-06-21 22:24:14 +0000] [6673] [DEBUG] Closing connection. 
+[2017-06-21 22:24:14 +0000] [6686] [INFO] Parent changed, shutting down: <Worker 6686>
+[2017-06-21 22:24:14 +0000] [7899] [INFO] Parent changed, shutting down: <Worker 7899>
+[2017-06-21 22:24:14 +0000] [6694] [INFO] Worker exiting (pid: 6694)
+[2017-06-21 22:24:14 +0000] [6667] [INFO] Worker exiting (pid: 6667)
+[2017-06-21 22:24:14 +0000] [6698] [INFO] Worker exiting (pid: 6698)
+[2017-06-21 22:24:14 +0000] [6701] [INFO] Worker exiting (pid: 6701)
+[2017-06-21 22:24:14 +0000] [6686] [INFO] Worker exiting (pid: 6686)
+[2017-06-21 22:24:14 +0000] [7899] [INFO] Worker exiting (pid: 7899)
+[2017-06-21 22:24:14 +0000] [6673] [INFO] Parent changed, shutting down: <Worker 6673>
+[2017-06-21 22:24:14 +0000] [6673] [INFO] Worker exiting (pid: 6673)
+[2017-06-21 22:24:14 +0000] [6669] [INFO] Parent changed, shutting down: <Worker 6669>
+[2017-06-21 22:24:14 +0000] [6695] [INFO] Parent changed, shutting down: <Worker 6695>
+[2017-06-21 22:24:14 +0000] [6670] [INFO] Parent changed, shutting down: <Worker 6670>
+[2017-06-21 22:24:14 +0000] [6685] [DEBUG] Closing connection. 
+[2017-06-21 22:24:14 +0000] [6669] [INFO] Worker exiting (pid: 6669)
+[2017-06-21 22:24:14 +0000] [6670] [INFO] Worker exiting (pid: 6670)
+[2017-06-21 22:24:14 +0000] [6695] [INFO] Worker exiting (pid: 6695)
+[2017-06-21 22:24:14 +0000] [6685] [INFO] Parent changed, shutting down: <Worker 6685>
+[2017-06-21 22:24:14 +0000] [6685] [INFO] Worker exiting (pid: 6685)
+[2017-06-21 22:24:15 +0000] [6692] [INFO] Parent changed, shutting down: <Worker 6692>
+[2017-06-21 22:24:15 +0000] [6660] [INFO] Parent changed, shutting down: <Worker 6660>
+[2017-06-21 22:24:15 +0000] [6692] [INFO] Worker exiting (pid: 6692)
+[2017-06-21 22:24:15 +0000] [6660] [INFO] Worker exiting (pid: 6660)
+[2017-06-21 22:24:15 +0000] [6666] [DEBUG] Closing connection. 
+[2017-06-21 22:24:15 +0000] [6666] [INFO] Parent changed, shutting down: <Worker 6666>
+[2017-06-21 22:24:15 +0000] [6666] [INFO] Worker exiting (pid: 6666)
+[2017-06-21 22:24:15 +0000] [6706] [INFO] Parent changed, shutting down: <Worker 6706>
+[2017-06-21 22:24:15 +0000] [6663] [INFO] Parent changed, shutting down: <Worker 6663>
+[2017-06-21 22:24:15 +0000] [7898] [DEBUG] Closing connection. 
+[2017-06-21 22:24:15 +0000] [6706] [INFO] Worker exiting (pid: 6706)
+[2017-06-21 22:24:15 +0000] [6663] [INFO] Worker exiting (pid: 6663)
+[2017-06-21 22:24:15 +0000] [7898] [INFO] Parent changed, shutting down: <Worker 7898>
+[2017-06-21 22:24:15 +0000] [7898] [INFO] Worker exiting (pid: 7898)
