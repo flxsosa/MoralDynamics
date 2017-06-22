@@ -26,7 +26,7 @@ AGENT_WALKING = 150
 # SPRITES
 BACKGROUND_S = pygame.image.load("Sprites/sand.jpg")
 BACKGROUND_G = pygame.image.load("Sprites/grass.jpg")
-fireSprite = pygame.image.load("Sprites/FIRE.png")
+fireSprite = pygame.image.load("Sprites/firea.png")
 patientSprite = pygame.image.load("Sprites/Patient.png")
 agentSprite = pygame.image.load("Sprites/Agent.png")
 
@@ -57,6 +57,24 @@ def setBackground(screen):
 	screen.blit(BACKGROUND_S, (400,200))
 	screen.blit(BACKGROUND_S, (600,200))
 	screen.blit(BACKGROUND_S, (800,200))
+
+def wait(screen, space, options, cylinder, ball, cone):
+
+	pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
+	pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
+	pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+
+	time=100
+	while (time > 0):
+			time-=1
+			# draw screen
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
+			screen.blit(fireSprite, pBall)
+			screen.blit(patientSprite, pCone)
+			screen.blit(agentSprite, pAgent)
+			pygame.display.flip()
 
 def shortDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -104,13 +122,16 @@ def shortDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# set clock
 	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick += 1
@@ -244,10 +265,13 @@ def mediumDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick += 1
@@ -382,10 +406,13 @@ def longDistance(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick+=1
@@ -522,10 +549,13 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick+=1
@@ -675,10 +705,13 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick+=1
@@ -817,10 +850,13 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick+=1
@@ -957,10 +993,13 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick+=1
@@ -1100,10 +1139,13 @@ def doubleTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick+=1
@@ -1242,10 +1284,13 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		time -= 1
@@ -1379,10 +1424,13 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		time -= 1
@@ -1514,10 +1562,13 @@ def touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	cnt = 0
 	x = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick+=1
@@ -1646,10 +1697,13 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		time -= 1
@@ -1742,103 +1796,6 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def test(space, screen, options, guess=False, impulse=100):
-	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
-	
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"] = screen
-	ch0.post_solve = handlers.rem0
-	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"] = screen
-	ch1.begin = handlers.rem2
-
-	DYN_FRICTION = 0.5
-	STAT_FRICTION = None
-	# dynamic friction
-	space.damping = DYN_FRICTION
-	
-	# add shapes
-	ball = agents.fireball(500, 300, F_MASS)
-	#space.add(ball.body, ball.shape)
-	cone = agents.patient(450, 300, AP_MASS)
-	#space.add(cone.body, cone.shape)
-	cylinder = agents.agent(300, 300, AP_MASS)
-	space.add(cylinder.body, cylinder.shape)
-	
-	# load fireball sprite into simulation
-	fireSprite = pygame.image.load("Plots/fireball.png")
-	
-	# lists for impulses per timestep, total impulses, running flag, and ticks
-	total = []
-	running = True
-	tick = 0
-
-	# animation flag and counter
-	x = 0
-	cnt = 0
-	dist = []
-	cylinder.body.apply_impulse_at_local_point((impulse,0))
-	total.append(impulse)
-	# run simulation
-	while running and tick < 200:
-		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
-		pCone = (cone.body.position[0]-30,cone.body.position[1]-40)
-		tick += 1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		
-		print "Velocity: ", cylinder.body.velocity[0]#, "Time: ", tick
-		print "Distance: ", cylinder.body.position[0] - 300
-		print "Force: ", cylinder.body.force
-
-		dist.append(cylinder.body.velocity[0]/50.0)
-
-		# set clock
-		clock = pygame.time.Clock()
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			screen.blit(fireSprite, pBall)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)
-	
-	# remove value from collision list
-	try:
-		handlers.collision = []
-	except:
-		print "Exited before collision."
-
-	# output to user and return tuple
-	print "Total impulse: ", sum(total)
-	print sum(dist)
-
 def sim1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
@@ -1885,13 +1842,16 @@ def sim1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# set clock
 	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick += 1
@@ -2027,13 +1987,16 @@ def sim2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# set clock
 	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick += 1
@@ -2170,13 +2133,16 @@ def agentPush(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# set clock
 	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick += 1
@@ -2316,13 +2282,16 @@ def agentTap(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# set clock
 	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick += 1
@@ -2460,13 +2429,16 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
 	# set clock
 	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
-		pBall = (ball.body.position[0]-30,ball.body.position[1]-60)
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		tick += 1
@@ -2539,6 +2511,141 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			cnt -= 1
 		else:
 			screen.blit(fireSprite, pBall)
+			screen.blit(agentSprite, pAgent)
+
+		# adjust pygame screen and move clock forward
+		pygame.display.flip()
+		clock.tick(50)
+
+	# remove value from collision list
+	try:
+		handlers.collision = []
+		handlers.PF_COLLISION = []
+	except:
+		print "Exited before collision."
+
+	# output to user and return tuple
+	print "Total impulse: ", sum(total)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
+
+def test(space, screen, options, guess=False, impulse=100):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball from a short distance
+	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	# if it's a truth sim, we use a display
+	if(not guess):
+		pygame.display.set_caption("Simulation 1: Short Distance")
+	
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(0, 1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+
+	# dynamic friction
+	space.damping = DYN_FRICTION
+	
+	# add shapes
+	ball = agents.fireball(900, 300, F_MASS)
+	#space.add(ball.body, ball.shape)
+	cone = agents.patient(550, 300, AP_MASS)
+	space.add(cone.body, cone.shape)
+	cylinder = agents.agent(450, 300, AP_MASS)
+	space.add(cylinder.body, cylinder.shape)
+	
+	# lists for impulses per timestep, total impulses, running flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total = []
+	running = True
+	tick = 0
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
+	# set clock
+	clock = pygame.time.Clock()
+
+	# run simulation
+	while running and len(handlers.PF_COLLISION) == 0:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
+		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		tick += 1
+
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				running = False
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
+		
+		# setup display and run sim based on whether it's truth or guess	
+		if(not guess):
+			# draw screen
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
+			#screen.blit(fireSprite, pBall)
+			screen.blit(patientSprite, pCone)
+			screen.blit(agentSprite, pAgent)
+
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+		else:
+			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
+
+	# patient collision
+	for i in range(25):
+		screen.fill((255,255,255))
+		space.debug_draw(options)
+		setBackground(screen)
+		#screen.blit(fireSprite, pBall)
+		screen.blit(agentSprite, pAgent)
+
+		# conditional animation sequence
+		if (cnt < 12 and x == 0):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt += 1
+			if cnt == 12:
+				x = 1
+				cnt = 11
+		elif (cnt >= 0 and x == 1):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt -= 1
+		else:
+			#screen.blit(fireSprite, pBall)
 			screen.blit(agentSprite, pAgent)
 
 		# adjust pygame screen and move clock forward
