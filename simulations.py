@@ -15,6 +15,8 @@ from pygame.locals import *
 import sys
 import glob
 
+import vidcap
+
 # MODEL PARAMETERS
 
 DYN_FRICTION = 0.6
