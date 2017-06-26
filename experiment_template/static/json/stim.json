@@ -1,28 +1,48 @@
 {
+        "intro":[
+        {
+            "name": "experiment_slides"
+        },
+        {
+            "name": "experiment_slides1"
+        },
+        {
+            "name": "experiment_slides2"
+        },
+        {
+            "name": "experiment_slides3"
+        },
+        {
+            "name": "experiment_slides4"
+        },
+        {
+            "name": "experiment_slides5"
+        },
+        {
+            "name": "experiment_slides6"
+        }
+    ],
         "stim":[
         {
-            "name": "clip1"
+            "name": "vidcap"
         },
         {
-            "name": "clip2"
+            "name": "vidcap1"
         },
         {
-            "name": "clip3"
+            "name": "vidcap2"
         },
         {
-            "name": "clip4"
+            "name": "vidcap3"
         },
         {
-            "name": "clip5"
+            "name": "vidcap4"
         },
         {
-            "name": "clip6"
+            "name": "vidcap5"
         },
         {
-            "name": "clip7"
-        },
-        {
-            "name": "clip8"
+            "name": "vidcap6"
         }
     ],
     "text": "",
