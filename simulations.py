@@ -15,7 +15,7 @@ from pygame.locals import *
 import sys
 import glob
 
-import vidcap
+#import vidcap
 
 # MODEL PARAMETERS
 
@@ -2648,6 +2648,732 @@ def test(space, screen, options, guess=False, impulse=100):
 			cnt -= 1
 		else:
 			#screen.blit(fireSprite, pBall)
+			screen.blit(agentSprite, pAgent)
+
+		# adjust pygame screen and move clock forward
+		pygame.display.flip()
+		clock.tick(50)
+
+	# remove value from collision list
+	try:
+		handlers.collision = []
+		handlers.PF_COLLISION = []
+	except:
+		print "Exited before collision."
+
+	# output to user and return tuple
+	print "Total impulse: ", sum(total)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
+
+def patientFireballMoving(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball from a short distance
+	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	# if it's a truth sim, we use a display
+	if(not guess):
+		pygame.display.set_caption("Simulation 1: Short Distance")
+	
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(0, 1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+
+	# dynamic friction
+	space.damping = DYN_FRICTION
+	
+	# add shapes
+	ball = agents.fireball(100, 250, F_MASS)
+	space.add(ball.body, ball.shape)
+	cone = agents.patient(800, 300, AP_MASS)
+	space.add(cone.body, cone.shape)
+	cylinder = agents.agent(500, 400, AP_MASS)
+	space.add(cylinder.body, cylinder.shape)
+	
+	# lists for impulses per timestep, total impulses, running flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total = []
+	running = True
+	tick = 0
+	time = 50
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
+	# set clock
+	clock = pygame.time.Clock()
+
+	# run simulation
+	while running and len(handlers.PF_COLLISION) == 0:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
+		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		tick += 1
+		time -= 1
+
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				running = False
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		
+		# keep the Agent at it's intended velocity for some duration
+		if (ball.body.velocity[0] < AGENT_WALKING):
+			imp = AGENT_WALKING - ball.body.velocity[0]
+			ball.body.apply_impulse_at_local_point((imp,0))
+		if (math.fabs(cone.body.velocity[0]) < AGENT_WALKING):
+			imp = AGENT_RUNNING - math.fabs(cone.body.velocity[0])
+			cone.body.apply_impulse_at_local_point((-1*imp, 0))
+		if (time == 0):
+			cylinder.body.apply_impulse_at_local_point((0,-1*AGENT_WALKING))
+
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
+		
+		# setup display and run sim based on whether it's truth or guess	
+		if(not guess):
+			# draw screen
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
+			screen.blit(fireSprite, pBall)
+			screen.blit(patientSprite, pCone)
+			screen.blit(agentSprite, pAgent)
+
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+		else:
+			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
+
+	# patient collision
+	for i in range(25):
+		screen.fill((255,255,255))
+		space.debug_draw(options)
+		setBackground(screen)
+		screen.blit(fireSprite, pBall)
+		screen.blit(agentSprite, pAgent)
+
+		# conditional animation sequence
+		if (cnt < 12 and x == 0):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt += 1
+			if cnt == 12:
+				x = 1
+				cnt = 11
+		elif (cnt >= 0 and x == 1):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt -= 1
+		else:
+			screen.blit(fireSprite, pBall)
+			screen.blit(agentSprite, pAgent)
+
+		# adjust pygame screen and move clock forward
+		pygame.display.flip()
+		clock.tick(50)
+
+	# remove value from collision list
+	try:
+		handlers.collision = []
+		handlers.PF_COLLISION = []
+	except:
+		print "Exited before collision."
+
+	# output to user and return tuple
+	print "Total impulse: ", sum(total)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
+
+def patientFireballStatic(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball from a short distance
+	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	# if it's a truth sim, we use a display
+	if(not guess):
+		pygame.display.set_caption("Simulation 1: Short Distance")
+	
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(0, 1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+
+	# dynamic friction
+	space.damping = DYN_FRICTION
+	
+	# add shapes
+	ball = agents.fireball(400, 250, F_MASS)
+	space.add(ball.body, ball.shape)
+	cone = agents.patient(800, 300, AP_MASS)
+	space.add(cone.body, cone.shape)
+	cylinder = agents.agent(500, 400, AP_MASS)
+	space.add(cylinder.body, cylinder.shape)
+	
+	# lists for impulses per timestep, total impulses, running flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total = []
+	running = True
+	tick = 0
+	time = 50
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
+	# set clock
+	clock = pygame.time.Clock()
+
+	# run simulation
+	while running and len(handlers.PF_COLLISION) == 0:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
+		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		tick += 1
+		time -= 1
+
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				running = False
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		
+		# keep the Agent at it's intended velocity for some duration
+		if (math.fabs(cone.body.velocity[0]) < AGENT_WALKING):
+			imp = AGENT_RUNNING - math.fabs(cone.body.velocity[0])
+			cone.body.apply_impulse_at_local_point((-1*imp, 0))
+		if (time == 0):
+			cylinder.body.apply_impulse_at_local_point((0,-1*AGENT_WALKING))
+
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
+		
+		# setup display and run sim based on whether it's truth or guess	
+		if(not guess):
+			# draw screen
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
+			screen.blit(fireSprite, pBall)
+			screen.blit(patientSprite, pCone)
+			screen.blit(agentSprite, pAgent)
+
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+		else:
+			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
+
+	# patient collision
+	for i in range(25):
+		screen.fill((255,255,255))
+		space.debug_draw(options)
+		setBackground(screen)
+		screen.blit(fireSprite, pBall)
+		screen.blit(agentSprite, pAgent)
+
+		# conditional animation sequence
+		if (cnt < 12 and x == 0):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt += 1
+			if cnt == 12:
+				x = 1
+				cnt = 11
+		elif (cnt >= 0 and x == 1):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt -= 1
+		else:
+			screen.blit(fireSprite, pBall)
+			screen.blit(agentSprite, pAgent)
+
+		# adjust pygame screen and move clock forward
+		pygame.display.flip()
+		clock.tick(50)
+
+	# remove value from collision list
+	try:
+		handlers.collision = []
+		handlers.PF_COLLISION = []
+	except:
+		print "Exited before collision."
+
+	# output to user and return tuple
+	print "Total impulse: ", sum(total)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
+
+def patientStaticFireballMoving(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball from a short distance
+	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	# if it's a truth sim, we use a display
+	if(not guess):
+		pygame.display.set_caption("Simulation 1: Short Distance")
+	
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(2, 1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+
+	# dynamic friction
+	space.damping = DYN_FRICTION
+	
+	# add shapes
+	ball = agents.fireball(800, 300, F_MASS)
+	space.add(ball.body, ball.shape)
+	cone = agents.patient(400, 250, AP_MASS)
+	space.add(cone.body, cone.shape)
+	cylinder = agents.agent(500, 400, AP_MASS)
+	space.add(cylinder.body, cylinder.shape)
+	
+	# lists for impulses per timestep, total impulses, running flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total = []
+	running = True
+	tick = 0
+	time = 50
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
+	# set clock
+	clock = pygame.time.Clock()
+
+	# run simulation
+	while running and len(handlers.PF_COLLISION) == 0:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
+		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		tick += 1
+		time -= 1
+
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				running = False
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		
+		# keep the Agent at it's intended velocity for some duration
+		if (math.fabs(ball.body.velocity[0]) < AGENT_WALKING and len(handlers.collision) == 0):
+			imp = AGENT_RUNNING - math.fabs(cone.body.velocity[0])
+			ball.body.apply_impulse_at_local_point((-1*imp, 0))
+		if (time == 0):
+			cylinder.body.apply_impulse_at_local_point((0,-1*AGENT_WALKING))
+
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
+		
+		# setup display and run sim based on whether it's truth or guess	
+		if(not guess):
+			# draw screen
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
+			screen.blit(fireSprite, pBall)
+			screen.blit(patientSprite, pCone)
+			screen.blit(agentSprite, pAgent)
+
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+		else:
+			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
+
+	# patient collision
+	for i in range(25):
+		screen.fill((255,255,255))
+		space.debug_draw(options)
+		setBackground(screen)
+		screen.blit(fireSprite, pBall)
+		screen.blit(agentSprite, pAgent)
+
+		# conditional animation sequence
+		if (cnt < 12 and x == 0):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt += 1
+			if cnt == 12:
+				x = 1
+				cnt = 11
+		elif (cnt >= 0 and x == 1):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt -= 1
+		else:
+			screen.blit(fireSprite, pBall)
+			screen.blit(agentSprite, pAgent)
+
+		# adjust pygame screen and move clock forward
+		pygame.display.flip()
+		clock.tick(50)
+
+	# remove value from collision list
+	try:
+		handlers.collision = []
+		handlers.PF_COLLISION = []
+	except:
+		print "Exited before collision."
+
+	# output to user and return tuple
+	print "Total impulse: ", sum(total)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
+
+def fireballMoving(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball from a short distance
+	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	# if it's a truth sim, we use a display
+	if(not guess):
+		pygame.display.set_caption("Simulation 1: Short Distance")
+	
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(2, 1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+
+	# dynamic friction
+	space.damping = DYN_FRICTION
+	
+	# add shapes
+	ball = agents.fireball(800, 300, F_MASS)
+	space.add(ball.body, ball.shape)
+	cone = agents.patient(400, 250, AP_MASS)
+	space.add(cone.body, cone.shape)
+	cylinder = agents.agent(500, 400, AP_MASS)
+	space.add(cylinder.body, cylinder.shape)
+	
+	# lists for impulses per timestep, total impulses, running flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total = []
+	running = True
+	tick = 0
+	time = 50
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
+	# set clock
+	clock = pygame.time.Clock()
+
+	# run simulation
+	while running and len(handlers.PF_COLLISION) == 0:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
+		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		tick += 1
+		time -= 1
+
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				running = False
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		
+		# keep the Agent at it's intended velocity for some duration
+		if (math.fabs(ball.body.velocity[0]) < AGENT_WALKING and len(handlers.collision) == 0):
+			imp = AGENT_RUNNING - math.fabs(ball.body.velocity[0])
+			ball.body.apply_impulse_at_local_point((-1*imp, 0))
+		if (time == 0):
+			cylinder.body.apply_impulse_at_local_point((0,-1*AGENT_WALKING))
+
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
+		
+		# setup display and run sim based on whether it's truth or guess	
+		if(not guess):
+			# draw screen
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
+			screen.blit(fireSprite, pBall)
+			screen.blit(patientSprite, pCone)
+			screen.blit(agentSprite, pAgent)
+
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+		else:
+			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
+
+	# patient collision
+	for i in range(25):
+		screen.fill((255,255,255))
+		space.debug_draw(options)
+		setBackground(screen)
+		screen.blit(fireSprite, pBall)
+		screen.blit(agentSprite, pAgent)
+
+		# conditional animation sequence
+		if (cnt < 12 and x == 0):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt += 1
+			if cnt == 12:
+				x = 1
+				cnt = 11
+		elif (cnt >= 0 and x == 1):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt -= 1
+		else:
+			screen.blit(fireSprite, pBall)
+			screen.blit(agentSprite, pAgent)
+
+		# adjust pygame screen and move clock forward
+		pygame.display.flip()
+		clock.tick(50)
+
+	# remove value from collision list
+	try:
+		handlers.collision = []
+		handlers.PF_COLLISION = []
+	except:
+		print "Exited before collision."
+
+	# output to user and return tuple
+	print "Total impulse: ", sum(total)
+	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
+		xImpsFireball, yImpsFireball)
+
+def patientFireballMoving2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+	'''
+	Simulation of Cylinder pushing Cone into Fireball from a short distance
+	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	space -- pymunk simulation space
+	screen -- pygame display Surface
+	options -- draw options for pymunk space
+	'''
+	# if it's a truth sim, we use a display
+	if(not guess):
+		pygame.display.set_caption("Simulation 1: Short Distance")
+	
+	# set up collision handlers
+	ch0 = space.add_collision_handler(0, 2)
+	ch0.data["surface"] = screen
+	ch0.post_solve = handlers.rem0
+	ch1 = space.add_collision_handler(2, 1)
+	ch1.data["surface"] = screen
+	ch1.begin = handlers.rem2
+
+	# dynamic friction
+	space.damping = DYN_FRICTION
+	
+	# add shapes
+	ball = agents.fireball(800, 300, F_MASS)
+	space.add(ball.body, ball.shape)
+	cone = agents.patient(100, 250, AP_MASS)
+	space.add(cone.body, cone.shape)
+	cylinder = agents.agent(500, 400, AP_MASS)
+	space.add(cylinder.body, cylinder.shape)
+	
+	# lists for impulses per timestep, total impulses, running flag, and ticks
+	xImpsAgent = []
+	yImpsAgent = []
+	xImpsPatient = []
+	yImpsPatient = []
+	xImpsFireball = []
+	yImpsFireball = []
+	total = []
+	running = True
+	tick = 0
+	time = 50
+
+	# animation flag and counter
+	x = 0
+	cnt = 0
+
+	# pause before showing clip
+	wait(screen, space, options, cylinder, ball, cone)
+
+	# set clock
+	clock = pygame.time.Clock()
+
+	# run simulation
+	while running and len(handlers.PF_COLLISION) == 0:
+		# update fireball sprite according to ball's position
+		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
+		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		tick += 1
+		time -= 1
+
+		#allow user to exit
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				running = False
+			elif event.type == KEYDOWN and event.key == K_ESCAPE:
+				running = False
+		
+		# keep the Agent at it's intended velocity for some duration
+		if (cone.body.velocity[0] < AGENT_WALKING):
+			imp = AGENT_WALKING - cone.body.velocity[0]
+			cone.body.apply_impulse_at_local_point((imp,0))
+		if (math.fabs(ball.body.velocity[0]) < AGENT_WALKING and len(handlers.collision) == 0):
+			imp = AGENT_RUNNING - math.fabs(ball.body.velocity[0])
+			ball.body.apply_impulse_at_local_point((-1*imp, 0))
+		if (time == 0):
+			cylinder.body.apply_impulse_at_local_point((0,-1*AGENT_WALKING))
+
+		# append positional values to each list
+		xImpsAgent.append(cylinder.body.position[0])
+		yImpsAgent.append(cylinder.body.position[1])
+		xImpsPatient.append(cone.body.position[0])
+		yImpsPatient.append(cone.body.position[1])
+		xImpsFireball.append(ball.body.position[0])
+		yImpsFireball.append(ball.body.position[1])
+
+		
+		# setup display and run sim based on whether it's truth or guess	
+		if(not guess):
+			# draw screen
+			screen.fill((255,255,255))
+			space.debug_draw(options)
+			setBackground(screen)
+			screen.blit(fireSprite, pBall)
+			screen.blit(patientSprite, pCone)
+			screen.blit(agentSprite, pAgent)
+
+			# adjust pygame screen and move clock forward
+			pygame.display.flip()
+			clock.tick(50)
+		else:
+			clock.tick(500000)
+
+		# update pymunk space
+		space.step(1/50.0)
+
+	# patient collision
+	for i in range(25):
+		screen.fill((255,255,255))
+		space.debug_draw(options)
+		setBackground(screen)
+		screen.blit(fireSprite, pBall)
+		screen.blit(agentSprite, pAgent)
+
+		# conditional animation sequence
+		if (cnt < 12 and x == 0):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt += 1
+			if cnt == 12:
+				x = 1
+				cnt = 11
+		elif (cnt >= 0 and x == 1):
+			img = pygame.image.load(ani[cnt])
+			screen.blit(img, pCone)
+			cnt -= 1
+		else:
+			screen.blit(fireSprite, pBall)
 			screen.blit(agentSprite, pAgent)
 
 		# adjust pygame screen and move clock forward

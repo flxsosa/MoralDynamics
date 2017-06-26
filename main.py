@@ -83,6 +83,16 @@ def main():
 				simulations.agentTap(space, screen, drawOptions)
 			elif (choice == '19'):
 				simulations.noTouch(space, screen, drawOptions)
+			elif (choice == '20'):
+				simulations.patientFireballMoving(space, screen, drawOptions)
+			elif (choice == '21'):
+				simulations.patientFireballStatic(space, screen, drawOptions)
+			elif (choice == '22'):
+				simulations.patientStaticFireballMoving(space, screen, drawOptions)
+			elif (choice == '23'):
+				simulations.fireballMoving(space, screen, drawOptions)
+			elif (choice == '24'):
+				simulations.patientFireballMoving2(space, screen, drawOptions)
 			else:
 				print("Must be an integer [0-14]")
 			pygame.quit()
