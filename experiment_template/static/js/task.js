@@ -115,7 +115,7 @@ var Introduction = function() {
 		STATE.set_index(0)
 
 		// Change the page
-		CURRENTVIEW = new TestPhase()
+		CURRENTVIEW = new Questions()
 	};
 
 	// Load the trial html page
@@ -197,18 +197,59 @@ var TestPhase = function() {
 				// If it's clicked more than twice, enable Continue and disable
 				// play button
 				if (playClick >= 2) {
-	 				$('#trial_next').prop('disabled', false);
 	 				$('#play').prop('disabled', true);
 	 				playClick = 0;
+	 				func();
 	 			}
 			});
  
             debug($c.questions);
-
+ 			var func = function(){
+	            // Create the HTML for the question and slider.
+	            var html = "";
+	            for (var i = 0; i < $c.questions.length; i++) {
+	            	// Add in the questions from list in stim.json
+	                var q = $c.questions[i].q;
+	                html += '<p class=".question">' + q + '</p><div class="s-' + i + '"></div><div class="l-' + i + '"></div><br />';
+	            }
+	            $('#choices').html(html);
+	 
+	            // Bulid the sliders for each question
+	            for (var i = 0; i < 1; i++) {
+	                // Create the sliders
+	                $('.s-' + i).slider().on("slidestart", function(event, ui) {
+	                    // Show the handle
+	                    $(this).find('.ui-slider-handle').show();
+	 
+	                    // Sum is the number of sliders that have been clicked
+	                    var sum = 0;
+	                    for (var j = 0; j < $c.questions.length; j++) {
+	                        if ($('.s-' + j).find('.ui-slider-handle').is(":visible")) {
+	                            sum++;
+	                        }
+	                    }
+	                    // If the number of sliders clicked is equal to the number of sliders
+	                    // the user can continue. 
+	                    if (sum == $c.questions.length) {
+	                        $('#trial_next').prop('disabled', false);
+	                    }
+	                });
+	 
+	                // Put labels on the sliders
+	                $('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
+	            }
+	 
+	            // Hide all the slider handles 
+	            $('.ui-slider-handle').hide();
+	 		}
             // Disable button which will be enabled once the sliders are clicked
             $('#trial_next').prop('disabled', true);
- 			$('#play').prop('disabled', false);
+            $('#play').prop('disabled', false);
+
             debug(that.trialinfo);
+
+            // Remove slider after each trial
+            $('#choices').html("");
 		}
 	};
 
@@ -226,13 +267,12 @@ var TestPhase = function() {
 			return question.type
 		});
 
+		// Record responses to psiturk
 		psiTurk.recordTrialData([this.trialinfo.name, question[0], response[0], question[1], response[1], question[2], response[2], ])
 
-		console.log("(Test Phase) Printing index: ")
-		console.log(STATE1.index)
+		// Increment the state index
 		STATE1.set_index(STATE1.index + 1);
-		console.log("(Test Phase) Printing index: ")
-		console.log(STATE1.index)
+
 		// Update the page with the current phase/trial
 		this.display_stim(this);
 	};
@@ -241,7 +281,7 @@ var TestPhase = function() {
 		debug("Finish test phase");
 
 		// Change the page
-		CURRENTVIEW = new Questions()
+		CURRENTVIEW = new Demographics()
 	};
 
 	// Load the trial html page
@@ -274,71 +314,44 @@ var Questions = function() {
 	$("#questions").fadeIn($c.fade);
 
 	//disable button initially
-	$('#trial_finish').prop('disabled', true);
+	$('#question_finish').prop('disabled', true);
 
 	//checks whether all questions were answered
 	$('.demoQ').change(function() {
-		if ($('input[name=q1]:checked').val() =="A" &&
-			$('input[name=q2]:checked').val() =="A" &&
-			$('input[name=q3]:checked').val() =="A" &&
-			$('input[name=q4]:checked').val() =="A") {
-			console.log("correct")
-			$('#trial_finish').prop('disabled', false)
-		} else {
-			$('#trial_finish').prop('disabled', true)
-			console.log("incorrect")
-		}
-	});
-
-	// deletes additional values in the number fields 
-	$('.numberQ').change(function(e) {
-		if ($(e.target).val() > 100) {
-			$(e.target).val(100)
+		if ($('input[name=q1]:checked').length > 0 &&
+			$('input[name=q2]:checked').length > 0 &&
+			$('input[name=q3]:checked').length > 0 &&
+			$('input[name=q4]:checked').length > 0) 
+		{
+			// If so, able to submit answers
+			$('#question_finish').prop('disabled', false)
+		} 
+		else {
+			// Else, not
+			$('#question_finish').prop('disabled', true)
 		}
 	});
 
 	this.finish = function() {
 		debug("Finish test phase");
 
-		// Show a page saying that the HIT is resubmitting, and
-		// show the error page again if it times out or error
-		var resubmit = function() {
-			$(".slide").hide();
-			$("#resubmit_slide").fadeIn($c.fade);
+		// Check if the input answers are correct
+		if ($('input[name=q1]:checked').val() =="A" &&
+			$('input[name=q2]:checked').val() =="A" &&
+			$('input[name=q3]:checked').val() =="A" &&
+			$('input[name=q4]:checked').val() =="A") 
+		{
+			// If so, move into stimuli
+			CURRENTVIEW = new TestPhase();
+		} 
+		else {
+			// Else, go back to the introduction
+			CURRENTVIEW = new Introduction();
+		}
+		
+	}; 
 
-			var reprompt = setTimeout(prompt_resubmit, 10000);
-			psiTurk.saveData({
-				success: function() {
-					clearInterval(reprompt);
-					finish();
-				},
-				error: prompt_resubmit
-			});
-		};
-
-		// Prompt them to resubmit the HIT, because it failed the first time
-		var prompt_resubmit = function() {
-			$("#resubmit_slide").click(resubmit);
-			$(".slide").hide();
-			$("#submit_error_slide").fadeIn($c.fade);
-		};
-
-		// Render a page saying it's submitting
-		psiTurk.showPage("submit.html");
-		psiTurk.saveData({
-			success: psiTurk.completeHIT,
-			error: prompt_resubmit
-		});
-	}; //this.finish function end 
-
-	$('#trial_finish').click(function() {
-		var feedback = $('textarea[name = feedback]').val();
-		var sex = $('input[name=sex]:checked').val();
-		var age = $('input[name=age]').val();
-
-		psiTurk.recordUnstructuredData('feedback', feedback);
-		psiTurk.recordUnstructuredData('sex', sex);
-		psiTurk.recordUnstructuredData('age', age);
+	$('#question_finish').click(function() {
 		that.finish();
 	});
 };
@@ -439,11 +452,14 @@ $(document).ready(function() {
 	// Start the experiment
 	STATE = new State();
 	STATE1 = new State();
+
 	// Begin the experiment phase
 	if (STATE.instructions) {
 		CURRENTVIEW = new Instructions();
-	} else if (STATE.introductions) {
-		CURRENTVIEW = new Introduction();
+	} else if (STATE.introduction) {
+		CURRENTVIEW = CURR = new Introduction();
+	} else if (STATE.questions) {
+		CURRENTVIEW = new Questions();
 	} else {
 		CURRENTVIEW = new TestPhase();
 	}
