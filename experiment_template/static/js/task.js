@@ -55,7 +55,7 @@ var Introduction = function() {
 
 	// Initialize a new trial. This is called either at the beginning
 	// of a new trial, or if the page is reloaded between trials.
-	this.init_trial = function() {
+	this.init_intro = function() {
 		debug("Initializing trial " + STATE.index);
 
 		// If there are no more trials left, then we are at the end of
@@ -75,20 +75,12 @@ var Introduction = function() {
 	};
 
 	this.display_stim = function(that) {
-		if (that.init_trial()) {
+		if (that.init_intro()) {
 			debug("Show STIMULUS");
 
 			// Show video
 			video_name = that.introinfo.name,
-			$("#video_mp4").attr("src", '/static/videos/' + video_name + '.jpg');
-			//$("#video_webm").attr("src", '/static/videos/' + video_name + '.jpg');
-			//$("#video_ogg").attr("src", '/static/videos/' + video_name + '.jpg');
-			//$(".stim_video").load()
-
-			$("#play.next").click(function() {
-				$(".stim_video").load()
-				$('.stim_video').trigger('play');
-			});
+			$("#intro_slide").attr("src", '/static/videos/' + video_name + '.jpg');
 
 			debug(that.introinfo);
 		}
@@ -131,14 +123,14 @@ var Introduction = function() {
 
 	// Show the slide
 	var that = this;
-	$("#trial").fadeIn($c.fade);
-	$('#trial_next.next').click(function() {
+	$("#intro").fadeIn($c.fade);
+	$('#intro_next.next').click(function() {
 		that.record_response();
 	});
 
 
 	// Initialize the current trial
-	if (this.init_trial()) {
+	if (this.init_intro()) {
 		// Start the test
 		this.display_stim(this);
 	};
@@ -181,22 +173,42 @@ var TestPhase = function() {
 	};
 
 	this.display_stim = function(that) {
+
+		// Create a click counter
+		var playClick = 0;
 		if (that.init_trial()) {
 			debug("Show STIMULUS");
 
 			// Show video
 			video_name = that.trialinfo.name,
-			$("#video_mp4").attr("src", '/static/videos/' + video_name + '.jpg');
-			//$("#video_webm").attr("src", '/static/videos/' + video_name + '.jpg');
-			//$("#video_ogg").attr("src", '/static/videos/' + video_name + '.jpg');
-			//$(".stim_video").load()
+			$("#video_mp4").attr("src", '/static/videos/avi/' + video_name + '.mp4');
+			$("#video_webm").attr("src", '/static/videos/webm' + video_name + '.webm');
+			$("#video_ogg").attr("src", '/static/videos/ogg' + video_name + '.ogv');
+			$(".stim_video").load()
 
 			$("#play.next").click(function() {
 				$(".stim_video").load()
 				$('.stim_video').trigger('play');
 			});
 
-			debug(that.trialinfo);
+			// When the play button is cliced, increment a counter
+			$("#play").click(function() {
+				playClick++;
+				// If it's clicked more than twice, enable Continue and disable
+				// play button
+				if (playClick >= 2) {
+	 				$('#trial_next').prop('disabled', false);
+	 				$('#play').prop('disabled', true);
+	 				playClick = 0;
+	 			}
+			});
+ 
+            debug($c.questions);
+
+            // Disable button which will be enabled once the sliders are clicked
+            $('#trial_next').prop('disabled', true);
+ 			$('#play').prop('disabled', false);
+            debug(that.trialinfo);
 		}
 	};
 
@@ -229,7 +241,7 @@ var TestPhase = function() {
 		debug("Finish test phase");
 
 		// Change the page
-		CURRENTVIEW = new Demographics()
+		CURRENTVIEW = new Questions()
 	};
 
 	// Load the trial html page
@@ -248,6 +260,87 @@ var TestPhase = function() {
 		// Start the test
 		this.display_stim(this);
 	};
+};
+
+/*****************
+ *  Questions  *
+ *****************/
+
+var Questions = function() {
+	var that = this;
+
+	// Show the slide
+	$(".slide").hide();
+	$("#questions").fadeIn($c.fade);
+
+	//disable button initially
+	$('#trial_finish').prop('disabled', true);
+
+	//checks whether all questions were answered
+	$('.demoQ').change(function() {
+		if ($('input[name=q1]:checked').val() =="A" &&
+			$('input[name=q2]:checked').val() =="A" &&
+			$('input[name=q3]:checked').val() =="A" &&
+			$('input[name=q4]:checked').val() =="A") {
+			console.log("correct")
+			$('#trial_finish').prop('disabled', false)
+		} else {
+			$('#trial_finish').prop('disabled', true)
+			console.log("incorrect")
+		}
+	});
+
+	// deletes additional values in the number fields 
+	$('.numberQ').change(function(e) {
+		if ($(e.target).val() > 100) {
+			$(e.target).val(100)
+		}
+	});
+
+	this.finish = function() {
+		debug("Finish test phase");
+
+		// Show a page saying that the HIT is resubmitting, and
+		// show the error page again if it times out or error
+		var resubmit = function() {
+			$(".slide").hide();
+			$("#resubmit_slide").fadeIn($c.fade);
+
+			var reprompt = setTimeout(prompt_resubmit, 10000);
+			psiTurk.saveData({
+				success: function() {
+					clearInterval(reprompt);
+					finish();
+				},
+				error: prompt_resubmit
+			});
+		};
+
+		// Prompt them to resubmit the HIT, because it failed the first time
+		var prompt_resubmit = function() {
+			$("#resubmit_slide").click(resubmit);
+			$(".slide").hide();
+			$("#submit_error_slide").fadeIn($c.fade);
+		};
+
+		// Render a page saying it's submitting
+		psiTurk.showPage("submit.html");
+		psiTurk.saveData({
+			success: psiTurk.completeHIT,
+			error: prompt_resubmit
+		});
+	}; //this.finish function end 
+
+	$('#trial_finish').click(function() {
+		var feedback = $('textarea[name = feedback]').val();
+		var sex = $('input[name=sex]:checked').val();
+		var age = $('input[name=age]').val();
+
+		psiTurk.recordUnstructuredData('feedback', feedback);
+		psiTurk.recordUnstructuredData('sex', sex);
+		psiTurk.recordUnstructuredData('age', age);
+		that.finish();
+	});
 };
 
 /*****************
