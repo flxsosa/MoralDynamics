@@ -15,6 +15,7 @@ import simulations
 import infer
 import sim
 import matplotlib.pyplot as plt
+import helper
 
 def main():
 	'''
@@ -23,7 +24,6 @@ def main():
 	print("=================================================")
 	print("1. Show Simulations")
 	print("2. Run Guesses")
-	print("3. Plot Sims")
 	print("0. EXIT")
 	print("=================================================")
 	print("Please choose an option or [0] to exit:")
@@ -31,7 +31,7 @@ def main():
 
 	# display simulation options
 	if choice == '1':
-		printOptions()
+		helper.printOptions()
 		choice = raw_input()
 		
 		while (choice != '0'):
@@ -71,8 +71,6 @@ def main():
 				simulations.touch(space, screen, drawOptions)
 			elif (choice == '14'):
 				simulations.pushFireball(space, screen, drawOptions)
-			elif (choice == 'test'):
-				simulations.test(space, screen, drawOptions)
 			elif (choice == '15'):
 				simulations.sim1(space, screen, drawOptions)
 			elif (choice == '16'):
@@ -84,20 +82,26 @@ def main():
 			elif (choice == '19'):
 				simulations.noTouch(space, screen, drawOptions)
 			elif (choice == '20'):
-				simulations.patientFireballMoving(space, screen, drawOptions)
+				simulations.victim_moving_moving(space, screen, drawOptions)
 			elif (choice == '21'):
-				simulations.patientFireballStatic(space, screen, drawOptions)
+				simulations.victim_moving_static(space, screen, drawOptions)
 			elif (choice == '22'):
-				simulations.patientStaticFireballMoving(space, screen, drawOptions)
+				simulations.victim_static_moving(space, screen, drawOptions)
 			elif (choice == '23'):
-				simulations.fireballMoving(space, screen, drawOptions)
+				simulations.victim_static_static(space, screen, drawOptions)
 			elif (choice == '24'):
-				simulations.patientFireballMoving2(space, screen, drawOptions)
+				simulations.harm_static_moving(space, screen, drawOptions)
+			elif (choice == '25'):
+				simulations.harm_static_static(space, screen, drawOptions)
+			elif (choice == '26'):
+				simulations.harm_moving_static(space, screen, drawOptions)
+			elif (choice == '27'):
+				simulations.harm_moving_moving(space, screen, drawOptions)
 			else:
 				print("Must be an integer [0-14]")
 			pygame.quit()
 			pygame.display.quit()
-			print("Please choose a Simulation [1-14] or [0] to exit:")
+			print("Please choose a simulation or [0] to exit:")
 			choice = raw_input()
 			
 		print("Goodbye")
@@ -105,7 +109,7 @@ def main():
 		
 	# display guess options
 	if choice == '2':
-		printOptions()
+		helper.printOptions()
 		choice = raw_input()
 		
 		while (choice != '0'):
@@ -146,36 +150,12 @@ def main():
 				print("Must be an integer [0-14]")
 			pygame.quit()
 			pygame.display.quit()
-			print("Please choose a Simulation [1-14] or [0] to exit:")
+			print("Please choose a simulation or [0] to exit:")
 			choice = raw_input()
 			
 		print("Goodbye")
 		sys.exit()
-
-	# display comparison options
-	if choice =='3':
-		print "Use graph.py in interactive mode"
 		
-
-def printOptions():
-	print("=================================================")
-	print("1. Short Distance")
-	print("2. Medium Distance")
-	print("3. Long Distance")
-	print("4. Static")
-	print("5. Uphill [N/A]")
-	print("6. Downhill [N/A]")
-	print("7. Slow Collision")
-	print("8. Fast Collision")
-	print("9. Dodge")
-	print("10. Double Touch")
-	print("11. Medium Push")
-	print("12. Long Push")
-	print("13. Touch")
-	print("14. Push Fireball")
-	print("0. EXIT")
-	print("=================================================")
-	print("Please choose a Simulation [1-14] or [0] to exit:")
 
 if __name__ == '__main__':
 	sys.exit(main())

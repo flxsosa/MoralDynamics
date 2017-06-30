@@ -59,4 +59,4 @@ class fireball:
 		self.shape = pymunk.Circle(self.body, rad)
 		self.shape.color = pygame.color.THECOLORS["red"]
 		self.shape.collision_type = 2
-		self.shape.elasticity = 0
+		self.shape.elasticity = 1

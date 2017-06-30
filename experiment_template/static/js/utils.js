@@ -101,6 +101,13 @@ function update_progress(num, num_trials) {
     $("#progress-text").html("Progress " + (num + 1) + "/" + num_trials);
 }
 
+function update_progress1(num, num_trials) {
+    debug("update progress1");
+    var x = 2 + 98 * (num / (num_trials - 1.0));
+    $("#indicator-stage1").css({"width": x + "%"});
+    $("#progress-text1").html("Progress " + (num + 1) + "/" + num_trials);
+}
+
 //Shuffle an array 
 
 function shuffle(array) {

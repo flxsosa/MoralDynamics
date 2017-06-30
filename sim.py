@@ -1,27 +1,5 @@
 '''
-Simulations for Moral Dynamics
-
-Simulations to implement:
-
-<Number>. <Factor> -- <Name> -- <Progress>
-1. Distance -- Long Distance -- Complete/Edit
-2. Distance -- Short Distance -- Complete/Edit
-3. Distance -- Medium Distance -- Complete/Edit
-4. Force/Distance -- Static Cylinder -- Complete/Edit
-5. Force -- Uphill Cylinder
-6. Force -- Downhill Cylinder
-7. Force -- Slow Collision Cone - Complete/Edit
-8. Force -- Fast Collision Cone - Complete/Edit
-9. Force/Distance -- Dodging Cylinder - Complete/Editgit m
-10. Frequency -- Double Contact Cylinder - Complete/Edit
-11. Duration -- Medium Push Cylinder - Complete/Edit
-12. Duration -- Long Push Cylinder - Complete/Edit
-13. Duration -- Touch Cylinder - Complete/Edit
-
-Key:
-In Progress: May not be functional but working on it
-Complete/Edit: Functions as needed but may need edits or optimizations
-Complete: Functions and is optimal
+Simulations for graphing Moral Dynamics
 
 March 10, 2017
 Felix Sosa
@@ -34,13 +12,11 @@ import handlers
 import math
 import pymunk.pygame_util
 from pygame.locals import *
-import sys
 import glob
 
 # MODEL PARAMETERS
 
 DYN = 0.6
-STAT_FRICTION = 0.1
 AP_MASS = 1
 F_MASS = 1
 AGENT_RUNNING = 300
@@ -139,14 +115,6 @@ def shortDistance(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-
-		# static friction for all bodies
-		if (cylinder.body.velocity[0] == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 		
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
@@ -285,14 +253,6 @@ def mediumDistance(space, screen, options, guess=False, DYN_FRICTION=DYN, impuls
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-
-		# static friction for all bodies
-		if (cylinder.body.velocity == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
@@ -434,14 +394,6 @@ def longDistance(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
 
-		# static friction for all bodies
-		if (cylinder.body.velocity == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
-
 		# keep the Agent at it's intended velocity for some duration
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cylinder.body.velocity[0]
@@ -581,15 +533,6 @@ def static(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=AGENT_
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-
-		# static friction for all bodies
-
-		if (cylinder.body.velocity == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 
 		# keep the Patient at it's intended velocity for some duration
 		if (cone.body.velocity[0] < impulse and cone.body.velocity[1] < 180 and \
@@ -1171,14 +1114,6 @@ def doubleTouch(space, screen, options, guess=False, DYN_FRICTION=DYN, impulse=A
 				running = False
 			elif event.type == KEYDOWN and event.key == K_ESCAPE:
 				running = False
-
-		# static friction for all bodies
-		if (cylinder.body.velocity == (0,0)):
-			cylinder.body.update_velocity(cylinder.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (cone.body.velocity == (0,0)):
-			cone.body.update_velocity(cone.body, (0,0), STAT_FRICTION, 1/50.0)
-		if (ball.body.velocity == (0,0)):
-			ball.body.update_velocity(ball.body, (0,0), STAT_FRICTION, 1/50.0)
 
 		# keep Agent at intended velocity
 		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):

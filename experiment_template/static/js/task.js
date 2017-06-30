@@ -44,20 +44,12 @@ var Instructions = function() {
  *****************/
 
 var Introduction = function() {
-	/* Instance variables */
-	console.log("Introduction")
 	// Information about the current trial
 	this.introinfo;
-	// The response they gave
-	this.response;
-	// The number they've gotten correct, so far
-	this.num_correct = 0;
 
 	// Initialize a new trial. This is called either at the beginning
 	// of a new trial, or if the page is reloaded between trials.
 	this.init_intro = function() {
-		debug("Initializing trial " + STATE.index);
-
 		// If there are no more trials left, then we are at the end of
 		// this phase
 		if (STATE.index >= $c.introslides.length) {
@@ -76,44 +68,14 @@ var Introduction = function() {
 
 	this.display_stim = function(that) {
 		if (that.init_intro()) {
-			debug("Show STIMULUS");
-
 			// Show video
 			video_name = that.introinfo.name,
 			$("#intro_slide").attr("src", '/static/videos/' + video_name + '.jpg');
-
-			debug(that.introinfo);
 		}
-	};
-
-
-	// Record a response (this could be either just clicking "start",
-	// or actually a choice to the prompt(s))
-	this.record_response = function() {
-		// TODO MAKE THIS CORRECT!
-		var response = [];
-		for (var i = 0; i < $c.questions.length; i++) {
-			response.push($('.s-' + i).slider('value'));
-		}
-
-		var question = $c.questions.map(function(question) {
-			return question.type
-		});
-
-		psiTurk.recordTrialData([this.introinfo.name, question[0], response[0], question[1], response[1], question[2], response[2], ])
-
-		STATE.set_index(STATE.index + 1);
-
-		// Update the page with the current phase/trial
-		this.display_stim(this);
 	};
 
 	this.finish = function() {
-		debug("Finish Introduction");
-		console.log("(Introduction) Printing index: ")
-		console.log(STATE.index)
 		STATE.set_index(0)
-
 		// Change the page
 		CURRENTVIEW = new Questions()
 	};
@@ -125,7 +87,9 @@ var Introduction = function() {
 	var that = this;
 	$("#intro").fadeIn($c.fade);
 	$('#intro_next.next').click(function() {
-		that.record_response();
+		STATE.set_index(STATE.index + 1);
+		// Update the page with the current phase/trial
+		that.display_stim(that);
 	});
 
 
@@ -141,9 +105,6 @@ var Introduction = function() {
  *****************/
 
 var TestPhase = function() {
-	/* Instance variables */
-	console.log("Test phase")
-	console.log("Initial State Index: " + STATE1.index)
 	// Information about the current trial
 	this.trialinfo;
 	// The response they gave
@@ -154,56 +115,50 @@ var TestPhase = function() {
 	// Initialize a new trial. This is called either at the beginning
 	// of a new trial, or if the page is reloaded between trials.
 	this.init_trial = function() {
-		debug("Initializing trial " + STATE1.index);
-
 		// If there are no more trials left, then we are at the end of
 		// this phase
-		if (STATE1.index >= $c.trials.length) {
+		if (STATE.index >= $c.trials.length) {
 			this.finish();
 			return false;
 		}
 
 		// Load the new trialinfo
-		this.trialinfo = $c.trials[STATE1.index];
+		this.trialinfo = $c.trials[STATE.index];
 
 		// Update progress bar
-		update_progress(STATE1.index, $c.trials.length);
+		update_progress1(STATE.index, $c.trials.length);
 
 		return true;
 	};
 
 	this.display_stim = function(that) {
-
-		// Create a click counter
+		// Create a click counter for the play button
 		var playClick = 0;
-		if (that.init_trial()) {
-			debug("Show STIMULUS");
 
-			// Show video
+		if (that.init_trial()) {
+			// Load and show video
 			video_name = that.trialinfo.name,
-			$("#video_mp4").attr("src", '/static/videos/avi/' + video_name + '.mp4');
+			$("#video_mp4").attr("src", '/static/videos/mp4/' + video_name + '.mp4');
 			$("#video_webm").attr("src", '/static/videos/webm' + video_name + '.webm');
 			$("#video_ogg").attr("src", '/static/videos/ogg' + video_name + '.ogv');
 			$(".stim_video").load()
-
 			$("#play.next").click(function() {
 				$(".stim_video").load()
 				$('.stim_video').trigger('play');
 			});
+			
+			// Watch for video being played to end and enable play button when done
+			// if it's been clicked less than twice
+			document.getElementById('vid').addEventListener('ended',function(e) {
+				if (playClick < 2){
+					$('#play').prop('disabled', false);
+				}
+				else {
+					func();
+				}
+			},false);
 
-			// When the play button is cliced, increment a counter
-			$("#play").click(function() {
-				playClick++;
-				// If it's clicked more than twice, enable Continue and disable
-				// play button
-				if (playClick >= 2) {
-	 				$('#play').prop('disabled', true);
-	 				playClick = 0;
-	 				func();
-	 			}
-			});
- 
-            debug($c.questions);
+			// Create html and build sliders
  			var func = function(){
 	            // Create the HTML for the question and slider.
 	            var html = "";
@@ -237,16 +192,30 @@ var TestPhase = function() {
 	 
 	                // Put labels on the sliders
 	                $('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
+	                $('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[1] + "</label>");
+                	$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[2] + "</label>");
 	            }
 	 
 	            // Hide all the slider handles 
 	            $('.ui-slider-handle').hide();
 	 		}
+
             // Disable button which will be enabled once the sliders are clicked
             $('#trial_next').prop('disabled', true);
-            $('#play').prop('disabled', false);
 
-            debug(that.trialinfo);
+            // When the continue button is clicked, reset playClick counter
+            $('#trial_next').on('click', function(){
+            	playClick = 0;
+            });
+
+            // Enable play video button at first
+            $('#play').prop('disabled', false);
+            
+            // When the button is clicked, disable button till end of video
+            $('#play').on('click', function() {
+            	playClick++;
+            	$('#play').prop('disabled', true);
+            });
 
             // Remove slider after each trial
             $('#choices').html("");
@@ -271,15 +240,14 @@ var TestPhase = function() {
 		psiTurk.recordTrialData([this.trialinfo.name, question[0], response[0], question[1], response[1], question[2], response[2], ])
 
 		// Increment the state index
-		STATE1.set_index(STATE1.index + 1);
+		STATE.set_index(STATE.index + 1);
 
 		// Update the page with the current phase/trial
 		this.display_stim(this);
 	};
 
 	this.finish = function() {
-		debug("Finish test phase");
-
+		STATE.set_index(0);
 		// Change the page
 		CURRENTVIEW = new Demographics()
 	};
@@ -293,7 +261,6 @@ var TestPhase = function() {
 	$('#trial_next.next').click(function() {
 		that.record_response();
 	});
-
 
 	// Initialize the current trial
 	if (this.init_trial()) {
@@ -333,18 +300,18 @@ var Questions = function() {
 	});
 
 	this.finish = function() {
-		debug("Finish test phase");
-
 		// Check if the input answers are correct
-		if ($('input[name=q1]:checked').val() =="A" &&
-			$('input[name=q2]:checked').val() =="A" &&
-			$('input[name=q3]:checked').val() =="A" &&
-			$('input[name=q4]:checked').val() =="A") 
+		if ($('input[name=q1]:checked').val() == "A" &&
+			$('input[name=q2]:checked').val() == "A" &&
+			$('input[name=q3]:checked').val() == "A" &&
+			$('input[name=q4]:checked').val() == "A") 
 		{
+			STATE.set_index(0);
 			// If so, move into stimuli
 			CURRENTVIEW = new TestPhase();
 		} 
 		else {
+			STATE.set_index(0);
 			// Else, go back to the introduction
 			CURRENTVIEW = new Introduction();
 		}
@@ -451,16 +418,11 @@ $(document).ready(function() {
 
 	// Start the experiment
 	STATE = new State();
-	STATE1 = new State();
 
 	// Begin the experiment phase
 	if (STATE.instructions) {
-		CURRENTVIEW = new Instructions();
-	} else if (STATE.introduction) {
-		CURRENTVIEW = CURR = new Introduction();
-	} else if (STATE.questions) {
-		CURRENTVIEW = new Questions();
+	CURRENTVIEW = new Instructions();
 	} else {
-		CURRENTVIEW = new TestPhase();
+		CURRENTVIEW = new Introduction();
 	}
 });

@@ -27,29 +27,14 @@
             "name": "vidcap"
         },
         {
-            "name": "vidcap1"
-        },
-        {
             "name": "vidcap2"
-        },
-        {
-            "name": "vidcap3"
-        },
-        {
-            "name": "vidcap4"
-        },
-        {
-            "name": "vidcap5"
-        },
-        {
-            "name": "vidcap6"
         }
     ],
     "text": "",
     "questions":[
-        {"q": " ''The red ball <b>caused</b> the black ball to go through the gate.'' ", 
+        {"q": " ''How bad was what the Blue did to the Green?'' ", 
         "type": "caused",
-        "l": ["not at all", "", "very much"]}
+        "l": ["not bad at all", "", "very bad"]}
     ]
 }
 

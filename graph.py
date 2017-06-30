@@ -9,12 +9,8 @@ import pymunk
 import pygame
 import pymunk.pygame_util
 from pygame.locals import *
-import sys
-import infer
 import sim
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import math
 
 # list of simulation calls from sim.py to be passed as parameters
 simulations = [sim.shortDistance, sim.mediumDistance, sim.longDistance, sim.static,sim.uphill, 
@@ -58,12 +54,11 @@ def compareKinematics(DYN, flag=True):
 	Plots two bar plots. One for Moral Kinematics data and one for
 	Moral Dynamics data.
 	'''
-
+	# impulses
 	impulses = []
 	# agreements for each comparison in Moral Kinematics
 	kinematics = [0.82, 0.88, 0.75, 0.5, 0.67, 0.84, 0.75, 1.0, 
 				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
-
 	# calculated probabilities for each comparison in Moral Dynamics
 	print "Gathering data..."
 
@@ -79,13 +74,12 @@ def compareKinematics(DYN, flag=True):
 		impulses.append(sim(space, screen, drawOptions, True, DYN))
 		pygame.quit()
 
+	# If a simulation failed at any time, do not account for it
 	if None in impulses:
 		print "Fail:"
-		print impulses
 	else:
 		# probabilities using Luce's Choice Axiom
 		dynamics = calcProb(impulses)
-
 		# x axis values for plot
 		idx = range(1, 16)
 		xLabels = ['1. LongDist v ShortDist', '2. LongDist v MedDist', '3. LongDist v Static', '4. MedPush v Down', 
@@ -157,7 +151,7 @@ def modelFit():
 	# agreements for each comparison in Moral Kinematics
 	kinematics = [0.82, 0.88, 0.75, 0.0, 0.0, 0.0, 0.75, 1.0, 
 				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
-
+	# value dictionary
 	values = {"Value" : "DYN"}
 
 	for dyn in range(30,101):
@@ -173,18 +167,18 @@ def modelFit():
 			# append total impulse applied to Agent for given simulation
 			impulses.append(sim(space, screen, drawOptions, True, dyn*0.01))
 			pygame.quit()
-
-		if not None in impulses:
+		# If a simulation failed, do not account for it
+		if None in impulses:
+			print "=============================="
+			print "Fail at Dynamic Friction: ", dyn*0.1
+			print "=============================="
+		else:
 			dynamics = calcProb(impulses)
 			print "=============================="
 			print "Success at Dynamic Friction: ", dyn*0.1
 			values[dyn*0.1] = rmse(kinematics, dynamics)
 			print "=============================="
-		else:
-			print "=============================="
-			print "Fail at Dynamic Friction: ", dyn*0.1
-			print "=============================="
-
+	# print the values of the dict
 	print min(values, key=values.get)
 
 def rmse(x, y):

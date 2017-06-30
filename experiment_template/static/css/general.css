@@ -82,19 +82,17 @@ div.container{
 }
 
 div.video_container{
- float:left;
- width: 450px;
+ width: 900px;
+ margin: auto;
 }
 
 div.choices_container{
- float:right;
- width: 450px;
+ width: 900px;
 }
 
 .stim_video {
-    float: left;
-    width:400px;
-    margin-top: 10px;
+    width:900px;
+    margin: auto;
 }
 
 .stim_text {
@@ -156,6 +154,8 @@ span.consent {
 
 #progress-text { position: absolute; }
 
+#progress-text1 { position: absolute; }
+
 #prompt-text { font-weight: bold; }
 
 #indicator-container {
@@ -176,6 +176,12 @@ span.consent {
     background-color: navy;
 }
 
+#indicator-stage1 {
+    height: 100%;
+    background-color: navy;
+}
+
+
 /* Question */
 
 .question {
@@ -183,14 +189,15 @@ span.consent {
     text-align: center;
     text-align: left;
     font-weight: bold;
+    margin:auto;
 }
 
 #choices {
     text-align: center;
     /*margin: 0 auto;*/
-    width: 450px;
-    float: right;
+    width: 600px;
     /*padding: 10px;*/
+    margin:auto;
 }
 
 #score {
