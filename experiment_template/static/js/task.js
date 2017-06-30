@@ -20,7 +20,6 @@ psiTurk.preloadPages($c.pages);
 // Objects to keep track of the current phase and state
 var CURRENTVIEW;
 var STATE;
-var STATE1;
 
 /*************************
  * INSTRUCTIONS         
@@ -421,7 +420,7 @@ $(document).ready(function() {
 
 	// Begin the experiment phase
 	if (STATE.instructions) {
-	CURRENTVIEW = new Instructions();
+		CURRENTVIEW = new Instructions();
 	} else {
 		CURRENTVIEW = new Introduction();
 	}
