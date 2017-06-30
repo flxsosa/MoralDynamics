@@ -30,7 +30,7 @@
 		<br />
 		<hr />
 		<div id="stim">
-				<div id="prompt-text"> Please pay attention to the introduction slides below. </div>
+				<div id="prompt-text"> Please pay attention to the introduction slides below. Each of them contains important information. You will be tested on this information in the next section. </div>
 				</br>
 				<div class="container">
 						<div style="width:50%; margin:auto">	
@@ -48,10 +48,10 @@
 <!-- Trial -->
 <div class="slide" id="trial">
 		<div id="progress">
-				<div id="progress-text">Progress</div>
+				<div id="progress-text1">Progress</div>
 				<div id="indicator-container">
 						<div id="indicator-outer">
-								<div id="indicator-stage"></div>
+								<div id="indicator-stage1"></div>
 						</div>
 				</div>
 				<div class="spacer"></div>
@@ -59,17 +59,17 @@
 		<br />
 		<hr />
 		<div id="stim">
-				<div id="prompt-text"> Please pay attention to the slides below. </div>
+				<div id="prompt-text"> Please pay attention to the video below. You must watch it twice and then judge it. The slider will appear after watching it the second time. </div>
 				</br>
 				<div class="container">
 						<div class="video_container">
-								<video class="stim_video" width="400" height="300" loop autoplay>
+								<video class="stim_video" width="900" id="vid">
 										<source src="" id="video_mp4">
 										<source src="" id="video_webm">
 										<source src="" id="video_ogg">
 								</video>
 								<div class="continue">
-										<button type="button" class="next" id="play">reload video</button>
+										<button type="button" class="next" id="play">Play Video</button>
 								</div>
 						</div>
 						<div class="choices_container">
@@ -77,7 +77,6 @@
 						</div>
 				</div>
 				<div class="spacer"></div>
-				<p class="stim_text"> <b>Note</b>: The video is played in a loop. If it stops playing, just click the 'reload video' button. </p>
 		</div>
 		<div class="spacer"></div>
 		<hr />
