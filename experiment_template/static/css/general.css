@@ -95,6 +95,11 @@ div.choices_container{
     margin: auto;
 }
 
+.intro_video {
+    width:600px;
+    margin: auto;
+}
+
 .stim_text {
     margin-left: 10px;
     margin-right: 10px;
