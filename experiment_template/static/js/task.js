@@ -41,10 +41,15 @@ var Instructions = function() {
 /*****************
  *  Inroduction  *
  *****************/
+var slideNumber = 0;
+
 
 var Introduction = function() {
 	// Information about the current trial
 	this.introinfo;
+	this.otherinfo;
+
+	// Slide number user is one
 
 	// Initialize a new trial. This is called either at the beginning
 	// of a new trial, or if the page is reloaded between trials.
@@ -67,9 +72,26 @@ var Introduction = function() {
 
 	this.display_stim = function(that) {
 		if (that.init_intro()) {
-			// Show video
+			console.log(slideNumber);
+			// Show video and increment slide number
+			slideNumber++;
 			video_name = that.introinfo.name,
-			$("#intro_slide").attr("src", '/static/videos/' + video_name + '.jpg');
+			$("#intro_slide").attr("src", '/static/images/' + video_name + '.png');
+			this.otherinfo = $c.trials[0];
+			if (slideNumber == 3 || slideNumber == 5) {
+				console.log("should work");
+				var html = "";
+	           	// Add in the questions from list in stim.json
+	            html += '<video loop autoplay class="intro_video" width="600" id="vid"><source src="" id="video_mp4"><source src="" id="video_webm"><source src="" id="video_ogg"></video>';
+	            video_name = that.otherinfo.name,
+	            $('#some').html(html);
+	            $("#video_mp4").attr("src", '/static/videos/mp4/' + video_name + '.mp4');
+				$("#video_webm").attr("src", '/static/videos/webm' + video_name + '.webm');
+				$("#video_ogg").attr("src", '/static/videos/ogg' + video_name + '.ogv');
+				$(".intro_video").load()
+				$(".intro_video").load()
+				$('.intro_video').trigger('play');
+			}
 		}
 	};
 
@@ -86,6 +108,7 @@ var Introduction = function() {
 	var that = this;
 	$("#intro").fadeIn($c.fade);
 	$('#intro_next.next').click(function() {
+		$('#some').html("");
 		STATE.set_index(STATE.index + 1);
 		// Update the page with the current phase/trial
 		that.display_stim(that);
@@ -236,7 +259,7 @@ var TestPhase = function() {
 		});
 
 		// Record responses to psiturk
-		psiTurk.recordTrialData([this.trialinfo.name, question[0], response[0], question[1], response[1], question[2], response[2], ])
+		psiTurk.recordTrialData([this.trialinfo.name, question[0], response[0]])
 
 		// Increment the state index
 		STATE.set_index(STATE.index + 1);
