@@ -97,6 +97,14 @@ def main():
 				simulations.harm_moving_static(space, screen, drawOptions)
 			elif (choice == '27'):
 				simulations.harm_moving_moving(space, screen, drawOptions)
+			elif (choice == '28'):
+				simulations.agentWalksToFireball(space, screen, drawOptions)
+			elif (choice == '29'):
+				simulations.patientWalksToFireball(space, screen, drawOptions)
+			elif (choice == '30'):
+				simulations.fireballMoving(space, screen, drawOptions)
+			elif (choice == '31'):
+				simulations.agentSavesPatient(space, screen, drawOptions)
 			else:
 				print("Must be an integer [0-14]")
 			pygame.quit()
@@ -156,6 +164,5 @@ def main():
 		print("Goodbye")
 		sys.exit()
 		
-
 if __name__ == '__main__':
 	sys.exit(main())
