@@ -44,67 +44,58 @@ def main():
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
 
 			if (choice == '1'):
-				simulations.shortDistance(space, screen, drawOptions)
+				simulations.shortDistancev1(space, screen, drawOptions)
 			elif (choice == '2'):
-				simulations.mediumDistance(space, screen, drawOptions)
+				simulations.mediumDistancev2(space, screen, drawOptions)
 			elif (choice == '3'):
-				simulations.longDistance(space, screen, drawOptions)
+				simulations.longDistancev1(space, screen, drawOptions)
 			elif (choice == '4'):
-				simulations.static(space, screen, drawOptions)
+				simulations.longDistancev2(space, screen, drawOptions)
 			elif (choice == '5'):
-				simulations.uphill(space, screen, drawOptions)
+				simulations.static(space, screen, drawOptions)
 			elif (choice == '6'):
-				simulations.downhill(space, screen, drawOptions)
-			elif (choice == '7'):
 				simulations.slowCollision(space, screen, drawOptions)
-			elif (choice == '8'):
+			elif (choice == '7'):
 				simulations.fastCollision(space, screen, drawOptions)
-			elif (choice == '9'):
+			elif (choice == '8'):
 				simulations.dodge(space, screen, drawOptions)
+			elif (choice == '9'):
+				simulations.doublePush(space, screen, drawOptions)
 			elif (choice == '10'):
-				simulations.doubleTouch(space, screen, drawOptions)
-			elif (choice == '11'):
 				simulations.mediumPush(space, screen, drawOptions)
-			elif (choice == '12'):
+			elif (choice == '11'):
 				simulations.longPush(space, screen, drawOptions)
 			elif (choice == '13'):
-				simulations.touch(space, screen, drawOptions)
-			elif (choice == '14'):
-				simulations.pushFireball(space, screen, drawOptions)
-			elif (choice == '15'):
-				simulations.sim1(space, screen, drawOptions)
-			elif (choice == '16'):
-				simulations.sim2(space, screen, drawOptions)
-			elif (choice == '17'):
-				simulations.agentPush(space, screen, drawOptions)
-			elif (choice == '18'):
-				simulations.agentTap(space, screen, drawOptions)
-			elif (choice == '19'):
 				simulations.noTouch(space, screen, drawOptions)
-			elif (choice == '20'):
+
+			elif (choice == '14'):
 				simulations.victim_moving_moving(space, screen, drawOptions)
-			elif (choice == '21'):
+			elif (choice == '15' or choice == '12'):
 				simulations.victim_moving_static(space, screen, drawOptions)
-			elif (choice == '22'):
+			elif (choice == '16'):
 				simulations.victim_static_moving(space, screen, drawOptions)
-			elif (choice == '23'):
+			elif (choice == '17'):
 				simulations.victim_static_static(space, screen, drawOptions)
-			elif (choice == '24'):
-				simulations.harm_static_moving(space, screen, drawOptions)
-			elif (choice == '25'):
-				simulations.harm_static_static(space, screen, drawOptions)
-			elif (choice == '26'):
-				simulations.harm_moving_static(space, screen, drawOptions)
-			elif (choice == '27'):
+			elif (choice == '18'):
 				simulations.harm_moving_moving(space, screen, drawOptions)
-			elif (choice == '28'):
+			elif (choice == '19'):
+				simulations.harm_moving_static(space, screen, drawOptions)
+			elif (choice == '20'):
+				simulations.harm_static_moving(space, screen, drawOptions)
+			elif (choice == '21'):
+				simulations.harm_static_static(space, screen, drawOptions)
+			
+			elif (choice == '22'):
+				simulations.mediumDistancev1(space, screen, drawOptions)
+			elif (choice == '23'):
+				simulations.pushFireball(space, screen, drawOptions)
+
+			elif (choice == '24'):
 				simulations.agentWalksToFireball(space, screen, drawOptions)
-			elif (choice == '29'):
+			elif (choice == '25'):
 				simulations.patientWalksToFireball(space, screen, drawOptions)
-			elif (choice == '30'):
+			elif (choice == '26'):
 				simulations.fireballMoving(space, screen, drawOptions)
-			elif (choice == '31'):
-				simulations.agentSavesPatient(space, screen, drawOptions)
 			else:
 				print("Must be an integer [0-14]")
 			pygame.quit()
