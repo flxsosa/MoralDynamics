@@ -45,10 +45,66 @@
     ],
         "stim":[
         {
-            "name": "vidcap"
+            "name": "video"
         },
         {
-            "name": "vidcap2"
+            "name": "video1"
+        },
+        {
+            "name": "video2"
+        },
+        {
+            "name": "video3"
+        },
+        {
+            "name": "video4"
+        },
+        {
+            "name": "video5"
+        },
+        {
+            "name": "video6"
+        },
+        {
+            "name": "video7"
+        },
+        {
+            "name": "video8"
+        },
+        {
+            "name": "video9"
+        },
+        {
+            "name": "video10"
+        },
+        {
+            "name": "video11"
+        },
+        {
+            "name": "video12"
+        },
+        {
+            "name": "video13"
+        },
+        {
+            "name": "video14"
+        },
+        {
+            "name": "video15"
+        },
+        {
+            "name": "video16"
+        }
+    ],
+        "vid":[
+        {
+            "name": "intro"
+        },
+        {
+            "name": "intro1"
+        },
+        {
+            "name": "intro2"
         }
     ],
     "text": "",

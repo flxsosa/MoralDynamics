@@ -43,11 +43,11 @@ var Instructions = function() {
  *****************/
 var slideNumber = 0;
 
-
 var Introduction = function() {
 	// Information about the current trial
 	this.introinfo;
 	this.otherinfo;
+	var count = 0;
 
 	// Slide number user is one
 
@@ -78,7 +78,9 @@ var Introduction = function() {
 			video_name = that.introinfo.name,
 			$("#intro_slide").attr("src", '/static/images/' + video_name + '.png');
 			this.otherinfo = $c.trials[0];
-			if (slideNumber == 3 || slideNumber == 5) {
+			if (slideNumber == 7 || slideNumber == 9 || slideNumber == 10) {
+				this.otherinfo=$c.introvids[count];
+				count++;
 				console.log("should work");
 				var html = "";
 	           	// Add in the questions from list in stim.json
@@ -335,6 +337,7 @@ var Questions = function() {
 		else {
 			STATE.set_index(0);
 			// Else, go back to the introduction
+			$('#intro_next.next').unbind();
 			CURRENTVIEW = new Introduction();
 		}
 		
