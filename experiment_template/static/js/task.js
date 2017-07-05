@@ -78,7 +78,7 @@ var Introduction = function() {
 			video_name = that.introinfo.name,
 			$("#intro_slide").attr("src", '/static/images/' + video_name + '.png');
 			this.otherinfo = $c.trials[0];
-			if (slideNumber == 7 || slideNumber == 9 || slideNumber == 10) {
+			if (slideNumber == 2 || slideNumber == 3 || slideNumber == 4 || slideNumber == 5) {
 				this.otherinfo=$c.introvids[count];
 				count++;
 				console.log("should work");
@@ -311,8 +311,7 @@ var Questions = function() {
 	$('.demoQ').change(function() {
 		if ($('input[name=q1]:checked').length > 0 &&
 			$('input[name=q2]:checked').length > 0 &&
-			$('input[name=q3]:checked').length > 0 &&
-			$('input[name=q4]:checked').length > 0) 
+			$('input[name=q3]:checked').length > 0) 
 		{
 			// If so, able to submit answers
 			$('#question_finish').prop('disabled', false)
@@ -326,9 +325,8 @@ var Questions = function() {
 	this.finish = function() {
 		// Check if the input answers are correct
 		if ($('input[name=q1]:checked').val() == "A" &&
-			$('input[name=q2]:checked').val() == "A" &&
-			$('input[name=q3]:checked').val() == "A" &&
-			$('input[name=q4]:checked').val() == "A") 
+			$('input[name=q2]:checked').val() == "B" &&
+			$('input[name=q3]:checked').val() == "B") 
 		{
 			STATE.set_index(0);
 			// If so, move into stimuli
