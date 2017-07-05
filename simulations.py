@@ -81,6 +81,9 @@ def shortDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -91,7 +94,8 @@ def shortDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 
 		#allow user to exit
 		for event in pygame.event.get():
@@ -165,7 +169,8 @@ def shortDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -224,6 +229,9 @@ def mediumDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -231,7 +239,8 @@ def mediumDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -306,7 +315,8 @@ def mediumDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -365,6 +375,9 @@ def longDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -372,6 +385,7 @@ def longDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		helper.snapshot(screen, tick)
 		tick+=1
 
 		#allow user to exit
@@ -448,7 +462,8 @@ def longDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -508,6 +523,9 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -515,6 +533,7 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		helper.snapshot(screen, tick)
 		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
@@ -530,7 +549,7 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			impy = AGENT_WALKING - cone.body.velocity[1]
 			cone.body.apply_impulse_at_local_point((impx,0))
 
-		# if collision between agent and patient, have agent push back once
+			# if 	collision between agent and patient, have agent push back once
 		if (len(handlers.collision) != 0 and count==0):
 			count+=1
 			try:
@@ -598,7 +617,8 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -612,7 +632,6 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-# MOD
 def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	'''
 	Simulation of Cone travelling slower after being hit by Cylinder.
@@ -658,6 +677,9 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -665,6 +687,7 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		helper.snapshot(screen, tick)
 		tick+=1
 		time -= 1
 
@@ -745,7 +768,8 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -758,7 +782,6 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-# MOD
 def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cone travelling faster after being hit by Cylinder.
@@ -803,6 +826,9 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -810,6 +836,7 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		helper.snapshot(screen, tick)
 		tick+=1
 		time -= 1
 		#allow user to exit
@@ -887,7 +914,8 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -944,6 +972,9 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -951,6 +982,7 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		helper.snapshot(screen, tick)
 		tick+=1
 		time-=1
 
@@ -1032,7 +1064,8 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1090,6 +1123,9 @@ def doublePush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -1097,6 +1133,7 @@ def doublePush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		helper.snapshot(screen, tick)
 		tick+=1
 		time -= 1
 		#allow user to exit
@@ -1179,7 +1216,8 @@ def doublePush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1237,6 +1275,9 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -1245,7 +1286,8 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		time -= 1
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		
 		#allow user to exit
 		for event in pygame.event.get():
@@ -1321,7 +1363,8 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1377,6 +1420,9 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -1385,7 +1431,8 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		time -= 1
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		
 		#allow user to exit
 		for event in pygame.event.get():
@@ -1461,7 +1508,8 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1516,6 +1564,9 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
@@ -1524,7 +1575,8 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		time -= 1
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		
 		#allow user to exit
 		for event in pygame.event.get():
@@ -1600,7 +1652,8 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1661,6 +1714,9 @@ def mediumDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -1671,7 +1727,8 @@ def mediumDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 
 		#allow user to exit
 		for event in pygame.event.get():
@@ -1745,7 +1802,8 @@ def mediumDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1806,6 +1864,9 @@ def longDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -1816,7 +1877,8 @@ def longDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 
 		#allow user to exit
 		for event in pygame.event.get():
@@ -1890,7 +1952,8 @@ def longDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -1952,6 +2015,9 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -1962,7 +2028,8 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -2037,7 +2104,8 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -2101,6 +2169,9 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -2111,7 +2182,8 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -2187,7 +2259,8 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -2249,6 +2322,9 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_WALK
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -2259,7 +2335,8 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_WALK
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -2332,7 +2409,8 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_WALK
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -2394,6 +2472,9 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -2404,7 +2485,8 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -2477,7 +2559,8 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -2539,6 +2622,9 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -2549,7 +2635,8 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -2620,7 +2707,8 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -2682,6 +2770,9 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -2692,7 +2783,8 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -2765,7 +2857,8 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -2827,6 +2920,9 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -2837,7 +2933,8 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -2908,7 +3005,8 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -2970,6 +3068,9 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_WALKIN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -2980,7 +3081,8 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -3053,7 +3155,8 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -3115,6 +3218,9 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -3125,7 +3231,8 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 		time -= 1
 
 		#allow user to exit
@@ -3201,7 +3308,8 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -3248,6 +3356,9 @@ def patientWalksToFireball(space, screen, options, guess=False, impulse=AGENT_WA
 
 	# pause before showing clip
 	# helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -3257,7 +3368,8 @@ def patientWalksToFireball(space, screen, options, guess=False, impulse=AGENT_WA
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 
 		#allow user to exit
 		for event in pygame.event.get():
@@ -3314,7 +3426,8 @@ def patientWalksToFireball(space, screen, options, guess=False, impulse=AGENT_WA
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
@@ -3422,7 +3535,9 @@ def fireballMoving(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	running = True
 	tick = 0
 	time = 100
-
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 	# set clock
 	clock = pygame.time.Clock()
 
@@ -3430,9 +3545,9 @@ def fireballMoving(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	while running and time!=0:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
-		tick += 1
 		time -= 1
-
+		helper.snapshot(screen, tick)
+		tick+=1
 		#allow user to exit
 		for event in pygame.event.get():
 			if event.type == QUIT:
@@ -3514,6 +3629,9 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
+	for i in range(100):
+		helper.snapshot(screen, tick)
+		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -3524,7 +3642,8 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		tick += 1
+		helper.snapshot(screen, tick)
+		tick+=1
 
 		#allow user to exit
 		for event in pygame.event.get():
@@ -3598,7 +3717,8 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-
+		helper.snapshot(screen, tick)
+		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
