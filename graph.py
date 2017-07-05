@@ -13,20 +13,21 @@ import sim
 import matplotlib.pyplot as plt
 
 # list of simulation calls from sim.py to be passed as parameters
-simulations = [sim.shortDistance, sim.mediumDistance, sim.longDistance, sim.static,sim.uphill, 
-			   sim.downhill, sim.slowCollision, sim.fastCollision, sim.touch, sim.doubleTouch, 
-			   sim.mediumPush, sim.longPush, sim.dodge, sim.pushFireball]
+simulations = [sim.shortDistancev1, sim.mediumDistancev1, sim.longDistancev1, sim.static,
+			   sim.slowCollision, sim.fastCollision, sim.noTouch, sim.doublePush, 
+			   sim.mediumPush, sim.longPush, sim.dodge, sim.pushFireball, sim.mediumDistancev2,
+			   sim.longDistancev2, sim.victim_moving_static]
 
 def compareTotalImps():
 	'''
 	Plot total impulses applied to Agent for each of the 14 simulations.
 	'''
-	DYN = 1.0
 	impulses = []
-	idx = range(14)
-	sims = ['shortDistance', 'medDistance', 'longDistance', 'static','N/A', 
-		    'N/A', 'slowCollision', 'fastCollision', 'touch', 'doubleTouch', 
-		    'medPush', 'longPush', 'dodge', 'pushFireball']
+	idx = range(15)
+	sims = ['shortDistancev1', 'mediumDistancev1', 'longDistancev1', 'static',
+			   'slowCollision', 'fastCollision', 'noTouch', 'doublePush', 
+			   'mediumPush', 'longPush', 'dodge', 'pushFireball', 'mediumDistancev2',
+			   'longDistancev2', 'moving']
 	
 	# traverse simulations and 
 	for sim in simulations:
@@ -46,7 +47,7 @@ def compareTotalImps():
 	plt.ylabel('Total Impulses')
 	plt.title('Effort Comparison for Sims')
 	plt.tight_layout()
-	plt.savefig('Dyn: '+ str(DYN) + '.png')
+	plt.savefig('NewSims' + '.png')
 	plt.show()
 
 def compareKinematics(DYN, flag=True):
