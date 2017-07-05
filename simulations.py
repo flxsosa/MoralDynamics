@@ -3354,12 +3354,6 @@ def patientWalksToFireball(space, screen, options, guess=False, impulse=AGENT_WA
 	x = 0
 	cnt = 0
 
-	# pause before showing clip
-	# helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
-		helper.snapshot(screen, tick)
-		tick+=1
-
 	# set clock
 	clock = pygame.time.Clock()
 
@@ -3467,6 +3461,7 @@ def agentWalksToFireball(space, screen, options, guess=False, impulse=AGENT_RUNN
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		helper.snapshot(screen, tick)
 		tick += 1
 		time -= 1
 
@@ -3535,9 +3530,7 @@ def fireballMoving(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	running = True
 	tick = 0
 	time = 100
-	for i in range(100):
-		helper.snapshot(screen, tick)
-		tick+=1
+
 	# set clock
 	clock = pygame.time.Clock()
 
@@ -3607,9 +3600,9 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 	# add shapes
 	ball = agents.fireball(900, 300, F_MASS)
 	space.add(ball.body, ball.shape)
-	cone = agents.patient(800, 300, AP_MASS)
+	cone = agents.patient(400, 300, AP_MASS)
 	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(500, 300, AP_MASS)
+	cylinder = agents.agent(750, 400, AP_MASS)
 	space.add(cylinder.body, cylinder.shape)
 	
 	# lists for impulses per timestep, total impulses, running flag, and ticks
@@ -3621,17 +3614,12 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 	yImpsFireball = []
 	total = []
 	running = True
+	time = 100
 	tick = 0
 
 	# animation flag and counter
 	x = 0
 	cnt = 0
-
-	# pause before showing clip
-	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
-		helper.snapshot(screen, tick)
-		tick+=1
 
 	# set clock
 	clock = pygame.time.Clock()
@@ -3642,6 +3630,7 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
 		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
+		time-=1
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -3653,14 +3642,12 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 				running = False
 		
 		# keep the Agent at it's intended velocity for some duration
-		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
-			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((imp,0))
-			total.append(imp)
-		elif (len(handlers.collision) == 1):
-			imp = cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
-			total.append(math.fabs(imp))
+		if (cone.body.velocity[0] < impulse and len(handlers.collision) == 0):
+			imp = impulse - cone.body.velocity[0]
+			cone.body.apply_impulse_at_local_point((imp,0))
+
+		if (time == 0):
+			cylinder.body.apply_impulse_at_local_point((0,-1*AGENT_WALKING))
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])
@@ -3717,8 +3704,6 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 		# adjust pygame screen and move clock forward
 		pygame.display.flip()
 		clock.tick(50)
-		helper.snapshot(screen, tick)
-		tick+=1
 	# remove value from collision list
 	try:
 		handlers.collision = []
