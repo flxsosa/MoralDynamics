@@ -1,2 +1,28 @@
 # Moral Dynamics
-Repo for Moral Dynamics project headed by Felix Sosa, Dr. Tobias Gerstenberg, Dr. Tomer Ullman, and Dr. Sam Gershman.
+This repo contains all of the necessary code to run the simulations, collect the data, reproduce the Mechanical Turk experiments for the Moral Dynamics project. The project is headed by Felix Sosa, Dr. Tobias Gerstenberg, Dr. Tomer Ullman, and Dr. Sam Gershman.
+
+## Getting Started
+From the terminal run:
+```bash
+$ git clone http://github.com/flxsosa/MoralDynamics
+$ cd MoralDynamics
+$ python main.py
+```
+Then simply follow the terminal prompt from there!
+
+## Overview 
+### main.py
+
+### simulations.py
+
+### infer.py
+
+### graph.py
+
+### sim.py
+
+### helper.py
+
+### handlers.py
+
+### agents.py
