@@ -81,7 +81,7 @@ def shortDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -151,6 +151,7 @@ def shortDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -229,7 +230,7 @@ def mediumDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -297,6 +298,7 @@ def mediumDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -375,7 +377,7 @@ def longDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -444,6 +446,7 @@ def longDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -523,7 +526,7 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -599,6 +602,7 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -677,7 +681,7 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -750,6 +754,7 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -826,7 +831,7 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -896,6 +901,7 @@ def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -972,7 +978,7 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -1046,6 +1052,7 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -1123,7 +1130,7 @@ def doublePush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -1198,6 +1205,7 @@ def doublePush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -1275,7 +1283,7 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -1345,6 +1353,7 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -1420,7 +1429,7 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -1490,6 +1499,7 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -1564,7 +1574,7 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -1634,6 +1644,7 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -1714,7 +1725,7 @@ def mediumDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -1784,6 +1795,7 @@ def mediumDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -1864,7 +1876,7 @@ def longDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -1934,6 +1946,7 @@ def longDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -2015,7 +2028,7 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -2086,6 +2099,7 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -2169,7 +2183,7 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -2241,6 +2255,7 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -2322,7 +2337,7 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_WALK
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -2391,6 +2406,7 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_WALK
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -2472,7 +2488,7 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -2541,6 +2557,7 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_WALK
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -2622,7 +2639,7 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -2689,6 +2706,7 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -2770,7 +2788,7 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -2839,6 +2857,7 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -2920,7 +2939,7 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -2987,6 +3006,7 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -3068,7 +3088,7 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_WALKIN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -3137,6 +3157,7 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -3218,7 +3239,7 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 
 	# pause before showing clip
 	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(100):
+	for i in range(25):
 		helper.snapshot(screen, tick)
 		tick+=1
 
@@ -3290,6 +3311,7 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_WALKIN
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -3403,6 +3425,7 @@ def patientWalksToFireball(space, screen, options, guess=False, impulse=AGENT_WA
 		screen.blit(fireSprite, pBall)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
@@ -3686,6 +3709,7 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 		screen.blit(agentSprite, pAgent)
 
 		# conditional animation sequence
+		screen.blit(patientSprite, pCone)
 		if (cnt < 12 and x == 0):
 			img = pygame.image.load(ani[cnt])
 			screen.blit(img, pCone)
