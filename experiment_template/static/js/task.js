@@ -178,7 +178,9 @@ var TestPhase = function() {
 					$('#play').prop('disabled', false);
 				}
 				else {
+					$('#play').hide();
 					func();
+					$('#trial_next').show();
 				}
 			},false);
 
@@ -226,7 +228,8 @@ var TestPhase = function() {
 
             // Disable button which will be enabled once the sliders are clicked
             $('#trial_next').prop('disabled', true);
-
+            $('#trial_next').hide();
+            // $('#trial_next').prop('disabled', true);
             // When the continue button is clicked, reset playClick counter
             $('#trial_next').on('click', function(){
             	playClick = 0;
@@ -283,6 +286,7 @@ var TestPhase = function() {
 	var that = this;
 	$("#trial").fadeIn($c.fade);
 	$('#trial_next.next').click(function() {
+		$('#play').show();
 		that.record_response();
 	});
 
@@ -448,4 +452,6 @@ $(document).ready(function() {
 	} else {
 		CURRENTVIEW = new Introduction();
 	}
+
+	// CURRENTVIEW = new TestPhase()
 });
