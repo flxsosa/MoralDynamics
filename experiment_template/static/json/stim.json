@@ -83,9 +83,9 @@
     ],
     "text": "",
     "questions":[
-        {"q": " ''How bad was what the Blue did to the Green?'' ", 
+        {"q": " ''How much is Blue to blame for Green getting burned?'' ", 
         "type": "caused",
-        "l": ["not bad at all", "", "very bad"]}
+        "l": ["not at all", "", "very much"]}
     ]
 }
 

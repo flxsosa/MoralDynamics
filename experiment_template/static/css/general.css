@@ -161,7 +161,7 @@ span.consent {
 
 #progress-text1 { position: absolute; }
 
-#prompt-text { font-weight: bold; }
+/* #prompt-text { font-weight: bold; } */
 
 #indicator-container {
     position: relative;
