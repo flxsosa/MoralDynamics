@@ -446,12 +446,12 @@ $(document).ready(function() {
 	// Start the experiment
 	STATE = new State();
 
-	// // Begin the experiment phase
-	// if (STATE.instructions) {
-	// 	CURRENTVIEW = new Instructions();
-	// } else {
-	// 	CURRENTVIEW = new Introduction();
-	// }
+	// Begin the experiment phase
+	if (STATE.instructions) {
+		CURRENTVIEW = new Instructions();
+	} else {
+		CURRENTVIEW = new Introduction();
+	}
 
-	CURRENTVIEW = new TestPhase()
+	// CURRENTVIEW = new TestPhase()
 });
