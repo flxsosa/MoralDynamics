@@ -23,30 +23,9 @@
         },
         {
             "name": "experiment_slides7"
-        },
-        {
-            "name": "experiment_slides8"
-        },
-        {
-            "name": "experiment_slides9"
-        },
-        {
-            "name": "experiment_slides10"
-        },
-        {
-            "name": "experiment_slides11"
-        },
-        {
-            "name": "experiment_slides12"
-        },
-        {
-            "name": "experiment_slides13"
         }
     ],
         "stim":[
-        {
-            "name": "video"
-        },
         {
             "name": "video1"
         },
@@ -85,16 +64,8 @@
         },
         {
             "name": "video13"
-        },
-        {
-            "name": "video14"
-        },
-        {
-            "name": "video15"
-        },
-        {
-            "name": "video16"
         }
+
     ],
         "vid":[
         {
@@ -105,6 +76,9 @@
         },
         {
             "name": "intro2"
+        },
+        {
+            "name": "intro3"
         }
     ],
     "text": "",

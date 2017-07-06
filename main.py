@@ -21,6 +21,78 @@ def main():
 	'''
 	Entry point
 	'''
+
+	if (len(sys.argv) == 2):
+		choice = sys.argv[1]
+		# initialize pygame and create a space to contain the simulation
+		pygame.init()
+		space = pymunk.Space()
+
+		# create a screen of 600x600 pixels
+		screen = pygame.display.set_mode((1000,600))	
+		drawOptions = pymunk.pygame_util.DrawOptions(screen)
+
+		if (choice == '1'):
+			simulations.shortDistancev1(space, screen, drawOptions)
+		elif (choice == '2'):
+			simulations.mediumDistancev2(space, screen, drawOptions)
+		elif (choice == '3'):
+			simulations.longDistancev1(space, screen, drawOptions)
+		elif (choice == '4'):
+			simulations.longDistancev2(space, screen, drawOptions)
+		elif (choice == '5'):
+			simulations.static(space, screen, drawOptions)
+		elif (choice == '6'):
+			simulations.slowCollision(space, screen, drawOptions)
+		elif (choice == '7'):
+			simulations.fastCollision(space, screen, drawOptions)
+		elif (choice == '8'):
+			simulations.dodge(space, screen, drawOptions)
+		elif (choice == '9'):
+			simulations.doublePush(space, screen, drawOptions)
+		elif (choice == '10'):
+			simulations.mediumPush(space, screen, drawOptions)
+		elif (choice == '11'):
+			simulations.longPush(space, screen, drawOptions)
+		elif (choice == '13'):
+			simulations.noTouch(space, screen, drawOptions)
+
+		elif (choice == '14'):
+			simulations.victim_moving_moving(space, screen, drawOptions)
+		elif (choice == '15' or choice == '12'):
+			simulations.victim_moving_static(space, screen, drawOptions)
+		elif (choice == '16'):
+			simulations.victim_static_moving(space, screen, drawOptions)
+		elif (choice == '17'):
+			simulations.victim_static_static(space, screen, drawOptions)
+		elif (choice == '18'):
+			simulations.harm_moving_moving(space, screen, drawOptions)
+		elif (choice == '19'):
+			simulations.harm_moving_static(space, screen, drawOptions)
+		elif (choice == '20'):
+			simulations.harm_static_moving(space, screen, drawOptions)
+		elif (choice == '21'):
+			simulations.harm_static_static(space, screen, drawOptions)
+		
+		elif (choice == '22'):
+			simulations.mediumDistancev1(space, screen, drawOptions)
+		elif (choice == '23'):
+			simulations.pushFireball(space, screen, drawOptions)
+
+		elif (choice == '24'):
+			simulations.agentWalksToFireball(space, screen, drawOptions)
+		elif (choice == '25'):
+			simulations.patientWalksToFireball(space, screen, drawOptions)
+		elif (choice == '26'):
+			simulations.fireballMoving(space, screen, drawOptions)
+		elif (choice == '27'):
+			simulations.agentSavesPatient(space, screen, drawOptions)
+		else:
+			print("Must be an integer [0-14]")
+		pygame.quit()
+		pygame.display.quit()
+		sys.exit()
+
 	print("=================================================")
 	print("1. Show Simulations")
 	print("2. Run Guesses")
@@ -96,6 +168,8 @@ def main():
 				simulations.patientWalksToFireball(space, screen, drawOptions)
 			elif (choice == '26'):
 				simulations.fireballMoving(space, screen, drawOptions)
+			elif (choice == '27'):
+				simulations.agentSavesPatient(space, screen, drawOptions)
 			else:
 				print("Must be an integer [0-14]")
 			pygame.quit()
