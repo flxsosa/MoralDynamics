@@ -83,7 +83,7 @@
     ],
     "text": "",
     "questions":[
-        {"q": " ''How much is Blue to blame for Green getting burned?'' ", 
+        {"q": " 'How much is Blue to blame for Green getting burned?' ", 
         "type": "caused",
         "l": ["not at all", "", "very much"]}
     ]

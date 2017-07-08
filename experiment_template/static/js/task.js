@@ -72,16 +72,20 @@ var Introduction = function() {
 
 	this.display_stim = function(that) {
 		if (that.init_intro()) {
-			console.log(slideNumber);
 			// Show video and increment slide number
 			slideNumber++;
+			console.log("What the other is")
+			console.log(slideNumber)
 			video_name = that.introinfo.name,
+			
 			$("#intro_slide").attr("src", '/static/images/' + video_name + '.png');
+			
 			this.otherinfo = $c.trials[0];
+			
 			if (slideNumber == 2 || slideNumber == 3 || slideNumber == 4 || slideNumber == 5) {
 				this.otherinfo=$c.introvids[count];
 				count++;
-				console.log("should work");
+
 				var html = "";
 	           	// Add in the questions from list in stim.json
 	            html += '<video loop autoplay class="intro_video" width="600" id="vid"><source src="" id="video_mp4"><source src="" id="video_webm"><source src="" id="video_ogg"></video>';
@@ -98,9 +102,12 @@ var Introduction = function() {
 	};
 
 	this.finish = function() {
-		STATE.set_index(0)
+		slideNumber = 0;
+		console.log("Slide Number")
+		console.log(slideNumber);
+		STATE.set_index(0);
 		// Change the page
-		CURRENTVIEW = new Questions()
+		CURRENTVIEW = new Questions();
 	};
 
 	// Load the trial html page
@@ -340,7 +347,13 @@ var Questions = function() {
 			STATE.set_index(0);
 			// Else, go back to the introduction
 			$('#intro_next.next').unbind();
-			CURRENTVIEW = new Introduction();
+			$(".slide").unbind();
+			$('.next').unbind();
+			$('input[name=q1]').attr('checked',false);
+			$('input[name=q2]').attr('checked',false);
+			$('input[name=q3]').attr('checked',false);
+			alert("The answers that were given are incorrect. \n \nYou will be shown the instructions and slides again and have to repeat the comprehension check. \n\nOnce the answers are correct you can proceed to the next step.")
+			CURRENTVIEW = new Instructions();
 		}
 		
 	}; 
@@ -446,12 +459,5 @@ $(document).ready(function() {
 	// Start the experiment
 	STATE = new State();
 
-	// // Begin the experiment phase
-	// if (STATE.instructions) {
-	// 	CURRENTVIEW = new Instructions();
-	// } else {
-	// 	CURRENTVIEW = new Introduction();
-	// }
-
-	CURRENTVIEW = new TestPhase()
+	CURRENTVIEW = new Instructions()
 });
