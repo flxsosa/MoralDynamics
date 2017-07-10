@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 simulations = [sim.shortDistancev1, sim.mediumDistancev1, sim.longDistancev1, sim.static,
 			   sim.slowCollision, sim.fastCollision, sim.noTouch, sim.doublePush, 
 			   sim.mediumPush, sim.longPush, sim.dodge, sim.pushFireball, sim.mediumDistancev2,
-			   sim.longDistancev2, sim.victim_moving_static]
+			   sim.longDistancev2, sim.moving]
 
 def compareTotalImps():
 	'''
@@ -50,7 +50,7 @@ def compareTotalImps():
 	plt.savefig('NewSims' + '.png')
 	plt.show()
 
-def compareKinematics(DYN, flag=True):
+def compareKinematics(flag=True):
 	'''
 	Plots two bar plots. One for Moral Kinematics data and one for
 	Moral Dynamics data.
@@ -72,7 +72,7 @@ def compareKinematics(DYN, flag=True):
 		screen = None
 		drawOptions = None
 		# append total impulse applied to Agent for given simulation
-		impulses.append(sim(space, screen, drawOptions, True, DYN))
+		impulses.append(sim(space, screen, drawOptions, True))
 		pygame.quit()
 
 	# If a simulation failed at any time, do not account for it
@@ -83,10 +83,10 @@ def compareKinematics(DYN, flag=True):
 		dynamics = calcProb(impulses)
 		# x axis values for plot
 		idx = range(1, 16)
-		xLabels = ['1. LongDist v ShortDist', '2. LongDist v MedDist', '3. LongDist v Static', '4. MedPush v Down', 
+		xLabels = ['1. LongDistv1 v ShortDistv1', '2. LongDistv2 v MedDistv2', '3. Movingt v Static', '4. MedPush v Down', 
 				   '5. Up v Down', '6. Up v MedPush', '7. FastColl v SlowColl', '8. Dodge v NoTouch',
-				   '9. Dodge v Static', '10. Static v NoTouch', '11. LongDist v Dodge', 
-				   '12. DoubleTouch v Touch', '13. MedPush v Touch', '14. LongPush v MedPush',
+				   '9. Dodge v Static', '10. Static v NoTouch', '11. Moving v Dodge', 
+				   '12. LongPush v DoublePush', '13. MedDistv2 v MedPush', '14. LongPush v MedPush',
 				   '15. LongPush v Touch']
 
 		# double bar plot
@@ -101,7 +101,7 @@ def compareKinematics(DYN, flag=True):
 		plt.legend(loc="best")
 		plt.plot([0.5]*17, "k--")
 		plt.tight_layout()
-		plt.savefig('Dyn: '+ str(DYN) + 'kin.png')
+		plt.savefig('kin.png')
 		plt.show()
 
 def calcProb(a):
@@ -115,9 +115,9 @@ def calcProb(a):
 	# long distance vs short distance
 	prob.append(a[2]/(a[0]+a[2]))
 	# long distance vs medium distance
-	prob.append(a[2]/(a[1]+a[2]))
+	prob.append(a[13]/(a[12]+a[13]))
 	# long distance vs static
-	prob.append(a[2]/(a[3]+a[2]))
+	prob.append(a[14]/(a[3]+a[14]))
 	# medium push vs downhill
 	prob.append(0)
 	# uphill vs downhill
@@ -125,23 +125,23 @@ def calcProb(a):
 	# uphill vs medium push
 	prob.append(0)
 	# fast collision vs slow collision
-	prob.append(a[7]/(a[6]+a[7]))
+	prob.append(a[5]/(a[5]+a[4]))
 	# dodge vs no touch
 	prob.append(1)
 	# dodge vs static
-	prob.append(a[12]/(a[3]+a[12]))
+	prob.append(a[10]/(a[3]+a[10]))
 	# static vs no touch
 	prob.append(1)
-	# long distance vs dodge
-	prob.append(a[2]/(a[12]+a[2]))
-	# double touch vs touch
-	prob.append(a[9]/(a[9]+a[8]))
-	# medium push vs touch
-	prob.append(a[10]/(a[10]+a[8]))
+	# Moving vs dodge
+	prob.append(a[14]/(a[14]+a[10]))
+	# Long Push vs Double Push
+	prob.append(a[9]/(a[9]+a[7]))
+	# Medium Distance v2 vs Medium Push
+	prob.append(a[12]/(a[12]+a[8]))
 	# long push vs medium push
-	prob.append(a[11]/(a[11]+a[10]))
+	prob.append(a[9]/(a[9]+a[8]))
 	# long push vs touch
-	prob.append(a[11]/(a[11]+a[8]))
+	prob.append(a[9]/(a[9]+a[2]))
 
 	return prob
 
