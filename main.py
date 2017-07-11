@@ -86,17 +86,21 @@ def main():
 			simulations.sim3Patient(space, screen, drawOptions)
 		elif (choice == '27'):
 			simulations.sim3Fireball(space, screen, drawOptions)
-
 		elif (choice == '28'):
-			simulations.agentWalksToFireball(space, screen, drawOptions)
+			simulations.sim4Patient(space, screen, drawOptions)
 		elif (choice == '29'):
-			simulations.patientWalksToFireball(space, screen, drawOptions)
+			simulations.sim4Fireball(space, screen, drawOptions)
+
 		elif (choice == '30'):
-			simulations.fireballMoving(space, screen, drawOptions)
+			simulations.agentWalksToFireball(space, screen, drawOptions)
 		elif (choice == '31'):
+			simulations.patientWalksToFireball(space, screen, drawOptions)
+		elif (choice == '32'):
+			simulations.fireballMoving(space, screen, drawOptions)
+		elif (choice == '33'):
 			simulations.agentSavesPatient(space, screen, drawOptions)
 		else:
-			print("Must be an integer [0-31]")
+			print("Must be an integer [0-33]")
 		pygame.quit()
 		pygame.display.quit()
 		sys.exit()
@@ -177,14 +181,18 @@ def main():
 				simulations.sim3Patient(space, screen, drawOptions)
 			elif (choice == '27'):
 				simulations.sim3Fireball(space, screen, drawOptions)
-
 			elif (choice == '28'):
-				simulations.agentWalksToFireball(space, screen, drawOptions)
+				simulations.sim4Patient(space, screen, drawOptions)
 			elif (choice == '29'):
-				simulations.patientWalksToFireball(space, screen, drawOptions)
+				simulations.sim4Fireball(space, screen, drawOptions)
+
 			elif (choice == '30'):
-				simulations.fireballMoving(space, screen, drawOptions)
+				simulations.agentWalksToFireball(space, screen, drawOptions)
 			elif (choice == '31'):
+				simulations.patientWalksToFireball(space, screen, drawOptions)
+			elif (choice == '32'):
+				simulations.fireballMoving(space, screen, drawOptions)
+			elif (choice == '33'):
 				simulations.agentSavesPatient(space, screen, drawOptions)
 			else:
 				print("Must be an integer [0-31]")
