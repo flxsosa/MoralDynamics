@@ -7,14 +7,12 @@ Felix Sosa
 
 import pymunk
 import pygame
-import agents
 import pymunk.pygame_util
 from pygame.locals import *
 import sys
 import simulations
 import infer
 import sim
-import matplotlib.pyplot as plt
 import helper
 
 def main():

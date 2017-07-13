@@ -92,7 +92,7 @@ def wait(screen, space, options, cylinder, ball, cone):
 	pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
 	pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 
-	time=1
+	time=200
 	while (time > 0):
 			time-=1
 			# draw screen
