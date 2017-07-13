@@ -15,6 +15,41 @@ import infer
 import sim
 import helper
 
+menu_actions = {
+	'1' : simulations.shortDistancev1,
+	'2' : simulations.mediumDistancev2,
+	'3' : simulations.longDistancev1,
+	'4' : simulations.static,
+	'5' : simulations.slowCollision,
+	'6' : simulations.fastCollision,
+	'7' : simulations.dodge,
+	'8' : simulations.doublePush,
+	'9' : simulations.mediumPush,
+	'10' : simulations.longPush,
+	'11' : simulations.victim_moving_static,
+	'12' : simulations.noTouch,
+	'13' : simulations.victim_moving_moving,
+	'14' : simulations.victim_moving_static,
+	'15' : simulations.victim_static_moving,
+	'16' : simulations.victim_static_static,
+	'17' : simulations.harm_moving_moving,
+	'18' : simulations.harm_moving_static,
+	'19' : simulations.harm_static_moving,
+	'20' : simulations.harm_static_static,
+	'21' : simulations.sim1Patient,
+	'22' : simulations.sim1Fireball,
+	'23' : simulations.sim2Patient,
+	'24' : simulations.sim2Fireball,
+	'25' : simulations.sim3Patient,
+	'26' : simulations.sim3Fireball,
+	'27' : simulations.sim4Patient,
+	'28' : simulations.sim4Fireball,
+	'29' : simulations.agentWalksToFireball,
+	'30' : simulations.patientWalksToFireball,
+	'31' : simulations.fireballMoving,
+	'32' : simulations.agentSavesPatient
+}
+
 def main():
 	'''
 	Entry point
@@ -29,88 +64,14 @@ def main():
 		# create a screen of 600x600 pixels
 		screen = pygame.display.set_mode((1000,600))	
 		drawOptions = pymunk.pygame_util.DrawOptions(screen)
+		menu_actions[choice](space, screen, drawOptions)
 
-		if (choice == '1'):
-			simulations.shortDistancev1(space, screen, drawOptions)
-		elif (choice == '2'):
-			simulations.mediumDistancev2(space, screen, drawOptions)
-		elif (choice == '3'):
-			simulations.longDistancev1(space, screen, drawOptions)
-		#elif (choice == '4'):
-		#	simulations.longDistancev2(space, screen, drawOptions)
-		elif (choice == '4'):
-			simulations.static(space, screen, drawOptions)
-		elif (choice == '5'):
-			simulations.slowCollision(space, screen, drawOptions)
-		elif (choice == '6'):
-			simulations.fastCollision(space, screen, drawOptions)
-		elif (choice == '7'):
-			simulations.dodge(space, screen, drawOptions)
-		elif (choice == '8'):
-			simulations.doublePush(space, screen, drawOptions)
-		elif (choice == '9'):
-			simulations.mediumPush(space, screen, drawOptions)
-		elif (choice == '10'):
-			simulations.longPush(space, screen, drawOptions)
-		elif (choice == '12'):
-			simulations.noTouch(space, screen, drawOptions)
-
-		elif (choice == '13'):
-			simulations.victim_moving_moving(space, screen, drawOptions)
-		elif (choice == '14' or choice == '11'):
-			simulations.victim_moving_static(space, screen, drawOptions)
-		elif (choice == '15'):
-			simulations.victim_static_moving(space, screen, drawOptions)
-		elif (choice == '16'):
-			simulations.victim_static_static(space, screen, drawOptions)
-		elif (choice == '17'):
-			simulations.harm_moving_moving(space, screen, drawOptions)
-		elif (choice == '18'):
-			simulations.harm_moving_static(space, screen, drawOptions)
-		elif (choice == '19'):
-			simulations.harm_static_moving(space, screen, drawOptions)
-		elif (choice == '20'):
-			simulations.harm_static_static(space, screen, drawOptions)
-		
-		elif (choice == '21'):
-			simulations.sim1Patient(space, screen, drawOptions)
-		elif (choice == '22'):
-			simulations.sim1Fireball(space, screen, drawOptions)
-		elif (choice == '23'):
-			simulations.sim2Patient(space, screen, drawOptions)
-		elif (choice == '24'):
-			simulations.sim2Fireball(space, screen, drawOptions)
-		elif (choice == '25'):
-			simulations.sim3Patient(space, screen, drawOptions)
-		elif (choice == '26'):
-			simulations.sim3Fireball(space, screen, drawOptions)
-		elif (choice == '27'):
-			simulations.sim4Patient(space, screen, drawOptions)
-		elif (choice == '28'):
-			simulations.sim4Fireball(space, screen, drawOptions)
-
-		elif (choice == '29'):
-			simulations.agentWalksToFireball(space, screen, drawOptions)
-		elif (choice == '30'):
-			simulations.patientWalksToFireball(space, screen, drawOptions)
-		elif (choice == '31'):
-			simulations.fireballMoving(space, screen, drawOptions)
-		elif (choice == '32'):
-			simulations.agentSavesPatient(space, screen, drawOptions)
-		else:
-			print("Must be an integer [0-33]")
 		pygame.quit()
 		pygame.display.quit()
 		sys.exit()
 
-	print("=================================================")
-	print("1. Show Simulations")
-	print("2. Run Guesses")
-	print("0. EXIT")
-	print("=================================================")
-	print("Please choose an option or [0] to exit:")
+	helper.printHeader()
 	choice = raw_input()
-
 	# display simulation options
 	if choice == '1':
 		helper.printOptions()
@@ -124,76 +85,8 @@ def main():
 			# create a screen of 600x600 pixels
 			screen = pygame.display.set_mode((1000,600))	
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
-
-			if (choice == '1'):
-				simulations.shortDistancev1(space, screen, drawOptions)
-			elif (choice == '2'):
-				simulations.mediumDistancev2(space, screen, drawOptions)
-			elif (choice == '3'):
-				simulations.longDistancev1(space, screen, drawOptions)
-			#elif (choice == '4'):
-			#	simulations.longDistancev2(space, screen, drawOptions)
-			elif (choice == '4'):
-				simulations.static(space, screen, drawOptions)
-			elif (choice == '5'):
-				simulations.slowCollision(space, screen, drawOptions)
-			elif (choice == '6'):
-				simulations.fastCollision(space, screen, drawOptions)
-			elif (choice == '7'):
-				simulations.dodge(space, screen, drawOptions)
-			elif (choice == '8'):
-				simulations.doublePush(space, screen, drawOptions)
-			elif (choice == '9'):
-				simulations.mediumPush(space, screen, drawOptions)
-			elif (choice == '10'):
-				simulations.longPush(space, screen, drawOptions)
-			elif (choice == '12'):
-				simulations.noTouch(space, screen, drawOptions)
-
-			elif (choice == '13'):
-				simulations.victim_moving_moving(space, screen, drawOptions)
-			elif (choice == '14' or choice == '11'):
-				simulations.victim_moving_static(space, screen, drawOptions)
-			elif (choice == '15'):
-				simulations.victim_static_moving(space, screen, drawOptions)
-			elif (choice == '16'):
-				simulations.victim_static_static(space, screen, drawOptions)
-			elif (choice == '17'):
-				simulations.harm_moving_moving(space, screen, drawOptions)
-			elif (choice == '18'):
-				simulations.harm_moving_static(space, screen, drawOptions)
-			elif (choice == '19'):
-				simulations.harm_static_moving(space, screen, drawOptions)
-			elif (choice == '20'):
-				simulations.harm_static_static(space, screen, drawOptions)
+			menu_actions[choice](space, screen, drawOptions)
 			
-			elif (choice == '21'):
-				simulations.sim1Patient(space, screen, drawOptions)
-			elif (choice == '22'):
-				simulations.sim1Fireball(space, screen, drawOptions)
-			elif (choice == '23'):
-				simulations.sim2Patient(space, screen, drawOptions)
-			elif (choice == '24'):
-				simulations.sim2Fireball(space, screen, drawOptions)
-			elif (choice == '25'):
-				simulations.sim3Patient(space, screen, drawOptions)
-			elif (choice == '26'):
-				simulations.sim3Fireball(space, screen, drawOptions)
-			elif (choice == '27'):
-				simulations.sim4Patient(space, screen, drawOptions)
-			elif (choice == '28'):
-				simulations.sim4Fireball(space, screen, drawOptions)
-
-			elif (choice == '29'):
-				simulations.agentWalksToFireball(space, screen, drawOptions)
-			elif (choice == '30'):
-				simulations.patientWalksToFireball(space, screen, drawOptions)
-			elif (choice == '31'):
-				simulations.fireballMoving(space, screen, drawOptions)
-			elif (choice == '32'):
-				simulations.agentSavesPatient(space, screen, drawOptions)
-			else:
-				print("Must be an integer [0-31]")
 			pygame.quit()
 			pygame.display.quit()
 			print("Please choose a simulation or [0] to exit:")

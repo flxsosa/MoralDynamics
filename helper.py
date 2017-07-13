@@ -14,6 +14,14 @@ fireSprite = pygame.image.load("Sprites/firea.png")
 patientSprite = pygame.image.load("Sprites/Patient.png")
 agentSprite = pygame.image.load("Sprites/Agent.png")
 
+def printHeader():
+	print("=================================================")
+	print("1. Show Simulations")
+	print("2. Run Guesses")
+	print("0. EXIT")
+	print("=================================================")
+	print("Please choose an option or [0] to exit:")
+	
 def printOptions():
 	'''
 	Prints simulation options to user.
