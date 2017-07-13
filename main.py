@@ -36,66 +36,66 @@ def main():
 			simulations.mediumDistancev2(space, screen, drawOptions)
 		elif (choice == '3'):
 			simulations.longDistancev1(space, screen, drawOptions)
+		#elif (choice == '4'):
+		#	simulations.longDistancev2(space, screen, drawOptions)
 		elif (choice == '4'):
-			simulations.longDistancev2(space, screen, drawOptions)
-		elif (choice == '5'):
 			simulations.static(space, screen, drawOptions)
-		elif (choice == '6'):
+		elif (choice == '5'):
 			simulations.slowCollision(space, screen, drawOptions)
-		elif (choice == '7'):
+		elif (choice == '6'):
 			simulations.fastCollision(space, screen, drawOptions)
-		elif (choice == '8'):
+		elif (choice == '7'):
 			simulations.dodge(space, screen, drawOptions)
-		elif (choice == '9'):
+		elif (choice == '8'):
 			simulations.doublePush(space, screen, drawOptions)
-		elif (choice == '10'):
+		elif (choice == '9'):
 			simulations.mediumPush(space, screen, drawOptions)
-		elif (choice == '11'):
+		elif (choice == '10'):
 			simulations.longPush(space, screen, drawOptions)
-		elif (choice == '13'):
+		elif (choice == '12'):
 			simulations.noTouch(space, screen, drawOptions)
 
-		elif (choice == '14'):
+		elif (choice == '13'):
 			simulations.victim_moving_moving(space, screen, drawOptions)
-		elif (choice == '15' or choice == '12'):
+		elif (choice == '14' or choice == '11'):
 			simulations.victim_moving_static(space, screen, drawOptions)
-		elif (choice == '16'):
+		elif (choice == '15'):
 			simulations.victim_static_moving(space, screen, drawOptions)
-		elif (choice == '17'):
+		elif (choice == '16'):
 			simulations.victim_static_static(space, screen, drawOptions)
-		elif (choice == '18'):
+		elif (choice == '17'):
 			simulations.harm_moving_moving(space, screen, drawOptions)
-		elif (choice == '19'):
+		elif (choice == '18'):
 			simulations.harm_moving_static(space, screen, drawOptions)
-		elif (choice == '20'):
+		elif (choice == '19'):
 			simulations.harm_static_moving(space, screen, drawOptions)
-		elif (choice == '21'):
+		elif (choice == '20'):
 			simulations.harm_static_static(space, screen, drawOptions)
 		
-		elif (choice == '22'):
+		elif (choice == '21'):
 			simulations.sim1Patient(space, screen, drawOptions)
-		elif (choice == '23'):
+		elif (choice == '22'):
 			simulations.sim1Fireball(space, screen, drawOptions)
-		elif (choice == '24'):
+		elif (choice == '23'):
 			simulations.sim2Patient(space, screen, drawOptions)
-		elif (choice == '25'):
+		elif (choice == '24'):
 			simulations.sim2Fireball(space, screen, drawOptions)
-		elif (choice == '26'):
+		elif (choice == '25'):
 			simulations.sim3Patient(space, screen, drawOptions)
-		elif (choice == '27'):
+		elif (choice == '26'):
 			simulations.sim3Fireball(space, screen, drawOptions)
-		elif (choice == '28'):
+		elif (choice == '27'):
 			simulations.sim4Patient(space, screen, drawOptions)
-		elif (choice == '29'):
+		elif (choice == '28'):
 			simulations.sim4Fireball(space, screen, drawOptions)
 
-		elif (choice == '30'):
+		elif (choice == '29'):
 			simulations.agentWalksToFireball(space, screen, drawOptions)
-		elif (choice == '31'):
+		elif (choice == '30'):
 			simulations.patientWalksToFireball(space, screen, drawOptions)
-		elif (choice == '32'):
+		elif (choice == '31'):
 			simulations.fireballMoving(space, screen, drawOptions)
-		elif (choice == '33'):
+		elif (choice == '32'):
 			simulations.agentSavesPatient(space, screen, drawOptions)
 		else:
 			print("Must be an integer [0-33]")
@@ -131,66 +131,66 @@ def main():
 				simulations.mediumDistancev2(space, screen, drawOptions)
 			elif (choice == '3'):
 				simulations.longDistancev1(space, screen, drawOptions)
+			#elif (choice == '4'):
+			#	simulations.longDistancev2(space, screen, drawOptions)
 			elif (choice == '4'):
-				simulations.longDistancev2(space, screen, drawOptions)
-			elif (choice == '5'):
 				simulations.static(space, screen, drawOptions)
-			elif (choice == '6'):
+			elif (choice == '5'):
 				simulations.slowCollision(space, screen, drawOptions)
-			elif (choice == '7'):
+			elif (choice == '6'):
 				simulations.fastCollision(space, screen, drawOptions)
-			elif (choice == '8'):
+			elif (choice == '7'):
 				simulations.dodge(space, screen, drawOptions)
-			elif (choice == '9'):
+			elif (choice == '8'):
 				simulations.doublePush(space, screen, drawOptions)
-			elif (choice == '10'):
+			elif (choice == '9'):
 				simulations.mediumPush(space, screen, drawOptions)
-			elif (choice == '11'):
+			elif (choice == '10'):
 				simulations.longPush(space, screen, drawOptions)
-			elif (choice == '13'):
+			elif (choice == '12'):
 				simulations.noTouch(space, screen, drawOptions)
 
-			elif (choice == '14'):
+			elif (choice == '13'):
 				simulations.victim_moving_moving(space, screen, drawOptions)
-			elif (choice == '15' or choice == '12'):
+			elif (choice == '14' or choice == '11'):
 				simulations.victim_moving_static(space, screen, drawOptions)
-			elif (choice == '16'):
+			elif (choice == '15'):
 				simulations.victim_static_moving(space, screen, drawOptions)
-			elif (choice == '17'):
+			elif (choice == '16'):
 				simulations.victim_static_static(space, screen, drawOptions)
-			elif (choice == '18'):
+			elif (choice == '17'):
 				simulations.harm_moving_moving(space, screen, drawOptions)
-			elif (choice == '19'):
+			elif (choice == '18'):
 				simulations.harm_moving_static(space, screen, drawOptions)
-			elif (choice == '20'):
+			elif (choice == '19'):
 				simulations.harm_static_moving(space, screen, drawOptions)
-			elif (choice == '21'):
+			elif (choice == '20'):
 				simulations.harm_static_static(space, screen, drawOptions)
 			
-			elif (choice == '22'):
+			elif (choice == '21'):
 				simulations.sim1Patient(space, screen, drawOptions)
-			elif (choice == '23'):
+			elif (choice == '22'):
 				simulations.sim1Fireball(space, screen, drawOptions)
-			elif (choice == '24'):
+			elif (choice == '23'):
 				simulations.sim2Patient(space, screen, drawOptions)
-			elif (choice == '25'):
+			elif (choice == '24'):
 				simulations.sim2Fireball(space, screen, drawOptions)
-			elif (choice == '26'):
+			elif (choice == '25'):
 				simulations.sim3Patient(space, screen, drawOptions)
-			elif (choice == '27'):
+			elif (choice == '26'):
 				simulations.sim3Fireball(space, screen, drawOptions)
-			elif (choice == '28'):
+			elif (choice == '27'):
 				simulations.sim4Patient(space, screen, drawOptions)
-			elif (choice == '29'):
+			elif (choice == '28'):
 				simulations.sim4Fireball(space, screen, drawOptions)
 
-			elif (choice == '30'):
+			elif (choice == '29'):
 				simulations.agentWalksToFireball(space, screen, drawOptions)
-			elif (choice == '31'):
+			elif (choice == '30'):
 				simulations.patientWalksToFireball(space, screen, drawOptions)
-			elif (choice == '32'):
+			elif (choice == '31'):
 				simulations.fireballMoving(space, screen, drawOptions)
-			elif (choice == '33'):
+			elif (choice == '32'):
 				simulations.agentSavesPatient(space, screen, drawOptions)
 			else:
 				print("Must be an integer [0-31]")
