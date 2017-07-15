@@ -2056,11 +2056,6 @@ def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		if (cone.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - cone.body.velocity[0]
 			cone.body.apply_impulse_at_local_point((imp,0))
-			total.append(imp)
-		elif (len(handlers.collision) == 1):
-			imp = cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
-			total.append(math.fabs(imp))
 
 		# append positional values to each list
 		xImpsAgent.append(cylinder.body.position[0])

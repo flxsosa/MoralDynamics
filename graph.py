@@ -127,17 +127,17 @@ def calcProb(a):
 	# fast collision vs slow collision
 	prob.append(a[5]/(a[5]+a[4]))
 	# dodge vs no touch
-	prob.append(1)
+	prob.append(a[10]/(a[10]+a[6]))
 	# dodge vs static
 	prob.append(a[10]/(a[3]+a[10]))
 	# static vs no touch
-	prob.append(1)
+	prob.append(a[3]/(a[3]+a[6]))
 	# Moving vs dodge
 	prob.append(a[14]/(a[14]+a[10]))
 	# Long Push vs Double Push
-	prob.append(a[9]/(a[9]+a[7]))
+	prob.append(a[7]/(a[9]+a[7]))
 	# Medium Distance v2 vs Medium Push
-	prob.append(a[12]/(a[12]+a[8]))
+	prob.append(a[8]/(a[12]+a[8]))
 	# long push vs medium push
 	prob.append(a[9]/(a[9]+a[8]))
 	# long push vs touch
