@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 simulations = [sim.shortDistancev1, sim.mediumDistancev1, sim.longDistancev1, sim.static,
 			   sim.slowCollision, sim.fastCollision, sim.noTouch, sim.doublePush, 
 			   sim.mediumPush, sim.longPush, sim.dodge, sim.pushFireball, sim.mediumDistancev2,
-			   sim.longDistancev2, sim.moving]
+			   sim.longDistancev2, sim.victim_moving_static]
 
 def compareTotalImps():
 	'''
