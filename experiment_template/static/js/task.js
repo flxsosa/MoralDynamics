@@ -34,7 +34,7 @@ var Instructions = function() {
 	slide.fadeIn($c.fade);
 
 	slide.find('.next').click(function() {
-		CURRENTVIEW = new Introduction();
+		CURRENTVIEW = new Demographics();
 	});
 };
 
