@@ -42,8 +42,8 @@ var Config = function (condition, counterbalance) {
     // Parse the JSON object that we've requested and load it into the
     // configuration
     this.parse_config = function (data) {
-        //data["stim"] = shuffle(data["stim"]); //shuffles the array 
-        this.trials = data["stim"];
+        this.trials = shuffle(data["stim"]); //shuffles the array 
+        //this.trials = data["stim"];
         this.introvids = data["vid"];
         this.introslides = data["intro"]
         this.text = data["text"] ;
