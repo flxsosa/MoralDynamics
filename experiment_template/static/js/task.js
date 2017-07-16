@@ -34,7 +34,7 @@ var Instructions = function() {
 	slide.fadeIn($c.fade);
 
 	slide.find('.next').click(function() {
-		CURRENTVIEW = new Introduction();
+		CURRENTVIEW = new Demographics();
 	});
 };
 
@@ -82,7 +82,7 @@ var Introduction = function() {
 			
 			this.otherinfo = $c.trials[0];
 			
-			if (slideNumber == 2 || slideNumber == 3 || slideNumber == 4 || slideNumber == 5) {
+			if (slideNumber == 2 || slideNumber == 3 || slideNumber == 4) {
 				this.otherinfo=$c.introvids[count];
 				count++;
 
