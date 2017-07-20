@@ -29222,3 +29222,958 @@ TemplateNotFound: experiment_slides1.png
 [2017-07-17 23:25:22 +0000] [26668] [INFO] Worker exiting (pid: 26668)
 [2017-07-17 23:25:22 +0000] [26670] [INFO] Parent changed, shutting down: <Worker 26670>
 [2017-07-17 23:25:22 +0000] [26670] [INFO] Worker exiting (pid: 26670)
+[2017-07-20 14:24:06 +0000] [4956] [DEBUG] Current configuration:
+  proxy_protocol: False
+  worker_connections: 1000
+  statsd_host: None
+  max_requests_jitter: 0
+  post_fork: <function post_fork at 0x7fd92f3f7de8>
+  pythonpath: None
+  enable_stdio_inheritance: False
+  worker_class: sync
+  ssl_version: 3
+  suppress_ragged_eofs: True
+  syslog: False
+  syslog_facility: user
+  when_ready: <function when_ready at 0x7fd92f3f7b18>
+  pre_fork: <function pre_fork at 0x7fd92f3f7c80>
+  cert_reqs: 0
+  preload_app: False
+  keepalive: 2
+  accesslog: None
+  group: 1000
+  graceful_timeout: 30
+  do_handshake_on_connect: False
+  spew: False
+  workers: 17
+  proc_name: psiturk_experiment_server
+  sendfile: None
+  pidfile: None
+  umask: 0
+  on_reload: <function on_reload at 0x7fd92f3f79b0>
+  pre_exec: <function pre_exec at 0x7fd92f3ff410>
+  worker_tmp_dir: None
+  post_worker_init: <function post_worker_init at 0x7fd92f3f7f50>
+  limit_request_fields: 100
+  on_exit: <function on_exit at 0x7fd92f44e410>
+  config: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  proxy_allow_ips: ['127.0.0.1']
+  pre_request: <function pre_request at 0x7fd92f3ff578>
+  post_request: <function post_request at 0x7fd92f3ff668>
+  user: 1000
+  forwarded_allow_ips: ['127.0.0.1']
+  worker_int: <function worker_int at 0x7fd92f3ff140>
+  threads: 1
+  max_requests: 0
+  limit_request_line: 0
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  certfile: None
+  worker_exit: <function worker_exit at 0x7fd92f3ff7d0>
+  chdir: /home/felix/GitHub/MoralDynamics/experiment_template
+  paste: None
+  default_proc_name: gunicorn
+  errorlog: server.log
+  loglevel: debug
+  logconfig: None
+  syslog_addr: udp://localhost:514
+  syslog_prefix: None
+  daemon: False
+  ciphers: TLSv1
+  on_starting: <function on_starting at 0x7fd92f3f7848>
+  worker_abort: <function worker_abort at 0x7fd92f3ff2a8>
+  bind: ['0.0.0.0:22362']
+  raw_env: []
+  reload: False
+  check_config: False
+  limit_request_field_size: 8190
+  nworkers_changed: <function nworkers_changed at 0x7fd92f3ff938>
+  timeout: 30
+  ca_certs: None
+  django_settings: None
+  tmp_upload_dir: None
+  keyfile: None
+  backlog: 2048
+  logger_class: gunicorn.glogging.Logger
+  statsd_prefix: 
+[2017-07-20 14:24:06 +0000] [4956] [INFO] Starting gunicorn 19.4.5
+[2017-07-20 14:24:06 +0000] [4956] [DEBUG] Arbiter booted
+[2017-07-20 14:24:06 +0000] [4956] [INFO] Listening at: http://0.0.0.0:22362 (4956)
+[2017-07-20 14:24:06 +0000] [4956] [INFO] Using worker: sync
+[2017-07-20 14:24:06 +0000] [4961] [INFO] Booting worker with pid: 4961
+[2017-07-20 14:24:06 +0000] [4964] [INFO] Booting worker with pid: 4964
+[2017-07-20 14:24:06 +0000] [4965] [INFO] Booting worker with pid: 4965
+[2017-07-20 14:24:06 +0000] [4970] [INFO] Booting worker with pid: 4970
+2017-07-20 14:24:06,821 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:06,822 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:06,823 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:06 +0000] [4973] [INFO] Booting worker with pid: 4973
+2017-07-20 14:24:06,903 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:06,903 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:06,906 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 14:24:06,913 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:06,913 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:06,915 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:06 +0000] [4974] [INFO] Booting worker with pid: 4974
+2017-07-20 14:24:06,999 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:06,999 Hmm... it seems no custom code (custom.py) associated                         with this project.
+[2017-07-20 14:24:06 +0000] [4977] [INFO] Booting worker with pid: 4977
+2017-07-20 14:24:07,001 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [4978] [INFO] Booting worker with pid: 4978
+2017-07-20 14:24:07,098 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,098 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,100 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [4985] [INFO] Booting worker with pid: 4985
+2017-07-20 14:24:07,148 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,148 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,149 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 14:24:07,195 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,195 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,196 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [4986] [INFO] Booting worker with pid: 4986
+2017-07-20 14:24:07,233 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,233 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,234 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [4989] [INFO] Booting worker with pid: 4989
+2017-07-20 14:24:07,316 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,316 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,317 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [4992] [INFO] Booting worker with pid: 4992
+[2017-07-20 14:24:07 +0000] [4995] [INFO] Booting worker with pid: 4995
+2017-07-20 14:24:07,395 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,395 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,397 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 14:24:07,446 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,447 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,448 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [4998] [INFO] Booting worker with pid: 4998
+2017-07-20 14:24:07,518 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,518 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,519 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [5003] [INFO] Booting worker with pid: 5003
+2017-07-20 14:24:07,579 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,579 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,581 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [5004] [INFO] Booting worker with pid: 5004
+2017-07-20 14:24:07,656 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,657 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,658 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [5007] [INFO] Booting worker with pid: 5007
+2017-07-20 14:24:07,745 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,745 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,747 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:07 +0000] [4956] [DEBUG] 17 workers
+2017-07-20 14:24:07,784 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,784 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,787 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 14:24:07,865 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 14:24:07,865 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 14:24:07,866 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 14:24:08 +0000] [4970] [DEBUG] Closing connection. 
+[2017-07-20 14:24:10 +0000] [5004] [DEBUG] Closing connection. 
+[2017-07-20 14:24:10 +0000] [4989] [DEBUG] Closing connection. 
+[2017-07-20 14:24:10 +0000] [4995] [DEBUG] Closing connection. 
+[2017-07-20 14:24:10 +0000] [4965] [DEBUG] GET /ad
+[2017-07-20 14:24:16 +0000] [4978] [DEBUG] GET /consent
+[2017-07-20 14:24:16 +0000] [4964] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:24:16 +0000] [4973] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:24:17 +0000] [4992] [DEBUG] GET /exp
+2017-07-20 14:24:17,563 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+2017-07-20 14:24:17,568 given Counter({(0, 0): 4}) chose (0, 0)
+[2017-07-20 14:24:17 +0000] [4977] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:24:17 +0000] [4973] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:24:17 +0000] [4970] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:24:17 +0000] [4965] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:24:17 +0000] [4985] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:24:17 +0000] [4978] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:24:17 +0000] [4961] [DEBUG] GET /ad
+[2017-07-20 14:24:17 +0000] [4974] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:24:17 +0000] [4989] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:24:17 +0000] [5004] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:24:17 +0000] [4986] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:24:17 +0000] [4970] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:24:17 +0000] [4974] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:24:17,905 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:24:17 +0000] [4998] [DEBUG] GET /trial.html
+[2017-07-20 14:24:17 +0000] [4995] [DEBUG] GET /submit.html
+[2017-07-20 14:24:17 +0000] [5007] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:24:17 +0000] [5004] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:24:17 +0000] [4965] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:24:22 +0000] [4977] [DEBUG] GET /static/lib/underscore-min.map
+[2017-07-20 14:24:52 +0000] [5007] [DEBUG] GET /ad
+[2017-07-20 14:24:53 +0000] [5003] [DEBUG] GET /favicon.ico
+[2017-07-20 14:24:53 +0000] [4992] [DEBUG] GET /consent
+[2017-07-20 14:24:53 +0000] [4970] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:24:53 +0000] [4973] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:24:54 +0000] [5004] [DEBUG] GET /exp
+2017-07-20 14:24:54,733 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:24:54 +0000] [4964] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:24:54 +0000] [4977] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:24:54 +0000] [4992] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:24:54 +0000] [4961] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:24:54 +0000] [5007] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:24:54 +0000] [5003] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:24:54 +0000] [4985] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:24:54 +0000] [4964] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:24:54 +0000] [5003] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:24:54 +0000] [4973] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:24:54 +0000] [4986] [DEBUG] GET /ad
+[2017-07-20 14:24:55 +0000] [4992] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:24:55 +0000] [4995] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:24:55,090 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:24:55 +0000] [4964] [DEBUG] GET /trial.html
+[2017-07-20 14:24:55 +0000] [4998] [DEBUG] GET /submit.html
+[2017-07-20 14:24:55 +0000] [4992] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:24:55 +0000] [4995] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:24:55 +0000] [5004] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:24:56 +0000] [4985] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 14:24:56 +0000] [4977] [DEBUG] GET /static/videos/webmoutput_file1.webm
+[2017-07-20 14:24:56 +0000] [4989] [DEBUG] GET /static/videos/oggoutput_file1.ogv
+[2017-07-20 14:24:58 +0000] [4995] [DEBUG] GET /static/lib/underscore-min.map
+[2017-07-20 14:25:11 +0000] [4985] [DEBUG] Closing connection. 
+[2017-07-20 14:27:54 +0000] [4974] [DEBUG] GET /consent
+[2017-07-20 14:27:54 +0000] [4989] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:27:54 +0000] [5003] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:28:02 +0000] [4965] [DEBUG] GET /exp
+2017-07-20 14:28:02,375 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:28:02 +0000] [4964] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:28:02 +0000] [4973] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:28:02 +0000] [4985] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:28:02 +0000] [5004] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:28:02 +0000] [4986] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:28:02 +0000] [4964] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:28:02 +0000] [4992] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:28:02 +0000] [4985] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:28:02 +0000] [4974] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:28:02 +0000] [4977] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:28:02 +0000] [4985] [DEBUG] GET /ad
+[2017-07-20 14:28:02 +0000] [4989] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:28:02 +0000] [4986] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:28:02,789 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:28:02 +0000] [4973] [DEBUG] GET /trial.html
+[2017-07-20 14:28:02 +0000] [5003] [DEBUG] GET /submit.html
+[2017-07-20 14:28:02 +0000] [4978] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:28:02 +0000] [4992] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:28:02 +0000] [4986] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:28:11 +0000] [4961] [DEBUG] GET /ad
+[2017-07-20 14:28:11 +0000] [4964] [DEBUG] GET /favicon.ico
+[2017-07-20 14:28:12 +0000] [4986] [DEBUG] GET /consent
+[2017-07-20 14:28:12 +0000] [5003] [DEBUG] GET /ad
+[2017-07-20 14:28:12 +0000] [4998] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:28:12 +0000] [4986] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:28:13 +0000] [4986] [DEBUG] GET /exp
+2017-07-20 14:28:13,357 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:28:13 +0000] [4964] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:28:13 +0000] [4989] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:28:13 +0000] [4992] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:28:13 +0000] [4970] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:28:13 +0000] [4973] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:28:13 +0000] [4985] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:28:13 +0000] [4986] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:28:13 +0000] [5007] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:28:13 +0000] [4965] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:28:13 +0000] [4973] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:28:13 +0000] [4964] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:28:13 +0000] [4995] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:28:13,465 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:28:13 +0000] [4974] [DEBUG] GET /trial.html
+[2017-07-20 14:28:13 +0000] [5004] [DEBUG] GET /submit.html
+[2017-07-20 14:28:13 +0000] [4998] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:28:13 +0000] [4973] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:28:13 +0000] [4974] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:28:14 +0000] [4995] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 14:28:14 +0000] [4977] [DEBUG] GET /static/videos/webmoutput_file1.webm
+[2017-07-20 14:28:14 +0000] [4998] [DEBUG] GET /static/videos/oggoutput_file1.ogv
+[2017-07-20 14:30:18 +0000] [5003] [DEBUG] GET /ad
+[2017-07-20 14:30:19 +0000] [4995] [DEBUG] GET /favicon.ico
+[2017-07-20 14:30:19 +0000] [4964] [DEBUG] GET /consent
+[2017-07-20 14:30:19 +0000] [4986] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:30:19 +0000] [4992] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:30:20 +0000] [4961] [DEBUG] GET /exp
+2017-07-20 14:30:20,489 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:30:20 +0000] [4986] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:30:20 +0000] [4961] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:30:20 +0000] [5003] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:30:20 +0000] [4995] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:30:20 +0000] [4992] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:30:20 +0000] [4964] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:30:20 +0000] [4986] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:30:20 +0000] [4961] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:30:20 +0000] [4995] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:30:20 +0000] [4974] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:30:20 +0000] [4995] [DEBUG] GET /ad
+[2017-07-20 14:30:20 +0000] [4974] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:30:20 +0000] [4978] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:30:20,807 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:30:20 +0000] [5007] [DEBUG] GET /trial.html
+[2017-07-20 14:30:20 +0000] [4989] [DEBUG] GET /submit.html
+[2017-07-20 14:30:20 +0000] [4973] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:30:20 +0000] [5003] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:30:20 +0000] [5007] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:30:22 +0000] [4973] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 14:30:30 +0000] [4973] [DEBUG] GET /consent
+[2017-07-20 14:30:30 +0000] [4964] [DEBUG] Closing connection. 
+[2017-07-20 14:30:30 +0000] [4964] [DEBUG] GET /ad
+[2017-07-20 14:30:30 +0000] [4973] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:30:30 +0000] [4986] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:30:31 +0000] [4973] [DEBUG] GET /exp
+2017-07-20 14:30:31,420 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:30:31 +0000] [4964] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:30:31 +0000] [4977] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:30:31 +0000] [4998] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:30:31 +0000] [4986] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:30:31 +0000] [4965] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:30:31 +0000] [4970] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:30:31 +0000] [4974] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:30:31 +0000] [4961] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:30:31 +0000] [4978] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:30:31 +0000] [4986] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:30:31 +0000] [4974] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:30:31 +0000] [4986] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:30:31,523 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:30:31 +0000] [5004] [DEBUG] GET /trial.html
+[2017-07-20 14:30:31 +0000] [4992] [DEBUG] GET /submit.html
+[2017-07-20 14:30:31 +0000] [4970] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:30:31 +0000] [4992] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:30:31 +0000] [5004] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:30:32 +0000] [4970] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 14:30:39 +0000] [4974] [DEBUG] Closing connection. 
+[2017-07-20 14:31:31 +0000] [5004] [DEBUG] GET /consent
+[2017-07-20 14:31:31 +0000] [4977] [DEBUG] GET /ad
+[2017-07-20 14:31:31 +0000] [4992] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:31:31 +0000] [5004] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:31:32 +0000] [5004] [DEBUG] GET /exp
+2017-07-20 14:31:32,025 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:31:32 +0000] [4974] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:31:32 +0000] [4977] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:31:32 +0000] [4965] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:31:32 +0000] [5007] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:31:32 +0000] [4998] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:31:32 +0000] [5007] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:31:32 +0000] [4964] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:31:32 +0000] [4977] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:31:32 +0000] [4998] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:31:32 +0000] [5003] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:31:32 +0000] [4985] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:31:32 +0000] [4986] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:31:32,136 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:31:32 +0000] [4964] [DEBUG] GET /trial.html
+[2017-07-20 14:31:32 +0000] [4974] [DEBUG] GET /submit.html
+[2017-07-20 14:31:32 +0000] [4973] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:31:32 +0000] [4978] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:31:32 +0000] [4989] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:31:33 +0000] [4985] [DEBUG] GET /static/videos/mp4/video3.mp4
+[2017-07-20 14:31:33 +0000] [4973] [DEBUG] GET /static/videos/webmvideo3.webm
+[2017-07-20 14:31:33 +0000] [4970] [DEBUG] GET /static/videos/oggvideo3.ogv
+[2017-07-20 14:32:50 +0000] [4998] [DEBUG] GET /consent
+[2017-07-20 14:32:50 +0000] [4998] [DEBUG] GET /ad
+[2017-07-20 14:32:50 +0000] [4985] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:32:50 +0000] [4992] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:32:51 +0000] [4995] [DEBUG] GET /exp
+2017-07-20 14:32:51,340 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:32:51 +0000] [4978] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:32:51 +0000] [4985] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:32:51 +0000] [4986] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:32:51 +0000] [4974] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:32:51 +0000] [4978] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:32:51 +0000] [4977] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:32:51 +0000] [4964] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:32:51 +0000] [4986] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:32:51 +0000] [4977] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:32:51 +0000] [4989] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:32:51 +0000] [4978] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:32:51 +0000] [5004] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:32:51,444 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:32:51 +0000] [4964] [DEBUG] GET /trial.html
+[2017-07-20 14:32:51 +0000] [5004] [DEBUG] GET /submit.html
+[2017-07-20 14:32:51 +0000] [4964] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:32:51 +0000] [4989] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:32:51 +0000] [4989] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:32:52 +0000] [4974] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 14:32:52 +0000] [4989] [DEBUG] GET /static/videos/webmoutput_file1.webm
+[2017-07-20 14:32:52 +0000] [4989] [DEBUG] GET /static/videos/oggoutput_file1.ogv
+[2017-07-20 14:36:05 +0000] [4974] [DEBUG] GET /ad
+[2017-07-20 14:36:07 +0000] [4964] [DEBUG] GET /consent
+[2017-07-20 14:36:07 +0000] [4986] [DEBUG] GET /ad
+[2017-07-20 14:36:07 +0000] [4995] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:36:07 +0000] [4970] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:36:08 +0000] [5007] [DEBUG] GET /exp
+2017-07-20 14:36:08,489 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:36:08 +0000] [4964] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:36:08 +0000] [4961] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:36:08 +0000] [4973] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:36:08 +0000] [4995] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:36:08 +0000] [4998] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:36:08 +0000] [4970] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:36:08 +0000] [4964] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:36:08 +0000] [4965] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:36:08 +0000] [4989] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:36:08 +0000] [4970] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:36:08 +0000] [4986] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:36:08 +0000] [4985] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:36:08,607 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:36:08 +0000] [4961] [DEBUG] GET /trial.html
+[2017-07-20 14:36:08 +0000] [4961] [DEBUG] GET /submit.html
+[2017-07-20 14:36:08 +0000] [4978] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:36:08 +0000] [5003] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:36:08 +0000] [4973] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:36:09 +0000] [4965] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 14:36:16 +0000] [4974] [DEBUG] Closing connection. 
+[2017-07-20 14:37:03 +0000] [4977] [DEBUG] GET /consent
+[2017-07-20 14:37:03 +0000] [4998] [DEBUG] GET /ad
+[2017-07-20 14:37:03 +0000] [4965] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:37:03 +0000] [4973] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:37:04 +0000] [4964] [DEBUG] GET /exp
+2017-07-20 14:37:04,359 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:37:04 +0000] [4985] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:37:04 +0000] [4978] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:37:04 +0000] [4973] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:37:04 +0000] [4965] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:37:04 +0000] [5004] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:37:04 +0000] [4965] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:37:04 +0000] [4985] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:37:04 +0000] [4995] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:37:04 +0000] [4970] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:37:04 +0000] [4978] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:37:04 +0000] [4973] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:37:04 +0000] [4970] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:37:04,471 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:37:04 +0000] [5003] [DEBUG] GET /trial.html
+[2017-07-20 14:37:04 +0000] [4974] [DEBUG] GET /submit.html
+[2017-07-20 14:37:04 +0000] [4977] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:37:04 +0000] [5004] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:37:04 +0000] [4992] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:37:06 +0000] [4978] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 14:37:12 +0000] [4978] [DEBUG] Closing connection. 
+[2017-07-20 14:37:14 +0000] [4965] [DEBUG] GET /static/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+[2017-07-20 14:37:14 +0000] [4973] [DEBUG] GET /static/css/images/ui-bg_glass_100_f6f6f6_1x400.png
+[2017-07-20 14:48:31 +0000] [4989] [DEBUG] GET /consent
+[2017-07-20 14:48:31 +0000] [4970] [DEBUG] GET /ad
+[2017-07-20 14:48:31 +0000] [4989] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:48:31 +0000] [4961] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:48:32 +0000] [4961] [DEBUG] GET /exp
+2017-07-20 14:48:32,405 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:48:32 +0000] [4978] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:48:32 +0000] [4989] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:48:32 +0000] [4970] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:48:32 +0000] [4961] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:48:32 +0000] [5007] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:48:32 +0000] [4978] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:48:32 +0000] [4974] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:48:32 +0000] [4995] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:48:32 +0000] [5004] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:48:32 +0000] [4964] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:48:32 +0000] [5003] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:48:32 +0000] [5007] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:48:32,530 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:48:32 +0000] [5007] [DEBUG] GET /trial.html
+[2017-07-20 14:48:32 +0000] [5007] [DEBUG] GET /submit.html
+[2017-07-20 14:48:32 +0000] [5004] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:48:32 +0000] [5007] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:48:32 +0000] [4964] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:48:33 +0000] [4977] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 14:48:33 +0000] [4985] [DEBUG] GET /static/videos/webmoutput_file1.webm
+[2017-07-20 14:48:33 +0000] [4992] [DEBUG] GET /static/videos/oggoutput_file1.ogv
+[2017-07-20 14:49:28 +0000] [4998] [DEBUG] GET /consent
+[2017-07-20 14:49:28 +0000] [4965] [DEBUG] GET /ad
+[2017-07-20 14:49:28 +0000] [4995] [DEBUG] GET /static/js/utils.js
+[2017-07-20 14:49:28 +0000] [4965] [DEBUG] GET /static/css/general.css
+[2017-07-20 14:49:29 +0000] [4992] [DEBUG] GET /exp
+2017-07-20 14:49:29,945 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 14:49:29 +0000] [4973] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 14:49:29 +0000] [4974] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 14:49:29 +0000] [5003] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 14:49:29 +0000] [4992] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 14:49:29 +0000] [4986] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 14:49:29 +0000] [4978] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 14:49:29 +0000] [4998] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 14:49:29 +0000] [4986] [DEBUG] GET /static/js/config.js
+[2017-07-20 14:49:29 +0000] [4965] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 14:49:29 +0000] [5003] [DEBUG] GET /static/js/task.js
+[2017-07-20 14:49:30 +0000] [4974] [DEBUG] GET /static/json/stim.json
+[2017-07-20 14:49:30 +0000] [5004] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 14:49:30,060 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 14:49:30 +0000] [4995] [DEBUG] GET /trial.html
+[2017-07-20 14:49:30 +0000] [4995] [DEBUG] GET /submit.html
+[2017-07-20 14:49:30 +0000] [4985] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 14:49:30 +0000] [5003] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 14:49:30 +0000] [4986] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 14:49:30 +0000] [5007] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4992)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4961)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4995)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4964)
+[2017-07-20 15:01:13 +0000] [4992] [INFO] Worker exiting (pid: 4992)
+[2017-07-20 15:01:13 +0000] [4961] [INFO] Worker exiting (pid: 4961)
+[2017-07-20 15:01:13 +0000] [4964] [INFO] Worker exiting (pid: 4964)
+[2017-07-20 15:01:13 +0000] [4995] [INFO] Worker exiting (pid: 4995)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4965)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4998)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4970)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:5003)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:5004)
+[2017-07-20 15:01:13 +0000] [4965] [INFO] Worker exiting (pid: 4965)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4973)
+[2017-07-20 15:01:13 +0000] [4998] [INFO] Worker exiting (pid: 4998)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4974)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:5007)
+[2017-07-20 15:01:13 +0000] [4970] [INFO] Worker exiting (pid: 4970)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4977)
+[2017-07-20 15:01:13 +0000] [5003] [INFO] Worker exiting (pid: 5003)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4978)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4985)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4986)
+[2017-07-20 15:01:13 +0000] [4974] [INFO] Worker exiting (pid: 4974)
+[2017-07-20 15:01:13 +0000] [4973] [INFO] Worker exiting (pid: 4973)
+[2017-07-20 15:01:13 +0000] [4956] [CRITICAL] WORKER TIMEOUT (pid:4989)
+[2017-07-20 15:01:13 +0000] [5004] [INFO] Worker exiting (pid: 5004)
+[2017-07-20 15:01:13 +0000] [4978] [INFO] Worker exiting (pid: 4978)
+[2017-07-20 15:01:13 +0000] [4985] [INFO] Worker exiting (pid: 4985)
+[2017-07-20 15:01:13 +0000] [4989] [INFO] Worker exiting (pid: 4989)
+[2017-07-20 15:01:13 +0000] [4977] [INFO] Worker exiting (pid: 4977)
+[2017-07-20 15:01:13 +0000] [4986] [INFO] Worker exiting (pid: 4986)
+[2017-07-20 15:01:13 +0000] [5007] [INFO] Worker exiting (pid: 5007)
+[2017-07-20 15:01:13 +0000] [4956] [DEBUG] 14 workers
+[2017-07-20 15:01:13 +0000] [9169] [INFO] Booting worker with pid: 9169
+[2017-07-20 15:01:13 +0000] [9170] [INFO] Booting worker with pid: 9170
+[2017-07-20 15:01:13 +0000] [9172] [INFO] Booting worker with pid: 9172
+[2017-07-20 15:01:13 +0000] [9173] [INFO] Booting worker with pid: 9173
+[2017-07-20 15:01:13 +0000] [9174] [INFO] Booting worker with pid: 9174
+[2017-07-20 15:01:13 +0000] [9175] [INFO] Booting worker with pid: 9175
+[2017-07-20 15:01:13 +0000] [9180] [INFO] Booting worker with pid: 9180
+[2017-07-20 15:01:13 +0000] [4956] [DEBUG] 7 workers
+[2017-07-20 15:01:13 +0000] [9181] [INFO] Booting worker with pid: 9181
+[2017-07-20 15:01:14 +0000] [9194] [INFO] Booting worker with pid: 9194
+[2017-07-20 15:01:14 +0000] [9202] [INFO] Booting worker with pid: 9202
+[2017-07-20 15:01:14 +0000] [9203] [INFO] Booting worker with pid: 9203
+2017-07-20 15:01:14,108 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,109 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,110 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,121 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,122 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,123 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,135 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,135 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,137 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,146 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,146 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,147 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,148 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,148 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,149 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,153 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,154 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,155 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 15:01:14 +0000] [9208] [INFO] Booting worker with pid: 9208
+2017-07-20 15:01:14,206 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,206 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,207 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,236 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,237 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,238 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 15:01:14 +0000] [9215] [INFO] Booting worker with pid: 9215
+2017-07-20 15:01:14,285 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,285 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,287 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,295 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,295 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,296 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 15:01:14 +0000] [9218] [INFO] Booting worker with pid: 9218
+2017-07-20 15:01:14,340 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,341 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,342 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,350 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,350 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,351 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 15:01:14 +0000] [9219] [INFO] Booting worker with pid: 9219
+[2017-07-20 15:01:14 +0000] [9220] [INFO] Booting worker with pid: 9220
+2017-07-20 15:01:14,421 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,421 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,422 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 15:01:14 +0000] [9227] [INFO] Booting worker with pid: 9227
+[2017-07-20 15:01:14 +0000] [4956] [DEBUG] 17 workers
+2017-07-20 15:01:14,507 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,508 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,509 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,517 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,517 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,518 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,563 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,563 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,564 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+2017-07-20 15:01:14,656 Secret key: 'this is my secret key which is hard to guess, i should change this'
+2017-07-20 15:01:14,657 Hmm... it seems no custom code (custom.py) associated                         with this project.
+2017-07-20 15:01:14,658 /usr/local/lib/python2.7/dist-packages/psiturk/psiturk_js/psiturk.js
+[2017-07-20 15:01:43 +0000] [9208] [DEBUG] GET /consent
+[2017-07-20 15:01:43 +0000] [9202] [DEBUG] GET /ad
+[2017-07-20 15:01:43 +0000] [9218] [DEBUG] GET /static/js/utils.js
+[2017-07-20 15:01:43 +0000] [9174] [DEBUG] GET /static/css/general.css
+[2017-07-20 15:01:44 +0000] [9181] [DEBUG] GET /exp
+2017-07-20 15:01:44,532 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 15:01:44 +0000] [9172] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 15:01:44 +0000] [9173] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 15:01:44 +0000] [9218] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 15:01:44 +0000] [9170] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 15:01:44 +0000] [9220] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 15:01:44 +0000] [9169] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 15:01:44 +0000] [9194] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 15:01:44 +0000] [9172] [DEBUG] GET /static/js/config.js
+[2017-07-20 15:01:44 +0000] [9203] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 15:01:44 +0000] [9220] [DEBUG] GET /static/js/task.js
+[2017-07-20 15:01:44 +0000] [9215] [DEBUG] GET /static/json/stim.json
+[2017-07-20 15:01:44 +0000] [9180] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 15:01:44,648 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 15:01:44 +0000] [9175] [DEBUG] GET /trial.html
+[2017-07-20 15:01:44 +0000] [9175] [DEBUG] GET /submit.html
+[2017-07-20 15:01:44 +0000] [9180] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 15:01:44 +0000] [9194] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 15:01:44 +0000] [9215] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 15:02:07 +0000] [9208] [DEBUG] GET /consent
+[2017-07-20 15:02:07 +0000] [9180] [DEBUG] GET /ad
+[2017-07-20 15:02:07 +0000] [9172] [DEBUG] GET /static/js/utils.js
+[2017-07-20 15:02:07 +0000] [9202] [DEBUG] GET /static/css/general.css
+[2017-07-20 15:02:08 +0000] [9215] [DEBUG] GET /exp
+2017-07-20 15:02:08,157 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 15:02:08 +0000] [9215] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 15:02:08 +0000] [9202] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 15:02:08 +0000] [9208] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 15:02:08 +0000] [9220] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 15:02:08 +0000] [9169] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 15:02:08 +0000] [9202] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 15:02:08 +0000] [9203] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 15:02:08 +0000] [9215] [DEBUG] GET /static/js/config.js
+[2017-07-20 15:02:08 +0000] [9202] [DEBUG] GET /static/js/task.js
+[2017-07-20 15:02:08 +0000] [9227] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 15:02:08 +0000] [9175] [DEBUG] GET /static/json/stim.json
+[2017-07-20 15:02:08 +0000] [9175] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 15:02:08,298 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 15:02:08 +0000] [9170] [DEBUG] GET /trial.html
+[2017-07-20 15:02:08 +0000] [9203] [DEBUG] GET /submit.html
+[2017-07-20 15:02:08 +0000] [9169] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 15:02:08 +0000] [9194] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 15:02:08 +0000] [9173] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 15:02:09 +0000] [9169] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 15:02:09 +0000] [9218] [DEBUG] GET /static/videos/webmoutput_file1.webm
+[2017-07-20 15:02:09 +0000] [9218] [DEBUG] GET /static/videos/oggoutput_file1.ogv
+[2017-07-20 15:05:46 +0000] [9227] [DEBUG] GET /consent
+[2017-07-20 15:05:47 +0000] [9218] [DEBUG] GET /ad
+[2017-07-20 15:05:47 +0000] [9174] [DEBUG] GET /static/js/utils.js
+[2017-07-20 15:05:47 +0000] [9219] [DEBUG] GET /static/css/general.css
+[2017-07-20 15:05:48 +0000] [9174] [DEBUG] GET /exp
+2017-07-20 15:05:48,094 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 15:05:48 +0000] [9194] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 15:05:48 +0000] [9169] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 15:05:48 +0000] [9170] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 15:05:48 +0000] [9175] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 15:05:48 +0000] [9227] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 15:05:48 +0000] [9194] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 15:05:48 +0000] [9175] [DEBUG] GET /static/js/config.js
+[2017-07-20 15:05:48 +0000] [9181] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 15:05:48 +0000] [9170] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 15:05:48 +0000] [9194] [DEBUG] GET /static/js/task.js
+[2017-07-20 15:05:48 +0000] [9215] [DEBUG] GET /static/json/stim.json
+[2017-07-20 15:05:48 +0000] [9175] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 15:05:48,225 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 15:05:48 +0000] [9227] [DEBUG] GET /trial.html
+[2017-07-20 15:05:48 +0000] [9194] [DEBUG] GET /submit.html
+[2017-07-20 15:05:48 +0000] [9215] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 15:05:48 +0000] [9203] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 15:05:48 +0000] [9208] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 15:05:49 +0000] [9219] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 15:05:49 +0000] [9219] [DEBUG] GET /static/videos/webmoutput_file1.webm
+[2017-07-20 15:05:49 +0000] [9219] [DEBUG] GET /static/videos/oggoutput_file1.ogv
+[2017-07-20 15:06:44 +0000] [9218] [DEBUG] GET /consent
+[2017-07-20 15:06:44 +0000] [9215] [DEBUG] GET /ad
+[2017-07-20 15:06:45 +0000] [9202] [DEBUG] GET /static/js/utils.js
+[2017-07-20 15:06:45 +0000] [9220] [DEBUG] GET /static/css/general.css
+[2017-07-20 15:06:45 +0000] [9173] [DEBUG] GET /exp
+2017-07-20 15:06:45,781 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 15:06:45 +0000] [9227] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 15:06:45 +0000] [9170] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 15:06:45 +0000] [9202] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 15:06:45 +0000] [9180] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 15:06:45 +0000] [9208] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 15:06:45 +0000] [9180] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 15:06:45 +0000] [9170] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 15:06:45 +0000] [9202] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 15:06:45 +0000] [9194] [DEBUG] GET /static/js/config.js
+[2017-07-20 15:06:45 +0000] [9203] [DEBUG] GET /static/js/task.js
+[2017-07-20 15:06:45 +0000] [9227] [DEBUG] GET /static/json/stim.json
+[2017-07-20 15:06:45 +0000] [9175] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 15:06:45,893 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 15:06:45 +0000] [9172] [DEBUG] GET /trial.html
+[2017-07-20 15:06:45 +0000] [9172] [DEBUG] GET /submit.html
+[2017-07-20 15:06:45 +0000] [9172] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 15:06:45 +0000] [9180] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 15:06:45 +0000] [9203] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 15:06:46 +0000] [9169] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 15:06:46 +0000] [9169] [DEBUG] GET /static/videos/webmoutput_file1.webm
+[2017-07-20 15:06:46 +0000] [9169] [DEBUG] GET /static/videos/oggoutput_file1.ogv
+[2017-07-20 15:08:04 +0000] [9202] [DEBUG] GET /consent
+[2017-07-20 15:08:04 +0000] [9174] [DEBUG] GET /ad
+[2017-07-20 15:08:05 +0000] [9220] [DEBUG] GET /static/js/utils.js
+[2017-07-20 15:08:05 +0000] [9181] [DEBUG] GET /static/css/general.css
+[2017-07-20 15:08:05 +0000] [9208] [DEBUG] GET /exp
+2017-07-20 15:08:05,808 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 15:08:05 +0000] [9175] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 15:08:05 +0000] [9220] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 15:08:05 +0000] [9219] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 15:08:05 +0000] [9170] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 15:08:05 +0000] [9203] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 15:08:05 +0000] [9175] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 15:08:05 +0000] [9173] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 15:08:05 +0000] [9220] [DEBUG] GET /static/js/config.js
+[2017-07-20 15:08:05 +0000] [9175] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 15:08:05 +0000] [9203] [DEBUG] GET /static/js/task.js
+[2017-07-20 15:08:05 +0000] [9172] [DEBUG] GET /static/json/stim.json
+[2017-07-20 15:08:05 +0000] [9219] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 15:08:05,915 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 15:08:05 +0000] [9194] [DEBUG] GET /trial.html
+[2017-07-20 15:08:05 +0000] [9194] [DEBUG] GET /submit.html
+[2017-07-20 15:08:05 +0000] [9208] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 15:08:05 +0000] [9219] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 15:08:05 +0000] [9170] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 15:08:06 +0000] [9194] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 15:08:57 +0000] [9208] [DEBUG] GET /consent
+[2017-07-20 15:08:57 +0000] [9175] [DEBUG] GET /ad
+[2017-07-20 15:08:57 +0000] [9203] [DEBUG] GET /static/js/utils.js
+[2017-07-20 15:08:57 +0000] [9218] [DEBUG] GET /static/css/general.css
+[2017-07-20 15:08:58 +0000] [9169] [DEBUG] GET /exp
+2017-07-20 15:08:58,094 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 15:08:58 +0000] [9215] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 15:08:58 +0000] [9175] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 15:08:58 +0000] [9194] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 15:08:58 +0000] [9219] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 15:08:58 +0000] [9203] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 15:08:58 +0000] [9175] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 15:08:58 +0000] [9218] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 15:08:58 +0000] [9202] [DEBUG] GET /static/js/config.js
+[2017-07-20 15:08:58 +0000] [9173] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 15:08:58 +0000] [9218] [DEBUG] GET /static/js/task.js
+[2017-07-20 15:08:58 +0000] [9172] [DEBUG] GET /static/json/stim.json
+[2017-07-20 15:08:58 +0000] [9219] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 15:08:58,207 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 15:08:58 +0000] [9170] [DEBUG] GET /trial.html
+[2017-07-20 15:08:58 +0000] [9220] [DEBUG] GET /submit.html
+[2017-07-20 15:08:58 +0000] [9170] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 15:08:58 +0000] [9218] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 15:08:58 +0000] [9175] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 15:08:58 +0000] [9219] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 15:09:04 +0000] [9173] [DEBUG] Closing connection. 
+[2017-07-20 15:09:14 +0000] [9180] [DEBUG] GET /consent
+[2017-07-20 15:09:14 +0000] [9180] [DEBUG] GET /static/js/utils.js
+[2017-07-20 15:09:14 +0000] [9208] [DEBUG] GET /static/css/general.css
+[2017-07-20 15:09:15 +0000] [9203] [DEBUG] GET /exp
+2017-07-20 15:09:15,632 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 15:09:15 +0000] [9203] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 15:09:15 +0000] [9173] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 15:09:15 +0000] [9202] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 15:09:15 +0000] [9219] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 15:09:15 +0000] [9208] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 15:09:15 +0000] [9175] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 15:09:15 +0000] [9203] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 15:09:15 +0000] [9181] [DEBUG] GET /static/js/config.js
+[2017-07-20 15:09:15 +0000] [9218] [DEBUG] GET /static/js/task.js
+[2017-07-20 15:09:15 +0000] [9202] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 15:09:15 +0000] [9173] [DEBUG] GET /ad
+[2017-07-20 15:09:15 +0000] [9175] [DEBUG] GET /static/json/stim.json
+[2017-07-20 15:09:15 +0000] [9215] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 15:09:15,993 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 15:09:16 +0000] [9208] [DEBUG] GET /trial.html
+[2017-07-20 15:09:16 +0000] [9181] [DEBUG] GET /submit.html
+[2017-07-20 15:09:16 +0000] [9175] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 15:09:16 +0000] [9208] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 15:09:16 +0000] [9181] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 15:09:16 +0000] [9208] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 15:09:18 +0000] [9208] [DEBUG] GET /static/videos/mp4/output_file1.mp4
+[2017-07-20 16:37:29 +0000] [9219] [DEBUG] GET /consent
+[2017-07-20 16:37:29 +0000] [9174] [DEBUG] GET /ad
+[2017-07-20 16:37:29 +0000] [9208] [DEBUG] GET /static/js/utils.js
+[2017-07-20 16:37:29 +0000] [9219] [DEBUG] GET /static/css/general.css
+[2017-07-20 16:37:31 +0000] [9170] [DEBUG] GET /exp
+2017-07-20 16:37:31,041 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 16:37:31 +0000] [9180] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 16:37:31 +0000] [9194] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 16:37:31 +0000] [9219] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 16:37:31 +0000] [9208] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 16:37:31 +0000] [9203] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 16:37:31 +0000] [9220] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 16:37:31 +0000] [9194] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 16:37:31 +0000] [9202] [DEBUG] GET /static/js/config.js
+[2017-07-20 16:37:31 +0000] [9220] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 16:37:31 +0000] [9208] [DEBUG] GET /static/js/task.js
+[2017-07-20 16:37:31 +0000] [9215] [DEBUG] GET /static/json/stim.json
+[2017-07-20 16:37:31 +0000] [9169] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 16:37:31,150 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 16:37:31 +0000] [9169] [DEBUG] GET /trial.html
+[2017-07-20 16:37:31 +0000] [9203] [DEBUG] GET /submit.html
+[2017-07-20 16:37:31 +0000] [9175] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 16:37:31 +0000] [9227] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 16:37:31 +0000] [9173] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 16:37:32 +0000] [9227] [DEBUG] GET /static/videos/mp4/video3.mp4
+[2017-07-20 16:37:39 +0000] [9181] [DEBUG] Closing connection. 
+[2017-07-20 16:38:14 +0000] [9202] [DEBUG] GET /consent
+[2017-07-20 16:38:14 +0000] [9175] [DEBUG] GET /ad
+[2017-07-20 16:38:14 +0000] [9173] [DEBUG] GET /static/js/utils.js
+[2017-07-20 16:38:14 +0000] [9202] [DEBUG] GET /static/css/general.css
+[2017-07-20 16:38:15 +0000] [9203] [DEBUG] GET /exp
+2017-07-20 16:38:15,843 Accessing /exp: debugORGFC7 debugFB74Z3 debug2SABJG 
+[2017-07-20 16:38:15 +0000] [9203] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 16:38:15 +0000] [9175] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 16:38:15 +0000] [9172] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 16:38:15 +0000] [9218] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 16:38:15 +0000] [9203] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 16:38:15 +0000] [9172] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 16:38:15 +0000] [9173] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 16:38:15 +0000] [9170] [DEBUG] GET /static/js/config.js
+[2017-07-20 16:38:15 +0000] [9203] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 16:38:15 +0000] [9219] [DEBUG] GET /static/js/task.js
+[2017-07-20 16:38:15 +0000] [9215] [DEBUG] GET /static/json/stim.json
+[2017-07-20 16:38:15 +0000] [9202] [DEBUG] GET /sync/debug2SABJG%3AdebugFB74Z3
+2017-07-20 16:38:15,948 GET /sync route with id: debug2SABJG:debugFB74Z3
+[2017-07-20 16:38:15 +0000] [9181] [DEBUG] GET /trial.html
+[2017-07-20 16:38:15 +0000] [9180] [DEBUG] GET /submit.html
+[2017-07-20 16:38:15 +0000] [9218] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 16:38:15 +0000] [9169] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 16:38:15 +0000] [9202] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 16:38:17 +0000] [9227] [DEBUG] GET /static/videos/mp4/video3.mp4
+[2017-07-20 16:38:53 +0000] [9173] [DEBUG] GET /static/lib/jquery-1.10.2.min.map
+[2017-07-20 16:38:53 +0000] [9202] [DEBUG] GET /static/lib/backbone-min.map
+[2017-07-20 16:38:53 +0000] [9180] [DEBUG] GET /static/lib/underscore-min.map
+[2017-07-20 16:38:53 +0000] [9173] [DEBUG] GET /static/lib/backbone.js
+[2017-07-20 17:26:19 +0000] [9203] [DEBUG] Closing connection. 
+[2017-07-20 17:26:22 +0000] [9180] [DEBUG] Closing connection. 
+[2017-07-20 17:26:22 +0000] [9175] [DEBUG] Closing connection. 
+[2017-07-20 17:26:22 +0000] [9172] [DEBUG] Closing connection. 
+[2017-07-20 17:26:27 +0000] [9203] [DEBUG] Closing connection. 
+[2017-07-20 17:26:27 +0000] [9194] [DEBUG] Closing connection. 
+[2017-07-20 17:26:27 +0000] [9215] [DEBUG] Closing connection. 
+[2017-07-20 17:26:28 +0000] [9203] [DEBUG] GET /ad
+[2017-07-20 17:26:37 +0000] [9219] [DEBUG] GET /ad
+[2017-07-20 17:26:38 +0000] [9227] [DEBUG] GET /consent
+[2017-07-20 17:26:39 +0000] [9208] [DEBUG] GET /ad
+[2017-07-20 17:26:39 +0000] [9181] [DEBUG] GET /static/js/utils.js
+[2017-07-20 17:26:39 +0000] [9208] [DEBUG] GET /static/css/general.css
+[2017-07-20 17:26:40 +0000] [9175] [DEBUG] GET /exp
+2017-07-20 17:26:40,448 Accessing /exp: debugH42N05 debugZ6DJ9R debugFB8RG3 
+2017-07-20 17:26:40,451 given Counter({(0, 0): 4}) chose (0, 0)
+[2017-07-20 17:26:40 +0000] [9208] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 17:26:40 +0000] [9175] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 17:26:40 +0000] [9219] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 17:26:40 +0000] [9173] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 17:26:40 +0000] [9208] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 17:26:40 +0000] [9203] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 17:26:40 +0000] [9175] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 17:26:40 +0000] [9174] [DEBUG] GET /static/js/config.js
+[2017-07-20 17:26:40 +0000] [9219] [DEBUG] GET /static/js/task.js
+[2017-07-20 17:26:40 +0000] [9173] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 17:26:40 +0000] [9220] [DEBUG] GET /static/json/stim.json
+[2017-07-20 17:26:40 +0000] [9202] [DEBUG] GET /sync/debugFB8RG3%3AdebugZ6DJ9R
+2017-07-20 17:26:40,571 GET /sync route with id: debugFB8RG3:debugZ6DJ9R
+[2017-07-20 17:26:40 +0000] [9215] [DEBUG] GET /trial.html
+[2017-07-20 17:26:40 +0000] [9174] [DEBUG] GET /submit.html
+[2017-07-20 17:26:40 +0000] [9202] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 17:26:40 +0000] [9172] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 17:26:40 +0000] [9172] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 17:26:41 +0000] [9175] [DEBUG] GET /static/videos/mp4/video21.mp4
+[2017-07-20 17:26:45 +0000] [9180] [DEBUG] Closing connection. 
+[2017-07-20 17:26:45 +0000] [9218] [DEBUG] Closing connection. 
+[2017-07-20 17:26:45 +0000] [9194] [DEBUG] Closing connection. 
+[2017-07-20 17:26:45 +0000] [9170] [DEBUG] Closing connection. 
+[2017-07-20 17:26:45 +0000] [9169] [DEBUG] Closing connection. 
+[2017-07-20 17:26:45 +0000] [9218] [DEBUG] GET /consent
+[2017-07-20 17:26:45 +0000] [9180] [DEBUG] GET /static/js/utils.js
+[2017-07-20 17:26:45 +0000] [9170] [DEBUG] GET /static/css/general.css
+[2017-07-20 17:26:46 +0000] [9170] [DEBUG] GET /exp
+2017-07-20 17:26:46,627 Accessing /exp: debugH42N05 debugZ6DJ9R debugFB8RG3 
+[2017-07-20 17:26:46 +0000] [9169] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 17:26:46 +0000] [9170] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 17:26:46 +0000] [9174] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 17:26:46 +0000] [9208] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 17:26:46 +0000] [9220] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 17:26:46 +0000] [9181] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 17:26:46 +0000] [9174] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 17:26:46 +0000] [9208] [DEBUG] GET /static/js/config.js
+[2017-07-20 17:26:46 +0000] [9220] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 17:26:46 +0000] [9194] [DEBUG] GET /static/js/task.js
+[2017-07-20 17:26:46 +0000] [9194] [DEBUG] GET /ad
+[2017-07-20 17:26:46 +0000] [9172] [DEBUG] GET /static/json/stim.json
+[2017-07-20 17:26:46 +0000] [9227] [DEBUG] GET /sync/debugFB8RG3%3AdebugZ6DJ9R
+2017-07-20 17:26:46,971 GET /sync route with id: debugFB8RG3:debugZ6DJ9R
+[2017-07-20 17:26:46 +0000] [9180] [DEBUG] GET /trial.html
+[2017-07-20 17:26:46 +0000] [9169] [DEBUG] GET /submit.html
+[2017-07-20 17:26:47 +0000] [9181] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 17:26:47 +0000] [9175] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 17:26:47 +0000] [9215] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 17:26:48 +0000] [9181] [DEBUG] GET /static/videos/mp4/video21.mp4
+[2017-07-20 17:55:14 +0000] [9173] [DEBUG] Closing connection. 
+[2017-07-20 17:55:16 +0000] [9202] [DEBUG] Closing connection. 
+[2017-07-20 17:55:17 +0000] [9208] [DEBUG] Closing connection. 
+[2017-07-20 17:55:19 +0000] [9172] [DEBUG] Closing connection. 
+[2017-07-20 17:55:19 +0000] [9218] [DEBUG] Closing connection. 
+[2017-07-20 17:55:19 +0000] [9170] [DEBUG] Closing connection. 
+[2017-07-20 17:55:24 +0000] [9215] [DEBUG] Closing connection. 
+[2017-07-20 17:55:25 +0000] [9203] [DEBUG] Closing connection. 
+[2017-07-20 17:55:25 +0000] [9227] [DEBUG] Closing connection. 
+[2017-07-20 17:55:25 +0000] [9220] [DEBUG] Closing connection. 
+[2017-07-20 17:55:25 +0000] [9220] [DEBUG] GET /ad
+[2017-07-20 17:55:27 +0000] [9172] [DEBUG] GET /consent
+[2017-07-20 17:55:27 +0000] [9227] [DEBUG] GET /static/js/utils.js
+[2017-07-20 17:55:27 +0000] [9174] [DEBUG] GET /static/css/general.css
+[2017-07-20 17:55:29 +0000] [9203] [DEBUG] GET /exp
+2017-07-20 17:55:29,244 Accessing /exp: debug7ISQW7 debugIYBWT0 debugL3PQZR 
+2017-07-20 17:55:29,253 given Counter({(0, 0): 5}) chose (0, 0)
+[2017-07-20 17:55:29 +0000] [9175] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 17:55:29 +0000] [9227] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 17:55:29 +0000] [9172] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 17:55:29 +0000] [9203] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 17:55:29 +0000] [9170] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 17:55:29 +0000] [9218] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 17:55:29 +0000] [9203] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 17:55:29 +0000] [9173] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 17:55:29 +0000] [9181] [DEBUG] GET /static/js/config.js
+[2017-07-20 17:55:29 +0000] [9172] [DEBUG] GET /static/js/task.js
+[2017-07-20 17:55:29 +0000] [9203] [DEBUG] GET /ad
+[2017-07-20 17:55:29 +0000] [9172] [DEBUG] GET /static/json/stim.json
+[2017-07-20 17:55:29 +0000] [9215] [DEBUG] GET /sync/debugL3PQZR%3AdebugIYBWT0
+2017-07-20 17:55:29,608 GET /sync route with id: debugL3PQZR:debugIYBWT0
+[2017-07-20 17:55:29 +0000] [9180] [DEBUG] GET /trial.html
+[2017-07-20 17:55:29 +0000] [9194] [DEBUG] GET /submit.html
+[2017-07-20 17:55:29 +0000] [9173] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 17:55:29 +0000] [9208] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 17:55:29 +0000] [9215] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 17:55:29 +0000] [9169] [DEBUG] GET /static/videos/mp4/video26.mp4
+[2017-07-20 17:55:32 +0000] [9194] [DEBUG] GET /static/videos/mp4/video26.mp4
+[2017-07-20 17:55:38 +0000] [9215] [DEBUG] GET /static/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+[2017-07-20 17:55:38 +0000] [9194] [DEBUG] GET /static/css/images/ui-bg_glass_100_f6f6f6_1x400.png
+[2017-07-20 17:55:39 +0000] [9194] [DEBUG] GET /static/css/images/ui-bg_glass_65_ffffff_1x400.png
+[2017-07-20 17:55:39 +0000] [9220] [DEBUG] GET /static/css/images/ui-bg_glass_100_fdf5ce_1x400.png
+[2017-07-20 17:55:41 +0000] [9202] [DEBUG] GET /static/videos/mp4/video13.mp4
+[2017-07-20 17:55:42 +0000] [9219] [DEBUG] GET /static/videos/mp4/video13.mp4
+[2017-07-20 17:56:47 +0000] [9218] [DEBUG] GET /consent
+[2017-07-20 17:56:47 +0000] [9174] [DEBUG] GET /static/js/utils.js
+[2017-07-20 17:56:47 +0000] [9174] [DEBUG] GET /static/css/general.css
+[2017-07-20 17:56:48 +0000] [9174] [DEBUG] GET /exp
+2017-07-20 17:56:48,357 Accessing /exp: debug7ISQW7 debugIYBWT0 debugL3PQZR 
+[2017-07-20 17:56:48 +0000] [9220] [DEBUG] GET /static/lib/jquery.min.js
+[2017-07-20 17:56:48 +0000] [9172] [DEBUG] GET /static/lib/seedrandom.js
+[2017-07-20 17:56:48 +0000] [9208] [DEBUG] GET /static/lib/backbone-min.js
+[2017-07-20 17:56:48 +0000] [9174] [DEBUG] GET /static/lib/underscore-min.js
+[2017-07-20 17:56:48 +0000] [9218] [DEBUG] GET /static/lib/jquery-ui.min.js
+[2017-07-20 17:56:48 +0000] [9170] [DEBUG] GET /static/lib/mustache.js
+[2017-07-20 17:56:48 +0000] [9174] [DEBUG] GET /static/css/jquery-ui.min.css
+[2017-07-20 17:56:48 +0000] [9202] [DEBUG] GET /ad
+[2017-07-20 17:56:48 +0000] [9220] [DEBUG] GET /static/js/psiturk.js
+[2017-07-20 17:56:48 +0000] [9208] [DEBUG] GET /static/js/task.js
+[2017-07-20 17:56:48 +0000] [9215] [DEBUG] GET /static/js/config.js
+[2017-07-20 17:56:48 +0000] [9170] [DEBUG] GET /static/json/stim.json
+[2017-07-20 17:56:48 +0000] [9227] [DEBUG] GET /sync/debugL3PQZR%3AdebugIYBWT0
+2017-07-20 17:56:48,616 GET /sync route with id: debugL3PQZR:debugIYBWT0
+[2017-07-20 17:56:48 +0000] [9169] [DEBUG] GET /trial.html
+[2017-07-20 17:56:48 +0000] [9175] [DEBUG] GET /submit.html
+[2017-07-20 17:56:48 +0000] [9181] [DEBUG] GET /static/images/introslide.png
+[2017-07-20 17:56:48 +0000] [9170] [DEBUG] GET /static/images/introslide1.png
+[2017-07-20 17:56:48 +0000] [9203] [DEBUG] GET /static/images/introslide2.png
+[2017-07-20 17:56:48 +0000] [9227] [DEBUG] GET /static/videos/mp4/video26.mp4
+[2017-07-20 17:56:54 +0000] [9194] [DEBUG] GET /static/css/images/ui-bg_glass_100_f6f6f6_1x400.png
+[2017-07-20 17:56:54 +0000] [9202] [DEBUG] GET /static/css/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
