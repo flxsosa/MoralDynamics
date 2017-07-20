@@ -226,7 +226,7 @@ var TestPhase = function() {
 					// Put labels on the sliders
 					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
 					$('.l-' + i).append("<label style='width: 33%'</label>");
-					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[2] + "</label>");
+					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[1] + "</label>");
 				}
 	 
 				// Hide all the slider handles 
@@ -453,7 +453,7 @@ $(document).ready(function() {
 
 	// Start the experiment
 	STATE = new State();
-	// CURRENTVIEW = new Instructions()
+	CURRENTVIEW = new Instructions()
 	// CURRENTVIEW = new Questions()
-	CURRENTVIEW = new TestPhase()
+	// CURRENTVIEW = new TestPhase()
 });

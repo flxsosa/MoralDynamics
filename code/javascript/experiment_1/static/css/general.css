@@ -78,12 +78,14 @@ div.slide {
 div.container{
  margin-bottom: 10;
  width: 900px; 
+ /* height: 540px; */
  /*padding: 10px;  */
 }
 
 div.video_container{
  width: 900px;
- margin: auto;
+ /* height: 540px; */
+ /* margin: auto; */
 }
 
 div.choices_container{

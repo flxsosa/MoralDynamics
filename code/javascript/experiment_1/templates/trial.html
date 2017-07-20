@@ -12,7 +12,7 @@
 				
 				<p>In the experiment, we will show you <b>28</b> videos. In all videos, a Green creature is burned as a result of colliding with a fireball.</p>
 
-				<p><b>Your task</b> is to judge, for each video, how much a Blue creature is to blame for the Green creature being hurt.</p>
+				<p><b>Your task</b> is to judge, for each video, how bad it was what the Blue creature did.</p>
 				
 				<p>Before beginning with the experiment, we will tell you a little more about planet Gaya.</p>
 
@@ -51,6 +51,51 @@
 				<button type="button" id="intro_next" class="next">Continue</button>
 		</div>
 </div>
+<!-- Questions -->
+<div class="slide" id="questions">
+		<h1>Please select which of the following statements is correct:</h1>
+		<div class="blue">
+				<p><b>Statement 1:</b>
+				<br>
+				</br>
+						<input class="demoQ" type="radio" name="q1" value="A">Blues see Fireballs but Greens don't. 
+				<br>
+				</br>
+						<input class="demoQ" type="radio" name="q1" value="B">Greens see Fireballs but Blues don't. 
+				<br>
+				</br>
+						<input class="demoQ" type="radio" name="q1" value="C">Both see Fireballs. 
+				</p>
+				<br/>
+				<p><b> Statement 2:</b>
+				<br>
+				</br>
+						<input class="demoQ" type="radio" name="q2" value="A">Blues get burned if they collide with a Fireball.
+				<br>
+				</br>
+						<input class="demoQ" type="radio" name="q2" value="B">Greens get burned if they collide with a Fireball.
+
+				<br>
+				</br>
+						<input class="demoQ" type="radio" name="q2" value="B">Both get burned if they collide with a Fireball. 
+				</p>
+				<br/>
+				<p><b> Statement 3:</b>
+				<br>
+				</br>
+						<input class="demoQ" type="radio" name="q3" value="A">Fireballs never move.
+				<br>
+				</br>
+						<input class="demoQ" type="radio" name="q3" value="B">Fireballs are sometimes moved by magnetic winds.
+				</p>
+				<br/>
+		</div>
+		<div class="continue">
+				<button type="button" class="next" id="question_finish">Continue</button>
+		</div>
+		<p style='text-align:center'>Please press Continue to submit your answers.</p>
+</div>
+
 <!-- Trial -->
 <div class="slide" id="trial">
 		<div id="progress">
@@ -103,8 +148,8 @@
 				<p><b>2.</b> Gender:
 						<input class="demoQ" type="radio" name="sex" value="female">Female
 						<input class="demoQ" type="radio" name="sex" value="male">Male
-						<input class="demoQ" type="radio" name="sex" value="male">Other
-						<input class="demoQ" type="radio" name="sex" value="male">Prefer Not to Say
+						<input class="demoQ" type="radio" name="sex" value="other">Other
+						<input class="demoQ" type="radio" name="sex" value="nosay">Prefer Not to Say
 				</p>
 				<br/>
 				<br/>
@@ -112,50 +157,5 @@
 		</div>
 		<div class="continue">
 				<button type="button" class="next" id="trial_finish">Finish</button>
-		</div>
-</div>
-<!-- Questions -->
-<div class="slide" id="questions">
-		<h1>Please select which of the following statements is correct:</h1>
-		<div class="blue">
-				<p><b>Statement 1:</b>
-				<br>
-				</br>
-						<input class="demoQ" type="radio" name="q1" value="A">Blues see Fireballs but Greens don't. 
-				<br>
-				</br>
-						<input class="demoQ" type="radio" name="q1" value="B">Greens see Fireballs but Blues don't. 
-				<br>
-				</br>
-						<input class="demoQ" type="radio" name="q1" value="C">Both see Fireballs. 
-				</p>
-				<br/>
-				<p><b> Statement 2:</b>
-				<br>
-				</br>
-						<input class="demoQ" type="radio" name="q2" value="A">Blues get burned if they collide with a Fireball.
-				<br>
-				</br>
-						<input class="demoQ" type="radio" name="q2" value="B">Greens get burned if they collide with a Fireball.
-
-				<br>
-				</br>
-						<input class="demoQ" type="radio" name="q2" value="B">Both get burned if they collide with a Fireball. 
-				</p>
-				<br/>
-				<p><b> Statement 3:</b>
-				<br>
-				</br>
-						<input class="demoQ" type="radio" name="q3" value="A">Fireballs never move.
-				<br>
-				</br>
-						<input class="demoQ" type="radio" name="q3" value="B">Fireballs are sometimes moved by magnetic winds.
-				</p>
-				<br/>
-				<br/>
-				<p>Please press finish to submit your answers.</p>
-		</div>
-		<div class="continue">
-				<button type="button" class="next" id="question_finish">Submit Answers</button>
 		</div>
 </div>

@@ -117,11 +117,9 @@
             "name": "intro3"
         }
     ],
-    "text": "",
     "questions":[
-        {"q": " 'How bad was what Blue did?' ", 
-        "type": "caused",
-        "l": ["not bad", "", "very bad"]}
+        {"q": "How bad was what Blue did?", 
+        "l": ["not bad", "very bad"]}
     ]
 }
 

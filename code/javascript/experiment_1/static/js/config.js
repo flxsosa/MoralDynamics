@@ -47,7 +47,7 @@ var Config = function (condition, counterbalance) {
         this.introvids = data["vid"];
         this.introslides = data["intro"]
         this.text = data["text"] ;
-        this.questions = shuffle(data["questions"] );
+        this.questions = data["questions"];
     };
 
     // Load the experiment configuration from the server
