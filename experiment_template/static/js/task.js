@@ -87,11 +87,11 @@ var Introduction = function() {
 				count++;
 
 				var html = "";
-	           	// Add in the questions from list in stim.json
-	            html += '<video loop autoplay class="intro_video" width="600" id="vid"><source src="" id="video_mp4"><source src="" id="video_webm"><source src="" id="video_ogg"></video>';
-	            video_name = that.otherinfo.name,
-	            $('#some').html(html);
-	            $("#video_mp4").attr("src", '/static/videos/mp4/' + video_name + '.mp4');
+				// Add in the questions from list in stim.json
+				html += '<video loop autoplay class="intro_video" width="600" id="vid"><source src="" id="video_mp4"><source src="" id="video_webm"><source src="" id="video_ogg"></video>';
+				video_name = that.otherinfo.name,
+				$('#some').html(html);
+				$("#video_mp4").attr("src", '/static/videos/mp4/' + video_name + '.mp4');
 				$("#video_webm").attr("src", '/static/videos/webm' + video_name + '.webm');
 				$("#video_ogg").attr("src", '/static/videos/ogg' + video_name + '.ogv');
 				$(".intro_video").load()
@@ -170,8 +170,8 @@ var TestPhase = function() {
 			// Load and show video
 			video_name = that.trialinfo.name,
 			$("#video_mp4").attr("src", '/static/videos/mp4/' + video_name + '.mp4');
-			$("#video_webm").attr("src", '/static/videos/webm' + video_name + '.webm');
-			$("#video_ogg").attr("src", '/static/videos/ogg' + video_name + '.ogv');
+			$("#video_webm").attr("src", '/static/videos/webm/' + video_name + '.webm');
+			$("#video_ogg").attr("src", '/static/videos/ogv/' + video_name + '.ogv');
 			$(".stim_video").load()
 			$("#play.next").click(function() {
 				$(".stim_video").load()
@@ -192,86 +192,82 @@ var TestPhase = function() {
 			},false);
 
 			// Create html and build sliders
- 			var func = function(){
-	            // Create the HTML for the question and slider.
-	            var html = "";
-	            for (var i = 0; i < $c.questions.length; i++) {
-	            	// Add in the questions from list in stim.json
-	                var q = $c.questions[i].q;
-	                html += '<p class=".question">' + q + '</p><div class="s-' + i + '"></div><div class="l-' + i + '"></div><br />';
-	            }
-	            $('#choices').html(html);
+			var func = function(){
+				// Create the HTML for the question and slider.
+				var html = "";
+				for (var i = 0; i < $c.questions.length; i++) {
+					// Add in the questions from list in stim.json
+					var q = $c.questions[i].q;
+					html += '<p class=".question">' + q + '</p><div class="s-' + i + '"></div><div class="l-' + i + '"></div><br />';
+				}
+				$('#choices').html(html);
 	 
-	            // Bulid the sliders for each question
-	            for (var i = 0; i < 1; i++) {
-	                // Create the sliders
-	                $('.s-' + i).slider().on("slidestart", function(event, ui) {
-	                    // Show the handle
-	                    $(this).find('.ui-slider-handle').show();
+				// Bulid the sliders for each question
+				for (var i = 0; i < 1; i++) {
+					// Create the sliders
+					$('.s-' + i).slider().on("slidestart", function(event, ui) {
+						// Show the handle
+						$(this).find('.ui-slider-handle').show();
 	 
-	                    // Sum is the number of sliders that have been clicked
-	                    var sum = 0;
-	                    for (var j = 0; j < $c.questions.length; j++) {
-	                        if ($('.s-' + j).find('.ui-slider-handle').is(":visible")) {
-	                            sum++;
-	                        }
-	                    }
-	                    // If the number of sliders clicked is equal to the number of sliders
-	                    // the user can continue. 
-	                    if (sum == $c.questions.length) {
-	                        $('#trial_next').prop('disabled', false);
-	                    }
-	                });
+						// Sum is the number of sliders that have been clicked
+						var sum = 0;
+						for (var j = 0; j < $c.questions.length; j++) {
+							if ($('.s-' + j).find('.ui-slider-handle').is(":visible")) {
+								sum++;
+							}
+						}
+						// If the number of sliders clicked is equal to the number of sliders
+						// the user can continue. 
+						if (sum == $c.questions.length) {
+							$('#trial_next').prop('disabled', false);
+						}
+					});
 	 
-	                // Put labels on the sliders
-	                $('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
-	                $('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[1] + "</label>");
-                	$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[2] + "</label>");
-	            }
+					// Put labels on the sliders
+					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
+					$('.l-' + i).append("<label style='width: 33%'</label>");
+					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[2] + "</label>");
+				}
 	 
-	            // Hide all the slider handles 
-	            $('.ui-slider-handle').hide();
-	 		}
+				// Hide all the slider handles 
+				$('.ui-slider-handle').hide();
+			}
 
-            // Disable button which will be enabled once the sliders are clicked
-            $('#trial_next').prop('disabled', true);
-            $('#trial_next').hide();
-            // $('#trial_next').prop('disabled', true);
-            // When the continue button is clicked, reset playClick counter
-            $('#trial_next').on('click', function(){
-            	playClick = 0;
-            });
+			// Disable button which will be enabled once the sliders are clicked
+			$('#trial_next').prop('disabled', true);
+			$('#trial_next').hide();
+			// $('#trial_next').prop('disabled', true);
+			// When the continue button is clicked, reset playClick counter
+			$('#trial_next').on('click', function(){
+				playClick = 0;
+			});
 
-            // Enable play video button at first
-            $('#play').prop('disabled', false);
-            
-            // When the button is clicked, disable button till end of video
-            $('#play').on('click', function() {
-            	playClick++;
-            	$('#play').prop('disabled', true);
-            });
+			// Enable play video button at first
+			$('#play').prop('disabled', false);
+			
+			// When the button is clicked, disable button till end of video
+			$('#play').on('click', function() {
+				playClick++;
+				$('#play').prop('disabled', true);
+			});
 
-            // Remove slider after each trial
-            $('#choices').html("");
+			// Remove slider after each trial
+			$('#choices').html("");
 		}
 	};
-
 
 	// Record a response (this could be either just clicking "start",
 	// or actually a choice to the prompt(s))
 	this.record_response = function() {
-		// TODO MAKE THIS CORRECT!
-		var response = [];
-		for (var i = 0; i < $c.questions.length; i++) {
-			response.push($('.s-' + i).slider('value'));
+		response = $('.s-0').slider('value');
+
+		var data = {
+			clip: this.trialinfo.name,
+			rating: response
 		}
 
-		var question = $c.questions.map(function(question) {
-			return question.type
-		});
-
 		// Record responses to psiturk
-		psiTurk.recordTrialData([this.trialinfo.name, question[0], response[0]])
+		psiTurk.recordTrialData(data)
 
 		// Increment the state index
 		STATE.set_index(STATE.index + 1);
@@ -454,10 +450,10 @@ $(document).ready(function() {
 	// Record various unstructured data
 	psiTurk.recordUnstructuredData("condition", condition);
 	psiTurk.recordUnstructuredData("counterbalance", counterbalance);
-	// psiTurk.recordUnstructuredData("choices", $("#choices").html());
 
 	// Start the experiment
 	STATE = new State();
-
-	CURRENTVIEW = new Instructions()
+	// CURRENTVIEW = new Instructions()
+	// CURRENTVIEW = new Questions()
+	CURRENTVIEW = new TestPhase()
 });
