@@ -2809,9 +2809,6 @@ def agentWalksToFireball(space, screen, options, guess=False, impulse=AGENT_RUNN
 		# update pymunk space
 		space.step(1/50.0)
 
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
 
 	# remove value from collision list
 	try:
@@ -2883,11 +2880,7 @@ def fireballMoving(space, screen, options, guess=False, impulse=AGENT_WALKING):
 
 		# update pymunk space
 		space.step(1/50.0)
-
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
-
+		
 	# remove value from collision list
 	try:
 		handlers.collision = []

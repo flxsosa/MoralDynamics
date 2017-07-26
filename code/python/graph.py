@@ -11,23 +11,32 @@ import pymunk.pygame_util
 from pygame.locals import *
 import sim
 import matplotlib.pyplot as plt
+import sqlite3
 
 # list of simulation calls from sim.py to be passed as parameters
-simulations = [sim.shortDistancev1, sim.mediumDistancev1, sim.longDistancev1, sim.static,
-			   sim.slowCollision, sim.fastCollision, sim.noTouch, sim.doublePush, 
-			   sim.mediumPush, sim.longPush, sim.dodge, sim.pushFireball, sim.mediumDistancev2,
-			   sim.longDistancev2, sim.victim_moving_static]
+simulations = [sim.shortDistancev1,sim.mediumDistancev2,sim.longDistancev1,
+				sim.static,sim.slowCollision,sim.fastCollision,sim.dodge,
+				sim.doublePush,sim.mediumPush,sim.longPush,sim.victim_moving_static,
+				sim.noTouch,sim.victim_moving_moving,sim.victim_moving_static,
+				sim.victim_static_moving,sim.victim_static_static,sim.harm_moving_moving,
+				sim.harm_moving_static,sim.harm_static_moving,sim.harm_static_static,sim.sim1Patient,
+				sim.sim1Fireball,sim.sim2Patient,sim.sim2Fireball,sim.sim3Patient,
+				sim.sim3Fireball,sim.sim4Patient,sim.sim4Fireball]
 
 def compareTotalImps():
 	'''
-	Plot total impulses applied to Agent for each of the 14 simulations.
+	Plot total impulses applied to Agent for each of the 14 sim.
 	'''
 	impulses = []
-	idx = range(15)
-	sims = ['shortDistancev1', 'mediumDistancev1', 'longDistancev1', 'static',
-			   'slowCollision', 'fastCollision', 'noTouch', 'doublePush', 
-			   'mediumPush', 'longPush', 'dodge', 'pushFireball', 'mediumDistancev2',
-			   'longDistancev2', 'moving']
+	idx = range(28)
+	sims = ['shortDistancev1','mediumDistancev2','longDistancev1',
+				'static','slowCollision','fastCollision','dodge',
+				'doublePush','mediumPush','longPush','victim_moving_static',
+				'noTouch','victim_moving_moving','victim_moving_static',
+				'victim_static_moving','victim_static_static','harm_moving_moving',
+				'harm_moving_static','harm_static_moving','harm_static_static','sim1Patient',
+				'sim1Fireball','sim2Patient','sim2Fireball','sim3Patient',
+				'sim3Fireball','sim4Patient','sim4Fireball']
 	
 	# traverse simulations and 
 	for sim in simulations:
@@ -40,9 +49,14 @@ def compareTotalImps():
 		# append total impulse applied to Agent for given simulation
 		impulses.append(sim(space, screen, drawOptions, True))
 		pygame.quit()
-
+	impulses = map(lambda x: x/max(impulses)*100, impulses)
+	data = parseSQL().values()
+	data = map(lambda x: sum(x)/len(x), data)
 	# create bar graph of total impulses per simulation
 	plt.bar(idx,impulses)
+	for xe, ye in zip(idx, data):
+		plt.plot(xe, ye, 'ro')
+	plt.plot()
 	plt.xticks(idx, sims, rotation=50)
 	plt.ylabel('Total Impulses')
 	plt.title('Effort Comparison for Sims')
@@ -112,11 +126,11 @@ def calcProb(a):
 	'''
 	prob = []
 
-	# long distance vs short distance
+	# longDistancev1 vs shortDistancev1
 	prob.append(a[2]/(a[0]+a[2]))
-	# long distance vs medium distance
-	prob.append(a[13]/(a[12]+a[13]))
-	# long distance vs static
+	# longDistancev2 vs mediumDistancev2
+	prob.append(0)
+	# victim_moving_static "Moving" vs static
 	prob.append(a[14]/(a[3]+a[14]))
 	# medium push vs downhill
 	prob.append(0)
@@ -124,17 +138,17 @@ def calcProb(a):
 	prob.append(0)
 	# uphill vs medium push
 	prob.append(0)
-	# fast collision vs slow collision
+	# fastCollision vs slowCollision
 	prob.append(a[5]/(a[5]+a[4]))
-	# dodge vs no touch
-	prob.append(a[10]/(a[10]+a[6]))
+	# dodge vs noTouch
+	prob.append(a[6]/(a[6]+a[11]))
 	# dodge vs static
-	prob.append(a[10]/(a[3]+a[10]))
-	# static vs no touch
-	prob.append(a[3]/(a[3]+a[6]))
-	# Moving vs dodge
-	prob.append(a[14]/(a[14]+a[10]))
-	# Long Push vs Double Push
+	prob.append(a[6]/(a[3]+a[6]))
+	# static vs noTouch
+	prob.append(a[3]/(a[3]+a[11]))
+	# victim_moving_static "Moving" vs dodge
+	prob.append(a[10]/(a[10]+a[6]))
+	# longPush vs doublePush
 	prob.append(a[7]/(a[9]+a[7]))
 	# Medium Distance v2 vs Medium Push
 	prob.append(a[8]/(a[12]+a[8]))
@@ -193,3 +207,41 @@ def rmse(x, y):
 
 	square = sum(z)/(len(x)+0.0)
 	return square**0.5
+
+def parseSQL():
+	# begin SQL connection and set cursor
+	conn = sqlite3.connect('participants.db')
+	cursor = conn.cursor()
+
+	# declare list and dictionary of data from SQL db
+	dataList = []
+	dataDict = {}
+
+	# traverse SQL database and grab the data
+	for row in cursor.execute("SELECT * FROM moral_dynamics WHERE datastring!='NULL'"):
+		# begin string
+		string = row[16]
+
+		# find data begin in string and extract rest of string
+		index = string.index('"data"')
+		newString = string[index:]
+
+		# split the string by commas
+		for str in newString.split(','):
+			# if "clip" or "rating", extract and add to list
+			if "clip" in str:
+				dataList.append(str[26:-1]) # clean extraction
+			if "rating" in str:
+				str2 = str[9:-2] # clean extraction
+				if "}" in str2:
+					str = str2[:-1]
+				else:
+					str = str2
+				dataList.append(str)
+
+	# add the datapoints to dictionary
+	for i in range(len(dataList)):
+		if i%2 == 0:
+			dataDict.setdefault(int(dataList[i]),[]).append(int(dataList[i+1]))
+
+	return dataDict
