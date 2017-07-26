@@ -64,6 +64,17 @@ div.slide {
     /*margin: 0 auto;*/
 }
 
+div.slide_trial {
+    /*width: 550px;*/
+    width: 1500px;
+    /*position: relative;*/
+    /*position: absolute;*/
+    margin-left: auto;
+    margin-right: auto;
+    /*padding: 1% 2% 1% 2%;*/
+    margin: 0 auto;
+}
+
 #stim{
     position: relative;
 }
@@ -72,7 +83,7 @@ div.slide {
     float: left;
     /*width: 150px;*/
     margin: 10px;
-    width: 900px;
+    width: 2000px;
 }
 
 div.container{
@@ -82,10 +93,29 @@ div.container{
  /*padding: 10px;  */
 }
 
+div.container_dual{
+ margin-bottom: 10;
+ width: 1500px; 
+ /* height: 540px; */
+ /*padding: 10px;  */
+}
+
 div.video_container{
  width: 900px;
  /* height: 540px; */
  /* margin: auto; */
+}
+div.video_container_left{
+ width: 700px;
+ /* height: 540px; */
+ /* margin: auto; */
+ float:left;
+}
+div.video_container_right{
+ width: 700px;
+ /* height: 540px; */
+ /* margin: auto; */
+ float:right;
 }
 
 div.choices_container{
@@ -93,7 +123,7 @@ div.choices_container{
 }
 
 .stim_video {
-    width:900px;
+    width:700px;
     margin: auto;
 }
 
