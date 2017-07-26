@@ -61,19 +61,77 @@ def compareTotalImps():
 	plt.ylabel('Total Impulses')
 	plt.title('Effort Comparison for Sims')
 	plt.tight_layout()
-	plt.savefig('NewSims' + '.png')
+	plt.savefig('total_impulses.png')
 	plt.show()
 
-def compareKinematics(flag=True):
+def compareKinematics():
 	'''
 	Plots two bar plots. One for Moral Kinematics data and one for
 	Moral Dynamics data.
 	'''
 	# impulses
 	impulses = []
+
 	# agreements for each comparison in Moral Kinematics
 	kinematics = [0.82, 0.88, 0.75, 0.5, 0.67, 0.84, 0.75, 1.0, 
 				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
+
+	# calculated probabilities for each comparison in Moral Dynamics
+	print "Gathering data..."
+
+	# traverse simulations and append impulses to list
+	for sim in simulations:
+		# initialize pygame and create a space to contain the simulation
+		pygame.init()
+		space = pymunk.Space()
+		# we are not viewing the sims
+		screen = None
+		drawOptions = None
+		# append total impulse applied to Agent for given simulation
+		impulses.append(sim(space, screen, drawOptions, True))
+		pygame.quit()
+
+	# If a simulation failed at any time, do not account for it
+	if None in impulses:
+		print "Fail:"
+	else:
+		# probabilities using Luce's Choice Axiom
+		dynamics = calcProb(impulses)
+		# x axis values for plot
+		idx = range(1, 16)
+		xLabels = ['1. LongDistv1 v ShortDistv1', '2. LongDistv2 v MedDistv2', '3. Movingt v Static', '4. MedPush v Down', 
+				   '5. Up v Down', '6. Up v MedPush', '7. FastColl v SlowColl', '8. Dodge v NoTouch',
+				   '9. Dodge v Static', '10. Static v NoTouch', '11. Moving v Dodge', 
+				   '12. LongPush v DoublePush', '13. MedPush v MedDistv2', '14. LongPush v MedPush',
+				   '15. LongPush v Touch']
+
+		# double bar plot
+		plt.subplot(111)
+		plt.ylabel("Agreement")
+		plt.title("Moral Kinematics vs Moral Dynamics")
+		# Moral Kinematics data
+		plt.bar(idx, kinematics, width=0.2, color='b', label='Kin')
+		# Moral Dynamics data - need to plot bars next to Kinematics bars
+		plt.bar(map(lambda x:x+0.2, idx), dynamics, width=0.2, color='r', label='Dyn')
+		plt.xticks(idx, xLabels, rotation='70')
+		plt.legend(loc="best")
+		plt.plot([0.5]*17, "k--")
+		plt.tight_layout()
+		plt.savefig('kinematics_dynamics_comparison.png')
+		plt.show()
+
+def compareModel():
+	'''
+	Plots two bar plots. One for Moral Kinematics data and one for
+	Moral Dynamics data.
+	'''
+	# impulses
+	impulses = []
+
+	data = parseSQL().values()
+	data = map(lambda x: sum(x)/len(x)+0.0, data)
+	kinematics = calcProb(data)
+
 	# calculated probabilities for each comparison in Moral Dynamics
 	print "Gathering data..."
 
@@ -106,16 +164,16 @@ def compareKinematics(flag=True):
 		# double bar plot
 		plt.subplot(111)
 		plt.ylabel("Agreement")
-		plt.title("Moral Kinematics vs Moral Dynamics")
+		plt.title("Empirical Data (Blue) vs Model Predictions (Red)")
 		# Moral Kinematics data
 		plt.bar(idx, kinematics, width=0.2, color='b', label='Kin')
 		# Moral Dynamics data - need to plot bars next to Kinematics bars
 		plt.bar(map(lambda x:x+0.2, idx), dynamics, width=0.2, color='r', label='Dyn')
 		plt.xticks(idx, xLabels, rotation='70')
-		plt.legend(loc="best")
+		#plt.legend(loc="best")
 		plt.plot([0.5]*17, "k--")
 		plt.tight_layout()
-		plt.savefig('kin.png')
+		plt.savefig('model_data_comparison.png')
 		plt.show()
 
 def calcProb(a):
@@ -150,8 +208,8 @@ def calcProb(a):
 	prob.append(a[10]/(a[10]+a[6]))
 	# longPush vs doublePush
 	prob.append(a[7]/(a[9]+a[7]))
-	# Medium Distance v2 vs Medium Push
-	prob.append(a[8]/(a[12]+a[8]))
+	# Medium Push vs Medium Distance v2
+	prob.append(a[8]/(a[8]+a[1]))
 	# long push vs medium push
 	prob.append(a[9]/(a[9]+a[8]))
 	# long push vs touch
