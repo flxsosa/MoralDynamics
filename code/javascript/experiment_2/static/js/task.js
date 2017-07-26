@@ -30,6 +30,7 @@ var Instructions = function() {
 	console.log("Instructions")
 	
 	$(".slide").hide();
+	$(".slide_trial").hide();
 	var slide = $("#instructions-training-1");
 	slide.fadeIn($c.fade);
 
@@ -112,6 +113,7 @@ var Introduction = function() {
 
 	// Load the trial html page
 	$(".slide").hide();
+	$(".slide_trial").hide();
 
 	// Show the slide
 	var that = this;
@@ -168,10 +170,22 @@ var TestPhase = function() {
 
 		if (that.init_trial()) {
 			// Load and show video
-			video_name = that.trialinfo.name,
-			$("#video_mp4").attr("src", '/static/videos/mp4/' + video_name + '.mp4');
-			$("#video_webm").attr("src", '/static/videos/webm/' + video_name + '.webm');
-			$("#video_ogg").attr("src", '/static/videos/ogv/' + video_name + '.ogv');
+			
+			video_pair = that.trialinfo.pair
+			video_1 = video_pair[0]
+			video_2 = video_pair[1]
+			$("#video_mp41").attr("src", '/static/videos/mp4/' + video_1 + '.mp4');
+			$("#video_webm1").attr("src", '/static/videos/webm/' + video_1 + '.webm');
+			$("#video_ogg1").attr("src", '/static/videos/ogv/' + video_1 + '.ogv');
+			$(".stim_video").load()
+			$("#play.next").click(function() {
+				$(".stim_video").load()
+				$('.stim_video').trigger('play');
+			});
+
+			$("#video_mp42").attr("src", '/static/videos/mp4/' + video_2 + '.mp4');
+			$("#video_webm2").attr("src", '/static/videos/webm/' + video_2 + '.webm');
+			$("#video_ogg2").attr("src", '/static/videos/ogv/' + video_2 + '.ogv');
 			$(".stim_video").load()
 			$("#play.next").click(function() {
 				$(".stim_video").load()
@@ -284,6 +298,7 @@ var TestPhase = function() {
 
 	// Load the trial html page
 	$(".slide").hide();
+	$(".slide_trial").hide();
 
 	// Show the slide
 	var that = this;
