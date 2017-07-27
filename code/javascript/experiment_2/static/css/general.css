@@ -120,6 +120,7 @@ div.video_container_right{
 
 div.choices_container{
  width: 900px;
+ margin: auto;
 }
 
 .stim_video {

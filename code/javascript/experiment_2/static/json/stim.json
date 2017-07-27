@@ -36,8 +36,8 @@
         }
     ],
     "questions":[
-        {"q": "How bad was what Blue did?", 
-        "l": ["not bad", "very bad"]}
+        {"q": "In which video shown is Blue being more bad?", 
+        "l": ["A", "B"]}
     ]
 }
 

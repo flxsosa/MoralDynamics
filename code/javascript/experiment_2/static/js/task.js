@@ -167,106 +167,75 @@ var TestPhase = function() {
 	this.display_stim = function(that) {
 		// Create a click counter for the play button
 		var playClick = 0;
-
+		$('document').ready(function(){
+			// Create the sliders
+			var html = "";
+			// Add in the questions from list in stim.json
+			var q = $c.questions[0].q;
+			html += '<p class=".question">' + q + '</p><input class="trialQ" name="A" type="radio" value="A"><b>A</b><input class="trialQ" name="A" type="radio" value="B"><b>B</b><br/>';
+			$('#choices').html(html);
+		});	
+		// Create html and build sliders
+		
 		if (that.init_trial()) {
 			// Load and show video
-			
 			video_pair = that.trialinfo.pair
 			video_1 = video_pair[0]
 			video_2 = video_pair[1]
 			$("#video_mp41").attr("src", '/static/videos/mp4/' + video_1 + '.mp4');
 			$("#video_webm1").attr("src", '/static/videos/webm/' + video_1 + '.webm');
 			$("#video_ogg1").attr("src", '/static/videos/ogv/' + video_1 + '.ogv');
-			$(".stim_video").load()
-			$("#play.next").click(function() {
-				$(".stim_video").load()
-				$('.stim_video').trigger('play');
+			$("#vid1").load()
+			$("#play1.next").click(function() {
+				$("#vid1").load()
+				$('#vid1').trigger('play');
 			});
 
 			$("#video_mp42").attr("src", '/static/videos/mp4/' + video_2 + '.mp4');
 			$("#video_webm2").attr("src", '/static/videos/webm/' + video_2 + '.webm');
 			$("#video_ogg2").attr("src", '/static/videos/ogv/' + video_2 + '.ogv');
-			$(".stim_video").load()
-			$("#play.next").click(function() {
-				$(".stim_video").load()
-				$('.stim_video').trigger('play');
+			$("#vid2").load()
+			$("#play2.next").click(function() {
+				$("#vid2").load()
+				$('#vid2').trigger('play');
 			});
 			
 			// Watch for video being played to end and enable play button when done
 			// if it's been clicked less than twice
-			document.getElementById('vid').addEventListener('ended',function(e) {
-				if (playClick < 2){
-					$('#play').prop('disabled', false);
-				}
-				else {
-					$('#play').hide();
-					func();
-					$('#trial_next').show();
-				}
+			document.getElementById('vid1').addEventListener('ended',function(e) {
+				$('#play1').prop('disabled', false);	
+				
+			},false);
+			document.getElementById('vid2').addEventListener('ended',function(e) {
+				$('#play2').prop('disabled', false);
 			},false);
 
-			// Create html and build sliders
-			var func = function(){
-				// Create the HTML for the question and slider.
-				var html = "";
-				for (var i = 0; i < $c.questions.length; i++) {
-					// Add in the questions from list in stim.json
-					var q = $c.questions[i].q;
-					html += '<p class=".question">' + q + '</p><div class="s-' + i + '"></div><div class="l-' + i + '"></div><br />';
-				}
-				$('#choices').html(html);
-	 
-				// Bulid the sliders for each question
-				for (var i = 0; i < 1; i++) {
-					// Create the sliders
-					$('.s-' + i).slider().on("slidestart", function(event, ui) {
-						// Show the handle
-						$(this).find('.ui-slider-handle').show();
-	 
-						// Sum is the number of sliders that have been clicked
-						var sum = 0;
-						for (var j = 0; j < $c.questions.length; j++) {
-							if ($('.s-' + j).find('.ui-slider-handle').is(":visible")) {
-								sum++;
-							}
-						}
-						// If the number of sliders clicked is equal to the number of sliders
-						// the user can continue. 
-						if (sum == $c.questions.length) {
-							$('#trial_next').prop('disabled', false);
-						}
-					});
-	 
-					// Put labels on the sliders
-					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
-					$('.l-' + i).append("<label style='width: 33%'</label>");
-					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[1] + "</label>");
-				}
-	 
-				// Hide all the slider handles 
-				$('.ui-slider-handle').hide();
-			}
+			
 
 			// Disable button which will be enabled once the sliders are clicked
 			$('#trial_next').prop('disabled', true);
 			$('#trial_next').hide();
 			// $('#trial_next').prop('disabled', true);
 			// When the continue button is clicked, reset playClick counter
-			$('#trial_next').on('click', function(){
-				playClick = 0;
-			});
+			// $('#trial_next').on('click', function(){
+			// 	playClick = 0;
+			// });
 
 			// Enable play video button at first
 			$('#play').prop('disabled', false);
 			
 			// When the button is clicked, disable button till end of video
-			$('#play').on('click', function() {
-				playClick++;
-				$('#play').prop('disabled', true);
+			$('#play1').on('click', function() {
+				//playClick++;
+				$('#play1').prop('disabled', true);
 			});
 
+			$('#play2').on('click', function() {
+				//playClick++;
+				$('#play2').prop('disabled', true);
+			});
 			// Remove slider after each trial
-			$('#choices').html("");
+			//$('#choices').html("");
 		}
 	};
 
