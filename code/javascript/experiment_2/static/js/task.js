@@ -166,31 +166,60 @@ var TestPhase = function() {
 
 	this.display_stim = function(that) {
 		// Create a click counter for the play button
-		var playClick = 0;
-		$('document').ready(function(){
+		playClick1 = 0;
+		playClick2 = 0;
+		
+		// Create html and build sliders
+		
+		if (that.init_trial()) {
 			// Create the sliders
 			var html = "";
 			// Add in the questions from list in stim.json
 			var q = $c.questions[0].q;
 			html += '<p class=".question">' + q + '</p><input class="trialQ" name="A" type="radio" value="A"><b>A</b><input class="trialQ" name="A" type="radio" value="B"><b>B</b><br/>';
 			$('#choices').html(html);
-		});	
-		// Create html and build sliders
-		
-		if (that.init_trial()) {
+			$('#choices').hide();
+
+			$('#trial_next.next').hide();
+			$('.trialQ').click(function() {
+				$('#trial_next.next').prop('disabled', false);
+				$('#trial_next.next').show();
+			});
+			$('#trial_next.next').click(function() {
+				that.record_response();
+				$('#play1').prop('disabled', false);
+				$('#play2').prop('disabled', false);
+				playClick1 = 0;
+				playClick2 = 0;
+			});
+
 			// Load and show video
 			$('#play1').prop('disabled', false);
 			$('#play2').prop('disabled', false);
-			video_pair = that.trialinfo.pair
-			video_1 = video_pair[0]
-			video_2 = video_pair[1]
+			var video_pair = that.trialinfo.pair;
+			var odds = Math.random()
+			stimulus = [];
+			
+			if (odds > 0.5) {
+				video_1 = video_pair[0];
+				video_2 = video_pair[1];
+			}
+			else {
+				video_1 = video_pair[1];
+				video_2 = video_pair[0];
+			} 
+
 			$("#video_mp41").attr("src", '/static/videos/mp4/' + video_1 + '.mp4');
 			$("#video_webm1").attr("src", '/static/videos/webm/' + video_1 + '.webm');
 			$("#video_ogg1").attr("src", '/static/videos/ogv/' + video_1 + '.ogv');
 			$("#vid1").load()
 			$("#play1.next").click(function() {
-				$("#vid1").load()
+				//console.log(playClick1);
 				$('#vid1').trigger('play');
+				playClick1++;
+				$('#play1.next').prop('disabled', true);
+				$('#play2.next').prop('disabled', true);
+				stimulus.push(video_1);
 			});
 
 			$("#video_mp42").attr("src", '/static/videos/mp4/' + video_2 + '.mp4');
@@ -198,49 +227,49 @@ var TestPhase = function() {
 			$("#video_ogg2").attr("src", '/static/videos/ogv/' + video_2 + '.ogv');
 			$("#vid2").load()
 			$("#play2.next").click(function() {
-				$("#vid2").load()
+				//console.log(playClick2);
 				$('#vid2').trigger('play');
+				playClick2++;
+				$('#play1.next').prop('disabled', true);
+				$('#play2.next').prop('disabled', true);
+				stimulus.push(video_2);
 			});
 			
 			// Watch for video being played to end and enable play button when done
 			// if it's been clicked less than twice
 			document.getElementById('vid1').addEventListener('ended',function(e) {
-				$('#play1').prop('disabled', false);	
-				
-			},false);
-			document.getElementById('vid2').addEventListener('ended',function(e) {
-				$('#play2').prop('disabled', false);
-			},false);
+				//console.log("Video 1 Ended. PlayClick1: ", playClick1);
+				if (playClick1 < 2) {
+					$('#play1').prop('disabled', false);	
+				}
 
+				else if (playClick2 >= 2) {
+					$('#choices').show();
+					$('#play1').prop('disabled', true);
+				}	
+
+				if (playClick2 < 2) {
+					$('#play2').prop('disabled', false);
+				}
+			},false);
 			
+			document.getElementById('vid2').addEventListener('ended',function(e) {
+				if (playClick2 < 2) {
+					$('#play2').prop('disabled', false);	
+						
+				}
+				else if (playClick1 >= 2) {
+					$('#choices').show();
+					$('#play2').prop('disabled', true);
+				}	
 
-			// Disable button which will be enabled once the sliders are clicked
-			$('#trial_next').prop('disabled', true);
-			//$('#trial_next').hide();
-			// When the continue button is clicked, reset playClick counter
-			$('#trial_next').on('click', function(){
-				record_response();
-				$('#play1').prop('disabled', false);
-				$('#play2').prop('disabled', false);
-			});
+				if (playClick1 < 2) {
+					$('#play1').prop('disabled', false);
+				}
+			},false);
 
 			// Enable play video button at first
-			$('#play').prop('disabled', false);
-			
-			// When the button is clicked, disable button till end of video
-			$('#play1').on('click', function() {
-				//playClick++;
-				$('#play1').prop('disabled', true);
-			});
-
-			$('#play2').on('click', function() {
-				//playClick++;
-				$('#play2').prop('disabled', true);
-			});
-			// Remove slider after each trial
-			$('.trialQ').change(function() {
-				$('#trial_next').prop('disabled', false);
-			});
+			$('#play').prop('disabled', false);			
 		}
 	};
 
@@ -251,7 +280,9 @@ var TestPhase = function() {
 
 		var data = {
 			clip: this.trialinfo.pair,
-			rating: response
+			order: [video_1, video_2],
+			rating: response,
+			viewing: stimulus
 		}
 
 		// Record responses to psiturk
@@ -259,7 +290,11 @@ var TestPhase = function() {
 
 		// Increment the state index
 		STATE.set_index(STATE.index + 1);
-
+		$('#trial_next.next').off();
+		$('#play1.next').off();
+		$('#play2.next').off();
+		$('#vid1').off();
+		$('#vid2').off();
 		// Update the page with the current phase/trial
 		this.display_stim(this);
 	};
@@ -277,10 +312,6 @@ var TestPhase = function() {
 	// Show the slide
 	var that = this;
 	$("#trial").fadeIn($c.fade);
-	$('#trial_next.next').click(function() {
-		$('#play').show();
-		that.record_response();
-	});
 
 	// Initialize the current trial
 	if (this.init_trial()) {
