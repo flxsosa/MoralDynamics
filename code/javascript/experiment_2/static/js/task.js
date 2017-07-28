@@ -179,6 +179,8 @@ var TestPhase = function() {
 		
 		if (that.init_trial()) {
 			// Load and show video
+			$('#play1').prop('disabled', false);
+			$('#play2').prop('disabled', false);
 			video_pair = that.trialinfo.pair
 			video_1 = video_pair[0]
 			video_2 = video_pair[1]
@@ -214,12 +216,13 @@ var TestPhase = function() {
 
 			// Disable button which will be enabled once the sliders are clicked
 			$('#trial_next').prop('disabled', true);
-			$('#trial_next').hide();
-			// $('#trial_next').prop('disabled', true);
+			//$('#trial_next').hide();
 			// When the continue button is clicked, reset playClick counter
-			// $('#trial_next').on('click', function(){
-			// 	playClick = 0;
-			// });
+			$('#trial_next').on('click', function(){
+				record_response();
+				$('#play1').prop('disabled', false);
+				$('#play2').prop('disabled', false);
+			});
 
 			// Enable play video button at first
 			$('#play').prop('disabled', false);
@@ -235,17 +238,19 @@ var TestPhase = function() {
 				$('#play2').prop('disabled', true);
 			});
 			// Remove slider after each trial
-			//$('#choices').html("");
+			$('.trialQ').change(function() {
+				$('#trial_next').prop('disabled', false);
+			});
 		}
 	};
 
 	// Record a response (this could be either just clicking "start",
 	// or actually a choice to the prompt(s))
 	this.record_response = function() {
-		response = $('.s-0').slider('value');
+		response = $('input[name=A]:checked').val();
 
 		var data = {
-			clip: this.trialinfo.name,
+			clip: this.trialinfo.pair,
 			rating: response
 		}
 
@@ -293,6 +298,7 @@ var Questions = function() {
 
 	// Show the slide
 	$(".slide").hide();
+	$(".slide_trial").hide();
 	$("#questions").fadeIn($c.fade);
 
 	//disable button initially
@@ -353,6 +359,7 @@ var Demographics = function() {
 
 	// Show the slide
 	$(".slide").hide();
+	$(".slide_trial").hide();
 	$("#demographics").fadeIn($c.fade);
 
 	//disable button initially
