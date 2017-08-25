@@ -66,8 +66,8 @@
         }
     ],
     "questions":[
-        {"q": "The action of Blue was worse in case...", 
-        "l": ["A", "B"]}
+        {"q": "In which clip was what Blue did worse?", 
+        "l": ["Definitely Clip A", "Definitely Clip B", "Equally Bad"]}
     ]
 }
 
