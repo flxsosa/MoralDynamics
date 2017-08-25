@@ -12,6 +12,8 @@ from pygame.locals import *
 import sim
 import matplotlib.pyplot as plt
 import sqlite3
+from scipy import stats
+import numpy as np
 
 # list of simulation calls from sim.py to be passed as parameters
 simulations = [sim.shortDistancev1,sim.mediumDistancev2,sim.longDistancev1,
@@ -49,20 +51,49 @@ def compareTotalImps():
 		# append total impulse applied to Agent for given simulation
 		impulses.append(sim(space, screen, drawOptions, True))
 		pygame.quit()
+	
 	impulses = map(lambda x: x/max(impulses)*100, impulses)
-	data = parseSQL().values()
-	data = map(lambda x: sum(x)/len(x), data)
-	# create bar graph of total impulses per simulation
-	plt.bar(idx,impulses)
-	for xe, ye in zip(idx, data):
-		plt.plot(xe, ye, 'ro')
-	plt.plot()
-	plt.xticks(idx, sims, rotation=50)
-	plt.ylabel('Total Impulses')
-	plt.title('Effort Comparison for Sims')
-	plt.tight_layout()
-	plt.savefig('total_impulses.png')
+	data = parseSQL().values()[:28]
+	data = normalize(np.array(data))
+	realData = []
+	for i in range(len(data)):
+		for j in range(len(data[i])):
+			realData.append(data[i][j])
+	# data = map(lambda x: sum(x)/len(x), data)
+
+	# get rid of 0s for log functions
+	# for item in impulses:
+	# 	if item == 0:
+	# 		impulses[impulses.index(item)] = 1
+	predictor = np.array(impulses)
+	for i in range(len(data)):
+		myFormattedList = [ '%.2f' % elem for elem in data[i] ]
+		print i,": ", myFormattedList
+		print ""
+		response = np.array(data[i])
+		plt.plot(predictor,response,'ro', label='data')
+	
+
+	# # print regression
+	# print(stats.linregress(predictor,response))
+	# slope, intercept, r_value, p_value, std_err = stats.linregress(predictor,response)
+	# # plot regression
+	# plt.plot(predictor,response,'ro', label='data')
+	# plt.plot(predictor, intercept + slope*predictor, 'blue', label='fitted line')
+	# plt.legend()
 	plt.show()
+	
+	# create bar graph of total impulses per simulation
+	# plt.bar(idx,impulses)
+	# for xe, ye in zip(idx, data):
+	# 	plt.plot(xe, ye, 'ro')
+	# plt.plot()
+	# plt.xticks(idx, sims, rotation=50)
+	# plt.ylabel('Total Impulses')
+	# plt.title('Effort Comparison for Sims')
+	# plt.tight_layout()
+	# plt.savefig('total_impulses.png')
+	# plt.show()
 
 def compareKinematics():
 	'''
@@ -73,7 +104,7 @@ def compareKinematics():
 	impulses = []
 
 	# agreements for each comparison in Moral Kinematics
-	kinematics = [0.82, 0.88, 0.75, 0.5, 0.67, 0.84, 0.75, 1.0, 
+	kinematics = [0.82, 0.75, 0.75, 1.0, 
 				  0.82, 0.75, 0.69, 0.75, 1.0, 0.82, 0.94]
 
 	# calculated probabilities for each comparison in Moral Dynamics
@@ -98,26 +129,25 @@ def compareKinematics():
 		# probabilities using Luce's Choice Axiom
 		dynamics = calcProb(impulses)
 		# x axis values for plot
-		idx = range(1, 16)
-		xLabels = ['1. LongDistv1 v ShortDistv1', '2. LongDistv2 v MedDistv2', '3. Movingt v Static', '4. MedPush v Down', 
-				   '5. Up v Down', '6. Up v MedPush', '7. FastColl v SlowColl', '8. Dodge v NoTouch',
+		idx = range(1, 12)
+		xLabels = ['1. LongDist v ShortDist', '3. Moving v Static', '7. FastColl v SlowColl', '8. Dodge v NoTouch',
 				   '9. Dodge v Static', '10. Static v NoTouch', '11. Moving v Dodge', 
-				   '12. LongPush v DoublePush', '13. MedPush v MedDistv2', '14. LongPush v MedPush',
-				   '15. LongPush v Touch']
+				   '12. LongPush v DoublePush', '13. MedPush v MedDist', '14. LongPush v MedPush',
+				   '15. LongPush v LongDist']
 
 		# double bar plot
 		plt.subplot(111)
 		plt.ylabel("Agreement")
-		plt.title("Moral Kinematics vs Moral Dynamics")
+		plt.title("Moral Kinematics (Empirical) vs Moral Dynamics Predictions")
 		# Moral Kinematics data
-		plt.bar(idx, kinematics, width=0.2, color='b', label='Kin')
+		plt.bar(idx, kinematics, width=0.4, color='b', label='Empirical')
 		# Moral Dynamics data - need to plot bars next to Kinematics bars
-		plt.bar(map(lambda x:x+0.2, idx), dynamics, width=0.2, color='r', label='Dyn')
+		plt.bar(map(lambda x:x+0.4, idx), dynamics, width=0.4, color='r', label='Dynamics')
 		plt.xticks(idx, xLabels, rotation='70')
 		plt.legend(loc="best")
-		plt.plot([0.5]*17, "k--")
+		plt.plot(range(1,12),[0.5]*11, "k--")
 		plt.tight_layout()
-		plt.savefig('kinematics_dynamics_comparison.png')
+		#plt.savefig('kinematics_dynamics_comparison.png')
 		plt.show()
 
 def compareModel():
@@ -187,15 +217,15 @@ def calcProb(a):
 	# longDistancev1 vs shortDistancev1
 	prob.append(a[2]/(a[0]+a[2]))
 	# longDistancev2 vs mediumDistancev2
-	prob.append(0)
+	#prob.append(0)
 	# victim_moving_static "Moving" vs static
 	prob.append(a[14]/(a[3]+a[14]))
 	# medium push vs downhill
-	prob.append(0)
+	#prob.append(0)
 	# uphill vs downhill
-	prob.append(0)
+	#prob.append(0)
 	# uphill vs medium push
-	prob.append(0)
+	#prob.append(0)
 	# fastCollision vs slowCollision
 	prob.append(a[5]/(a[5]+a[4]))
 	# dodge vs noTouch
@@ -286,6 +316,7 @@ def parseSQL():
 
 		# split the string by commas
 		for str in newString.split(','):
+
 			# if "clip" or "rating", extract and add to list
 			if "clip" in str:
 				dataList.append(str[26:-1]) # clean extraction
@@ -298,8 +329,44 @@ def parseSQL():
 				dataList.append(str)
 
 	# add the datapoints to dictionary
+	print "Data List Length:", len(dataList)
 	for i in range(len(dataList)):
+		# print dataList[i]
 		if i%2 == 0:
 			dataDict.setdefault(int(dataList[i]),[]).append(int(dataList[i+1]))
-
+			
 	return dataDict
+
+def normalize(input_matrix=np.array(parseSQL().values())):
+	# trying to fix data TODO
+	matrix = []
+	for i in range(len(simulations)):
+		matrix.append([])
+	for i in range(len(input_matrix)):
+		matrix[i] = input_matrix[i][:28]
+
+	# transpose the matrix of participant x responses to get
+	# responses x participant
+	transposed_matrix = np.array(matrix)#.transpose()
+
+	# find the standard deviation of the transposed_matrix
+	std_dev = np.std(transposed_matrix, axis=0)
+
+	# collect row vector of response averages across participants
+	average_vector = []
+	for response in transposed_matrix:
+		average_vector.append(sum(response)/(len(response)+0.0))
+
+	# create z-score matrix of equal length to input_matrix
+	z_score_matrix = []
+	for i in range(len(simulations)):
+		z_score_matrix.append([])
+	print z_score_matrix
+
+	for participant in range(len(matrix)):
+		for response in range(len(matrix[participant])):
+			z_score_matrix[participant].append(
+			(matrix[participant][response] - average_vector[participant])/std_dev[participant])
+	print "Averages Per Response: ", average_vector
+	print "Standard Deviation: ", std_dev
+	return z_score_matrix
