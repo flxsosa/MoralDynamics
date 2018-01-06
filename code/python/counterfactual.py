@@ -1,5 +1,5 @@
 '''
-Counterfactual imulations for Moral Dynamics
+Counterfactual Simulations for Moral Dynamics
 
 Januaray 6, 2018
 Felix Sosa
