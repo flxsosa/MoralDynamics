@@ -16,12 +16,13 @@ import pymunk.pygame_util
 from pygame.locals import *
 import sys
 import simulations
+import counterfactual
 import infer
 import sim
 import helper
 
 # Available simulations
-menu_actions = {
+simulation_menu_actions = {
 	'1' : simulations.short_distance_v1,
 	'2' : simulations.medium_distance_v2,
 	'3' : simulations.long_distance_v1,
@@ -53,8 +54,40 @@ menu_actions = {
 	'29' : simulations.agent_walks_to_fireball,
 	'30' : simulations.patient_walks_to_fireball,
 	'31' : simulations.fireball_moving,
-	'32' : simulations.agent_saves_patient,
-	'c' : simulations.counterfactual_short_distance
+	'32' : simulations.agent_saves_patient
+}
+
+# Available counterfactuals
+counterfactual_menu_actions = {
+	'1' : counterfactual.short_distance_v1,
+	'2' : counterfactual.medium_distance_v2,
+	'3' : counterfactual.long_distance_v1,
+	'4' : counterfactual.static,
+	'5' : counterfactual.slow_collision,
+	'6' : counterfactual.fast_collision,
+	'7' : counterfactual.dodge,
+	'8' : counterfactual.double_push,
+	'9' : counterfactual.medium_push,
+	'10' : counterfactual.long_push,
+	'11' : counterfactual.victim_moving_static,
+	'12' : counterfactual.no_touch,
+	'13' : counterfactual.victim_moving_moving,
+	'14' : counterfactual.victim_moving_static,
+	'15' : counterfactual.victim_static_moving,
+	'16' : counterfactual.victim_static_static,
+	'17' : counterfactual.harm_moving_moving,
+	'18' : counterfactual.harm_moving_static,
+	'19' : counterfactual.harm_static_moving,
+	'20' : counterfactual.harm_static_static,
+	'21' : counterfactual.sim_1_patient,
+	'22' : counterfactual.sim_1_fireball,
+	'23' : counterfactual.sim_2_patient,
+	'24' : counterfactual.sim_2_fireball,
+	'25' : counterfactual.sim_3_patient,
+	'26' : counterfactual.sim_3_fireball,
+	'27' : counterfactual.sim_4_patient,
+	'28' : counterfactual.sim_4_fireball,
+	'c' : counterfactual.counterfactual_short_distance
 }
 
 def main():
@@ -72,7 +105,7 @@ def main():
 		# create a screen of 600x600 pixels
 		screen = pygame.display.set_mode((1000,600))	
 		drawOptions = pymunk.pygame_util.DrawOptions(screen)
-		menu_actions[choice](space, screen, drawOptions)
+		simulation_menu_actions[choice](space, screen, drawOptions)
 
 		pygame.quit()
 		pygame.display.quit()
@@ -97,7 +130,7 @@ def main():
 			# create a screen of 600x600 pixels
 			screen = pygame.display.set_mode((1000,600))	
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
-			menu_actions[choice](space, screen, drawOptions)
+			simulation_menu_actions[choice](space, screen, drawOptions)
 			
 			# Quit the pygame instance and pygame display
 			pygame.quit()
@@ -111,7 +144,7 @@ def main():
 		print("Goodbye")
 		sys.exit()
 		
-	# If user chooses, display guess menu options
+	# If user chooses, display counterfactual menu options
 	if choice == '2':
 		# Print simulation menu options and record choice
 		helper.printOptions()
@@ -119,41 +152,14 @@ def main():
 		
 		# While the user does not decide to exit the program
 		while (choice != '0'):
-			# Create a pymunk space instance to contain the simulation
+			# initialize pygame and create a space to contain the simulation
+			pygame.init()
 			space = pymunk.Space()
 
-			# Each choice executes an enumeration over a fixed interval of guess
-			# impulses for each sim
-			if (choice == '1'):
-				infer.enum(simulations.shortDistance, 100, 300)
-			elif (choice == '2'):
-				infer.enum(simulations.mediumDistance, 100, 300)
-			elif (choice == '3'):
-				infer.enum(simulations.longDistance, 100, 300)
-			elif (choice == '4'):
-				infer.enum(simluations.static, 250, 450)
-			elif (choice == '5'):
-				simulations.uphill(space, screen, drawOptions)
-			elif (choice == '6'):
-				simulations.downhill(space, screen, drawOptions)
-			elif (choice == '7'):
-				infer.enum(simulations.slowCollision, 300, 500)
-			elif (choice == '8'):
-				infer.enum(simulations.fastCollision, 170, 370)
-			elif (choice == '9'):
-				infer.enum(simulations.dodge, 50, 250)
-			elif (choice == '10'):
-				infer.enum(simulations.doubleTouch, 70, 270)
-			elif (choice == '11'):
-				infer.enum(simulations.mediumPush, 50, 250)
-			elif (choice == '12'):
-				infer.enum(simulations.longPush, 10, 200)
-			elif (choice == '13'):
-				infer.enum(simulations.touch, 150, 350)
-			elif (choice == '14'):
-				infer.enum(simulations.pushFireball, 175, 375)
-			else:
-				print("Must be an integer [0-14]")
+			# create a screen of 600x600 pixels
+			screen = pygame.display.set_mode((1000,600))	
+			drawOptions = pymunk.pygame_util.DrawOptions(screen)
+			counterfactual_menu_actions[choice](space, screen, drawOptions)
 			
 			# Quit the pygame instance and pygame display
 			pygame.quit()
