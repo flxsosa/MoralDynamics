@@ -22,7 +22,7 @@ def printHeader():
 	'''
 	print("=================================================")
 	print("1. Show Simulations")
-	print("2. Run Guesses")
+	print("2. Show Counterfactuals")
 	print("0. EXIT")
 	print("=================================================")
 	print("Please choose an option or [0] to exit:")
