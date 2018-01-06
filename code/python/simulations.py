@@ -33,7 +33,7 @@ ani.sort()
 
 # Experiment 2 simulations
 
-def shortDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
 	away. Originally to be compared with longDistanceSim in Moral Kinematics.
@@ -184,7 +184,7 @@ def shortDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def mediumDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def medium_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a medium distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -331,7 +331,7 @@ def mediumDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def longDistancev1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def long_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -636,7 +636,7 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
+def slow_collision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	'''
 	Simulation of Cone travelling slower after being hit by Cylinder.
 	screen -- pygame display Surface
@@ -787,7 +787,7 @@ def slowCollision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def fastCollision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def fast_collision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cone travelling faster after being hit by Cylinder.
 	screen -- pygame display Surface
@@ -1085,7 +1085,7 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def doublePush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def double_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder tapping Cone twice into Fireball.
 	space -- pymunk simulation space
@@ -1238,7 +1238,7 @@ def doublePush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def medium_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball over a medium distance
 	before letting go.
@@ -1386,7 +1386,7 @@ def mediumPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def long_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball over complete
 	distance.
@@ -1530,7 +1530,7 @@ def longPush(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def push_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Fireball into Cone.
 	space -- pymunk simulation space
@@ -1677,7 +1677,7 @@ def pushFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def mediumDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def medium_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
 	away. Originally to be compared with longDistanceSim in Moral Kinematics.
@@ -1828,7 +1828,7 @@ def mediumDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def longDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def long_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
 	away. Originally to be compared with longDistanceSim in Moral Kinematics.
@@ -1979,7 +1979,7 @@ def longDistancev2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def noTouch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def no_touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a short distance
 	away. Originally to be compared with longDistanceSim in Moral Kinematics.
@@ -3347,7 +3347,7 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 # Instruction simulations for experiments on mTurk
 
-def patientWalksToFireball(space, screen, options, guess=False, impulse=AGENT_WALKING):
+def patient_walks_to_fireball(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	# if it's a truth sim, we use a display
 	if(not guess):
 		pygame.display.set_caption("Simulation 1: Short Distance")
@@ -3453,7 +3453,7 @@ def patientWalksToFireball(space, screen, options, guess=False, impulse=AGENT_WA
 	except:
 		print "Exited before collision."
 
-def agentWalksToFireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def agent_walks_to_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	# if it's a truth sim, we use a display
 	if(not guess):
 		pygame.display.set_caption("Simulation 1: Short Distance")
@@ -3530,7 +3530,7 @@ def agentWalksToFireball(space, screen, options, guess=False, impulse=AGENT_RUNN
 	except:
 		print "Exited before collision."
 
-def fireballMoving(space, screen, options, guess=False, impulse=AGENT_WALKING):
+def fireball_moving(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	# if it's a truth sim, we use a display
 	if(not guess):
 		pygame.display.set_caption("Simulation 1: Short Distance")
@@ -3605,7 +3605,7 @@ def fireballMoving(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	except:
 		print "Exited before collision."
 
-def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING):
+def agent_saves_patient(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	# if it's a truth sim, we use a display
 	if(not guess):
 		pygame.display.set_caption("Simulation 1: Short Distance")
@@ -3743,7 +3743,7 @@ def agentSavesPatient(space, screen, options, guess=False, impulse=AGENT_WALKING
 
 # Dynamics simulations
 
-def sim1Patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def sim_1_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	F <-- P <-- A
 	'''
@@ -3886,7 +3886,7 @@ def sim1Patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def sim1Fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def sim_1_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -4033,7 +4033,7 @@ def sim1Fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def sim2Patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def sim_2_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -4180,7 +4180,7 @@ def sim2Patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def sim2Fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def sim_2_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -4327,7 +4327,7 @@ def sim2Fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def sim3Patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def sim_3_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -4474,7 +4474,7 @@ def sim3Patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def sim3Fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def sim_3_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -4621,7 +4621,7 @@ def sim3Fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def sim4Patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def sim_4_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
@@ -4770,7 +4770,7 @@ def sim4Patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
 		xImpsFireball, yImpsFireball)
 
-def sim4Fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
+def sim_4_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
 	Simulation of Cylinder pushing Cone into Fireball from a long distance
 	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
