@@ -5,6 +5,11 @@ March 31, 2017
 Felix Sosa
 '''
 
+'''
+Main file for Moral Dynamics project.
+
+Felix Sosa
+'''
 import pymunk
 import pygame
 import pymunk.pygame_util
@@ -47,7 +52,8 @@ menu_actions = {
 	'29' : simulations.agentWalksToFireball,
 	'30' : simulations.patientWalksToFireball,
 	'31' : simulations.fireballMoving,
-	'32' : simulations.agentSavesPatient
+	'32' : simulations.agentSavesPatient,
+	'c' : simulations.counterfactual_short_distance
 }
 
 def main():
@@ -55,6 +61,7 @@ def main():
 	Entry point
 	'''
 
+	# If user supplies simulation choice at launch
 	if (len(sys.argv) == 2):
 		choice = sys.argv[1]
 		# initialize pygame and create a space to contain the simulation
@@ -70,13 +77,17 @@ def main():
 		pygame.display.quit()
 		sys.exit()
 
+	# Print main menu options to user otherwise and record choice
 	helper.printHeader()
 	choice = raw_input()
-	# display simulation options
+	
+	# If user chooses, display simulation menu options
 	if choice == '1':
+		# Print simulation menu options and record choice
 		helper.printOptions()
 		choice = raw_input()
 		
+		# While the user does not decide to exit the program
 		while (choice != '0'):
 			# initialize pygame and create a space to contain the simulation
 			pygame.init()
@@ -87,24 +98,30 @@ def main():
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
 			menu_actions[choice](space, screen, drawOptions)
 			
+			# Quit the pygame instance and pygame display
 			pygame.quit()
 			pygame.display.quit()
+
+			# Inform user to make a second choice and record it
 			print("Please choose a simulation or [0] to exit:")
 			choice = raw_input()
-			
+		
+		# User has chosen to exit program. Say bye and exit system
 		print("Goodbye")
 		sys.exit()
 		
-	# display guess options
+	# If user chooses, display guess menu options
 	if choice == '2':
+		# Print simulation menu options and record choice
 		helper.printOptions()
 		choice = raw_input()
 		
+		# While the user does not decide to exit the program
 		while (choice != '0'):
-			# create a space to contain the simulation
+			# Create a pymunk space instance to contain the simulation
 			space = pymunk.Space()
 
-			# each choice executes an enumeration over a fixed interval of guess
+			# Each choice executes an enumeration over a fixed interval of guess
 			# impulses for each sim
 			if (choice == '1'):
 				infer.enum(simulations.shortDistance, 100, 300)
@@ -136,11 +153,16 @@ def main():
 				infer.enum(simulations.pushFireball, 175, 375)
 			else:
 				print("Must be an integer [0-14]")
+			
+			# Quit the pygame instance and pygame display
 			pygame.quit()
 			pygame.display.quit()
+
+			# Inform user to make a second choice and record it
 			print("Please choose a simulation or [0] to exit:")
 			choice = raw_input()
-			
+		
+		# User has chosen to exit program. Say bye and exit system
 		print("Goodbye")
 		sys.exit()
 		

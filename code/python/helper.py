@@ -6,8 +6,10 @@ Felix Sosa
 June 27, 2017
 '''
 import pygame
+import numpy as np
+#import main
 
-# sprites
+# Sprites used in simulations
 BACKGROUND_S = pygame.image.load("Sprites/sand.jpg")
 BACKGROUND_G = pygame.image.load("Sprites/grass.jpg")
 fireSprite = pygame.image.load("Sprites/firea.png")
@@ -15,6 +17,9 @@ patientSprite = pygame.image.load("Sprites/Patient.png")
 agentSprite = pygame.image.load("Sprites/Agent.png")
 
 def printHeader():
+	'''
+	Prints main menu header
+	'''
 	print("=================================================")
 	print("1. Show Simulations")
 	print("2. Run Guesses")
@@ -24,7 +29,7 @@ def printHeader():
 	
 def printOptions():
 	'''
-	Prints simulation options to user.
+	Prints simulation menu options to user.
 	'''
 	print("=================================================")
 	print("-----AVAILABLE EXPERIMENT 1 SIMS-----")
@@ -113,4 +118,13 @@ def wait(screen, space, options, cylinder, ball, cone):
 			pygame.display.flip()
 
 def snapshot(screen, counter):
+	'''
+	Takes a snapshot of a given frame in a pygame instance
+	'''
 	pygame.image.save(screen, "image"+str(counter)+".png")
+
+def sample_trajectory():
+	# Sample from normal distribution
+	mu = 0
+	sigma = 0.05
+	return np.random.normal(mu, sigma)
