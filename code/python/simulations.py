@@ -35,15 +35,15 @@ ani.sort()
 
 def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Agent pushes Patient into Fireball from a short distance away.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 1: Short Distance v1")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -186,15 +186,15 @@ def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING
 
 def medium_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a medium distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
+	Agent pushes Patient into Fireball from a medium distance away.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 2: Medium Distance")
+		pygame.display.set_caption("Medium Distance v1")
 
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -333,15 +333,15 @@ def medium_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 def long_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
+	Agent pushes Patient into Fireball from a long distance away.
+	
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 3: Long Distance")
+		pygame.display.set_caption("Simulation 3: Long Distance v1")
 
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -481,14 +481,14 @@ def long_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 
 def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cone bouncing off of a static Cylinder into a Fireball.
-	Originally to be compared with shortDistance in Moral Kinematics.
+	Patient bounces off of Agent and then falls into a Fireball.
+	
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	if (not guess):
-		pygame.display.set_caption("Simulation 4: Static Cylinder")
+		pygame.display.set_caption("Simulation 4: Static")
 
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
@@ -638,12 +638,14 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 def slow_collision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 	'''
-	Simulation of Cone travelling slower after being hit by Cylinder.
+	Patient gets hit by Agent and then runs slower than before being hit.
+
+	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	if(not guess):
-		pygame.display.set_caption("Simulation 7: Slow Collision Cylinder")
+		pygame.display.set_caption("Simulation 5: Slow Collision")
 
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
@@ -789,12 +791,14 @@ def slow_collision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 
 def fast_collision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cone travelling faster after being hit by Cylinder.
+	Patient gets hit by Agent and then runs faster than before being hit.
+
+	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	if(not guess):
-		pygame.display.set_caption("Simulation 8: Fast Collision Cylinder")
+		pygame.display.set_caption("Simulation 6: Fast Collision")
 
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
@@ -936,7 +940,8 @@ def fast_collision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder dodging Cone as it runs into Fireball.
+	Agent dodges Patient as Patient runs towards Fireball.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
@@ -944,7 +949,7 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	1. See if there's a better way to deal with the time variable
 	'''
 	if(not guess):
-		pygame.display.set_caption("Simulation 9: Dodging Cylinder")
+		pygame.display.set_caption("Simulation 7: Dodge")
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
 	ch0.data["surface"] = screen
@@ -1087,13 +1092,14 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 def double_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder tapping Cone twice into Fireball.
+	Agent pushes Patient twice into Fireball.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	if(not guess):
-		pygame.display.set_caption("Simulation 10: Double Touch")
+		pygame.display.set_caption("Simulation 8: Double Push")
 
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
@@ -1240,8 +1246,8 @@ def double_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 def medium_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball over a medium distance
-	before letting go.
+	Agent pushes Patient into Fireball over a medium distance into Fireball.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
@@ -1249,7 +1255,7 @@ def medium_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	1. Make pushing not time dependent but distance dependent
 	'''
 	if(not guess):
-		pygame.display.set_caption("Simulation 11: Medium Push Cylinder")
+		pygame.display.set_caption("Simulation 9: Medium Push")
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
 	ch0.data["surface"] = screen
@@ -1388,14 +1394,14 @@ def medium_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 def long_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball over complete
-	distance.
+	Agent pushes Patient into Fireball over long distance into Fireball.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	if(not guess):
-		pygame.display.set_caption("Simulation 12: Long Push Cylinder")
+		pygame.display.set_caption("Simulation 10: Long Push")
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0,2)
 	ch0.data["surface"] = screen
@@ -1532,13 +1538,14 @@ def long_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 def push_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Fireball into Cone.
+	Agent pushes Fireball into Patient.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	if(not guess):
-		pygame.display.set_caption("Simulation 14: Push Fireball")
+		pygame.display.set_caption("Push Fireball")
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -1679,15 +1686,15 @@ def push_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 def medium_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Agent pushes Patient into Fireball from a medium distance away.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Sim 1")
+		pygame.display.set_caption("Simulation 2: Medium Distance v2")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -1830,15 +1837,15 @@ def medium_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 def long_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Agent pushes Patient into Fireball from a long distance away.
+	
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Sim 1")
+		pygame.display.set_caption("Long Distance v2")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -1981,15 +1988,15 @@ def long_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 
 def no_touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Agent watces Patient run into Fireball wihtout intervening.
+	
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Agent Push")
+		pygame.display.set_caption("Simulation 12: No Touch")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -2131,15 +2138,18 @@ def no_touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Fireball moving right from upper left corner. Patient moving left from lower 
+	right corner. Agent rests in lower middle of screen. 
+	Agent pushes moving Patient into moving Fireball when Patient
+	comes in proximity of Agent.
+	
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 13: Victim Moving, Harm Moving")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -2286,15 +2296,18 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 
 def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Fireball rests in upper left of screen. Patient moving left from lower 
+	right corner. Agent rests in lower middle of screen. 
+	Agent pushes moving Patient into resting Fireball when Patient
+	comes in proximity of Agent.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 14: Victim Moving, Harm Static")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -2438,15 +2451,18 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 
 def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Fireball moving left from upper right corner. Patient rests in front of Agent in
+	lower middle of screen. Agent rests behind Patient in lower middle of screen. 
+	Agent pushes resting Patient into moving Fireball when Fireball
+	comes in proximity of Patient.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 15: Victim Static, Harm Moving")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -2590,15 +2606,17 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 
 def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Agent rests on left side of screen. Fireball rests on right side of screen.
+	Patient rests in between Agent and Fireball. 
+	Agent pushes resting Patient into resting Fireball.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 16: Victim Static, Harm Static")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -2739,15 +2757,18 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 
 def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Patient moving left from upper right corner. Fireball rests in front of Agent in
+	lower middle of screen. Agent rests behind Fireball in lower middle of screen. 
+	Agent pushes resting Fireball into moving Patient when Patient comes in proximity 
+	of Patient.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 19: Harm Static, Victim Moving")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -2891,15 +2912,17 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Agent rests on left side of screen. Patient rests on right side of screen.
+	Fireball rests in between Agent and Patient. 
+	Agent pushes resting Fireball into resting Patient.
+
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 20: Harm Static, Victim Static")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -3040,15 +3063,18 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Patient rests in upper left of screen. Fireball moving left from lower 
+	right corner. Agent rests in lower middle of screen. 
+	Agent pushes moving Fireball into resting Patient when Fireball
+	comes in proximity of Agent.
+	
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 18: Harm Moving, Victim Static")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -3192,15 +3218,18 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
-	Simulation of Cylinder pushing Cone into Fireball from a short distance
-	away. Originally to be compared with longDistanceSim in Moral Kinematics.
+	Patient moving right from upper left corner. Fireball moving left from lower 
+	right corner. Agent rests in lower middle of screen. 
+	Agent pushes moving Fireball into moving Patient when Fireball
+	comes in proximity of Agent.
+	
 	space -- pymunk simulation space
 	screen -- pygame display Surface
 	options -- draw options for pymunk space
 	'''
 	# if it's a truth sim, we use a display
 	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
+		pygame.display.set_caption("Simulation 17: Harm Moving, Victim Moving")
 	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
@@ -3348,10 +3377,6 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 # Instruction simulations for experiments on mTurk
 
 def patient_walks_to_fireball(space, screen, options, guess=False, impulse=AGENT_WALKING):
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
-	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -3454,10 +3479,6 @@ def patient_walks_to_fireball(space, screen, options, guess=False, impulse=AGENT
 		print "Exited before collision."
 
 def agent_walks_to_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
-	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -3531,10 +3552,6 @@ def agent_walks_to_fireball(space, screen, options, guess=False, impulse=AGENT_R
 		print "Exited before collision."
 
 def fireball_moving(space, screen, options, guess=False, impulse=AGENT_WALKING):
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
-	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -3606,10 +3623,6 @@ def fireball_moving(space, screen, options, guess=False, impulse=AGENT_WALKING):
 		print "Exited before collision."
 
 def agent_saves_patient(space, screen, options, guess=False, impulse=AGENT_WALKING):
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 1: Short Distance")
-	
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -3744,13 +3757,6 @@ def agent_saves_patient(space, screen, options, guess=False, impulse=AGENT_WALKI
 # Dynamics simulations
 
 def sim_1_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	F <-- P <-- A
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Sim 1 Patient")
-
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -3887,17 +3893,6 @@ def sim_1_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		xImpsFireball, yImpsFireball)
 
 def sim_1_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 3: Long Distance")
-
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -4034,17 +4029,6 @@ def sim_1_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		xImpsFireball, yImpsFireball)
 
 def sim_2_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 3: Long Distance")
-
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -4181,17 +4165,6 @@ def sim_2_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		xImpsFireball, yImpsFireball)
 
 def sim_2_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 3: Long Distance")
-
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -4328,17 +4301,6 @@ def sim_2_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		xImpsFireball, yImpsFireball)
 
 def sim_3_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 3: Long Distance")
-
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -4475,17 +4437,6 @@ def sim_3_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		xImpsFireball, yImpsFireball)
 
 def sim_3_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 3: Long Distance")
-
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -4622,17 +4573,6 @@ def sim_3_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		xImpsFireball, yImpsFireball)
 
 def sim_4_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 3: Long Distance")
-
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -4771,17 +4711,6 @@ def sim_4_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		xImpsFireball, yImpsFireball)
 
 def sim_4_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Simulation of Cylinder pushing Cone into Fireball from a long distance
-	away. Originally to be compared with shortDistanceSim in Moral Kinematics.
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Simulation 3: Long Distance")
-
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
