@@ -20,6 +20,7 @@ import infer
 import sim
 import helper
 
+# Available simulations
 menu_actions = {
 	'1' : simulations.short_distance_v1,
 	'2' : simulations.medium_distance_v2,
