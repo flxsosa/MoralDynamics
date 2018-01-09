@@ -48,11 +48,14 @@ counterfactual_menu_actions = {
 	'27' : counterfactual.sim_4_patient,
 	'28' : counterfactual.sim_4_fireball
 }
+# Whether you want to write to file or not
+store = False
 
 def main():
-	# File for counterfactual results
-	file_results = open("counterfactual_results.txt", "w")
-	file_results.write("Simulation \t\t Whether-Dependence of Agent\n")
+	if store:
+		# File for counterfactual results
+		file_results = open("counterfactual_results.txt", "w")
+		file_results.write("Simulation \t\t Whether-Dependence of Agent\n")
 
 	# Input variable to make it work
 	ALL = "ALL"
@@ -95,7 +98,8 @@ def main():
 			
 			# Print results to user
 			print "Number of different outcomes was {0} out of {1}".format(k, n)
-			file_results.write("{0} \t {1}\n".format(counterfactual_menu_actions[sim].__name__, ((k*1.0)/n)))
+			if store:
+				file_results.write("{0} \t {1}\n".format(counterfactual_menu_actions[sim].__name__, ((k*1.0)/n)))
 
 		
 	else:
@@ -130,7 +134,8 @@ def main():
 			
 			# Print results to user
 			print "Number of different outcomes was {0} out of {1}".format(k, n)
-			file_results.write("{0} \t {1}".format(counterfactual_menu_actions[sim].__name__, k*1.0/n*100))
+			if store:
+				file_results.write("{0} \t {1}".format(counterfactual_menu_actions[sim].__name__, k*1.0/n*100))
 			# Inform user to make a second choice and record it
 			print("Please choose a simulation or [0] to exit:")
 			choice = input()
@@ -138,7 +143,8 @@ def main():
 	# User has chosen to exit program. Say bye and exit system
 	print("Goodbye")
 	sys.exit()
-	file_results.close()
+	if store:
+		file_results.close()
 
 if __name__ == '__main__':
 	sys.exit(main())
