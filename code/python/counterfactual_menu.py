@@ -53,7 +53,7 @@ store = True
 def main():
 	if store:
 		# File for counterfactual results
-		results_csv = open('results_csv.csv','w')
+		results_csv = open('causality.csv','w')
 
 	# Input variable to make it work
 	ALL = "ALL"
