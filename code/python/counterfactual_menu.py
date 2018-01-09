@@ -13,9 +13,8 @@ from pygame.locals import *
 import sys
 import simulations
 import counterfactual
-import infer
-import sim
 import helper
+import csv
 
 # Available counterfactuals
 counterfactual_menu_actions = {
@@ -49,13 +48,12 @@ counterfactual_menu_actions = {
 	'28' : counterfactual.sim_4_fireball
 }
 # Whether you want to write to file or not
-store = False
+store = True
 
 def main():
 	if store:
 		# File for counterfactual results
-		file_results = open("counterfactual_results.txt", "w")
-		file_results.write("Simulation \t\t Whether-Dependence of Agent\n")
+		results_csv = open('results_csv.csv','w')
 
 	# Input variable to make it work
 	ALL = "ALL"
@@ -69,7 +67,10 @@ def main():
 	if (choice[0] == "ALL"):
 		# Number of counterfactual simulations user wants to run
 		n = choice[1]
-		
+
+		# Dictionary for counterfactual results
+		results_dict = {}
+
 		# While the user does not decide to exit the program
 		for sim in counterfactual_menu_actions.keys():
 			# Number of times a different outcome occurred versus the factual outcome
@@ -86,10 +87,10 @@ def main():
 				drawOptions = pymunk.pygame_util.DrawOptions(screen)
 				
 				# Record whether counterfactual resulted in different outcome from factual simulation
-				boolean = counterfactual_menu_actions[sim](space, screen, drawOptions, True)
+				different_outcome = not(counterfactual_menu_actions[sim](space, screen, drawOptions, True))
 				
 				# If it did (False), increment k, otherwise (True) do not
-				if not boolean:
+				if different_outcome:
 					k += 1
 				
 				# Quit the pygame instance and pygame display
@@ -97,10 +98,9 @@ def main():
 				pygame.display.quit()
 			
 			# Print results to user
-			print "Number of different outcomes was {0} out of {1}".format(k, n)
+			print "Number of different outcomes for simulation {0} was {1} out of {2}".format(sim, k, n)
 			if store:
-				file_results.write("{0} \t {1}\n".format(counterfactual_menu_actions[sim].__name__, ((k*1.0)/n)))
-
+				results_dict[sim] = (k*1.0)/n
 		
 	else:
 		# While the user does not decide to exit the program
@@ -142,9 +142,22 @@ def main():
 	
 	# User has chosen to exit program. Say bye and exit system
 	print("Goodbye")
-	sys.exit()
 	if store:
-		file_results.close()
+		# Sort the keys for the counterfactual dictionary
+		keys = counterfactual_menu_actions.keys()
+		keys.sort(key=int)
+		
+		# Create a csv writer
+		writer = csv.DictWriter(results_csv, fieldnames = ['sim', 'prob'])
+		
+		# Write the results dictionary to a csv file
+		for k in keys:
+			writer.writerow({'sim':k,'prob':results_dict[k]})
+		
+		# Close the csv file
+		results_csv.close()
+	
+	sys.exit()
 
 if __name__ == '__main__':
 	sys.exit(main())
