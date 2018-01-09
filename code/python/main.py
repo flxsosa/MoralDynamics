@@ -5,11 +5,6 @@ March 31, 2017
 Felix Sosa
 '''
 
-'''
-Main file for Moral Dynamics project.
-
-Felix Sosa
-'''
 import pymunk
 import pygame
 import pymunk.pygame_util
@@ -86,8 +81,7 @@ counterfactual_menu_actions = {
 	'25' : counterfactual.sim_3_patient,
 	'26' : counterfactual.sim_3_fireball,
 	'27' : counterfactual.sim_4_patient,
-	'28' : counterfactual.sim_4_fireball,
-	'c' : counterfactual.counterfactual_short_distance
+	'28' : counterfactual.sim_4_fireball
 }
 
 def main():
