@@ -95,7 +95,7 @@ def main():
 			
 			# Print results to user
 			print "Number of different outcomes was {0} out of {1}".format(k, n)
-			file_results.write("{0} \t {1}\n".format(counterfactual_menu_actions[sim].__name__, ((k*1.0)/n))
+			file_results.write("{0} \t {1}\n".format(counterfactual_menu_actions[sim].__name__, ((k*1.0)/n)))
 
 		
 	else:
