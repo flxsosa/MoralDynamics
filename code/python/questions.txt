@@ -1,0 +1,31 @@
+1. In the Double Push counterfactual, should we consider two critical points?
+1.a If not, which point should be the critical point - the first or second push?
+
+2. How long should the counterfactual simulation, the ticks after the crticial point, run for?
+
+3. For the No Touch simulation, there is no point of collision. Should the counterfactual simply remove the the Agent?
+3.a Is there a need to apply noise to the velocity of the Fireball?
+3.a.1 If so, when and why?
+
+4. For the Dynamics Simulation 4 (both Patient and Fireball), what should we consider the critical point?
+
+5. Should noise be applied to the Fireball?
+
+6. Should we not simulate how-dependence?
+6.a Look at simulations 21,22,25,26
+
+Notes:
+
+- Blender
+- CSM
+- Stimuli from Leyla (question about effort and animations)
+- Creating 'calibration scenarios' and rerunning experiments
+- New GitHub branch at time of submission with Singularity container for reproducibility 
+- 
+
+Notes from meeting:
+- Exp 1 replicates Moral Kinematics as close as possible
+- Exp 2 adds on with good 
+
+
+- Rerun our experiments with Blender videos

@@ -15,6 +15,7 @@ import counterfactual
 import infer
 import sim
 import helper
+import convert_to_blender
 
 # Available simulations
 simulation_menu_actions = {
@@ -154,6 +155,33 @@ def main():
 			screen = pygame.display.set_mode((1000,600))	
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
 			counterfactual_menu_actions[choice](space, screen, drawOptions)
+			
+			# Quit the pygame instance and pygame display
+			pygame.quit()
+			pygame.display.quit()
+
+			# Inform user to make a second choice and record it
+			print("Please choose a simulation or [0] to exit:")
+			choice = raw_input()
+		
+		# User has chosen to exit program. Say bye and exit system
+		print("Goodbye")
+		sys.exit()
+
+	# If user chooses, display counterfactual menu options
+	if choice == '3':
+		choice = raw_input()
+		
+		# While the user does not decide to exit the program
+		while (choice != '0'):
+			# initialize pygame and create a space to contain the simulation
+			pygame.init()
+			space = pymunk.Space()
+
+			# create a screen of 600x600 pixels
+			screen = pygame.display.set_mode((1000,600))	
+			drawOptions = pymunk.pygame_util.DrawOptions(screen)
+			convert_to_blender.long_distance_v1(space, screen, drawOptions)
 			
 			# Quit the pygame instance and pygame display
 			pygame.quit()

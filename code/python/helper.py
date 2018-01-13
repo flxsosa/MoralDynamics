@@ -128,3 +128,57 @@ def sample_trajectory():
 	mu = 0
 	sigma = 0.05
 	return np.random.normal(mu, sigma)
+
+import json
+
+def serialize(c, data, filename='../example/test.json'):
+
+	# dictionary of objects, each object has a list of dictionaries the length
+	# of the number of frames, each dictionary has properties for that frame
+
+	total_len = len(data['spaces'])
+
+	objects = data['spaces'][0].bodies
+
+	obj_data = {get_name(ob): [{} for _ in range(total_len)] for ob in objects}
+
+	for n, frame in enumerate(data['spaces']):
+		for ob in frame.bodies:
+
+			ob_name = get_name(ob)
+
+			obj_data[ob_name][n]['x'] = ob.position.x
+			obj_data[ob_name][n]['y'] = ob.position.y
+
+
+	container = {'config': c, 'data': obj_data}
+
+	with open(filename, 'w') as f:
+		json.dump(container, f, indent=2)
+
+def get_name(ob):
+
+	shape = ob.shapes.pop()
+	return inverse_shape_code[shape.collision_type]
+
+def get_position(ob_name, space):
+	# we have to encode object identity in it's collision type, so to extract
+	# it we need to check each object's type
+	for ob in space.bodies:
+
+		shape = ob.shapes.pop()
+
+		# comparison must be == and not 'is'
+		if shape.collision_type == shape_code[ob_name]:
+			return ob.position
+
+def get_velocity(ob_name, space):
+	# we have to encode object identity in it's collision type, so to extract
+	# it we need to check each object's type
+	for ob in space.bodies:
+
+		shape = ob.shapes.pop()
+
+		# comparison must be == and not 'is'
+		if shape.collision_type == shape_code[ob_name]:
+			return ob.velocity

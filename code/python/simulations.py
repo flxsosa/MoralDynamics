@@ -176,6 +176,7 @@ def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING
 		clock.tick(50)
 		#helper.snapshot(screen, tick)
 		tick+=1
+	
 	# remove value from collision list
 	try:
 		handlers.collision = []
