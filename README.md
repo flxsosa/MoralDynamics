@@ -1,52 +1,23 @@
 # Moral Dynamics
-This repo contains all the necessary code to reproduce the Moral Dynamics project. The project is headed by Felix Sosa, Tobias Gerstenberg, Tomer Ullman, Josh Tenenbaum, and Sam Gershman.
+This repo contains the Moral Dynamics project. 
 
-## Getting Started 
-### Running Simulations Locally
-From the terminal run:
-```bash
-$ git clone http://github.com/flxsosa/MoralDynamics
-$ cd MoralDynamics/code/python
-$ python main.py
-```
-Then simply follow the terminal prompt from there!
+The project is headed by Felix Sosa, Tobias Gerstenberg, Tomer Ullman, Josh Tenenbaum, and Sam Gershman.
 
-### Running MTurk Experiments Using Psiturk
-From the terminal run:
-```bash
-$ git clone http://github.com/flxsosa/MoralDynamics
-$ cd MoralDynamics/code/javascript/experiment_of_your_choice
-$ psiturk
-[psiturk]$ server on
-[psiturk]$ debug
-```
-Then simply follow the webpage prompt from there!
+## Overview 
+### /blender
+Directory contains the blender file 'convert.blend' which takes in jsons and outputs rendered blender simulations.
 
-## Simulation [Python] Overview 
-### main.py
-Serves as entry point. Contains functions for displaying terminal menu of possible simulations to choose from.
+### /python
+Directory contains python scripts to support the Moral Dynamics model.
 
-### simulations.py
-Contains each simulation. Currently, each simulation is a function that is called on. Due to repetiive structure, this will be turned into a class in the future. Each simulation will be an instance of that class.
+### /javascript
+Directory contains javascript, html, and css files for the online MTurk experiments involved in Moral Dynamics.
 
-### infer.py
-[Deprecated - to be replaced] Contains functions for inferring physical effort values exerted by an Agent given a simulation.
+### /shell
+Directory contains multiple shell scripts for the conversion of rendered images output by the physics engines in Moral Dynamics into videos of arbitrary type.
 
-### graph.py
-[Refactoring - in the process of refactoring] Contains functions for collecting and plotting simulation data, given a set of simulations.
+### /R
+Directory contains R scripts used for statistical analyses used in Moral Dynamics.
 
-### sim.py
-[Deprecated - to be replaced] Contains each simulation needed for graph.py.
-
-### helper.py
-Contains helper functions for simulations.py, main.py, and graph.py.
-
-### handlers.py
-Contains Pymunk collision handlers for simulations.py.
-
-### agents.py
-Contains classes for each body in each simulation (Agent, Patient, Fireball).
-
-## Experiment [Javascript] Overview 
-### Experiment 1
-### Experiment 2
+### /om
+Directory contains necesarry scripts to submit and run render jobs on OpenMind.
