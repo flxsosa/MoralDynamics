@@ -169,6 +169,7 @@ var TestPhase = function() {
 		if (that.init_trial()) {
 			// Load and show video
 			video_name = that.trialinfo.name,
+			$('#choices').hide();
 			$("#video_mp4").attr("src", '/static/videos/mp4/' + video_name + '.mp4');
 			$("#video_webm").attr("src", '/static/videos/webm/' + video_name + '.webm');
 			$("#video_ogg").attr("src", '/static/videos/ogv/' + video_name + '.ogv');
@@ -193,44 +194,19 @@ var TestPhase = function() {
 
 			// Create html and build sliders
 			var func = function(){
-				// Create the HTML for the question and slider.
-				var html = "";
-				for (var i = 0; i < $c.questions.length; i++) {
-					// Add in the questions from list in stim.json
-					var q = $c.questions[i].q;
-					html += '<p class=".question">' + q + '</p><div class="s-' + i + '"></div><div class="l-' + i + '"></div><br />';
-				}
-				$('#choices').html(html);
-	 
-				// Bulid the sliders for each question
-				for (var i = 0; i < 1; i++) {
-					// Create the sliders
-					$('.s-' + i).slider().on("slidestart", function(event, ui) {
-						// Show the handle
-						$(this).find('.ui-slider-handle').show();
-	 
-						// Sum is the number of sliders that have been clicked
-						var sum = 0;
-						for (var j = 0; j < $c.questions.length; j++) {
-							if ($('.s-' + j).find('.ui-slider-handle').is(":visible")) {
-								sum++;
-							}
-						}
-						// If the number of sliders clicked is equal to the number of sliders
-						// the user can continue. 
-						if (sum == $c.questions.length) {
-							$('#trial_next').prop('disabled', false);
-						}
-					});
-	 
-					// Put labels on the sliders
-					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
-					$('.l-' + i).append("<label style='width: 33%'</label>");
-					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[1] + "</label>");
-				}
-	 
-				// Hide all the slider handles 
-				$('.ui-slider-handle').hide();
+				$('#choices').show();
+				//checks whether all questions were answered
+				$('.demoQ').change(function() {
+					if ($('input[name=q1]:checked').length > 0)
+					{
+						// If so, able to submit answers
+						$('#trial_next').prop('disabled', false);
+					} 
+					else {
+						// Else, not
+						$('#trial_next').prop('disabled', true);
+					}
+				});
 			}
 
 			// Disable button which will be enabled once the sliders are clicked
@@ -252,7 +228,8 @@ var TestPhase = function() {
 			});
 
 			// Remove slider after each trial
-			$('#choices').html("");
+			$('input[name=q1]').attr('checked',false);
+			$('#choices').hide();
 		}
 	};
 
@@ -453,7 +430,7 @@ $(document).ready(function() {
 
 	// Start the experiment
 	STATE = new State();
-	CURRENTVIEW = new Instructions()
+	// CURRENTVIEW = new Instructions()
 	// CURRENTVIEW = new Questions()
-	// CURRENTVIEW = new TestPhase()
+	CURRENTVIEW = new TestPhase()
 });

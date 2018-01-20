@@ -3284,7 +3284,7 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
 		pBall = (ball.body.position[0]-30,ball.body.position[1]-30)
-		pCone = (cone.body.position[0]-30,cone.body.position[1]-30)
+		pCone = (cone.body.position[0]-30,cone.body.position[1]-25)
 		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
 		#helper.snapshot(screen, tick)
 		tick+=1

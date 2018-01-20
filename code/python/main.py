@@ -16,6 +16,7 @@ import infer
 import sim
 import helper
 import convert_to_blender
+import placeholder
 
 # Available simulations
 simulation_menu_actions = {
@@ -85,6 +86,41 @@ counterfactual_menu_actions = {
 	'28' : counterfactual.sim_4_fireball
 }
 
+convert_to_blender_menu_actions = {
+	'1' : convert_to_blender.short_distance_v1,
+	'2' : convert_to_blender.medium_distance_v2,
+	'3' : convert_to_blender.long_distance_v1,
+	'4' : convert_to_blender.static,
+	'5' : convert_to_blender.slow_collision,
+	'6' : convert_to_blender.fast_collision,
+	'7' : convert_to_blender.dodge,
+	'8' : convert_to_blender.double_push,
+	'9' : convert_to_blender.medium_push,
+	'10' : convert_to_blender.long_push,
+	'11' : convert_to_blender.victim_moving_static,
+	'12' : convert_to_blender.no_touch,
+	'13' : convert_to_blender.victim_moving_moving,
+	'14' : convert_to_blender.victim_moving_static,
+	'15' : convert_to_blender.victim_static_moving,
+	'16' : convert_to_blender.victim_static_static,
+	'17' : convert_to_blender.harm_moving_moving,
+	'18' : convert_to_blender.harm_moving_static,
+	'19' : convert_to_blender.harm_static_moving,
+	'20' : convert_to_blender.harm_static_static,
+	'21' : convert_to_blender.sim_1_patient,
+	'22' : convert_to_blender.sim_1_fireball,
+	'23' : convert_to_blender.sim_2_patient,
+	'24' : convert_to_blender.sim_2_fireball,
+	'25' : convert_to_blender.sim_3_patient,
+	'26' : convert_to_blender.sim_3_fireball,
+	'27' : convert_to_blender.sim_4_patient,
+	'28' : convert_to_blender.sim_4_fireball,
+	'29' : convert_to_blender.agent_walks_to_fireball,
+	'30' : convert_to_blender.patient_walks_to_fireball,
+	'31' : convert_to_blender.fireball_moving,
+	'32' : convert_to_blender.agent_saves_patient
+}
+
 def main():
 	'''
 	Entry point
@@ -100,7 +136,8 @@ def main():
 		# create a screen of 600x600 pixels
 		screen = pygame.display.set_mode((1000,600))	
 		drawOptions = pymunk.pygame_util.DrawOptions(screen)
-		simulation_menu_actions[choice](space, screen, drawOptions)
+		# In converting to blender we don't want the pygame display to show
+		convert_to_blender_menu_actions[choice](space, None, None)
 
 		pygame.quit()
 		pygame.display.quit()
@@ -182,6 +219,35 @@ def main():
 			screen = pygame.display.set_mode((1000,600))	
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
 			convert_to_blender.long_distance_v1(space, screen, drawOptions)
+			
+			# Quit the pygame instance and pygame display
+			pygame.quit()
+			pygame.display.quit()
+
+			# Inform user to make a second choice and record it
+			print("Please choose a simulation or [0] to exit:")
+			choice = raw_input()
+		
+		# User has chosen to exit program. Say bye and exit system
+		print("Goodbye")
+		sys.exit()
+
+	# If user chooses, display simulation menu options
+	if choice == '4':
+		# Print simulation menu options and record choice
+		helper.printOptions()
+		choice = raw_input()
+		
+		# While the user does not decide to exit the program
+		while (choice != '0'):
+			# initialize pygame and create a space to contain the simulation
+			pygame.init()
+			space = pymunk.Space()
+
+			# create a screen of 600x600 pixels
+			screen = pygame.display.set_mode((1000,600))	
+			drawOptions = pymunk.pygame_util.DrawOptions(screen)
+			convert_to_blender_menu_actions[choice](space, screen, drawOptions)
 			
 			# Quit the pygame instance and pygame display
 			pygame.quit()
