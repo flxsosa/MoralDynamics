@@ -9,7 +9,7 @@ library(tidyverse)
 
 # EXP1: Read in and structure data ------------------------------------------------------------------
 # con = dbConnect(SQLite(),dbname = "../javascript/experiment_1/participants.db");
-con = dbConnect(SQLite(),dbname = "experiment1.db");
+con = dbConnect(SQLite(),dbname = "../../data/experiment1.db");
 df.data = dbReadTable(con,"moral_dynamics")
 dbDisconnect(con)
 
@@ -30,7 +30,7 @@ df.demographics = df.data$datastring %>%
   mutate(time = difftime(df.data$endhit,df.data$beginhit,units = 'mins'))
 
 # trial data 
-df.long = df.data$datastring %>%
+df.long = df.data$datastring %>% 
   as.tbl_json() %>% 
   spread_values(participant = jstring('workerId')) %>%
   enter_object('data') %>%
@@ -53,19 +53,24 @@ rmse = function(x,y){
   return(sqrt(mean((x-y)^2)))
 }
 
-df.predictions = read.csv("effort.csv",header=F) %>% 
-  setNames(c("clip","prediction"))
+df.predictions = read.csv("../../data/effort.csv",header=F) %>% 
+  setNames(c("clip","effort")) %>% 
+  left_join(read.csv("../../data/causality.csv",header=F) %>% 
+              setNames(c("clip","caused")))
+
 
 df.tmp = df.long %>% 
   left_join(df.predictions) %>% 
   group_by(clip) %>% 
   summarise(data = mean(rating),
-            effort = mean(prediction)) %>% 
+            effort = mean(effort),
+            caused = mean(caused)
+            ) %>% 
   mutate(data = data/100) %>% 
   mutate(moving = ifelse(clip %in% c(4,12),0,1),
          # caused = ifelse(clip %in% c(12,21,22,25,26),0,1)) %$%
-         # vector containing causality bit of Agent for each clip (0 is no cause, 1 is cause)
-         caused = ifelse(clip %in% c(4,12,21,22,25,26),0,1)) %>%
+         caused.alternative = ifelse(clip %in% c(4,12,21,22,25,26),0,1)
+         ) %>%
   mutate(prediction.effort.causality = glm(data~effort+caused,data=.,family=binomial(link='logit'))$fitted.values,
          prediction.effort = glm(data~effort,data=.,family=binomial(link='logit'))$fitted.values)
 
@@ -106,8 +111,16 @@ df.long %>%
   # ggsave("../../figures/plots/mean_judgments_predictions.png",width=12,height=4)
   # ggsave("../../figures/plots/mean_judgments_predictions.svg",width=12,height=4)
 
-# EXP2: Read in and structure data ------------------------------------------------------------------
 
+
+
+
+
+
+
+  
+
+# EXP2: Read in and structure data ------------------------------------------------------------------
 # con = dbConnect(SQLite(),dbname = "../javascript/experiment_1/participants.db");
 con = dbConnect(SQLite(),dbname = "../../data/experiment2.db");
 df.data = dbReadTable(con,"moral_dynamics")
