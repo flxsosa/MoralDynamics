@@ -172,60 +172,51 @@ var TestPhase = function() {
 		// Create html and build sliders
 		
 		if (that.init_trial()) {
-			$('#choices').hide();
+			// Create the sliders
+			var html = "";
+			// Add in the questions from list in stim.json
+			var q = $c.questions[0].q;
+			html += '<p class=".question">' + q + '</p><div class="s-' + 0 + '" id="z"></div><div class="l-' + 0 + '" id="c"></div><br />'
+			//html += '<p class=".question">' + q + '</p><input class="trialQ" name="A" type="radio" value="A"><b>A</b><input class="trialQ" name="A" type="radio" value="B"><b>B</b><br/>';
+			$('#choices').html(html);
 			$('#c').html("");
 			$('#z').html("");
-			// Create html and build sliders
-			var func = function(){
+			$('#choices').hide();
+
+			var func = function() {
 				$('#c').html("");
-				$('#choices').show();
-				//checks whether all questions were answered
-				$('.demoQ').change(function() {
-					if ($('input[name=q1]:checked').length > 0)
-					{
-						// If so, able to submit answers
-						$('#trial_next.next').prop('disabled', false);
-					} 
-					else {
-						// Else, not
-						$('#trial_next.next').prop('disabled', true);
-					}
-				});
+				// Bulid the sliders for each question
+				for (var i = 0; i < 1; i++) {
+					// Create the sliders
+					$('.s-' + i).slider().on("slidestart", function(event, ui) {
+						// Show the handle
+						$(this).find('.ui-slider-handle').show();
+	 
+						// Sum is the number of sliders that have been clicked
+						var sum = 0;
+						for (var j = 0; j < $c.questions.length; j++) {
+							if ($('.s-' + j).find('.ui-slider-handle').is(":visible")) {
+								sum++;
+							}
+						}
+						// If the number of sliders clicked is equal to the number of sliders
+						// the user can continue. 
+						if (sum == $c.questions.length) {
+							$('#trial_next.next').prop('disabled', false);
+							$('#trial_next.next').show();
+						}
+					});
+	 
+					// Put labels on the sliders
+					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
+					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[2] + "</label>");
+					$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[1] + "</label>");
+				}
+				// Hide all the slider handles 
+				$('.ui-slider-handle').hide();
 			}
-			// var func = function() {
-			// 	$('#c').html("");
-			// 	// Bulid the sliders for each question
-			// 	for (var i = 0; i < 1; i++) {
-			// 		// Create the sliders
-			// 		$('.s-' + i).slider().on("slidestart", function(event, ui) {
-			// 			// Show the handle
-			// 			$(this).find('.ui-slider-handle').show();
-	 
-			// 			// Sum is the number of sliders that have been clicked
-			// 			var sum = 0;
-			// 			for (var j = 0; j < $c.questions.length; j++) {
-			// 				if ($('.s-' + j).find('.ui-slider-handle').is(":visible")) {
-			// 					sum++;
-			// 				}
-			// 			}
-			// 			// If the number of sliders clicked is equal to the number of sliders
-			// 			// the user can continue. 
-			// 			if (sum == $c.questions.length) {
-			// 				$('#trial_next.next').prop('disabled', false);
-			// 				$('#trial_next.next').show();
-			// 			}
-			// 		});
-	 
-			// 		// Put labels on the sliders
-			// 		$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
-			// 		$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[2] + "</label>");
-			// 		$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[1] + "</label>");
-			// 	}
-			// 	// Hide all the slider handles 
-			// 	$('.ui-slider-handle').hide();
-			// }
 			$('#trial_next.next').hide();
-			$('.checkboxgroup').click(function() {
+			$('.trialQ').click(function() {
 				$('#trial_next.next').prop('disabled', false);
 				$('#trial_next.next').show();
 			});
@@ -322,17 +313,15 @@ var TestPhase = function() {
 			},false);
 
 			// Enable play video button at first
-			$('#play').show();	
-			$('#choices').hide();
-			$('input[name=q1]').attr('checked',false);	
+			$('#play').show();		
 		}
 	};
 
 	// Record a response (this could be either just clicking "start",
 	// or actually a choice to the prompt(s))
 	this.record_response = function() {
-		response = $('input[name=q1]:checked').val();
-		// response = $('.s-0').slider('value');
+		//response = $('input[name=A]:checked').val();
+		response = $('.s-0').slider('value');
 		var data = {
 			clip: this.trialinfo.pair,
 			order: flip,
@@ -533,7 +522,7 @@ $(document).ready(function() {
 
 	// Start the experiment
 	STATE = new State();
- 	// CURRENTVIEW = new Instructions()
+ 	CURRENTVIEW = new Instructions()
 	// CURRENTVIEW = new Questions()
-	CURRENTVIEW = new TestPhase()
+	// CURRENTVIEW = new TestPhase()
 });

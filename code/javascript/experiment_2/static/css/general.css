@@ -49,17 +49,6 @@ button:active, .next:active {
     box-shadow: 0px 0px 3px;
 }
 
-/* Radio Buttons*/
-
-.checkboxgroup {
-  display: inline-block;
-  text-align: center;
-  padding: 15px;
-}
-.checkboxgroup label {
-  display: block;
-}
-
 /********************************************************************/
 /* Slide components                                                 */
 /********************************************************************/
@@ -132,12 +121,6 @@ div.video_container_right{
 div.choices_container{
  width: 900px;
  margin: auto;
-}
-
-div.choices_button_container{
- width: 1200px;
- margin: auto;
- background-color: #CEECF5;
 }
 
 .stim_video {
@@ -250,15 +233,7 @@ span.consent {
 #choices {
     text-align: center;
     /*margin: 0 auto;*/
-/*    width: 600px; */
-    padding: 10px;
-    margin:auto;
-}
-
-#button_choices {
-    text-align: center;
-    /*margin: 0 auto;*/
-/*    width: 600px;*/
+    width: 600px;
     /*padding: 10px;*/
     margin:auto;
 }
@@ -334,11 +309,11 @@ label{
   padding-top: 0.5cm;
 }
 label:first-child{
-  text-align:center;
+  text-align:left;
 }
 label:second-child{
   text-align:center;
 }
 label:last-child{
-  text-align:center;
+  text-align:right;
 }
