@@ -5,7 +5,7 @@ import os
 
 # Path to blend file. Contained in the git repo /git/MoralDynamics/om/
 blend = ff.join(ff.step(ff.absPath(__file__), -2), ff.join("./",
-	"convert_2d_to_3d.blend"))
+	"convert.blend"))
 
 # Path to python file that will render one scene at a time.
 # Contained in the git repo /git/MoralDynamics/om/
