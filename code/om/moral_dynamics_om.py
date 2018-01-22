@@ -26,7 +26,7 @@ def main():
 		help = "Path to blender executable")
 	parser.add_argument("--blend", "-b", type=str, default=blend,
         help = "Path to blender file. Default :".format(blend))
-	parser.add_argument("--python", "-b", type=str, default=py,
+	parser.add_argument("--python", "-p", type=str, default=py,
 		      help = "Path to python file. Default :".format(py))
 	
 	# Initializes the slurm arguments:
