@@ -70,6 +70,8 @@ def create_empty_material():
 def init():   
     # Unpack json file for a given simulation
     simulation_data = json.load(open(sys.argv[-1]))
+    destination = sys.argv[-2]
+    print(destination)
     radius = simulation_data['config']['scene']/100.0
     simulation_id = simulation_data['config']['name']
 
@@ -94,7 +96,7 @@ def init():
     plane_mat = create_empty_material()
     
     # Material for plane is an image
-    image_path = os.path.expanduser('sand.jpg')
+    image_path = '/om2/user/fsosa/git/MoralDynamics/code/om/blend_mats/sand.jpg'
     try:
         img = bpy.data.images.load(image_path)
     except:
@@ -157,7 +159,7 @@ def init():
         bpy.context.scene.render.engine = "CYCLES"
         bpy.data.scenes['Scene'].cycles.device = 'GPU'
         bpy.data.scenes['Scene'].cycles.film_exposure = 9.0
-        bpy.context.scene.render.filepath = './rendered_images/{0}/image{1}'.format(simulation_id,idx)
+        bpy.context.scene.render.filepath = '{0}/{1}/image{2}'.format(destination,simulation_id,idx)
         ops.render.render(write_still = True)
 
     # Patient-Fireball collision, create sphere for fire on Patient
@@ -254,7 +256,7 @@ def init():
 
     # Render animation and save image of each frame
     ops.render.render(write_still = True, animation=True)
-    bpy.context.scene.render.filepath = './rendered_images/{0}/image{1}##'.format(simulation_id,idx) 
+    bpy.context.scene.render.filepath = '{0}/{1}/image{2}##'.format(destination,simulation_id,idx) 
     
 def clear_textures():
     for tex in data.textures:
