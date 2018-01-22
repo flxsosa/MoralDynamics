@@ -16,7 +16,6 @@ import infer
 import sim
 import helper
 import convert_to_blender
-import placeholder
 
 # Available simulations
 simulation_menu_actions = {
@@ -126,7 +125,7 @@ def main():
 	Entry point
 	'''
 
-	# If user supplies simulation choice at launch
+	# If
 	if (len(sys.argv) == 2):
 		choice = sys.argv[1]
 		# initialize pygame and create a space to contain the simulation

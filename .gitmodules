@@ -1,0 +1,6 @@
+[submodule "slurm"]
+	path = slurm
+	url = https://github.com/belledon/slurm.git
+[submodule "fileFuncs"]
+	path = fileFuncs
+	url = https://github.com/belledon/fileFuncs.git
