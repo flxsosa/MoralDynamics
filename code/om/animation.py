@@ -145,7 +145,7 @@ def init():
     plane = bpy.data.objects.get('plane')
 
     # Move agents around scene and render each frame and save it as an image
-    for idx in range(25, simulation_data['config']['ticks']):
+    for idx in range(simulation_data['config']['ticks']):
         # Move agent
         agent.location.x = (simulation_data['objects']['agent'][idx]['x']/100.0)
         agent.location.y = ((simulation_data['objects']['agent'][idx]['y']/100.0) + 2)
