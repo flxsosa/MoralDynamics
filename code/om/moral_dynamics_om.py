@@ -22,8 +22,8 @@ def main():
 	# jsondir is contained in git repo /git/MoralDynamics/om/jsons/
 	parser.add_argument("jsondir", type = str,
 		help = "Directory containing json files")
-	parser.add_argument('container', type = str,
-		help = "Path to container")
+	parser.add_argument('blender', type = str,
+		help = "Path to blender executable")
 	parser.add_argument("--blend", "-b", type=str, default=blend,
         help = "Path to blender file. Default :".format(blend))
 	parser.add_argument("--python", "-b", type=str, default=py,
@@ -61,8 +61,8 @@ def main():
 	exports = []
         
 	# This is equivalent to the job template
-	func = 'singularity exec -B /om2:/om2 {0!s} /usr/bin/python3 {1!s}'.format(
-		args.container, py)
+	func = '{0} --background {1} --python {2}'.format(args.blender,
+		args.blend, args.py)
 
 	batch = om.slurm.Batch(interpreter, modules, exports, func, jobs, flags,
 			args)
