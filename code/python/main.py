@@ -12,7 +12,6 @@ from pygame.locals import *
 import sys
 import simulations
 import counterfactual
-import infer
 import sim
 import helper
 import convert_to_blender
