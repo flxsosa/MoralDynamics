@@ -33,6 +33,8 @@ ani.sort()
 # Dictionary for json file, used for each simulation
 sim_dict = {}
 
+path = '../data/'
+
 # Experiment 2 simulations
 
 def short_distance_v1(space, screen, options, guess=True, impulse=AGENT_RUNNING):
@@ -147,7 +149,7 @@ def short_distance_v1(space, screen, options, guess=True, impulse=AGENT_RUNNING)
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 	
 	# remove value from collision list
@@ -266,7 +268,7 @@ def medium_distance_v1(space, screen, options, guess=True, impulse=AGENT_RUNNING
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 	
 	# remove value from collision list
@@ -381,7 +383,7 @@ def long_distance_v1(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 	
 	# remove value from collision list
@@ -507,7 +509,7 @@ def static(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -630,7 +632,7 @@ def slow_collision(space, screen, options, guess=True, impulse=AGENT_WALKING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -749,7 +751,7 @@ def fast_collision(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -869,7 +871,7 @@ def dodge(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -993,7 +995,7 @@ def double_push(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -1107,7 +1109,7 @@ def medium_push(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -1222,7 +1224,7 @@ def long_push(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -1339,7 +1341,7 @@ def push_fireball(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -1458,7 +1460,7 @@ def medium_distance_v2(space, screen, options, guess=True, impulse=AGENT_RUNNING
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -1578,7 +1580,7 @@ def long_distance_v2(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -1695,7 +1697,7 @@ def no_touch(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -1824,7 +1826,7 @@ def victim_moving_moving(space, screen, options, guess=True, impulse=AGENT_RUNNI
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -1947,7 +1949,7 @@ def victim_moving_static(space, screen, options, guess=True, impulse=AGENT_RUNNI
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -2069,7 +2071,7 @@ def victim_static_moving(space, screen, options, guess=True, impulse=AGENT_RUNNI
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -2188,7 +2190,7 @@ def victim_static_static(space, screen, options, guess=True, impulse=AGENT_RUNNI
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -2311,7 +2313,7 @@ def harm_static_moving(space, screen, options, guess=True, impulse=AGENT_RUNNING
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -2433,7 +2435,7 @@ def harm_static_static(space, screen, options, guess=True, impulse=AGENT_RUNNING
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -2558,7 +2560,7 @@ def harm_moving_static(space, screen, options, guess=True, impulse=AGENT_RUNNING
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -2693,7 +2695,7 @@ def harm_moving_moving(space, screen, options, guess=True, impulse=AGENT_RUNNING
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -2707,6 +2709,14 @@ def harm_moving_moving(space, screen, options, guess=True, impulse=AGENT_RUNNING
 # Instruction simulations for experiments on mTurk
 
 def patient_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_WALKING):
+	# Set up space dictionary
+	config = {"scene" : pygame.display.get_surface().get_size()[0]}
+	config['name'] = sys._getframe().f_code.co_name
+	bodies_dict = {}
+	agent_position_dict = []
+	patient_position_dict = []
+	fireball_position_dict = []
+
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -2740,7 +2750,7 @@ def patient_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		#helper.snapshot(screen, tick)
 		tick+=1
-		agent_position_dict.append({'x' : agent.body.position[0], 'y' : agent.body.position[1]})
+		agent_position_dict.append({'x' : -300, 'y' : -300})
 		patient_position_dict.append({'x' : patient.body.position[0], 'y' : patient.body.position[1]})
 		fireball_position_dict.append({'x' : fireball.body.position[0], 'y' : fireball.body.position[1]})
 
@@ -2781,7 +2791,7 @@ def patient_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -2791,6 +2801,14 @@ def patient_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_
 		print "Exited before collision."
 
 def agent_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_RUNNING):
+	# Set up space dictionary
+	config = {"scene" : pygame.display.get_surface().get_size()[0]}
+	config['name'] = sys._getframe().f_code.co_name
+	bodies_dict = {}
+	agent_position_dict = []
+	patient_position_dict = []
+	fireball_position_dict = []
+
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -2815,7 +2833,10 @@ def agent_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_RU
 	while running and time!=0:
 		# update fireball sprite according to fireball's position
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
-		position_patient = (agent.body.position[0]-30,agent.body.position[1]-30)
+		position_agent = (agent.body.position[0]-30,agent.body.position[1]-30)
+		agent_position_dict.append({'x' : agent.body.position[0], 'y' : agent.body.position[1]})
+		patient_position_dict.append({'x' : -300, 'y' : -300})
+		fireball_position_dict.append({'x' : fireball.body.position[0], 'y' : fireball.body.position[1]})
 		#helper.snapshot(screen, tick)
 		tick += 1
 		time -= 1
@@ -2839,7 +2860,7 @@ def agent_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_RU
 			space.debug_draw(options)
 			helper.setBackground(screen)
 			screen.blit(fireSprite, position_fireball)
-			screen.blit(agentSprite, position_patient)
+			screen.blit(agentSprite, position_agent)
 
 			# adjust pygame screen and move clock forward
 			pygame.display.flip()
@@ -2857,7 +2878,7 @@ def agent_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_RU
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -2868,6 +2889,14 @@ def agent_walks_to_fireball(space, screen, options, guess=True, impulse=AGENT_RU
 		print "Exited before collision."
 
 def fireball_moving(space, screen, options, guess=True, impulse=AGENT_WALKING):
+	# Set up space dictionary
+	config = {"scene" : pygame.display.get_surface().get_size()[0]}
+	config['name'] = sys._getframe().f_code.co_name
+	bodies_dict = {}
+	agent_position_dict = []
+	patient_position_dict = []
+	fireball_position_dict = []
+
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -2896,8 +2925,8 @@ def fireball_moving(space, screen, options, guess=True, impulse=AGENT_WALKING):
 		time -= 1
 		#helper.snapshot(screen, tick)
 		tick+=1
-		agent_position_dict.append({'x' : agent.body.position[0], 'y' : agent.body.position[1]})
-		patient_position_dict.append({'x' : patient.body.position[0], 'y' : patient.body.position[1]})
+		agent_position_dict.append({'x' : -300, 'y' : -300})
+		patient_position_dict.append({'x' : -300, 'y' : -300})
 		fireball_position_dict.append({'x' : fireball.body.position[0], 'y' : fireball.body.position[1]})
 		#allow user to exit
 		for event in pygame.event.get():
@@ -2935,7 +2964,7 @@ def fireball_moving(space, screen, options, guess=True, impulse=AGENT_WALKING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -2946,6 +2975,14 @@ def fireball_moving(space, screen, options, guess=True, impulse=AGENT_WALKING):
 		print "Exited before collision."
 
 def agent_saves_patient(space, screen, options, guess=True, impulse=AGENT_WALKING):
+	# Set up space dictionary
+	config = {"scene" : pygame.display.get_surface().get_size()[0]}
+	config['name'] = sys._getframe().f_code.co_name
+	bodies_dict = {}
+	agent_position_dict = []
+	patient_position_dict = []
+	fireball_position_dict = []
+
 	# set up collision handlers
 	ch0 = space.add_collision_handler(0, 2)
 	ch0.data["surface"] = screen
@@ -3029,7 +3066,7 @@ def agent_saves_patient(space, screen, options, guess=True, impulse=AGENT_WALKIN
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -3140,7 +3177,7 @@ def sim_1_patient(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	# remove value from collision list
@@ -3247,7 +3284,7 @@ def sim_1_fireball(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -3354,7 +3391,7 @@ def sim_2_patient(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -3460,7 +3497,7 @@ def sim_2_fireball(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -3566,7 +3603,7 @@ def sim_3_patient(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -3672,7 +3709,7 @@ def sim_3_fireball(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -3780,7 +3817,7 @@ def sim_4_patient(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
@@ -3887,7 +3924,7 @@ def sim_4_fireball(space, screen, options, guess=True, impulse=AGENT_RUNNING):
 	bodies_dict["patient"] = patient_position_dict
 	bodies_dict["fireball"] = fireball_position_dict
 	sim_dict["objects"] = bodies_dict
-	with open("simulation.json", "w") as j:
+	with open(path+sys._getframe().f_code.co_name+".json", "w") as j:
 		json.dump(sim_dict, j, indent=2)
 
 	try:
