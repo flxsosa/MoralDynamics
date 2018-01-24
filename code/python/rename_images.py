@@ -7,7 +7,7 @@ author: Felix Sosa
 import os
 import re
 
-for dirr, subdirs, files in os.walk("../../../../Desktop/images"):
+for dirr, subdirs, files in os.walk("../../../../data/MoralDynamics/rendered_images"):
 	# Traverse the files
 	for file in files:
 		print(dirr,file)
