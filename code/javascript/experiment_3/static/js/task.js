@@ -94,7 +94,6 @@ var Introduction = function() {
 				$('#some').html(html);
 				$("#video_mp4").attr("src", '/static/videos/mp4/' + video_name + '.mp4');
 				$("#video_webm").attr("src", '/static/videos/webm' + video_name + '.webm');
-				$("#video_ogg").attr("src", '/static/videos/ogg' + video_name + '.ogv');
 				$(".intro_video").load()
 				$(".intro_video").load()
 				$('.intro_video').trigger('play');
@@ -192,42 +191,20 @@ var TestPhase = function() {
 					}
 				});
 			}
-			// var func = function() {
-			// 	$('#c').html("");
-			// 	// Bulid the sliders for each question
-			// 	for (var i = 0; i < 1; i++) {
-			// 		// Create the sliders
-			// 		$('.s-' + i).slider().on("slidestart", function(event, ui) {
-			// 			// Show the handle
-			// 			$(this).find('.ui-slider-handle').show();
-	 
-			// 			// Sum is the number of sliders that have been clicked
-			// 			var sum = 0;
-			// 			for (var j = 0; j < $c.questions.length; j++) {
-			// 				if ($('.s-' + j).find('.ui-slider-handle').is(":visible")) {
-			// 					sum++;
-			// 				}
-			// 			}
-			// 			// If the number of sliders clicked is equal to the number of sliders
-			// 			// the user can continue. 
-			// 			if (sum == $c.questions.length) {
-			// 				$('#trial_next.next').prop('disabled', false);
-			// 				$('#trial_next.next').show();
-			// 			}
-			// 		});
-	 
-			// 		// Put labels on the sliders
-			// 		$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[0] + "</label>");
-			// 		$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[2] + "</label>");
-			// 		$('.l-' + i).append("<label style='width: 33%'>" + $c.questions[i].l[1] + "</label>");
-			// 	}
-			// 	// Hide all the slider handles 
-			// 	$('.ui-slider-handle').hide();
-			// }
 			$('#trial_next.next').hide();
 			$('.checkboxgroup').click(function() {
-				$('#trial_next.next').prop('disabled', false);
-				$('#trial_next.next').show();
+				if ($('input[name=q1]:checked').length > 0)
+				{
+					// If so, able to submit answers
+					$('#trial_next.next').prop('disabled', false);
+					$('#trial_next.next').show();
+				} 
+				else {
+					// Else, not
+					$('#trial_next.next').prop('disabled', true);
+				}
+				// $('#trial_next.next').prop('disabled', false);
+				// $('#trial_next.next').show();
 			});
 			$('#trial_next.next').click(function() {
 				that.record_response();
@@ -533,7 +510,7 @@ $(document).ready(function() {
 
 	// Start the experiment
 	STATE = new State();
- 	// CURRENTVIEW = new Instructions()
+ 	CURRENTVIEW = new Instructions()
 	// CURRENTVIEW = new Questions()
-	CURRENTVIEW = new TestPhase()
+	// CURRENTVIEW = new TestPhase()
 });
