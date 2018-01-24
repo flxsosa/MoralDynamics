@@ -2,3 +2,4 @@ participants.db
 *.pyc
 server.log
 .Rproj.user
+.psiturk_history
