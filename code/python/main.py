@@ -49,7 +49,11 @@ simulation_menu_actions = {
 	'29' : simulations.agent_walks_to_fireball,
 	'30' : simulations.patient_walks_to_fireball,
 	'31' : simulations.fireball_moving,
-	'32' : simulations.agent_saves_patient
+	'32' : simulations.agent_saves_patient,
+	'33' : simulations.agent_saves_patient_1,
+	'34' : simulations.agent_makes_patient_safer,
+	'35' : simulations.agent_saves_patient_2,
+	'36' : simulations.dodge_save
 }
 
 # Available counterfactuals

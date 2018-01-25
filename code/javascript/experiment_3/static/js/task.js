@@ -33,6 +33,7 @@ var Instructions = function() {
 	$(".slide_trial").hide();
 	var slide = $("#instructions-training-1");
 	slide.fadeIn($c.fade);
+	CURRENTVIEW = new TestPhase();
 
 	slide.find('.next').click(function() {
 		CURRENTVIEW = new Introduction();
@@ -168,7 +169,7 @@ var TestPhase = function() {
 		playClick1 = 0;
 		playClick2 = 0;
 		
-		// Create html and build sliders
+		// Create html and radio buttons 
 		
 		if (that.init_trial()) {
 			$('#choices').hide();
