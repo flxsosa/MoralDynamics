@@ -33,8 +33,7 @@ var Instructions = function() {
 	$(".slide_trial").hide();
 	var slide = $("#instructions-training-1");
 	slide.fadeIn($c.fade);
-	CURRENTVIEW = new TestPhase();
-
+	// CURRENTVIEW = new TestPhase();
 	slide.find('.next').click(function() {
 		CURRENTVIEW = new Introduction();
 	});
@@ -144,7 +143,7 @@ var TestPhase = function() {
 	this.response;
 	// The number they've gotten correct, so far
 	this.num_correct = 0;
-
+	// STATE.set_index(9);
 	// Initialize a new trial. This is called either at the beginning
 	// of a new trial, or if the page is reloaded between trials.
 	this.init_trial = function() {
@@ -312,10 +311,9 @@ var TestPhase = function() {
 		response = $('input[name=q1]:checked').val();
 		// response = $('.s-0').slider('value');
 		var data = {
-			clip: this.trialinfo.pair,
+			clip: this.trialinfo.pair.toString(),
 			order: flip,
-			rating: response,
-			viewing: stimulus
+			rating: response
 		}
 
 		// Record responses to psiturk

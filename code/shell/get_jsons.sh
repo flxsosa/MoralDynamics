@@ -1,7 +1,7 @@
 #!/bin/bash
 cd ~/git/MoralDynamics/code/python
 
-for idx in `seq 29 32`;
+for idx in `seq 1 24`;
 do 
 	echo Running Simulation $idx in Moral Dynamics...
 	python main.py $idx
