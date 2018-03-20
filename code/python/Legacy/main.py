@@ -114,36 +114,36 @@ good_counterfactual_menu = {
 	'24' :exp2_counterfactuals.bump_patient
 }
 # Available counterfactuals
-counterfactual_menu_actions = {
-	'1' : counterfactual.short_distance_v1,
-	'2' : counterfactual.medium_distance_v2,
-	'3' : counterfactual.long_distance_v1,
-	'4' : counterfactual.static,
-	'5' : counterfactual.slow_collision,
-	'6' : counterfactual.fast_collision,
-	'7' : counterfactual.dodge,
-	'8' : counterfactual.double_push,
-	'9' : counterfactual.medium_push,
-	'10' : counterfactual.long_push,
-	'11' : counterfactual.victim_moving_static,
-	'12' : counterfactual.no_touch,
-	'13' : counterfactual.victim_moving_moving,
-	'14' : counterfactual.victim_moving_static,
-	'15' : counterfactual.victim_static_moving,
-	'16' : counterfactual.victim_static_static,
-	'17' : counterfactual.harm_moving_moving,
-	'18' : counterfactual.harm_moving_static,
-	'19' : counterfactual.harm_static_moving,
-	'20' : counterfactual.harm_static_static,
-	'21' : counterfactual.sim_1_patient,
-	'22' : counterfactual.sim_1_fireball,
-	'23' : counterfactual.sim_2_patient,
-	'24' : counterfactual.sim_2_fireball,
-	'25' : counterfactual.sim_3_patient,
-	'26' : counterfactual.sim_3_fireball,
-	'27' : counterfactual.sim_4_patient,
-	'28' : counterfactual.sim_4_fireball
-}
+# counterfactual_menu_actions = {
+# 	'1' : counterfactual.short_distance_v1,
+# 	'2' : counterfactual.medium_distance_v2,
+# 	'3' : counterfactual.long_distance_v1,
+# 	'4' : counterfactual.static,
+# 	'5' : counterfactual.slow_collision,
+# 	'6' : counterfactual.fast_collision,
+# 	'7' : counterfactual.dodge,
+# 	'8' : counterfactual.double_push,
+# 	'9' : counterfactual.medium_push,
+# 	'10' : counterfactual.long_push,
+# 	'11' : counterfactual.victim_moving_static,
+# 	'12' : counterfactual.no_touch,
+# 	'13' : counterfactual.victim_moving_moving,
+# 	'14' : counterfactual.victim_moving_static,
+# 	'15' : counterfactual.victim_static_moving,
+# 	'16' : counterfactual.victim_static_static,
+# 	'17' : counterfactual.harm_moving_moving,
+# 	'18' : counterfactual.harm_moving_static,
+# 	'19' : counterfactual.harm_static_moving,
+# 	'20' : counterfactual.harm_static_static,
+# 	'21' : counterfactual.sim_1_patient,
+# 	'22' : counterfactual.sim_1_fireball,
+# 	'23' : counterfactual.sim_2_patient,
+# 	'24' : counterfactual.sim_2_fireball,
+# 	'25' : counterfactual.sim_3_patient,
+# 	'26' : counterfactual.sim_3_fireball,
+# 	'27' : counterfactual.sim_4_patient,
+# 	'28' : counterfactual.sim_4_fireball
+# }
 
 convert_to_blender_menu_actions = {
 	'1' : convert_to_blender.short_distance_v1,
@@ -221,7 +221,7 @@ def main():
 			# create a screen of 600x600 pixels
 			screen = pygame.display.set_mode((1000,600))	
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
-			good_menu[choice](space, screen, drawOptions)
+			simulation_menu_actions[choice](space, screen, drawOptions)
 			# simulation_menu_actions[choice](space, screen, drawOptions)
 			# Quit the pygame instance and pygame display
 			pygame.quit()
