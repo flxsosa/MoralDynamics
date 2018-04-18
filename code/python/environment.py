@@ -42,21 +42,26 @@ class Environment:
 		self.screen = None
 		self.options = None
 		self.clock = None
+		# Environment parameters
 		self.tick = 0
 		self.counter_tick = [self.tick,counter_tick]
 		self.noise = noise
 		self.agent_collision = None
 		self.patient_fireball_collision = 0
+		self.position_dict = {
+			'agent':[],
+			'patient':[],
+			'fireball':[]
+		}
+		self.screen_size = (1000,600)
 		# Collision handlers
 		self.coll_handlers = [x for x in handlers] if handlers else handlers
-		# Configure and run environment
-		# self.configure()
 
 	def configure(self,env_type='normal'):
 		# Configure pymunk space and pygame engine parameters (if any)
 		if self.view:
 			pygame.init()
-			self.screen = pygame.display.set_mode((1000,600))
+			self.screen = pygame.display.set_mode(self.screen_size)
 			self.options = pymunk.pygame_util.DrawOptions(self.screen)
 			self.clock = pygame.time.Clock()
 		self.space = pymunk.Space()
@@ -78,7 +83,6 @@ class Environment:
 		print("Configured as {}".format(env_type))
 
 	def run(self,run_type='normal'):
-		# Run environment
 		# Agent velocities
 		a_vel, p_vel, f_vel = self.vel
 		# Agent action generators (yield actions of agents)
@@ -96,10 +100,17 @@ class Environment:
 		# Run simulation until collision between P and F or policy ends
 		while running and not handlers.PF_COLLISION:
 			try:
-				if run_type == 'normal':
-					next(a_generator)
+				# Execute the generators
+				if run_type == 'normal': next(a_generator)
 				next(p_generator)
 				next(f_generator)
+				# Append positional information to the dict
+				self.position_dict['agent'].append({'x':self.agent.body.position[0], 
+													'y':self.agent.body.position[1]})
+				self.position_dict['patient'].append({'x':self.patient.body.position[0], 
+													  'y':self.patient.body.position[1]})
+				self.position_dict['fireball'].append({'x':self.fireball.body.position[0], 
+													   'y':self.fireball.body.position[1]})
 				# Render space if requested
 				if self.view:
 					self.screen.fill((255,255,255))
@@ -108,6 +119,7 @@ class Environment:
 					self.clock.tick(50)
 				self.space.step(1/50.0)
 				self.tick += 1
+				# Record when the agent collides with someone else
 				if not handlers.A_COLLISION: self.agent_collision = self.tick
 			except:
 				running = False
@@ -117,7 +129,6 @@ class Environment:
 		# Record whether P and F collision occurred
 		self.patient_fireball_collision = 1 if handlers.PF_COLLISION else 0
 		# Reset collision handlers
-		handlers.PF_COLLISION = []
-		handlers.A_COLLISION = []
+		handlers.PF_COLLISION, handlers.A_COLLISION = [], []
 		# Return outcome to user (whether Agent's goal was reached or not)
 		return self.agent.evaluate_policy(self.patient_fireball_collision)
