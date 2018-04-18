@@ -7,6 +7,7 @@ June 27, 2017
 '''
 import pygame
 import numpy as np
+import json
 #import main
 
 # Sprites used in simulations
@@ -74,6 +75,44 @@ def printOptions():
 	print("34. Agent Makes Patient Safer")
 	print("35. Agent Saves Patient 2")
 	print("36. Dodge Save")
+	print("37. Agent Saves Patient 3")
+	print("0. EXIT")
+	print("=================================================")
+	print("Please choose a Simulation [1-14] or [0] to exit:")
+
+def print_exp2_options():
+	'''
+	Prints simulation menu options to user.
+	'''
+	print("=================================================")
+	print("-----AVAILABLE EXPERIMENT 2 SIMS-----")
+	print("+ Cause, Bad Outcome, Fireball Intervention, Low Effort")
+	print("1.")
+	print("+ Cause, Bad Outcome, Patient Intervention, Low Effort")
+	print("2.")
+	print("+ Cause, Bad Outcome, Fireball Intervention, High Effort")
+	print("3.")
+	print("+ Cause, Bad Outcome, Patient Intervention, High Effort")
+	print("4.")
+	print("- Cause, Bad Outcome, Fireball Intervention, Low Effort")
+	print("5.")
+	print("- Cause, Bad Outcome, Fireball Intervention, Low Effort")
+	print("6.")
+	print("- Cause, Bad Outcome, Fireball Intervention, Low Effort")
+	print("7.")
+	print("- Cause, Bad Outcome, Fireball Intervention, Low Effort")
+	print("8.")
+
+
+
+
+
+
+	print("+ Cause, Bad Outcome, Patient Intervention, High Effort")
+	print("+ Cause, Bad Outcome, Fireball Intervention, Low Effort")
+	print("+ Cause, Bad Outcome, Patient Intervention, High Effort")
+	print("+ Cause, Bad Outcome, Fireball Intervention, Low Effort")
+	print("+ Cause, Bad Outcome, Patient Intervention, High Effort")
 	print("0. EXIT")
 	print("=================================================")
 	print("Please choose a Simulation [1-14] or [0] to exit:")
@@ -122,19 +161,17 @@ def wait(screen, space, options, cylinder, ball, cone):
 			screen.blit(agentSprite, pAgent)
 			pygame.display.flip()
 
-def snapshot(screen, counter):
+def snapshot(screen, counter,foo):
 	'''
 	Takes a snapshot of a given frame in a pygame instance
 	'''
 	pygame.image.save(screen, "image"+str(counter)+".png")
 
-def sample_trajectory():
+def sample_trajectory(n=0.05):
 	# Sample from normal distribution
 	mu = 0
-	sigma = 0.05
+	sigma = 0.1
 	return np.random.normal(mu, sigma)
-
-import json
 
 def serialize(c, data, filename='../example/test.json'):
 

@@ -78,8 +78,6 @@ def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and tick < point_of_collision:
@@ -87,29 +85,6 @@ def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-			#screen.blit(agentSprite, position_agent)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -125,13 +100,6 @@ def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING
 		# position_agent = (agent.body.position[0]-30,agent.body.position[1]-30)
 		#helper.snapshot(screen, tick)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -142,22 +110,6 @@ def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-			#screen.blit(agentSprite, position_agent)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -176,157 +128,6 @@ def short_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING
 	# Return counterfactual result
 	print(collision)
 	return (collision)
-
-# No Counterfactual
-def medium_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Agent pushes Patient into Fireball from a medium distance away.
-
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# Set simulation display title
-	pygame.display.set_caption("Medium Distance v1")
-	# Simulation tick at which Agent factually collides with Patient
-	point_of_collision = 0
-
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"]=screen
-	ch0.post_solve=handlers.rem0
-	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"]=screen
-	ch1.begin=handlers.rem2
-	space.damping = DYN_FRICTION
-
-	# add shapes
-	ball = agents.fireball(900, 300, F_MASS)
-	space.add(ball.body, ball.shape)
-	cone = agents.patient(800, 300, AP_MASS)
-	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(500, 300, AP_MASS)
-	space.add(cylinder.body, cylinder.shape)
-
-	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
-	xImpsAgent = []
-	yImpsAgent = []
-	xImpsPatient = []
-	yImpsPatient = []
-	xImpsFireball = []
-	yImpsFireball = []
-	total=[]
-	running = True
-	tick = 0
-
-	# animation flag and counter
-	x = 0
-	cnt = 0
-
-	# pause before showing clip
-	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(25):
-		#helper.snapshot(screen, tick)
-		tick+=1
-
-	# run simulation
-	while running and len(handlers.collision) == 0:
-		# update fireball sprite according to ball's position
-		position_fireball = (ball.body.position[0]-30,ball.body.position[1]-30)
-		position_patient = (cone.body.position[0]-30,cone.body.position[1]-30)
-		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		#helper.snapshot(screen, tick)
-		tick+=1
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# keep the Agent at it's intended velocity for some duration
-		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
-			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((imp,0))
-			total.append(imp)
-		if (len(handlers.collision) == 1):
-			imp = cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
-			total.append(math.fabs(imp))
-
-		# append positional values to each list
-		xImpsAgent.append(cylinder.body.position[0])
-		yImpsAgent.append(cylinder.body.position[1])
-		xImpsPatient.append(cone.body.position[0])
-		yImpsPatient.append(cone.body.position[1])
-		xImpsFireball.append(ball.body.position[0])
-		yImpsFireball.append(ball.body.position[1])
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-			screen.blit(agentSprite, pAgent)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)	
-	
-	point_of_collision = tick
-	# print "Point of collision occurs at tick {0}".format(point_of_collision)
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		helper.setBackground(screen)
-		screen.blit(fireSprite, position_fireball)
-		screen.blit(agentSprite, pAgent)
-
-		# conditional animation sequence
-		screen.blit(patientSprite, position_patient)
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, position_patient)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, position_patient)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(agentSprite, pAgent)
-
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
-		#helper.snapshot(screen, tick)
-		tick+=1
-	# remove value from collision list
-	try:
-		handlers.collision = []
-		handlers.PF_COLLISION = []
-	except:
-		print "Exited before collision."
-
-	# output to user and return tuple
-	print "Total impulse: ", sum(total), "Tick ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
 
 def long_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -369,38 +170,12 @@ def long_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
-
 	# run simulation
 	while running and tick < point_of_collision:
 		# update fireball sprite according to ball's position
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-			#screen.blit(agentSprite, position_agent)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -416,13 +191,6 @@ def long_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 		# position_agent = (agent.body.position[0]-30,agent.body.position[1]-30)
 		#helper.snapshot(screen, tick)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -433,22 +201,6 @@ def long_distance_v1(space, screen, options, guess=False, impulse=AGENT_RUNNING)
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-			#screen.blit(agentSprite, position_agent)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -515,13 +267,6 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-		
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 
 		# keep the Patient at it's intended velocity for some duration
 		if (patient.body.velocity[0] < impulse and patient.body.velocity[1] < AGENT_RUNNING and \
@@ -529,24 +274,6 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			impx = impulse - patient.body.velocity[0]
 			impy = AGENT_WALKING - patient.body.velocity[1]
 			patient.body.apply_impulse_at_local_point((impx,0))
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -557,13 +284,6 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -574,24 +294,6 @@ def static(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)
 		
 	if (len(handlers.PF_COLLISION) > 0):
 		collision = True
@@ -658,31 +360,6 @@ def slow_collision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 		tick+=1
 		time -= 1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
 		# update pymunk space
 		space.step(1/50.0)	
 	
@@ -695,13 +372,6 @@ def slow_collision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -712,21 +382,6 @@ def slow_collision(space, screen, options, guess=False, impulse=AGENT_WALKING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -796,31 +451,6 @@ def fast_collision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		tick+=1
 		time -= 1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
 		# update pymunk space
 		space.step(1/50.0)	
 	
@@ -833,13 +463,6 @@ def fast_collision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -850,21 +473,6 @@ def fast_collision(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -931,13 +539,6 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		tick+=1
 		time-=1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
 		# keep Patient at it's intended velocity
 		if (patient.body.velocity[0] < AGENT_RUNNING):
 			imp = AGENT_RUNNING - patient.body.velocity[0]
@@ -945,21 +546,6 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 
 		# set clock
 		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -973,13 +559,6 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -990,21 +569,6 @@ def dodge(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -1072,31 +636,6 @@ def double_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 		time -= 1
-		
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -1107,13 +646,6 @@ def double_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -1124,21 +656,6 @@ def double_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -1205,31 +722,6 @@ def medium_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		
 		time -= 1
 		tick+=1
-		
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -1243,13 +735,6 @@ def medium_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -1260,21 +745,6 @@ def medium_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -1340,31 +810,6 @@ def long_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		time -= 1
 		tick+=1
-		
-		# allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -1375,13 +820,6 @@ def long_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -1392,21 +830,6 @@ def long_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -1426,158 +849,6 @@ def long_push(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	# Return counterfactual result
 	print(collision)
 	return (collision)
-
-# No Counterfactual
-def push_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Agent pushes Fireball into Patient.
-
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	if(not guess):
-		pygame.display.set_caption("Push Fireball")
-	# Simulation tick at which Agent factually collides with Patient
-	point_of_collision = 0
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"] = screen
-	ch0.post_solve = handlers.rem0
-	ch1 = space.add_collision_handler(1, 2)
-	ch1.data["surface"] = screen
-	ch1.begin = handlers.rem2
-	space.damping = DYN_FRICTION
-
-	# add shapes
-	ball = agents.fireball(200, 300, F_MASS)
-	space.add(ball.body, ball.shape)
-	cone = agents.patient(900, 300, AP_MASS)
-	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(100, 300, AP_MASS)
-	space.add(cylinder.body, cylinder.shape)
-
-	# lists for impulse values at each timestep, total impulses, runnign flag, and ticks
-	xImpsAgent = []
-	yImpsAgent = []
-	xImpsPatient = []
-	yImpsPatient = []
-	xImpsFireball = []
-	yImpsFireball = []
-	total=[]
-	running = True
-	tick = 0
-	time = 100
-
-	# animation flag and counter 
-	x = 0
-	cnt = 0
-
-	# pause before showing clip
-	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(25):
-		#helper.snapshot(screen, tick)
-		tick+=1
-
-	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
-		# update fireball sprite according to ball's position
-		position_fireball = (ball.body.position[0]-30,ball.body.position[1]-30)
-		position_patient = (cone.body.position[0]-30,cone.body.position[1]-30)
-		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		time -= 1
-		#helper.snapshot(screen, tick)
-		tick+=1
-		
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# keep Agent at intended velocity
-		if (len(handlers.PF_COLLISION) == 0):
-			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((imp,0))
-			total.append(math.fabs(imp))
-
-		# when t == 0, have Agent stop 
-		#if (time == 0):
-		#	cylinder.body.apply_impulse_at_local_point((-1*cylinder.body.velocity[0],0))
-		
-		# append positional values to each list
-		xImpsAgent.append(cylinder.body.position[0])
-		yImpsAgent.append(cylinder.body.position[1])
-		xImpsPatient.append(cone.body.position[0])
-		yImpsPatient.append(cone.body.position[1])
-		xImpsFireball.append(ball.body.position[0])
-		yImpsFireball.append(ball.body.position[1])
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-			screen.blit(agentSprite, pAgent)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)	
-	point_of_collision = tick
-	# print "Point of collision occurs at tick {0}".format(point_of_collision)
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		helper.setBackground(screen)
-		screen.blit(fireSprite, position_fireball)
-		screen.blit(agentSprite, pAgent)
-
-		# conditional animation sequence
-		screen.blit(patientSprite, position_patient)
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, position_patient)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, position_patient)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(agentSprite, pAgent)
-
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
-		#helper.snapshot(screen, tick)
-		tick+=1
-	# remove value from collision list
-	try:
-		handlers.collision = []
-		handlers.PF_COLLISION = []
-	except:
-		print "Exited before collision."
-
-	# output to user and return tuple
-	print "Total impulse: ", sum(total), "Tick: ", tick
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
 
 def medium_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -1630,28 +901,6 @@ def medium_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
 		# update pymunk space
 		space.step(1/50.0)
 	
@@ -1661,13 +910,6 @@ def medium_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -1678,21 +920,6 @@ def medium_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -1712,160 +939,6 @@ def medium_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 	# Return counterfactual result
 	print(collision)
 	return (collision)
-# No Counterfactual
-def long_distance_v2(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	'''
-	Agent pushes Patient into Fireball from a long distance away.
-	
-	space -- pymunk simulation space
-	screen -- pygame display Surface
-	options -- draw options for pymunk space
-	'''
-	# if it's a truth sim, we use a display
-	if(not guess):
-		pygame.display.set_caption("Long Distance v2")
-	# Simulation tick at which Agent factually collides with Patient
-	point_of_collision = 0
-
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"] = screen
-	ch0.post_solve = handlers.rem0
-	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"] = screen
-	ch1.begin = handlers.rem2
-
-	# dynamic friction
-	space.damping = DYN_FRICTION
-	
-	# add shapes
-	ball = agents.fireball(900, 300, F_MASS)
-	space.add(ball.body, ball.shape)
-	cone = agents.patient(600, 300, AP_MASS)
-	space.add(cone.body, cone.shape)
-	cylinder = agents.agent(-100, 300, AP_MASS)
-	space.add(cylinder.body, cylinder.shape)
-	
-	# lists for impulses per timestep, total impulses, running flag, and ticks
-	xImpsAgent = []
-	yImpsAgent = []
-	xImpsPatient = []
-	yImpsPatient = []
-	xImpsFireball = []
-	yImpsFireball = []
-	total = []
-	running = True
-	tick = 0
-
-	# animation flag and counter
-	x = 0
-	cnt = 0
-
-	# pause before showing clip
-	helper.wait(screen, space, options, cylinder, ball, cone)
-	for i in range(25):
-		#helper.snapshot(screen, tick)
-		tick+=1
-
-	# set clock
-	clock = pygame.time.Clock()
-
-	# run simulation
-	while running and len(handlers.PF_COLLISION) == 0:
-		# update fireball sprite according to ball's position
-		position_fireball = (ball.body.position[0]-30,ball.body.position[1]-30)
-		position_patient = (cone.body.position[0]-30,cone.body.position[1]-30)
-		pAgent = (cylinder.body.position[0]-30,cylinder.body.position[1]-30)
-		#helper.snapshot(screen, tick)
-		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# keep the Agent at it's intended velocity for some duration
-		if (cylinder.body.velocity[0] < impulse and len(handlers.collision) == 0):
-			imp = impulse - cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((imp,0))
-			total.append(imp)
-		elif (len(handlers.collision) == 1):
-			imp = cylinder.body.velocity[0]
-			cylinder.body.apply_impulse_at_local_point((-1*imp,0))
-			total.append(math.fabs(imp))
-
-		# append positional values to each list
-		xImpsAgent.append(cylinder.body.position[0])
-		yImpsAgent.append(cylinder.body.position[1])
-		xImpsPatient.append(cone.body.position[0])
-		yImpsPatient.append(cone.body.position[1])
-		xImpsFireball.append(ball.body.position[0])
-		yImpsFireball.append(ball.body.position[1])
-
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-			screen.blit(agentSprite, pAgent)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)
-	point_of_collision = tick
-	# print "Point of collision occurs at tick {0}".format(point_of_collision)
-	# patient collision
-	for i in range(25):
-		screen.fill((255,255,255))
-		space.debug_draw(options)
-		helper.setBackground(screen)
-		screen.blit(fireSprite, position_fireball)
-		screen.blit(agentSprite, pAgent)
-
-		# conditional animation sequence
-		screen.blit(patientSprite, position_patient)
-		if (cnt < 12 and x == 0):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, position_patient)
-			cnt += 1
-			if cnt == 12:
-				x = 1
-				cnt = 11
-		elif (cnt >= 0 and x == 1):
-			img = pygame.image.load(ani[cnt])
-			screen.blit(img, position_patient)
-			cnt -= 1
-		else:
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(agentSprite, pAgent)
-
-		# adjust pygame screen and move clock forward
-		pygame.display.flip()
-		clock.tick(50)
-		#helper.snapshot(screen, tick)
-		tick+=1
-	# remove value from collision list
-	try:
-		handlers.collision = []
-		handlers.PF_COLLISION = []
-	except:
-		print "Exited before collision."
-
-	# output to user and return tuple
-	print "Total impulse: ", sum(total)
-	return (xImpsAgent, yImpsAgent, xImpsPatient, yImpsPatient, 
-		xImpsFireball, yImpsFireball)
 
 def no_touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -1909,9 +982,6 @@ def no_touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
-
 	# run simulation
 	while running and len(handlers.PF_COLLISION) == 0:
 		# update fireball sprite according to ball's position
@@ -1919,33 +989,10 @@ def no_touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 		time -= 1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
 		# keep the Agent at it's intended velocity for some duration
 		if (patient.body.velocity[0] < impulse and len(handlers.collision) == 0):
 			imp = impulse - patient.body.velocity[0]
 			patient.body.apply_impulse_at_local_point((imp,0))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -1966,7 +1013,7 @@ def no_touch(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	print(collision)
 	return (collision)
 
-# Experiment 1 simulations
+# # Experiment 1 simulations
 
 def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 	'''
@@ -2013,8 +1060,6 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and tick < point_of_collision:
@@ -2025,12 +1070,6 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 		tick+=1
 		time -= 1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# keep the Agent at it's intended velocity for some duration
 		if (fireball.body.velocity[0] < AGENT_WALKING):
@@ -2039,21 +1078,7 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 		if (math.fabs(patient.body.velocity[0]) < AGENT_WALKING and len(handlers.collision) == 0):
 			imp = AGENT_WALKING - math.fabs(patient.body.velocity[0])
 			patient.body.apply_impulse_at_local_point((-1*imp, 0))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
 
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2064,14 +1089,6 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
 			# Sample x and y velocity from normal distribution and apply
@@ -2081,21 +1098,7 @@ def victim_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
 
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2161,9 +1164,6 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
-
 	# run simulation
 	while running and tick < point_of_collision:
 		# update fireball sprite according to ball's position
@@ -2172,33 +1172,11 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 
 		tick+=1
 		time -= 1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# keep the Agent at it's intended velocity for some duration
 		if (math.fabs(patient.body.velocity[0]) < AGENT_WALKING and len(handlers.collision) == 0):
 			imp = AGENT_WALKING - math.fabs(patient.body.velocity[0])
 			patient.body.apply_impulse_at_local_point((-1*imp, 0))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2212,13 +1190,6 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -2229,22 +1200,6 @@ def victim_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
 		# update pymunk space
 		space.step(1/50.0)
 	
@@ -2309,9 +1264,6 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
-
 	# run simulation
 	while running and tick < point_of_collision:
 		# update fireball sprite according to ball's position
@@ -2320,33 +1272,11 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 
 		tick+=1
 		time -= 1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# keep the Agent at it's intended velocity for some duration
 		if (math.fabs(fireball.body.velocity[0]) < AGENT_RUNNING):# and len(handlers.collision) == 0):
 			imp = AGENT_RUNNING - math.fabs(fireball.body.velocity[0])
 			fireball.body.apply_impulse_at_local_point((-1*imp, 0))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2360,13 +1290,6 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -2377,21 +1300,6 @@ def victim_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2456,9 +1364,6 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
-
 	# run simulation
 	while running and tick < point_of_collision:
 		# update fireball sprite according to ball's position
@@ -2466,28 +1371,6 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 		time -= 1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2501,13 +1384,6 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -2518,21 +1394,6 @@ def victim_static_static(space, screen, options, guess=False, impulse=AGENT_RUNN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2597,9 +1458,6 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
-
 	# run simulation
 	while running and tick < point_of_collision:
 		# update fireball sprite according to ball's position
@@ -2608,33 +1466,11 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 
 		tick+=1
 		time -= 1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# keep the Agent at it's intended velocity for some duration
 		if (math.fabs(patient.body.velocity[0]) < AGENT_RUNNING):# and len(handlers.collision) == 0):
 			imp = AGENT_RUNNING - math.fabs(patient.body.velocity[0])
 			patient.body.apply_impulse_at_local_point((-1*imp, 0))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2648,13 +1484,6 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -2665,21 +1494,6 @@ def harm_static_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2744,8 +1558,6 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
 
 	# run simulation
 	while running and tick < point_of_collision:
@@ -2754,28 +1566,6 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 		time -= 1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2789,13 +1579,6 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -2806,21 +1589,6 @@ def harm_static_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -2886,9 +1654,7 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
-
+	# set cloc
 	# run simulation
 	while running and tick < point_of_collision:
 		# update fireball sprite according to ball's position
@@ -2897,33 +1663,11 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		tick+=1
 		time -= 1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
 		# keep the Agent at it's intended velocity for some duration
 		if (math.fabs(fireball.body.velocity[0]) < AGENT_WALKING and len(handlers.collision) == 0):
 			imp = AGENT_WALKING - math.fabs(fireball.body.velocity[0])
 			fireball.body.apply_impulse_at_local_point((-1*imp, 0))
 		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
 		# update pymunk space
 		space.step(1/50.0)
 	
@@ -2936,13 +1680,6 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -2953,21 +1690,6 @@ def harm_moving_static(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -3033,9 +1755,6 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 	x = 0
 	cnt = 0
 
-	# set clock
-	clock = pygame.time.Clock()
-
 	# run simulation
 	while running and tick < point_of_collision:
 		# update fireball sprite according to ball's position
@@ -3043,13 +1762,6 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 		time -= 1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# keep the Agent at it's intended velocity for some duration
 		if (math.fabs(fireball.body.velocity[0]) < AGENT_WALKING and len(handlers.collision) == 0):
@@ -3058,21 +1770,6 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		if (patient.body.velocity[0] < AGENT_WALKING):
 			imp = AGENT_WALKING - patient.body.velocity[0]
 			patient.body.apply_impulse_at_local_point((imp, 0))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -3086,13 +1783,6 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -3103,21 +1793,6 @@ def harm_moving_moving(space, screen, options, guess=False, impulse=AGENT_RUNNIN
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -3177,35 +1852,11 @@ def sim_1_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
 		# keep the Agent at it's intended velocity for some duration
 		if (patient.body.velocity[0] < AGENT_WALKING):
 			imp = AGENT_WALKING - patient.body.velocity[0]
 			patient.body.apply_impulse_at_local_point((imp,0))
 
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -3219,13 +1870,6 @@ def sim_1_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -3236,21 +1880,6 @@ def sim_1_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -3307,35 +1936,11 @@ def sim_1_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 
 		# keep the Agent at it's intended velocity for some duration
 		if (fireball.body.velocity[0] < AGENT_WALKING):
 			imp = AGENT_WALKING - fireball.body.velocity[0]
 			fireball.body.apply_impulse_at_local_point((imp,0))
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -3349,13 +1954,6 @@ def sim_1_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -3366,21 +1964,6 @@ def sim_1_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -3437,35 +2020,10 @@ def sim_2_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
 		# keep the Agent at it's intended velocity for some duration
 		if (math.fabs(patient.body.velocity[0]) < AGENT_WALKING):
 			imp = AGENT_WALKING - math.fabs(patient.body.velocity[0])
 			patient.body.apply_impulse_at_local_point((-1*imp,0))
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -3479,13 +2037,6 @@ def sim_2_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -3496,21 +2047,6 @@ def sim_2_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)
@@ -3567,35 +2103,11 @@ def sim_2_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
 		tick+=1
 
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
 		# keep the Agent at it's intended velocity for some duration
 		if (math.fabs(fireball.body.velocity[0]) < AGENT_WALKING):
 			imp = AGENT_WALKING - math.fabs(fireball.body.velocity[0])
 			fireball.body.apply_impulse_at_local_point((-1*imp,0))
 
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)	
@@ -3608,13 +2120,6 @@ def sim_2_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
 		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
 		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
 		
 		# Apply noise to the velocity of the Patient and Fireball
 		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
@@ -3625,541 +2130,6 @@ def sim_2_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
 			# Sample x and y velocity from normal distribution and apply
 			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
 				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)
-	
-	if (len(handlers.PF_COLLISION) > 0):
-		collision = True
-	else:
-		collision = False
-
-	# remove value from collision list
-	try:
-		handlers.collision = []
-		handlers.PF_COLLISION = []
-	except:
-		print "Exited before collision."
-	
-	# Return counterfactual result
-	print(collision)
-	return (collision)
-
-def sim_3_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	# Simulation tick at which Agent factually collides with Patient
-	point_of_collision = 59
-
-	# Parameters of Patient and Fireball in factual simulation
-	factual_impulse_patient = 0
-	factual_impulse_fireball = AGENT_WALKING
-
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"] = screen
-	ch0.post_solve = handlers.rem0
-	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"] = screen
-	ch1.begin = handlers.rem2
-	space.damping = DYN_FRICTION
-
-	# add shapes
-	fireball = agents.fireball(800, 300, F_MASS)
-	space.add(fireball.body, fireball.shape)
-	patient = agents.patient(500, 300, AP_MASS)
-	space.add(patient.body, patient.shape)
-	running = True
-	tick = 0
-
-	# animation flag and counter
-	x = 0
-	cnt = 0
-
-	# run simulation
-	while running and tick < point_of_collision:
-		# update fireball sprite according to ball's position
-		position_fireball = (fireball.body.position[0]-30, fireball.body.position[1]-30)
-		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
-		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# keep the Agent at it's intended velocity for some duration
-		if (math.fabs(fireball.body.velocity[0]) < AGENT_WALKING):
-			imp = math.fabs(fireball.body.velocity[0]) - AGENT_WALKING
-			fireball.body.apply_impulse_at_local_point((imp,0))
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)	
-	point_of_collision = tick
-	# print "Point of collision occurs at tick {0}".format(point_of_collision)
-	
-	# Run counterfactual
-	for i in range(length_of_counterfactual):
-		# update fireball sprite according to ball's position
-		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
-		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
-		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# Apply noise to the velocity of the Patient and Fireball
-		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
-			# Sample x and y velocity from normal distribution and apply
-			patient.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
-				factual_impulse_patient*helper.sample_trajectory()))
-		if (fireball.body.velocity[0] < factual_impulse_fireball or fireball.body.velocity[1] < factual_impulse_fireball):
-			# Sample x and y velocity from normal distribution and apply
-			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
-				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)
-	
-	if (len(handlers.PF_COLLISION) > 0):
-		collision = True
-	else:
-		collision = False
-
-	# remove value from collision list
-	try:
-		handlers.collision = []
-		handlers.PF_COLLISION = []
-	except:
-		print "Exited before collision."
-	
-	# Return counterfactual result
-	print(collision)
-	return (collision)
-
-def sim_3_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	# Simulation tick at which Agent factually collides with Patient
-	point_of_collision = 59
-
-	# Parameters of Patient and Fireball in factual simulation
-	factual_impulse_patient = AGENT_WALKING
-	factual_impulse_fireball = 0
-
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"] = screen
-	ch0.post_solve = handlers.rem0
-	ch1 = space.add_collision_handler(2, 1)
-	ch1.data["surface"] = screen
-	ch1.begin = handlers.rem2
-	space.damping = DYN_FRICTION
-
-	# add shapes
-	fireball = agents.fireball(500, 300, F_MASS)
-	space.add(fireball.body, fireball.shape)
-	patient = agents.patient(800, 300, AP_MASS)
-	space.add(patient.body, patient.shape)
-	running = True
-	tick = 0
-
-	# animation flag and counter
-	x = 0
-	cnt = 0
-
-	# run simulation
-	while running and tick < point_of_collision:
-		# update fireball sprite according to ball's position
-		position_fireball = (fireball.body.position[0]-30, fireball.body.position[1]-30)
-		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
-		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# keep the Agent at it's intended velocity for some duration
-		if (math.fabs(patient.body.velocity[0]) < AGENT_WALKING):
-			imp = math.fabs(patient.body.velocity[0]) - AGENT_WALKING
-			patient.body.apply_impulse_at_local_point((imp,0))
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)	
-	point_of_collision = tick
-	# print "Point of collision occurs at tick {0}".format(point_of_collision)
-	
-	# Run counterfactual
-	for i in range(length_of_counterfactual):
-		# update fireball sprite according to ball's position
-		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
-		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
-		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# Apply noise to the velocity of the Patient and Fireball
-		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
-			# Sample x and y velocity from normal distribution and apply
-			patient.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
-				factual_impulse_patient*helper.sample_trajectory()))
-		if (fireball.body.velocity[0] < factual_impulse_fireball or fireball.body.velocity[1] < factual_impulse_fireball):
-			# Sample x and y velocity from normal distribution and apply
-			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
-				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)
-	
-	if (len(handlers.PF_COLLISION) > 0):
-		collision = True
-	else:
-		collision = False
-
-	# remove value from collision list
-	try:
-		handlers.collision = []
-		handlers.PF_COLLISION = []
-	except:
-		print "Exited before collision."
-	
-	# Return counterfactual result
-	print(collision)
-	return (collision)
-
-def sim_4_patient(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	# Simulation tick at which Agent factually collides with Patient
-	point_of_collision = 42
-
-	# Parameters of Patient and Fireball in factual simulation
-	factual_impulse_patient = 0
-	factual_impulse_fireball = AGENT_WALKING
-
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"] = screen
-	ch0.post_solve = handlers.rem0
-	ch1 = space.add_collision_handler(0, 1)
-	ch1.data["surface"] = screen
-	ch1.begin = handlers.rem2
-	space.damping = DYN_FRICTION
-
-	# add shapes
-	fireball = agents.fireball(700, 300, F_MASS)
-	space.add(fireball.body, fireball.shape)
-	patient = agents.patient(400, 300, AP_MASS)
-	space.add(patient.body, patient.shape)
-	running = True
-	tick = 0
-	time=40
-
-	# animation flag and counter
-	x = 0
-	cnt = 0
-
-	# run simulation
-	while running and tick < point_of_collision:
-		# update fireball sprite according to ball's position
-		position_fireball = (fireball.body.position[0]-30, fireball.body.position[1]-30)
-		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
-		tick+=1
-		time-=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# keep the Agent at it's intended velocity for some duration
-		if (time < 0 and math.fabs(fireball.body.velocity[0]) < AGENT_WALKING):
-			imp = math.fabs(fireball.body.velocity[0]) - AGENT_WALKING
-			fireball.body.apply_impulse_at_local_point((-1*imp,0))
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)	
-	point_of_collision = tick
-	# print "Point of collision occurs at tick {0}".format(point_of_collision)
-	
-	# Run counterfactual
-	for i in range(length_of_counterfactual):
-		# update fireball sprite according to ball's position
-		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
-		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
-		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# Apply noise to the velocity of the Patient and Fireball
-		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
-			# Sample x and y velocity from normal distribution and apply
-			patient.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
-				factual_impulse_patient*helper.sample_trajectory()))
-		if (fireball.body.velocity[0] < factual_impulse_fireball or fireball.body.velocity[1] < factual_impulse_fireball):
-			# Sample x and y velocity from normal distribution and apply
-			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
-				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)
-	
-	if (len(handlers.PF_COLLISION) > 0):
-		collision = True
-	else:
-		collision = False
-
-	# remove value from collision list
-	try:
-		handlers.collision = []
-		handlers.PF_COLLISION = []
-	except:
-		print "Exited before collision."
-	
-	# Return counterfactual result
-	print(collision)
-	return (collision)
-
-def sim_4_fireball(space, screen, options, guess=False, impulse=AGENT_RUNNING):
-	# Simulation tick at which Agent factually collides with Patient
-	point_of_collision = 42
-
-	# Parameters of Patient and Fireball in factual simulation
-	factual_impulse_patient = AGENT_WALKING
-	factual_impulse_fireball = 0
-
-	# set up collision handlers
-	ch0 = space.add_collision_handler(0, 2)
-	ch0.data["surface"] = screen
-	ch0.post_solve = handlers.rem0
-	ch1 = space.add_collision_handler(2, 1)
-	ch1.data["surface"] = screen
-	ch1.begin = handlers.rem2
-	space.damping = DYN_FRICTION
-
-	# add shapes
-	fireball = agents.fireball(400, 300, F_MASS)
-	space.add(fireball.body, fireball.shape)
-	patient = agents.patient(700, 300, AP_MASS)
-	space.add(patient.body, patient.shape)
-	running = True
-	tick = 0
-	time = 40
-
-	# animation flag and counter
-	x = 0
-	cnt = 0
-
-	# run simulation
-	while running and tick < point_of_collision:
-		# update fireball sprite according to ball's position
-		position_fireball = (fireball.body.position[0]-30, fireball.body.position[1]-30)
-		position_patient = (patient.body.position[0]-30, patient.body.position[1]-30)
-		tick+=1
-		time-=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-
-		# keep the Agent at it's intended velocity for some duration
-		if (time < 0 and math.fabs(patient.body.velocity[0]) < AGENT_WALKING):
-			imp = math.fabs(patient.body.velocity[0]) - AGENT_WALKING
-			patient.body.apply_impulse_at_local_point((-1*imp,0))
-
-		# set clock
-		clock = pygame.time.Clock()
-
-		# setup display and run sim based on whether it's truth or guess
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
-
-		# update pymunk space
-		space.step(1/50.0)	
-	point_of_collision = tick
-	# print "Point of collision occurs at tick {0}".format(point_of_collision)
-	
-	# Run counterfactual
-	for i in range(length_of_counterfactual):
-		# update fireball sprite according to ball's position
-		position_fireball = (fireball.body.position[0]-30,fireball.body.position[1]-30)
-		position_patient = (patient.body.position[0]-30,patient.body.position[1]-30)
-		tick+=1
-
-		#allow user to exit
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				running = False
-			elif event.type == KEYDOWN and event.key == K_ESCAPE:
-				running = False
-		
-		# Apply noise to the velocity of the Patient and Fireball
-		if (patient.body.velocity[0] < factual_impulse_patient or patient.body.velocity[1] < factual_impulse_patient):
-			# Sample x and y velocity from normal distribution and apply
-			patient.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
-				factual_impulse_patient*helper.sample_trajectory()))
-		if (fireball.body.velocity[0] < factual_impulse_fireball or fireball.body.velocity[1] < factual_impulse_fireball):
-			# Sample x and y velocity from normal distribution and apply
-			fireball.body.apply_impulse_at_local_point((factual_impulse_patient*helper.sample_trajectory(),
-				factual_impulse_fireball*helper.sample_trajectory()))
-		
-		# setup display and run sim based on whether it's truth or guess	
-		if(not guess):
-			# draw screen
-			screen.fill((255,255,255))
-			space.debug_draw(options)
-			helper.setBackground(screen)
-			screen.blit(fireSprite, position_fireball)
-			screen.blit(patientSprite, position_patient)
-
-			# adjust pygame screen and move clock forward
-			pygame.display.flip()
-			clock.tick(50)
-		else:
-			clock.tick(500000)
 
 		# update pymunk space
 		space.step(1/50.0)

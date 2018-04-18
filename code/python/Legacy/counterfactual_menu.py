@@ -15,6 +15,7 @@ import simulations
 import counterfactual
 import helper
 import csv
+import exp2_counterfactuals
 
 # Available counterfactuals
 counterfactual_menu_actions = {
@@ -41,19 +42,41 @@ counterfactual_menu_actions = {
 	'21' : counterfactual.sim_1_patient,
 	'22' : counterfactual.sim_1_fireball,
 	'23' : counterfactual.sim_2_patient,
-	'24' : counterfactual.sim_2_fireball,
-	'25' : counterfactual.sim_3_patient,
-	'26' : counterfactual.sim_3_fireball,
-	'27' : counterfactual.sim_4_patient,
-	'28' : counterfactual.sim_4_fireball
+	'24' : counterfactual.sim_2_fireball
+}
+good_counterfactual_menu = {
+	'1' : exp2_counterfactuals.good_1,
+	'2' : exp2_counterfactuals.good_2,
+	'3' :exp2_counterfactuals.good_3,
+	'4' :exp2_counterfactuals.good_4,
+	'5' :exp2_counterfactuals.good_5,
+	'6' :exp2_counterfactuals.good_6,
+	'7' :exp2_counterfactuals.good_7,
+	'8' :exp2_counterfactuals.good_8,
+	'9' :exp2_counterfactuals.good_9,
+	'10' :exp2_counterfactuals.good_10,
+	'11' :exp2_counterfactuals.good_11,
+	'12' :exp2_counterfactuals.good_12,
+	'13' :exp2_counterfactuals.short_distance_fireball,
+	'14' :exp2_counterfactuals.short_distance_patient,
+	'15' :exp2_counterfactuals.sim_2_fireball,
+	'16' :exp2_counterfactuals.sim_2_patient,
+	'17' :exp2_counterfactuals.no_touch_fireball,
+	'18' :exp2_counterfactuals.no_touch_patient,
+	'19' :exp2_counterfactuals.sim_1_fireball,
+	'20' :exp2_counterfactuals.sim_1_patient,
+	'21' :exp2_counterfactuals.static_fireball,
+	'22' :exp2_counterfactuals.static_patient,
+	'23' :exp2_counterfactuals.bump_fireball,
+	# '24' :exp2_counterfactuals.bump_patient
 }
 # Whether you want to write to file or not
-store = True
+store = False
 
 def main():
 	if store:
 		# File for counterfactual results
-		results_csv = open('causality.csv','w')
+		results_csv = open('causality_fix.csv','w')
 
 	# Input variable to make it work
 	ALL = "ALL"
@@ -72,30 +95,30 @@ def main():
 		results_dict = {}
 
 		# While the user does not decide to exit the program
-		for sim in counterfactual_menu_actions.keys():
+		for sim in good_counterfactual_menu.keys():
 			# Number of times a different outcome occurred versus the factual outcome
 			k = 0
 
 			# Run counterfactuals n times
 			for i in range(n):
 				# initialize pygame and create a space to contain the simulation
-				pygame.init()
+				# pygame.init()
 				space = pymunk.Space()
 
 				# create a screen of 600x600 pixels
-				screen = pygame.display.set_mode((1000,600))	
-				drawOptions = pymunk.pygame_util.DrawOptions(screen)
+				screen = None# pygame.display.set_mode((1000,600))	
+				drawOptions = None #pymunk.pygame_util.DrawOptions(screen)
 				
 				# Record whether counterfactual resulted in different outcome from factual simulation
-				different_outcome = not(counterfactual_menu_actions[sim](space, screen, drawOptions, True))
+				different_outcome = good_counterfactual_menu[sim](space, screen, drawOptions, True)
 				
 				# If it did (False), increment k, otherwise (True) do not
 				if different_outcome:
 					k += 1
 				
 				# Quit the pygame instance and pygame display
-				pygame.quit()
-				pygame.display.quit()
+				# pygame.quit()
+				# pygame.display.quit()
 			
 			# Print results to user
 			print "Number of different outcomes for simulation {0} was {1} out of {2}".format(sim, k, n)
@@ -114,23 +137,23 @@ def main():
 			# Run counterfactuals n times
 			for i in range(n):
 				# initialize pygame and create a space to contain the simulation
-				pygame.init()
+				# pygame.init()
 				space = pymunk.Space()
 
 				# create a screen of 600x600 pixels
-				screen = pygame.display.set_mode((1000,600))	
-				drawOptions = pymunk.pygame_util.DrawOptions(screen)
+				screen = None#pygame.display.set_mode((1000,600))	
+				drawOptions = None#pymunk.pygame_util.DrawOptions(screen)
 				
 				# Record whether counterfactual resulted in different outcome from factual simulation
-				boolean = counterfactual_menu_actions[sim](space, screen, drawOptions, True)
+				boolean = good_counterfactual_menu[sim](space, screen, drawOptions, True)
 				
 				# If it did (False), increment k, otherwise (True) do not
 				if not boolean:
 					k += 1
 				
-				# Quit the pygame instance and pygame display
-				pygame.quit()
-				pygame.display.quit()
+				# # Quit the pygame instance and pygame display
+				# pygame.quit()
+				# pygame.display.quit()
 			
 			# Print results to user
 			print "Number of different outcomes was {0} out of {1}".format(k, n)
@@ -151,8 +174,8 @@ def main():
 		writer = csv.DictWriter(results_csv, fieldnames = ['sim', 'prob'])
 		
 		# Write the results dictionary to a csv file
-		for k in keys:
-			writer.writerow({'sim':k,'prob':results_dict[k]})
+		for k in range(1,13):#keys:
+			writer.writerow({'sim':k,'prob':results_dict[str(k)]})
 		
 		# Close the csv file
 		results_csv.close()

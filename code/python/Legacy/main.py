@@ -15,6 +15,8 @@ import counterfactual
 import sim
 import helper
 import convert_to_blender
+import exp2_simulations
+import exp2_counterfactuals
 
 # Available simulations
 simulation_menu_actions = {
@@ -53,40 +55,95 @@ simulation_menu_actions = {
 	'33' : simulations.agent_saves_patient_1,
 	'34' : simulations.agent_makes_patient_safer,
 	'35' : simulations.agent_saves_patient_2,
-	'36' : simulations.dodge_save
+	'36' : simulations.dodge_save,
+	'37' : simulations.agent_saves_patient_3,
+	'38' : simulations.good_1,
+	'39' : simulations.good_2
 }
 
-# Available counterfactuals
-counterfactual_menu_actions = {
-	'1' : counterfactual.short_distance_v1,
-	'2' : counterfactual.medium_distance_v2,
-	'3' : counterfactual.long_distance_v1,
-	'4' : counterfactual.static,
-	'5' : counterfactual.slow_collision,
-	'6' : counterfactual.fast_collision,
-	'7' : counterfactual.dodge,
-	'8' : counterfactual.double_push,
-	'9' : counterfactual.medium_push,
-	'10' : counterfactual.long_push,
-	'11' : counterfactual.victim_moving_static,
-	'12' : counterfactual.no_touch,
-	'13' : counterfactual.victim_moving_moving,
-	'14' : counterfactual.victim_moving_static,
-	'15' : counterfactual.victim_static_moving,
-	'16' : counterfactual.victim_static_static,
-	'17' : counterfactual.harm_moving_moving,
-	'18' : counterfactual.harm_moving_static,
-	'19' : counterfactual.harm_static_moving,
-	'20' : counterfactual.harm_static_static,
-	'21' : counterfactual.sim_1_patient,
-	'22' : counterfactual.sim_1_fireball,
-	'23' : counterfactual.sim_2_patient,
-	'24' : counterfactual.sim_2_fireball,
-	'25' : counterfactual.sim_3_patient,
-	'26' : counterfactual.sim_3_fireball,
-	'27' : counterfactual.sim_4_patient,
-	'28' : counterfactual.sim_4_fireball
+good_menu = {
+	'1' : exp2_simulations.good_1,
+	'2' : exp2_simulations.good_2,
+	'3' :exp2_simulations.good_3,
+	'4' :exp2_simulations.good_4,
+	'5' :exp2_simulations.good_5,
+	'6' :exp2_simulations.good_6,
+	'7' :exp2_simulations.good_7,
+	'8' :exp2_simulations.good_8,
+	'9' :exp2_simulations.good_9,
+	'10' :exp2_simulations.good_10,
+	'11' :exp2_simulations.good_11,
+	'12' :exp2_simulations.good_12,
+	'13' :exp2_simulations.short_distance_fireball,
+	'14' :exp2_simulations.short_distance_patient,
+	'15' :exp2_simulations.sim_2_fireball,
+	'16' :exp2_simulations.sim_2_patient,
+	'17' :exp2_simulations.no_touch_fireball,
+	'18' :exp2_simulations.no_touch_patient,
+	'19' :exp2_simulations.sim_1_fireball,
+	'20' :exp2_simulations.sim_1_patient,
+	'21' :exp2_simulations.static_fireball,
+	'22' :exp2_simulations.static_patient,
+	'23' :exp2_simulations.bump_fireball,
+	'24' :exp2_simulations.bump_patient
 }
+good_counterfactual_menu = {
+	'1' : exp2_counterfactuals.good_1,
+	'2' : exp2_counterfactuals.good_2,
+	'3' :exp2_counterfactuals.good_3,
+	'4' :exp2_counterfactuals.good_4,
+	'5' :exp2_counterfactuals.good_5,
+	'6' :exp2_counterfactuals.good_6,
+	'7' :exp2_counterfactuals.good_7,
+	'8' :exp2_counterfactuals.good_8,
+	'9' :exp2_counterfactuals.good_9,
+	'10' :exp2_counterfactuals.good_10,
+	'11' :exp2_counterfactuals.good_11,
+	'12' :exp2_counterfactuals.good_12,
+	'13' :exp2_counterfactuals.short_distance_fireball,
+	'14' :exp2_counterfactuals.short_distance_patient,
+	'15' :exp2_counterfactuals.sim_2_fireball,
+	'16' :exp2_counterfactuals.sim_2_patient,
+	'17' :exp2_counterfactuals.no_touch_fireball,
+	'18' :exp2_counterfactuals.no_touch_patient,
+	'19' :exp2_counterfactuals.sim_1_fireball,
+	'20' :exp2_counterfactuals.sim_1_patient,
+	'21' :exp2_counterfactuals.static_fireball,
+	'22' :exp2_counterfactuals.static_patient,
+	'23' :exp2_counterfactuals.bump_fireball,
+	'24' :exp2_counterfactuals.bump_patient
+}
+# Available counterfactuals
+# counterfactual_menu_actions = {
+# 	'1' : counterfactual.short_distance_v1,
+# 	'2' : counterfactual.medium_distance_v2,
+# 	'3' : counterfactual.long_distance_v1,
+# 	'4' : counterfactual.static,
+# 	'5' : counterfactual.slow_collision,
+# 	'6' : counterfactual.fast_collision,
+# 	'7' : counterfactual.dodge,
+# 	'8' : counterfactual.double_push,
+# 	'9' : counterfactual.medium_push,
+# 	'10' : counterfactual.long_push,
+# 	'11' : counterfactual.victim_moving_static,
+# 	'12' : counterfactual.no_touch,
+# 	'13' : counterfactual.victim_moving_moving,
+# 	'14' : counterfactual.victim_moving_static,
+# 	'15' : counterfactual.victim_static_moving,
+# 	'16' : counterfactual.victim_static_static,
+# 	'17' : counterfactual.harm_moving_moving,
+# 	'18' : counterfactual.harm_moving_static,
+# 	'19' : counterfactual.harm_static_moving,
+# 	'20' : counterfactual.harm_static_static,
+# 	'21' : counterfactual.sim_1_patient,
+# 	'22' : counterfactual.sim_1_fireball,
+# 	'23' : counterfactual.sim_2_patient,
+# 	'24' : counterfactual.sim_2_fireball,
+# 	'25' : counterfactual.sim_3_patient,
+# 	'26' : counterfactual.sim_3_fireball,
+# 	'27' : counterfactual.sim_4_patient,
+# 	'28' : counterfactual.sim_4_fireball
+# }
 
 convert_to_blender_menu_actions = {
 	'1' : convert_to_blender.short_distance_v1,
@@ -132,17 +189,17 @@ def main():
 	if (len(sys.argv) == 2):
 		choice = sys.argv[1]
 		# initialize pygame and create a space to contain the simulation
-		pygame.init()
+		# pygame.init()
 		space = pymunk.Space()
 
 		# create a screen of 600x600 pixels
-		screen = pygame.display.set_mode((1000,600))	
-		drawOptions = pymunk.pygame_util.DrawOptions(screen)
+		# screen = pygame.display.set_mode((1000,600))	
+		# drawOptions = pymunk.pygame_util.DrawOptions(screen)
 		# In converting to blender we don't want the pygame display to show
-		convert_to_blender_menu_actions[choice](space, None, None)
+		good_counterfactual_menu[choice](space, None, None)
 
-		pygame.quit()
-		pygame.display.quit()
+		# pygame.quit()
+		# pygame.display.quit()
 		sys.exit()
 
 	# Print main menu options to user otherwise and record choice
@@ -165,7 +222,7 @@ def main():
 			screen = pygame.display.set_mode((1000,600))	
 			drawOptions = pymunk.pygame_util.DrawOptions(screen)
 			simulation_menu_actions[choice](space, screen, drawOptions)
-			
+			# simulation_menu_actions[choice](space, screen, drawOptions)
 			# Quit the pygame instance and pygame display
 			pygame.quit()
 			pygame.display.quit()
