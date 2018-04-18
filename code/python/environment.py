@@ -3,6 +3,7 @@ Class for agent environments in Moral Dynamics
 
 Felix Sosa
 '''
+import sys
 import pymunk
 import pygame
 import pymunk.pygame_util
@@ -13,7 +14,9 @@ from agents import Agent, TypedAgent
 class Environment:
 
 	def __init__(self, a_params, p_params, f_params, vel, handlers=None, 
-				 view=True, e_noise=0, a_noise=0, frict=0.05):
+				 view=True, noise=[None,None], counter_tick=None, frict=0.05):
+		# Agent params
+		self.a_params, self.p_params, self.f_params = a_params, p_params, f_params
 		# Boolean flag for whether you want to view the sim or not
 		self.view = view
 		# Objects in environent
@@ -29,10 +32,7 @@ class Environment:
 		# Initial location of objects in environment
 		self.p_loc = p_params['loc']
 		self.a_loc = a_params['loc']
-		self.f_loc = f_params['loc']
-		# Environement and agent parameters
-		self.e_noise = e_noise
-		self.a_noise = a_noise
+		self.f_loc = f_params['loc']		
 		# Pymunk space friction
 		self.friction = frict
 		# Agent velocities
@@ -42,12 +42,17 @@ class Environment:
 		self.screen = None
 		self.options = None
 		self.clock = None
+		self.tick = 0
+		self.counter_tick = [self.tick,counter_tick]
+		self.noise = noise
+		self.agent_collision = None
+		self.patient_fireball_collision = 0
 		# Collision handlers
 		self.coll_handlers = [x for x in handlers] if handlers else handlers
 		# Configure and run environment
-		self.configure()
+		# self.configure()
 
-	def configure(self):
+	def configure(self,env_type='normal'):
 		# Configure pymunk space and pygame engine parameters (if any)
 		if self.view:
 			pygame.init()
@@ -63,26 +68,36 @@ class Environment:
 				ch.data["surface"] = self.screen
 				ch.post_solve = rem
 		# Add agents to the pymunk space
-		self.space.add(self.agent.body, self.agent.shape,
-					   self.patient.body, self.patient.shape,
-					   self.fireball.body, self.fireball.shape)
+		if env_type == 'normal': 
+			self.space.add(self.agent.body, self.agent.shape,
+						   self.patient.body, self.patient.shape,
+						   self.fireball.body, self.fireball.shape)
+		else:
+			self.space.add(self.patient.body, self.patient.shape,
+						   self.fireball.body, self.fireball.shape)
+		print("Configured as {}".format(env_type))
 
-	def run(self):
+	def run(self,run_type='normal'):
 		# Run environment
 		# Agent velocities
 		a_vel, p_vel, f_vel = self.vel
 		# Agent action generators (yield actions of agents)
-		a_generator = self.agent.act(a_vel, self.clock, self.screen,
-								self.space, self.options, self.view)
+		if run_type == 'normal':
+			a_generator = self.agent.act(a_vel, self.clock, self.screen,
+									self.space, self.options, self.view, 
+									self.counter_tick, self.noise)
 		p_generator = self.patient.act(p_vel, self.clock, self.screen,
-								self.space, self.options, self.view)
+								self.space, self.options, self.view, 
+								self.counter_tick, self.noise)
 		f_generator = self.fireball.act(f_vel, self.clock, self.screen,
-								self.space, self.options, self.view)
+								self.space, self.options, self.view, 
+								self.counter_tick, self.noise)
 		running = True
 		# Run simulation until collision between P and F or policy ends
 		while running and not handlers.PF_COLLISION:
 			try:
-				next(a_generator)
+				if run_type == 'normal':
+					next(a_generator)
 				next(p_generator)
 				next(f_generator)
 				# Render space if requested
@@ -92,14 +107,17 @@ class Environment:
 					pygame.display.flip()
 					self.clock.tick(50)
 				self.space.step(1/50.0)
+				self.tick += 1
+				if not handlers.A_COLLISION: self.agent_collision = self.tick
 			except:
 				running = False
 		if self.view:
 			pygame.quit()
 			pygame.display.quit()
 		# Record whether P and F collision occurred
-		coll = 1 if handlers.PF_COLLISION else 0
-		# Reset collision handler
+		self.patient_fireball_collision = 1 if handlers.PF_COLLISION else 0
+		# Reset collision handlers
 		handlers.PF_COLLISION = []
+		handlers.A_COLLISION = []
 		# Return outcome to user (whether Agent's goal was reached or not)
-		return self.agent.evaluate_policy(coll)
+		return self.agent.evaluate_policy(self.patient_fireball_collision)

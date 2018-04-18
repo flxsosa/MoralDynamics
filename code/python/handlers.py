@@ -10,6 +10,7 @@ from pygame.locals import *
 
 collision = []
 PF_COLLISION = []
+A_COLLISION = []
 totalImpulse = []
 
 def rem0(arbiter, space, data):
@@ -26,18 +27,12 @@ def rem0(arbiter, space, data):
 	pygame.time.set_timer(QUIT, 1000)
 	return True
 
-def rem2(arbiter, space, data):
+def rem1(arbiter, space, data):
 	'''
-	Used with begin method of CollisionHandler. Adds element to collision list
-	to signify a collision has begun.
+	Used with post_solve. Removes the Cone after colliding with the Fireball.
+	Expected that Cone is in space.shapes[1]
 	'''
-	collision.append(1)
-	return True
-
-def rem4(arbiter, space, data):
-	'''
-	Used with begin method of CollisionHandler. Adds element to collision list
-	to signify a collision has begun.
-	'''
-	PF_COLLISION = 1
+	if A_COLLISION:
+		return True
+	A_COLLISION.append(1)
 	return True
