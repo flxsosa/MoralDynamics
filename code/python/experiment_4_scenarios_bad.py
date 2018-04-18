@@ -376,5 +376,3 @@ def bump_patient(view=True,run=True,noise=[None,None],counter_tick=None):
 		env.configure()
 		score = env.run()
 	return env
-
-short_distance_patient()

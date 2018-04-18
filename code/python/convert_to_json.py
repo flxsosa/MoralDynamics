@@ -1,11 +1,6 @@
-'''
-Runs factual and counterfactual simulations and records
-data from them.
-
-Felix Sosa
-'''
-import csv
-from counterfactual import run_csm
+import json
+import sys
+import pygame
 
 from moral_kinematics_scenarios import long_distance, dodge, bystander, \
 							  stays_put, short_distance, med_push, long_push, \
@@ -42,60 +37,38 @@ experiment_4_scenarios_bad = [short_distance_fireball, short_distance_patient, p
 # Create list of lists of scenarios
 list_of_scenarios = [moral_kinematics_scenarios, counter_scenarios, experiment_4_scenarios_good,
 					 experiment_4_scenarios_bad]
-# list_of_scenarios = [moral_kinematics_scenarios]
-# list_of_scenarios = [counter_scenarios]
-# list_of_scenarios = [experiment_4_scenarios_good]
-# list_of_scenarios = [experiment_4_scenarios_bad]
-
 # Names of lists
 names = ['mk', 'counter', 'exp_4_good', 'exp_4_bad']
-# names = ['exp_4_good']
-# names = ['counter']
-# names = ['mk']
-# names = ['exp_4_bad']
+path = '../../json/'
 
-# # Iterate through list of scenarios and record effort values
+def convert(environment, path=""):
+	# Init environment
+	env = environment(view=False,run=False)
+	# Set up config for json file
+	sim_dict = {} # Dict to be converted to json
+	config = {'scene' : env.screen_size[0]} # Screen size (y-axis)
+	config['name'] = environment.__name__ # Name of scenario
+	# Init dictionaries for body positions
+	bodies_dict = {}
+	# Run environment
+	env.configure()
+	env.run()
+	# Gather positional data on objects and add to dict
+	bodies_dict["agent"] = env.position_dict['agent']
+	bodies_dict["patient"] = env.position_dict['patient']
+	bodies_dict["fireball"] = env.position_dict['fireball']
+
+	# Convert dict to json
+	config['ticks'] = env.tick
+	sim_dict['config'] = config
+	sim_dict["objects"] = bodies_dict
+
+	# Save json
+	with open(path+config['name']+".json", "w") as j:
+		json.dump(sim_dict, j, indent=2)
+
 i = 0
-for scene_list in list_of_scenarios:
-	effort_values = []
-	scenarios = []
-	# Append lists with appropriate values
-	for scene in scene_list:
-		effort_values.append(scene(False))
-		scenarios.append(scene.__name__)
-	# Write effort values to csv file
-	results_csv = open('effort_'+names[i]+'_planning.csv','w')
-	keys = scenarios
-	writer = csv.DictWriter(results_csv, fieldnames = ['scenario', 'effort'])
-	writer.writeheader()
-	# Write the results dictionary to a csv file
-	for j in range(len(scenarios)):#keys:
-		writer.writerow({'scenario':scenarios[j],'effort':effort_values[j]})
-	# Close the csv file
-	results_csv.close()
-	i+=1
-
-# Iterate through list of scenarios and record counterfactual values
-for sd in range(1,16):
-	i = 0
-	# 10
-	noise = [0,(sd*0.1)]
-	num_times = 100
-	for scene_list in list_of_scenarios:
-		counterfactual_values = []
-		scenarios = []
-		# Append lists with appropriate values
-		for scene in scene_list:
-			counterfactual_values.append(run_csm(scene,False,noise,num_times))
-			scenarios.append(scene.__name__)
-		# Write counterfactual values to csv file
-		results_csv = open('counterfactual_'+names[i]+'_planning_'+str((sd*0.1))+'.csv','w')
-		keys = scenarios
-		writer = csv.DictWriter(results_csv, fieldnames = ['scenario', 'counterfactual'])
-		writer.writeheader()
-		# Write the results dictionary to a csv file
-		for j in range(len(scenarios)):#keys:
-			writer.writerow({'scenario':scenarios[j],'counterfactual':counterfactual_values[j]})
-		# Close the csv file
-		results_csv.close()
-		i+=1
+for scenarios in list_of_scenarios:
+	scenario_type = names[i]
+	for scene in scenarios:
+		convert(scene, path)
