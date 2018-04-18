@@ -12,7 +12,8 @@ blend = ff.join(ff.step(ff.absPath(__file__), -2), ff.join("om", "convert.blend"
 py = ff.join(ff.step(ff.absPath(__file__), -2), ff.join("om",
 	"animation.py"))
 
-dest = "/om2/user/fsosa/data/MoralDynamics/rendered_images/"
+# dest = "/om2/user/fsosa/data/MoralDynamics/rendered_images/"
+dest = "/om2/user/fsosa/data/MoralDynamics/rendered_images/nameless/"
 
 def main():
 
