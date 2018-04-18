@@ -6,15 +6,30 @@ from fileFuncs import ff
 # images = "/om2/user/fsosa/data/MoralDynamics/rendered_images/"
 # videos = "/om2/user/fsosa/data/MoralDynamics/videos/"
 # script = "/om2/user/fsosa/git/MoralDynamics/code/shell/test.sh"
-sims = ["short_distance_v1", "medium_distance_v2", "long_distance_v1", "static",
- 	"slow_collision", "fast_collision", "dodge", "double_push", "medium_push",
-  	"long_push", "victim_moving_static", "no_touch", "victim_moving_moving",
-  	"victim_moving_static", "victim_static_moving", "victim_static_static", 
-  	"harm_moving_moving", "harm_moving_static", "harm_static_moving", "harm_static_static",
-  	"sim_1_patient", "sim_1_fireball", "sim_2_patient", "sim_2_fireball", "sim_3_patient", 
-  	"sim_3_fireball", "sim_4_patient", "sim_4_fireball", "agent_walks_to_fireball", 
-  	"patient_walks_to_fireball", "fireball_moving", "agent_saves_patient"]
-idx = range(1,33)
+
+# Uncomment this line for experiment 1 sims
+# sims = ["short_distance_v1", "medium_distance_v2", "long_distance_v1", "static",
+#  	"slow_collision", "fast_collision", "dodge", "double_push", "medium_push",
+#   	"long_push", "victim_moving_static", "no_touch", "victim_moving_moving",
+#   	"victim_moving_static", "victim_static_moving", "victim_static_static", 
+#   	"harm_moving_moving", "harm_moving_static", "harm_static_moving", "harm_static_static",
+#   	"sim_1_patient", "sim_1_fireball", "sim_2_patient", "sim_2_fireball", "sim_3_patient", 
+#   	"sim_3_fireball", "sim_4_patient", "sim_4_fireball", "agent_walks_to_fireball", 
+#   	"patient_walks_to_fireball", "fireball_moving", "agent_saves_patient"]
+# idx = range(1,33)
+
+
+# Uncomment this line for experiment 2 sims
+#sims = ['good_1', 'good_2', 'good_3', 'good_4', 'good_5', 'good_6', 
+	#	'good_7', 'good_8', 'good_9', 'good_10', 'good_11', 'good_12', 
+	#	'short_distance_fireball', 'short_distance_patient', 
+	#	'sim_2_fireball', 'sim_2_patient', 'no_touch_fireball', 'no_touch_patient', 
+	#	'sim_1_fireball', 'sim_1_patient', 'static_fireball', 'static_patient', 
+	#	'bump_fireball', 'bump_patient']
+# sims = ['static_fireball']
+# idx = [1]
+sims = ['bump_fireball', 'bump_patient']
+idx = [23,24]
 
 def main():
 

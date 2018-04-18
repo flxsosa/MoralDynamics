@@ -7,10 +7,10 @@ author: Felix Sosa
 import os
 import re
 
-for dirr, subdirs, files in os.walk("../../../../data/MoralDynamics/rendered_images"):
+for dirr, subdirs, files in os.walk("../../../../data/MoralDynamics/rendered_images_exp2_fixups"):
 	# Traverse the files
 	for file in files:
-		print(dirr,file)
+		# print(dirr,file)
 		# Make sure file is an image.png
 		match = re.match(r"([a-z]+)([0-9]+).([a-z]+)", file, re.I)
 		if match:
@@ -18,6 +18,7 @@ for dirr, subdirs, files in os.walk("../../../../data/MoralDynamics/rendered_ima
 			items = match.groups()
 			# If the image is of an animation
 			if len(str(items[1])) > 3:
+				print(file)
 				if (len(str(items[1])) == 7):
 					idx = int(str(items[1])[:3])
 					inc = int(str(items[1])[3:])

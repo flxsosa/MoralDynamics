@@ -144,39 +144,22 @@ def init():
     fireball = bpy.data.objects.get('fireball')
     plane = bpy.data.objects.get('plane')
 
-    # Move agents around scene and render each frame and save it as an image
-    idx = (simulation_data['config']['ticks'])-1
-    # Move agent
-    agent.location.x = (simulation_data['objects']['agent'][idx]['x']/100.0)
-    agent.location.y = ((simulation_data['objects']['agent'][idx]['y']/100.0) + 2)
-    # Move patient
-    patient.location.x = (simulation_data['objects']['patient'][idx]['x']/100.0)
-    patient.location.y = ((simulation_data['objects']['patient'][idx]['y']/100.0) + 2)
-    # Move fireball
-    fireball.location.x = (simulation_data['objects']['fireball'][idx]['x']/100.0)
-    fireball.location.y = ((simulation_data['objects']['fireball'][idx]['y']/100.0) + 2)
+    for idx in range(simulation_data['config']['ticks']):
+        # Move agent
+        agent.location.x = (simulation_data['objects']['agent'][idx]['x']/100.0)
+        agent.location.y = ((simulation_data['objects']['agent'][idx]['y']/100.0) + 2)
+        # Move patient
+        patient.location.x = (simulation_data['objects']['patient'][idx]['x']/100.0)
+        patient.location.y = ((simulation_data['objects']['patient'][idx]['y']/100.0) + 2)
+        # Move fireball
+        fireball.location.x = (simulation_data['objects']['fireball'][idx]['x']/100.0)
+        fireball.location.y = ((simulation_data['objects']['fireball'][idx]['y']/100.0) + 2)
 
-    bpy.context.scene.render.engine = "CYCLES"
-    bpy.data.scenes['Scene'].cycles.device = 'GPU'
-    bpy.data.scenes['Scene'].cycles.film_exposure = 9.0
-    bpy.context.scene.render.filepath = '{0}/{1}/image{2}'.format(destination,simulation_id,idx)
-    ops.render.render(write_still = True)
-    # for idx in range(simulation_data['config']['ticks']):
-    #     # Move agent
-    #     agent.location.x = (simulation_data['objects']['agent'][idx]['x']/100.0)
-    #     agent.location.y = ((simulation_data['objects']['agent'][idx]['y']/100.0) + 2)
-    #     # Move patient
-    #     patient.location.x = (simulation_data['objects']['patient'][idx]['x']/100.0)
-    #     patient.location.y = ((simulation_data['objects']['patient'][idx]['y']/100.0) + 2)
-    #     # Move fireball
-    #     fireball.location.x = (simulation_data['objects']['fireball'][idx]['x']/100.0)
-    #     fireball.location.y = ((simulation_data['objects']['fireball'][idx]['y']/100.0) + 2)
-
-    #     bpy.context.scene.render.engine = "CYCLES"
-    #     bpy.data.scenes['Scene'].cycles.device = 'GPU'
-    #     bpy.data.scenes['Scene'].cycles.film_exposure = 9.0
-    #     bpy.context.scene.render.filepath = '{0}/{1}/image{2}'.format(destination,simulation_id,idx)
-    #     ops.render.render(write_still = True)
+        bpy.context.scene.render.engine = "CYCLES"
+        bpy.data.scenes['Scene'].cycles.device = 'GPU'
+        bpy.data.scenes['Scene'].cycles.film_exposure = 9.0
+        bpy.context.scene.render.filepath = '{0}/{1}/image{2}'.format(destination,simulation_id,idx)
+        ops.render.render(write_still = True)
 
     # Patient-Fireball collision, create sphere for fire on Patient
     create_sphere(0.15, 'patient_fire')
