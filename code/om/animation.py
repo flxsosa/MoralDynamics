@@ -144,10 +144,7 @@ def init():
     fireball = bpy.data.objects.get('fireball')
     plane = bpy.data.objects.get('plane')
 
-<<<<<<< HEAD
-=======
     # Move agents around scene and render each frame and save it as an image
->>>>>>> a980930a3ca1ec7c463b86f40a2d4d0df38ef277
     for idx in range(simulation_data['config']['ticks']):
         # Move agent
         agent.location.x = (simulation_data['objects']['agent'][idx]['x']/100.0)
