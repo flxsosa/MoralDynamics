@@ -28,10 +28,10 @@ from fileFuncs import ff
 	#	'bump_fireball', 'bump_patient']
 
 # Uncomment this line for experiment 5 sims
-sims = [long_distance, dodge, bystander, stays_put, short_distance, med_push, long_push,
-		push_patient, double_push,med_push_fireball, long_push_patient_moving, long_push_fireball_moving,
-		push_against_patient, push_against_fireball, push_patient_oncoming, 
-		push_fireball_oncoming, fireball_walks_away, patient_walks_away]
+sims = ['long_distance', 'dodge', 'bystander', 'stays_put', 'short_distance', 'med_push', 'long_push',
+		'push_patient', 'double_push','med_push_fireball', 'long_push_patient_moving', 'long_push_fireball_moving',
+		'push_against_patient', 'push_against_fireball', 'push_patient_oncoming', 
+		'push_fireball_oncoming', 'fireball_walks_away', 'patient_walks_away']
 idx = [3,7,12,4,1,9,10,11,8,20,21,22,23,24,25,26,27,28]
 
 # Uncomment this line for experiment 6 sims
