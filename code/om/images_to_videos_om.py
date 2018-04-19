@@ -27,15 +27,13 @@ from fileFuncs import ff
 	#	'sim_1_fireball', 'sim_1_patient', 'static_fireball', 'static_patient', 
 	#	'bump_fireball', 'bump_patient']
 
-# # Uncomment this line for experiment 5 sims
-# sims = ['long_distance', 'dodge', 'bystander', 'stays_put', 'short_distance', 'med_push', 'long_push',
-# 		'push_patient', 'double_push','med_push_fireball', 'long_push_patient_moving', 'long_push_fireball_moving',
-# 		'push_against_patient', 'push_against_fireball', 'push_patient_oncoming', 
-# 		'push_fireball_oncoming', 'fireball_walks_away', 'patient_walks_away']
-# idx = [3,7,12,4,1,9,10,11,8,20,21,22,23,24,25,26,27,28]
+# Uncomment this line for experiment 5 sims
+sims = ['long_distance', 'dodge', 'bystander', 'stays_put', 'short_distance', 'med_push', 'long_push',
+		'push_patient', 'double_push','med_push_fireball', 'long_push_patient_moving', 'long_push_fireball_moving',
+		'push_against_patient', 'push_against_fireball', 'push_patient_oncoming', 
+		'push_fireball_oncoming', 'fireball_walks_away', 'patient_walks_away']
+idx = [3,7,12,4,1,9,10,11,8,20,21,22,23,24,25,26,27,28]
 
-sims = ['dodge', 'push_patient']
-idx = [7,11]
 # Uncomment this line for experiment 6 sims
 # experiment_4_scenarios_good =[good_1, good_2, good_3, good_4, good_5, good_6, good_7, 
 # 							  good_8, good_9, good_10, good_11, good_12]
