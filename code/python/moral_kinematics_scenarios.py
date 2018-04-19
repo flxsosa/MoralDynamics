@@ -49,7 +49,7 @@ def dodge(view=True,run=True,noise=[None,None],counter_tick=None):
 	# Agent parameters
 	a_params['loc'] = (500,300)
 	a_params['color'] = "blue"
-	a_params['moves'] = None
+	a_params['moves'] = ['N','N','U','N','N']
 	a_params['coll'] = 0
 	a_params['type'] = 'B'
 	# Patient parameters
@@ -66,10 +66,10 @@ def dodge(view=True,run=True,noise=[None,None],counter_tick=None):
 	handlers =[(1,2,rem0)]
 	# Agent velocities
 	vel = 300,300,300
-	# Enumerate and score agent's possible policies
-	best_policy_score, best_policy = run_policy(a_params, p_params, 
-												f_params, vel, handlers)
-	a_params['moves'] = best_policy if best_policy else ['N']*5
+	# # Enumerate and score agent's possible policies
+	# best_policy_score, best_policy = run_policy(a_params, p_params, 
+	# 											f_params, vel, handlers)
+	# a_params['moves'] = best_policy if best_policy else ['N']*5
 	env = Environment(a_params,p_params,f_params,vel,handlers,view)
 	if run:
 		env.configure()
@@ -253,20 +253,20 @@ def push_patient(view=True,run=True,noise=[None,None],counter_tick=None):
 	a_params, p_params, f_params = {}, {}, {}
 	# Agent parameters
 	# a_params['loc'] = (550,100) # <- check this out
-	a_params['loc'] = (500,100)
+	a_params['loc'] = (450,100)
 	a_params['color'] = "blue"
-	a_params['moves'] = None
+	a_params['moves'] = ['N','N','U','U','N']
 	a_params['coll'] = 0
 	a_params['type'] = 'B'
 	# Patient parameters
 	# p_params['loc'] = (900,300) # <- check this out
-	p_params['loc'] = (900,300)
+	p_params['loc'] = (950,300)
 	p_params['color'] = "green"
-	p_params['moves'] = ['L','L','N','N', 'N']
+	p_params['moves'] = ['L','L','L','N', 'N']
 	p_params['coll'] = 1
 	# Fireball parameters
 	# f_params['loc'] = (450,500) # <- check this out
-	f_params['loc'] = (450,500)
+	f_params['loc'] = (400,500)
 	f_params['color'] = "red"
 	f_params['moves'] = ['N','N','N','N','N']
 	f_params['coll'] = 2
@@ -274,10 +274,10 @@ def push_patient(view=True,run=True,noise=[None,None],counter_tick=None):
 	handlers =[(1,2,rem0)]
 	# Agent velocities
 	vel = 300,300,300
-	# Enumerate and score agent's possible policies
-	best_policy_score, best_policy = run_policy(a_params, p_params, 
-												f_params, vel, handlers)
-	a_params['moves'] = best_policy
+	# # Enumerate and score agent's possible policies
+	# best_policy_score, best_policy = run_policy(a_params, p_params, 
+	# 											f_params, vel, handlers)
+	# a_params['moves'] = best_policy
 	env = Environment(a_params,p_params,f_params,vel,handlers,view)
 	if run:
 		env.configure()
@@ -313,3 +313,5 @@ def double_push(view=True,run=True,noise=[None,None],counter_tick=None):
 		env.configure()
 		score = env.run()
 	return env
+
+push_patient()
