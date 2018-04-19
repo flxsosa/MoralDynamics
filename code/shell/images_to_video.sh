@@ -1,5 +1,5 @@
 #!/bin/bash
-module add openmind/singularity/2.4
+module add openmind/singularity
 
 CONT=/om/user/belledon/singularity_imported/blender.img 
 DIR=$1
