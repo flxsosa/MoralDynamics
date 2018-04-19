@@ -26,10 +26,22 @@ from fileFuncs import ff
 	#	'sim_2_fireball', 'sim_2_patient', 'no_touch_fireball', 'no_touch_patient', 
 	#	'sim_1_fireball', 'sim_1_patient', 'static_fireball', 'static_patient', 
 	#	'bump_fireball', 'bump_patient']
-# sims = ['static_fireball']
-# idx = [1]
-sims = ['bump_fireball', 'bump_patient']
-idx = [23,24]
+
+# Uncomment this line for experiment 5 sims
+sims = [long_distance, dodge, bystander, stays_put, short_distance, med_push, long_push,
+		push_patient, double_push,med_push_fireball, long_push_patient_moving, long_push_fireball_moving,
+		push_against_patient, push_against_fireball, push_patient_oncoming, 
+		push_fireball_oncoming, fireball_walks_away, patient_walks_away]
+idx = [3,7,12,4,1,9,10,11,8,20,21,22,23,24,25,26,27,28]
+
+# Uncomment this line for experiment 6 sims
+# experiment_4_scenarios_good =[good_1, good_2, good_3, good_4, good_5, good_6, good_7, 
+# 							  good_8, good_9, good_10, good_11, good_12]
+# experiment_4_scenarios_bad = [short_distance_fireball, short_distance_patient, push_against_fireball,
+# 							  push_against_patient, bystander_patient, bystander_fireball, 
+# 							  long_push_fireball_moving, long_push_patient_moving, 
+# 							  stays_put_fireball, stays_put_patient, bump_fireball, 
+# 							  bump_patient]
 
 def main():
 
